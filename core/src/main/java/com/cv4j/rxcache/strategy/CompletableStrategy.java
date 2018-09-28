@@ -10,5 +10,5 @@ import java.lang.reflect.Type;
  */
 public interface CompletableStrategy {
 
-    <T> Completable execute(RxCache rxCache, String key, Completable source, Type type);
+    Completable execute(RxCache rxCache, String key, Completable source, Type type);
 }

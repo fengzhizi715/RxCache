@@ -13,20 +13,11 @@ public interface Persistence {
 
     void saveRecord(String key, Record record);
 
-    /**
-     * Retrieve the keys from all records persisted
-     */
     List<String> allKeys();
 
-    /**
-     * Delete the data associated with its particular key
-     *
-     * @param key The key associated with the object to be deleted from persistence
-     */
+    boolean containsKey(String key);
+
     void evict(String key);
 
-    /**
-     * Delete all the data
-     */
     void evictAll();
 }

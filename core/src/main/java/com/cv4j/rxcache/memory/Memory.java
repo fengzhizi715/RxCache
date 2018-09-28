@@ -15,6 +15,8 @@ public interface Memory {
 
     Set<String> keySet();
 
+    boolean containsKey(String key);
+
     void evict(String key);
 
     void evictAll();

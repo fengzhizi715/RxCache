@@ -1,4 +1,4 @@
-package com.cv4j.rxcache.converter;
+package com.cv4j.rxcache.persistence.converter;
 
 import java.io.InputStream;
 import java.io.OutputStream;

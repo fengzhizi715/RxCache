@@ -10,4 +10,10 @@ public class CacheRepository {
 
     private Memory memory;
     private Persistence persistence;
+
+    CacheRepository(Memory memory, Persistence persistence) {
+        this.memory = memory;
+        this.persistence = persistence;
+    }
+
 }

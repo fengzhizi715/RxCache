@@ -2,6 +2,15 @@ plugins {
     id 'java'
 }
 
+ext {
+    libraries = [
+
+            rxjava                    : "2.2.1",
+
+            lombok                    : "1.18.0"
+    ]
+}
+
 group 'com.cv4j.rxcache'
 version '1.0-SNAPSHOT'
 

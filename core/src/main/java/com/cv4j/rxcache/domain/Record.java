@@ -1,6 +1,5 @@
 package com.cv4j.rxcache.domain;
 
-import com.cv4j.rxcache.Source;
 import lombok.Data;
 
 /**

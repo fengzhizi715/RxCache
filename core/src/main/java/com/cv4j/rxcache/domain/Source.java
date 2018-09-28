@@ -1,4 +1,4 @@
-package com.cv4j.rxcache;
+package com.cv4j.rxcache.domain;
 
 /**
  * 数据来源

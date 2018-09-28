@@ -4,8 +4,6 @@ import com.cv4j.rxcache.domain.Record;
 import com.cv4j.rxcache.memory.Memory;
 import com.cv4j.rxcache.persistence.Persistence;
 
-import java.lang.reflect.Type;
-
 /**
  * Created by tony on 2018/9/28.
  */
@@ -14,7 +12,7 @@ public class CacheRepository {
     private Memory memory;
     private Persistence persistence;
 
-    CacheRepository(Memory memory, Persistence persistence) {
+    public CacheRepository(Memory memory, Persistence persistence) {
         this.memory = memory;
         this.persistence = persistence;
     }
@@ -22,7 +20,7 @@ public class CacheRepository {
     /**
      * 读取
      */
-    public <T> Record<T> get(String key, Type type) {
+    public <T> Record<T> get(String key) {
         if (memory != null) {
             Record<T> result = memory.getIfPresent(key);
             if (result != null) {

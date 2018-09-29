@@ -1,24 +1,21 @@
 package com.cv4j.rxcache.memory.impl;
 
 import com.cv4j.rxcache.domain.CacheHolder;
-import com.cv4j.rxcache.memory.Memory;
 
-import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by tony on 2018/9/29.
  */
-public class DefaultMemoryImpl implements Memory {
+public class DefaultMemoryImpl extends AbstractMemoryImpl {
 
     private ConcurrentHashMap<String,Object> cache;
-    private HashMap<String, Long> timestampMap;
 
-    public DefaultMemoryImpl(int maxSize) {
+    public DefaultMemoryImpl(long maxSize) {
 
-        cache = new ConcurrentHashMap<String,Object>(maxSize);
-        timestampMap = new HashMap<>();
+        super(maxSize);
+        cache = new ConcurrentHashMap<String,Object>((int)maxSize);
     }
 
     @Override

@@ -1,27 +1,25 @@
 package com.cv4j.rxcache.extra.memory;
 
 import com.cv4j.rxcache.domain.CacheHolder;
-import com.cv4j.rxcache.memory.Memory;
+import com.cv4j.rxcache.memory.impl.AbstractMemoryImpl;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
-import java.util.HashMap;
 import java.util.Set;
 
 /**
  * Created by tony on 2018/9/29.
  */
-public class CaffeineImpl implements Memory {
+public class CaffeineImpl extends AbstractMemoryImpl {
 
     private Cache<String, Object> cache;
-    private HashMap<String, Long> timestampMap;
 
     public CaffeineImpl(long maxSize) {
 
+        super(maxSize);
         cache = Caffeine.newBuilder()
                 .maximumSize(maxSize)
                 .build();
-        timestampMap = new HashMap<>();
     }
 
     @Override

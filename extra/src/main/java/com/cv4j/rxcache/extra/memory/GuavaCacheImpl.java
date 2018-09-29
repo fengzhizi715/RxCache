@@ -1,24 +1,23 @@
 package com.cv4j.rxcache.extra.memory;
 
 import com.cv4j.rxcache.domain.CacheHolder;
-import com.cv4j.rxcache.memory.Memory;
+import com.cv4j.rxcache.memory.impl.AbstractMemoryImpl;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-import java.util.HashMap;
 import java.util.Set;
 
 /**
  * Created by tony on 2018/9/29.
  */
-public class GuavaCacheImpl implements Memory {
+public class GuavaCacheImpl extends AbstractMemoryImpl {
 
     private LoadingCache<String,Object > cache;
-    private HashMap<String, Long> timestampMap;
 
     public GuavaCacheImpl(long maxSize) {
 
+        super(maxSize);
         cache = CacheBuilder
                 .newBuilder()
                 .maximumSize(maxSize)
@@ -28,7 +27,6 @@ public class GuavaCacheImpl implements Memory {
                         return key;
                     }
                 });
-        timestampMap = new HashMap<>();
     }
 
     @Override

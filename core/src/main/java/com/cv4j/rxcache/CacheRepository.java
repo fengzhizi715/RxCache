@@ -7,17 +7,17 @@ import com.cv4j.rxcache.persistence.Persistence;
 /**
  * Created by tony on 2018/9/28.
  */
-public class CacheRepository {
+class CacheRepository {
 
     private Memory memory;
     private Persistence persistence;
 
-    public CacheRepository(Memory memory, Persistence persistence) {
+    CacheRepository(Memory memory, Persistence persistence) {
         this.memory = memory;
         this.persistence = persistence;
     }
 
-    public <T> Record<T> get(String key) {
+    <T> Record<T> get(String key) {
 
         if (memory != null) {
 
@@ -32,7 +32,7 @@ public class CacheRepository {
         return null;
     }
 
-    public <T> void save(String key, Record<T> record) {
+    <T> void save(String key, Record<T> record) {
 
         if (record != null) {
 
@@ -56,12 +56,12 @@ public class CacheRepository {
         }
     }
 
-    public boolean containsKey(String key) {
+    boolean containsKey(String key) {
 
         return (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
     }
 
-    public void remove(String key) {
+    void remove(String key) {
 
         if (memory != null) {
             memory.evict(key);
@@ -72,7 +72,7 @@ public class CacheRepository {
         }
     }
 
-    public void clear() {
+    void clear() {
 
         if (memory != null) {
             memory.evictAll();

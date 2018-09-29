@@ -10,22 +10,22 @@ public class RxCache {
 
     private final CacheRepository cacheRepository;
 
-    private static RxCache sDefaultRxCache;
+    private static RxCache mRxCache;
 
-    public static RxCache getDefault() {
+    public static RxCache getRxCache() {
 
-        if (sDefaultRxCache == null) {
-            sDefaultRxCache = new RxCache.Builder()
+        if (mRxCache == null) {
+            mRxCache = new RxCache.Builder()
                     .build();
-
         }
-        return sDefaultRxCache;
+
+        return mRxCache;
     }
 
-    public static void initializeConfig(RxCache rxCache) {
+    public static void config(Builder builder) {
 
-        if (sDefaultRxCache == null) {
-            RxCache.sDefaultRxCache = rxCache;
+        if (mRxCache == null) {
+            RxCache.mRxCache = builder.build();
         }
     }
 

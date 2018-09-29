@@ -7,7 +7,9 @@ ext {
 
             rxjava                    : "2.2.1",
 
-            lombok                    : "1.18.0"
+            lombok                    : "1.18.0",
+
+            tony_common_utils         : "1.2.6"
     ]
 }
 
@@ -17,6 +19,7 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 

@@ -10,6 +10,7 @@ sourceCompatibility = 1.8
 def libs = rootProject.ext.libraries // 库
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -19,4 +20,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
 
     implementation "org.projectlombok:lombok:${libs.lombok}"
+
+    implementation "tony-common:tony-common-utils:${libs.tony_common_utils}"
 }

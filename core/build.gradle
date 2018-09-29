@@ -18,10 +18,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
-
     implementation "org.projectlombok:lombok:${libs.lombok}"
-
     implementation 'com.google.code.gson:gson:2.8.5'
-
     implementation "tony-common:tony-common-utils:${libs.tony_common_utils}"
 }

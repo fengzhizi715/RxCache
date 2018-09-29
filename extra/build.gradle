@@ -7,7 +7,10 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+def libs = rootProject.ext.libraries // 库
+
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -17,4 +20,6 @@ dependencies {
     implementation project(":core")
     implementation 'com.google.guava:guava:26.0-jre'
     implementation 'com.github.ben-manes.caffeine:caffeine:2.6.2'
+    implementation 'com.alibaba:fastjson:1.2.49'
+    implementation "tony-common:tony-common-utils:${libs.tony_common_utils}"
 }

@@ -2,9 +2,8 @@ package com.cv4j.rxcache.extra.memory;
 
 import com.cv4j.rxcache.domain.CacheHolder;
 import com.cv4j.rxcache.memory.Memory;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -12,22 +11,16 @@ import java.util.Set;
 /**
  * Created by tony on 2018/9/29.
  */
-public class GuavaCacheImpl implements Memory {
+public class CaffeineImpl implements Memory {
 
-    private LoadingCache<String,Object > cache;
+    private Cache<String, Object> cache;
     private HashMap<String, Long> timestampMap;
 
-    public GuavaCacheImpl(long maxSize) {
+    public CaffeineImpl(long maxSize) {
 
-        cache = CacheBuilder
-                .newBuilder()
+        cache = Caffeine.newBuilder()
                 .maximumSize(maxSize)
-                .build(new CacheLoader<String, Object>(){
-                    @Override
-                    public String load(String key) throws Exception {
-                        return key;
-                    }
-                });
+                .build();
         timestampMap = new HashMap<>();
     }
 

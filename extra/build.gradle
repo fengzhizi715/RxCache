@@ -16,4 +16,5 @@ dependencies {
 
     implementation project(":core")
     implementation 'com.google.guava:guava:26.0-jre'
+    implementation 'com.github.ben-manes.caffeine:caffeine:2.6.2'
 }

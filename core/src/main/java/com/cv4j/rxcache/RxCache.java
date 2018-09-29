@@ -148,10 +148,10 @@ public class RxCache {
 
         public RxCache build() {
 
-//            if (memory == null) {
-//
-//                memory = new DefaultMemoryImpl(maxCacheSize);
-//            }
+            if (memory == null) {
+
+                memory = new DefaultMemoryImpl(maxCacheSize);
+            }
 
             return new RxCache(this);
         }

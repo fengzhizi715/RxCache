@@ -1,16 +1,30 @@
 import com.cv4j.rxcache.RxCache;
 import com.cv4j.rxcache.domain.Record;
+import com.cv4j.rxcache.persistence.disk.converter.GsonConverter;
+import com.cv4j.rxcache.persistence.disk.impl.DiskImpl;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
+import java.io.File;
+
 /**
- * Created by tony on 2018/9/29.
+ * Created by tony on 2018/9/30.
  */
-public class Test {
+public class TestDiskImpl {
+
 
     public static void main(String[] args) {
 
-        RxCache.config(new RxCache.Builder());
+        File cacheDirectory = new File("aaa");
+
+        if (!cacheDirectory.exists()) {
+
+            cacheDirectory.mkdir();
+        }
+
+        DiskImpl diskImpl = new DiskImpl(cacheDirectory,new GsonConverter());
+
+        RxCache.config(new RxCache.Builder().persistence(diskImpl));
 
         RxCache rxCache = RxCache.getRxCache();
 

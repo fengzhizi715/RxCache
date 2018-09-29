@@ -4,7 +4,9 @@ import com.cv4j.rxcache.domain.Record;
 import com.cv4j.rxcache.memory.Memory;
 import com.cv4j.rxcache.memory.impl.DefaultMemoryImpl;
 import com.cv4j.rxcache.persistence.Persistence;
+import com.cv4j.rxcache.strategy.*;
 import io.reactivex.*;
+import org.reactivestreams.Publisher;
 
 import java.lang.reflect.Type;
 
@@ -41,6 +43,54 @@ public class RxCache {
         Persistence persistence = builder.persistence;
 
         cacheRepository = new CacheRepository(memory, persistence);
+    }
+
+    public <T> ObservableTransformer<T, Record<T>> transformObservable(final String key, final Type type, final ObservableStrategy strategy) {
+        return new ObservableTransformer<T, Record<T>>() {
+            @Override
+            public ObservableSource<Record<T>> apply(Observable<T> upstream) {
+                return strategy.execute(RxCache.this, key, upstream, type);
+            }
+        };
+    }
+
+    public <T> FlowableTransformer<T, Record<T>> transformFlowable(final String key, final Type type, final FlowableStrategy strategy) {
+        return new FlowableTransformer<T, Record<T>>() {
+            @Override
+            public Publisher<Record<T>> apply(Flowable<T> upstream) {
+                return strategy.execute(RxCache.this, key, upstream, type);
+            }
+        };
+    }
+
+    public <T> SingleTransformer<T, Record<T>> transformSingle(final String key, final Type type, final SingleStrategy strategy) {
+        return new SingleTransformer<T, Record<T>>() {
+
+            @Override
+            public SingleSource<Record<T>> apply(Single<T> upstream) {
+                return strategy.execute(RxCache.this, key, upstream, type);
+            }
+        };
+    }
+
+    public <T> CompletableTransformer transformCompletable(final String key, final Type type, final CompletableStrategy strategy) {
+        return new CompletableTransformer() {
+
+            @Override
+            public CompletableSource apply(Completable upstream) {
+                return strategy.execute(RxCache.this, key, upstream, type);
+            }
+        };
+    }
+
+    public <T> MaybeTransformer<T, Record<T>> transformMaybe(final String key, final Type type, final MaybeStrategy strategy) {
+        return new MaybeTransformer<T, Record<T>>() {
+
+            @Override
+            public MaybeSource<Record<T>> apply(Maybe<T> upstream) {
+                return strategy.execute(RxCache.this, key, upstream, type);
+            }
+        };
     }
 
     public <T> Observable<Record<T>> get(final String key, final Type type) {
@@ -101,6 +151,5 @@ public class RxCache {
 
             return new RxCache(this);
         }
-
     }
 }

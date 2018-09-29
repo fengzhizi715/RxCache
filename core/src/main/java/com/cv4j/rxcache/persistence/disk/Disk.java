@@ -7,5 +7,5 @@ import com.cv4j.rxcache.persistence.Persistence;
  */
 public interface Disk extends Persistence {
 
-
+    int storedMB();
 }

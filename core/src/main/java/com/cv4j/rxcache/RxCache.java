@@ -93,24 +93,14 @@ public class RxCache {
         };
     }
 
-    public <T> Observable<Record<T>> get(final String key, final Type type) {
+    public <T> Observable<Record<T>> load(final String key, final Type type) {
 
-        return Observable.create(new ObservableOnSubscribe<Record<T>>() {
-            @Override
-            public void subscribe(ObservableEmitter<Record<T>> emitter) throws Exception {
+        return Observable.just(get(key,type));
+    }
 
-                Record<T> record = cacheRepository.get(key,type);
-                if (!emitter.isDisposed()) {
-                    if (record != null) {
-                        emitter.onNext(record);
-                        emitter.onComplete();
-                    } else {
+    public <T> Record<T> get(String key, Type type) {
 
-                        Observable.empty();
-                    }
-                }
-            }
-        });
+        return cacheRepository.get(key,type);
     }
 
     public <T> void save(final String key, final T value) {
@@ -127,7 +117,7 @@ public class RxCache {
 
         cacheRepository.remove(key);
     }
-    
+
     public void clear() {
         cacheRepository.clear();
     }
@@ -158,10 +148,10 @@ public class RxCache {
 
         public RxCache build() {
 
-            if (memory == null) {
-
-                memory = new DefaultMemoryImpl(maxCacheSize);
-            }
+//            if (memory == null) {
+//
+//                memory = new DefaultMemoryImpl(maxCacheSize);
+//            }
 
             return new RxCache(this);
         }

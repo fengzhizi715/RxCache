@@ -1,6 +1,5 @@
 import com.cv4j.rxcache.RxCache;
 import com.cv4j.rxcache.domain.Record;
-import com.cv4j.rxcache.memory.impl.DefaultMemoryImpl;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
@@ -11,7 +10,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        RxCache.config(new RxCache.Builder().memory(new DefaultMemoryImpl(100)));
+        RxCache.config(new RxCache.Builder());
 
         RxCache rxCache = RxCache.getRxCache();
 

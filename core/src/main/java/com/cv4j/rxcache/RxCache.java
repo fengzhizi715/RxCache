@@ -2,6 +2,7 @@ package com.cv4j.rxcache;
 
 import com.cv4j.rxcache.domain.Record;
 import com.cv4j.rxcache.memory.Memory;
+import com.cv4j.rxcache.memory.impl.DefaultMemoryImpl;
 import com.cv4j.rxcache.persistence.Persistence;
 import io.reactivex.*;
 
@@ -69,10 +70,9 @@ public class RxCache {
 
     public static final class Builder {
 
-        private static final int DEFAULT_MEMORY_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 8);//运行内存的8分之1
         private Memory memory;
+        private int maxCacheSize = 100;
         private Persistence persistence;
-        private Integer memoryMaxSize;
 
         public Builder() {
         }
@@ -87,18 +87,16 @@ public class RxCache {
             return this;
         }
 
-        /**
-         * 不设置,默认为运行内存的8分之1.设置0,或小于0，则不开启内存缓存;
-         */
-        public Builder memoryMax(int maxSize) {
-            this.memoryMaxSize = maxSize;
+        public Builder maxCacheSize(int maxCacheSize) {
+            this.maxCacheSize = maxCacheSize;
             return this;
         }
 
         public RxCache build() {
 
-            if (memoryMaxSize == null) {
-                memoryMaxSize = DEFAULT_MEMORY_CACHE_SIZE;
+            if (memory == null) {
+
+                memory = new DefaultMemoryImpl(maxCacheSize);
             }
 
             return new RxCache(this);

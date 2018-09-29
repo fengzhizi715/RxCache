@@ -19,7 +19,7 @@ public class Test {
         u.password = "123456";
         rxCache.save("test",u);
 
-        Observable<Record<User>> observable = rxCache.load("test", User.class);
+        Observable<Record<User>> observable = rxCache.load2Observable("test", User.class);
 
         observable.subscribe(new Consumer<Record<User>>() {
 

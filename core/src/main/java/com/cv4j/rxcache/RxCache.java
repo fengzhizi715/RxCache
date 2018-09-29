@@ -93,7 +93,7 @@ public class RxCache {
         };
     }
 
-    public <T> Observable<Record<T>> load(final String key, final Type type) {
+    public <T> Observable<Record<T>> load2Observable(final String key, final Type type) {
 
         return Observable.just(get(key,type));
     }

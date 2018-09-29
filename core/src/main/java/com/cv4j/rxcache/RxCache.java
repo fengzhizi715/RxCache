@@ -98,6 +98,21 @@ public class RxCache {
         return Observable.just(get(key,type));
     }
 
+    public <T> Flowable<Record<T>> load2Flowable(final String key, final Type type) {
+
+        return Flowable.just(get(key,type));
+    }
+
+    public <T> Single<Record<T>> load2Single(final String key, final Type type) {
+
+        return Single.just(get(key,type));
+    }
+
+    public <T> Maybe<Record<T>> load2Maybe(final String key, final Type type) {
+
+        return Maybe.just(get(key,type));
+    }
+
     public <T> Record<T> get(String key, Type type) {
 
         return cacheRepository.get(key,type);

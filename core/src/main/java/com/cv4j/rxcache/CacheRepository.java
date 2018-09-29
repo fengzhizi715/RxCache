@@ -17,31 +17,34 @@ public class CacheRepository {
         this.persistence = persistence;
     }
 
-    /**
-     * 读取
-     */
     public <T> Record<T> get(String key) {
+
         if (memory != null) {
-            Record<T> result = memory.getIfPresent(key);
-            if (result != null) {
-                return result;
-            }
+
+            return memory.getIfPresent(key);
         }
+
         if (persistence != null) {
-            Record<T> result = persistence.retrieveRecord(key);
-            if (result != null) {
-                return result;
-            }
+
+            return persistence.retrieveRecord(key);
         }
+
         return null;
     }
 
-    /**
-     * 保存
-     */
     public <T> void save(String key, Record<T> record) {
 
-        if (record == null) { //如果要保存的值为空,则删除
+        if (record != null) {
+
+            if (memory != null) {
+                memory.put(key, record);
+            }
+
+            if (persistence != null) {
+                persistence.saveRecord(key, record);
+            }
+
+        } else {
 
             if (memory != null) {
                 memory.evict(key);
@@ -51,27 +54,13 @@ public class CacheRepository {
                 persistence.evict(key);
             }
         }
-
-        if (memory != null) {
-            memory.put(key, record);
-        }
-
-        if (persistence != null) {
-            persistence.saveRecord(key, record);
-        }
     }
 
-    /**
-     * 是否包含
-     */
     public boolean containsKey(String key) {
 
         return memory != null && memory.containsKey(key) || persistence != null && persistence.containsKey(key);
     }
 
-    /**
-     * 删除缓存
-     */
     public void remove(String key) {
 
         if (memory != null) {
@@ -83,9 +72,6 @@ public class CacheRepository {
         }
     }
 
-    /**
-     * 清空缓存
-     */
     public void clear() {
 
         if (memory != null) {

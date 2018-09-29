@@ -48,11 +48,14 @@ public class RxCache {
             @Override
             public void subscribe(ObservableEmitter<Record<T>> emitter) throws Exception {
 
-                Record<T> record = cacheRepository.get(key);
+                Record<T> record = cacheRepository.get(key,type);
                 if (!emitter.isDisposed()) {
                     if (record != null) {
                         emitter.onNext(record);
                         emitter.onComplete();
+                    } else {
+
+                        Observable.empty();
                     }
                 }
             }
@@ -88,6 +91,10 @@ public class RxCache {
         }
 
         public RxCache build() {
+
+            if (memoryMaxSize == null) {
+                memoryMaxSize = DEFAULT_MEMORY_CACHE_SIZE;
+            }
 
             return new RxCache(this);
         }

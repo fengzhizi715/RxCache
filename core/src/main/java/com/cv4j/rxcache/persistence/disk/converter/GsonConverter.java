@@ -3,6 +3,7 @@ package com.cv4j.rxcache.persistence.disk.converter;
 import com.google.gson.Gson;
 import com.safframework.tony.common.utils.IOUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -24,11 +25,26 @@ public class GsonConverter implements Converter {
     public <T> T read(InputStream source, Type type) {
 
         String json = null;
+        ByteArrayOutputStream outSteam = null;
         try {
-            json = IOUtils.inputStream2String(source);
+
+            outSteam = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len = 0;
+            while( (len = source.read(buffer)) !=-1 ){
+                if (len!=0) {
+                    outSteam.write(buffer, 0, len);
+                }
+            }
+
+            json = new String(outSteam.toByteArray(), "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+
+            IOUtils.closeQuietly(outSteam);
         }
+
         return gson.fromJson(json, type);
     }
 

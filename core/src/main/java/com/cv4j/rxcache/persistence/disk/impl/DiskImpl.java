@@ -49,10 +49,12 @@ public class DiskImpl implements Disk {
         key = safetyKey(key);
 
         File file = new File(cacheDirectory, key);
-        InputStream inputStream = null;
+
+        FileInputStream inputStream = null;
         try {
             inputStream = new FileInputStream(file);
             T result = converter.read(inputStream,type);
+
             return result != null ? new CacheHolder<>(result, timestampMap.get(key)) : null;
         } catch (Exception ignore) {
             return null;
@@ -72,7 +74,7 @@ public class DiskImpl implements Disk {
             File file = new File(cacheDirectory, key);
             outputStream = new FileOutputStream(file, false);
             converter.writer(outputStream,value);
-
+            timestampMap.put(key,System.currentTimeMillis());
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {

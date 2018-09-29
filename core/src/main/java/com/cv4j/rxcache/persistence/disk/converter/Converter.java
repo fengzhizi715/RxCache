@@ -1,4 +1,4 @@
-package com.cv4j.rxcache.persistence.converter;
+package com.cv4j.rxcache.persistence.disk.converter;
 
 import java.io.InputStream;
 import java.io.OutputStream;

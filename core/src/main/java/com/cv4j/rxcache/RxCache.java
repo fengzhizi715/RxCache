@@ -10,11 +10,30 @@ public class RxCache {
 
     private final CacheRepository cacheRepository;
 
+    private static RxCache sDefaultRxCache;
+
+    public static RxCache getDefault() {
+
+        if (sDefaultRxCache == null) {
+            sDefaultRxCache = new RxCache.Builder()
+                    .build();
+
+        }
+        return sDefaultRxCache;
+    }
+
+    public static void initializeConfig(RxCache rxCache) {
+
+        if (sDefaultRxCache == null) {
+            RxCache.sDefaultRxCache = rxCache;
+        }
+    }
+
     private RxCache(Builder builder) {
 
         Memory memory= builder.memory;
         Persistence persistence = builder.persistence;
-        
+
         cacheRepository = new CacheRepository(memory, persistence);
     }
 

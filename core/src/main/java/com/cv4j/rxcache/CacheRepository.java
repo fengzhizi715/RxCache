@@ -58,7 +58,7 @@ public class CacheRepository {
 
     public boolean containsKey(String key) {
 
-        return memory != null && memory.containsKey(key) || persistence != null && persistence.containsKey(key);
+        return (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
     }
 
     public void remove(String key) {

@@ -3,9 +3,7 @@ package com.cv4j.rxcache;
 import com.cv4j.rxcache.domain.Record;
 import com.cv4j.rxcache.memory.Memory;
 import com.cv4j.rxcache.persistence.Persistence;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.*;
 
 import java.lang.reflect.Type;
 
@@ -50,19 +48,17 @@ public class RxCache {
             @Override
             public void subscribe(ObservableEmitter<Record<T>> emitter) throws Exception {
 
-                Record<T> load = cacheRepository.get(key);
+                Record<T> record = cacheRepository.get(key);
                 if (!emitter.isDisposed()) {
-                    if (load != null) {
-                        emitter.onNext(load);
+                    if (record != null) {
+                        emitter.onNext(record);
                         emitter.onComplete();
-                    } else {
-                        emitter.onError(new NullPointerException("Not find the key corresponding to the cache"));
                     }
                 }
             }
         });
     }
-    
+
     public static final class Builder {
 
         private static final int DEFAULT_MEMORY_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 8);//运行内存的8分之1

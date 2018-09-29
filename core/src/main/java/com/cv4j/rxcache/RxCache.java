@@ -8,13 +8,14 @@ import com.cv4j.rxcache.persistence.Persistence;
  */
 public class RxCache {
 
-    private final CacheRepository cacheCore;
+    private final CacheRepository cacheRepository;
 
     private RxCache(Builder builder) {
 
         Memory memory= builder.memory;
         Persistence persistence = builder.persistence;
-        cacheCore = new CacheRepository(memory, persistence);
+        
+        cacheRepository = new CacheRepository(memory, persistence);
     }
 
     public static final class Builder {
@@ -27,12 +28,12 @@ public class RxCache {
         public Builder() {
         }
 
-        public Builder Memory(Memory memory) {
+        public Builder memory(Memory memory) {
             this.memory = memory;
             return this;
         }
 
-        public Builder Persistence(Persistence persistence) {
+        public Builder persistence(Persistence persistence) {
             this.persistence = persistence;
             return this;
         }

@@ -24,5 +24,5 @@ public interface Converter {
      * @param data
      * @return
      */
-    boolean writer(OutputStream sink, Object data);
+    void writer(OutputStream sink, Object data);
 }

@@ -46,7 +46,7 @@ public class DiskImpl implements Disk {
     @Override
     public <T> CacheHolder<T> retrieve(String key, Type type) {
 
-        key = formatKey(key);
+        key = safetyKey(key);
 
         File file = new File(cacheDirectory, key);
         InputStream inputStream = null;
@@ -65,7 +65,7 @@ public class DiskImpl implements Disk {
     @Override
     public <T> void save(String key, T value) {
 
-        key = formatKey(key);
+        key = safetyKey(key);
         FileOutputStream outputStream = null;
 
         try {
@@ -115,7 +115,7 @@ public class DiskImpl implements Disk {
 
     @Override
     public void evict(String key) {
-        key = formatKey(key);
+        key = safetyKey(key);
         final File file = new File(cacheDirectory, key);
         file.delete();
     }
@@ -133,7 +133,7 @@ public class DiskImpl implements Disk {
         }
     }
 
-    private String formatKey(String key) {
+    private String safetyKey(String key) {
         return key.replaceAll("/", "_");
     }
 }

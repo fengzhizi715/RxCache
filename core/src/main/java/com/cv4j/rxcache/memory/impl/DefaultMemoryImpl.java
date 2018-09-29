@@ -1,8 +1,9 @@
 package com.cv4j.rxcache.memory.impl;
 
-import com.cv4j.rxcache.domain.Record;
+import com.cv4j.rxcache.domain.CacheHolder;
 import com.cv4j.rxcache.memory.Memory;
 
+import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -11,17 +12,27 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DefaultMemoryImpl implements Memory {
 
-    private ConcurrentHashMap<String,Record> cache = new ConcurrentHashMap<String,Record>();
+    private ConcurrentHashMap<String,Object> cache;
+    private HashMap<String, Long> timestampMap;
 
-    @Override
-    public <T> Record<T> getIfPresent(String key) {
-        return cache.get(key);
+    public DefaultMemoryImpl(int maxSize) {
+
+        cache = new ConcurrentHashMap<String,Object>(maxSize);
+        timestampMap = new HashMap<>();
     }
 
     @Override
-    public <T> void put(String key, Record<T> record) {
+    public <T> CacheHolder<T> getIfPresent(String key) {
 
-        cache.put(key,record);
+        T result = (T) cache.get(key);
+        return result != null ? new CacheHolder<>(result, timestampMap.get(key)) : null;
+    }
+
+    @Override
+    public <T> void put(String key, T value) {
+
+        cache.put(key,value);
+        timestampMap.put(key,System.currentTimeMillis());
     }
 
     @Override

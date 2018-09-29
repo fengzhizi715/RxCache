@@ -1,6 +1,6 @@
 package com.cv4j.rxcache.memory;
 
-import com.cv4j.rxcache.domain.Record;
+import com.cv4j.rxcache.domain.CacheHolder;
 
 import java.util.Set;
 
@@ -9,9 +9,9 @@ import java.util.Set;
  */
 public interface Memory {
 
-    <T> Record<T> getIfPresent(String key);
+    <T> CacheHolder<T> getIfPresent(String key);
 
-    <T> void put(String key, Record<T> record);
+    <T> void put(String key, T value);
 
     Set<String> keySet();
 

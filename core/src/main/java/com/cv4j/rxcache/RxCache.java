@@ -62,6 +62,11 @@ public class RxCache {
         });
     }
 
+    public <T> void save(final String key, final T value) {
+
+        cacheRepository.save(key, value);
+    }
+
     public static final class Builder {
 
         private static final int DEFAULT_MEMORY_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 8);//运行内存的8分之1

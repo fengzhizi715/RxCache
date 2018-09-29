@@ -1,6 +1,6 @@
 package com.cv4j.rxcache.persistence;
 
-import com.cv4j.rxcache.domain.Record;
+import com.cv4j.rxcache.domain.CacheHolder;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface Persistence {
 
-    <T> Record<T> retrieveRecord(String key,Type type);
+    <T> CacheHolder<T> retrieve(String key, Type type);
 
-    void saveRecord(String key, Record record);
+    <T> void save(String key, T value);
 
     List<String> allKeys();
 

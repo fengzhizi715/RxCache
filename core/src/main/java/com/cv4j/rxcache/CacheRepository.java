@@ -1,6 +1,8 @@
 package com.cv4j.rxcache;
 
+import com.cv4j.rxcache.domain.CacheHolder;
 import com.cv4j.rxcache.domain.Record;
+import com.cv4j.rxcache.domain.Source;
 import com.cv4j.rxcache.memory.Memory;
 import com.cv4j.rxcache.persistence.Persistence;
 
@@ -23,27 +25,37 @@ class CacheRepository {
 
         if (memory != null) {
 
-            return memory.getIfPresent(key);
+            CacheHolder<T> result = memory.getIfPresent(key);
+
+            if (result!=null) {
+
+                return new Record<>(Source.MEMORY,key,result.data,result.timestamp);
+            }
         }
 
         if (persistence != null) {
 
-            return persistence.retrieveRecord(key,type);
+            CacheHolder<T> result = persistence.retrieve(key,type);
+
+            if (result!=null) {
+
+                return new Record<>(Source.PERSISTENCE,key,result.data,result.timestamp);
+            }
         }
 
         return null;
     }
 
-    <T> void save(String key, Record<T> record) {
+    <T> void save(String key, T value) {
 
-        if (record != null) {
+        if (value != null) {
 
             if (memory != null) {
-                memory.put(key, record);
+                memory.put(key, value);
             }
 
             if (persistence != null) {
-                persistence.saveRecord(key, record);
+                persistence.save(key, value);
             }
 
         } else {

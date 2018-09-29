@@ -118,6 +118,20 @@ public class RxCache {
         cacheRepository.save(key, value);
     }
 
+    public boolean containsKey(final String key) {
+
+        return cacheRepository.containsKey(key);
+    }
+
+    public void remove(final String key) {
+
+        cacheRepository.remove(key);
+    }
+    
+    public void clear() {
+        cacheRepository.clear();
+    }
+
     public static final class Builder {
 
         private Memory memory;
@@ -144,10 +158,10 @@ public class RxCache {
 
         public RxCache build() {
 
-//            if (memory == null) {
-//
-//                memory = new DefaultMemoryImpl(maxCacheSize);
-//            }
+            if (memory == null) {
+
+                memory = new DefaultMemoryImpl(maxCacheSize);
+            }
 
             return new RxCache(this);
         }

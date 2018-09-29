@@ -1,7 +1,13 @@
 package com.cv4j.rxcache;
 
+import com.cv4j.rxcache.domain.Record;
 import com.cv4j.rxcache.memory.Memory;
 import com.cv4j.rxcache.persistence.Persistence;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+
+import java.lang.reflect.Type;
 
 /**
  * Created by tony on 2018/9/28.
@@ -15,8 +21,8 @@ public class RxCache {
     public static RxCache getRxCache() {
 
         if (mRxCache == null) {
-            mRxCache = new RxCache.Builder()
-                    .build();
+
+            mRxCache = new RxCache.Builder().build();
         }
 
         return mRxCache;
@@ -25,6 +31,7 @@ public class RxCache {
     public static void config(Builder builder) {
 
         if (mRxCache == null) {
+
             RxCache.mRxCache = builder.build();
         }
     }
@@ -37,6 +44,25 @@ public class RxCache {
         cacheRepository = new CacheRepository(memory, persistence);
     }
 
+    public <T> Observable<Record<T>> get(final String key, final Type type) {
+
+        return Observable.create(new ObservableOnSubscribe<Record<T>>() {
+            @Override
+            public void subscribe(ObservableEmitter<Record<T>> emitter) throws Exception {
+
+                Record<T> load = cacheRepository.get(key);
+                if (!emitter.isDisposed()) {
+                    if (load != null) {
+                        emitter.onNext(load);
+                        emitter.onComplete();
+                    } else {
+                        emitter.onError(new NullPointerException("Not find the key corresponding to the cache"));
+                    }
+                }
+            }
+        });
+    }
+    
     public static final class Builder {
 
         private static final int DEFAULT_MEMORY_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 8);//运行内存的8分之1

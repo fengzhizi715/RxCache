@@ -54,7 +54,7 @@ public class GsonConverter implements Converter {
         String wrapperJSONSerialized = gson.toJson(data);
         byte[] buffer = wrapperJSONSerialized.getBytes();
 
-        // sink 不必关闭，DiskImpl 会实现 sink 的关闭
+        // sink 此时不必关闭，DiskImpl 会实现 sink 的关闭
         try {
             sink.write(buffer, 0, buffer.length);
         } catch (IOException e) {

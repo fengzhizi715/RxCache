@@ -1,5 +1,6 @@
 package com.cv4j.rxcache.persistence.disk.converter;
 
+import com.cv4j.rxcache.persistence.disk.encrypt.Encryptor;
 import com.safframework.tony.common.utils.IOUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -12,6 +13,16 @@ import java.lang.reflect.Type;
  * Created by tony on 2018/10/1.
  */
 public abstract class AbstractConverter implements Converter {
+
+    private Encryptor encryptor;
+
+    public AbstractConverter() {
+    }
+
+    public AbstractConverter(Encryptor encryptor) {
+
+        this.encryptor = encryptor;
+    }
 
     @Override
     public <T> T read(InputStream source, Type type) {
@@ -37,6 +48,11 @@ public abstract class AbstractConverter implements Converter {
             IOUtils.closeQuietly(outSteam);
         }
 
+        if (encryptor!=null) {
+
+            json = encryptor.decrypt(json);
+        }
+
         return fromJson(json,type);
     }
 
@@ -44,6 +60,12 @@ public abstract class AbstractConverter implements Converter {
     public void writer(OutputStream sink, Object data) {
 
         String wrapperJSONSerialized = toJson(data);
+
+        if (encryptor!=null) {
+
+            wrapperJSONSerialized = encryptor.encrypt(wrapperJSONSerialized);
+        }
+
         byte[] buffer = wrapperJSONSerialized.getBytes();
 
         // sink 此时不必关闭，DiskImpl 会实现 sink 的关闭

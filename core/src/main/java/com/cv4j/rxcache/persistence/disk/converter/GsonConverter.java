@@ -17,12 +17,12 @@ public class GsonConverter extends AbstractConverter {
     }
 
     @Override
-    <T> T fromJson(String json, Type type) {
+    protected <T> T fromJson(String json, Type type) {
         return gson.fromJson(json, type);
     }
 
     @Override
-    String toJson(Object data) {
+    protected String toJson(Object data) {
         return gson.toJson(data);
     }
 }

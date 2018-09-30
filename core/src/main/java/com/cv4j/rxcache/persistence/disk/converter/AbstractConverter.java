@@ -54,7 +54,7 @@ public abstract class AbstractConverter implements Converter {
         }
     }
 
-    abstract <T> T fromJson(String json, Type type);
+    protected abstract <T> T fromJson(String json, Type type);
 
-    abstract String toJson(Object data);
+    protected abstract String toJson(Object data);
 }

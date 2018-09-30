@@ -95,22 +95,30 @@ public class RxCache {
 
     public <T> Observable<Record<T>> load2Observable(final String key, final Type type) {
 
-        return Observable.just(get(key,type));
+        Record<T> recodrd = get(key,type);
+
+        return recodrd!=null?Observable.just(recodrd):Observable.empty();
     }
 
     public <T> Flowable<Record<T>> load2Flowable(final String key, final Type type) {
 
-        return Flowable.just(get(key,type));
+        Record<T> recodrd = get(key,type);
+
+        return recodrd!=null?Flowable.just(recodrd):Flowable.empty();
     }
 
     public <T> Single<Record<T>> load2Single(final String key, final Type type) {
 
-        return Single.just(get(key,type));
+        Record<T> recodrd = get(key,type);
+
+        return recodrd!=null?Single.just(recodrd):Single.never();
     }
 
     public <T> Maybe<Record<T>> load2Maybe(final String key, final Type type) {
 
-        return Maybe.just(get(key,type));
+        Record<T> recodrd = get(key,type);
+
+        return recodrd!=null?Maybe.just(recodrd):Maybe.empty();
     }
 
     public <T> Record<T> get(String key, Type type) {

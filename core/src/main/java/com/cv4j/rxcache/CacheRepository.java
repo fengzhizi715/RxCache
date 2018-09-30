@@ -7,6 +7,8 @@ import com.cv4j.rxcache.memory.Memory;
 import com.cv4j.rxcache.persistence.Persistence;
 
 import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by tony on 2018/9/28.
@@ -73,6 +75,23 @@ class CacheRepository {
     boolean containsKey(String key) {
 
         return (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
+    }
+
+    Set<String> getAllKeys() {
+
+        Set<String> result = new HashSet<>();
+
+        if (memory!=null) {
+
+            result.addAll(memory.keySet());
+        }
+
+        if (persistence!=null) {
+
+            result.addAll(persistence.allKeys());
+        }
+
+        return result;
     }
 
     void remove(String key) {

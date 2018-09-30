@@ -9,6 +9,7 @@ import io.reactivex.*;
 import org.reactivestreams.Publisher;
 
 import java.lang.reflect.Type;
+import java.util.Set;
 
 /**
  * Created by tony on 2018/9/28.
@@ -126,17 +127,22 @@ public class RxCache {
         return cacheRepository.get(key,type);
     }
 
-    public <T> void save(final String key, final T value) {
+    public <T> void save(String key, T value) {
 
         cacheRepository.save(key, value);
     }
 
-    public boolean containsKey(final String key) {
+    public boolean containsKey(String key) {
 
         return cacheRepository.containsKey(key);
     }
 
-    public void remove(final String key) {
+    public Set<String> getAllKeys() {
+
+        return cacheRepository.getAllKeys();
+    }
+
+    public void remove(String key) {
 
         cacheRepository.remove(key);
     }

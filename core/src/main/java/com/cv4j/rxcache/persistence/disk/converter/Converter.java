@@ -9,20 +9,7 @@ import java.lang.reflect.Type;
  */
 public interface Converter {
 
-    /**
-     * 读取
-     *
-     * @param source
-     * @return
-     */
     <T> T read(InputStream source, Type type);
 
-    /**
-     * 写入
-     *
-     * @param sink
-     * @param data
-     * @return
-     */
     void writer(OutputStream sink, Object data);
 }

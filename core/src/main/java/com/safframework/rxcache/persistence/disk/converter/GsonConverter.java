@@ -1,6 +1,7 @@
 package com.safframework.rxcache.persistence.disk.converter;
 
 import com.google.gson.Gson;
+import com.safframework.rxcache.persistence.disk.encrypt.Encryptor;
 
 import java.lang.reflect.Type;
 
@@ -13,6 +14,12 @@ public class GsonConverter extends AbstractConverter {
 
     public GsonConverter() {
 
+        gson = new Gson();
+    }
+
+    public GsonConverter(Encryptor encryptor) {
+
+        super(encryptor);
         gson = new Gson();
     }
 

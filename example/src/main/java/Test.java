@@ -1,5 +1,5 @@
-import com.cv4j.rxcache.RxCache;
-import com.cv4j.rxcache.domain.Record;
+import com.safframework.rxcache.RxCache;
+import com.safframework.rxcache.domain.Record;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 

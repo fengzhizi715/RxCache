@@ -61,12 +61,15 @@ public abstract class AbstractConverter implements Converter {
 
         String wrapperJSONSerialized = toJson(data);
 
+        byte[] buffer = null;
+
         if (encryptor!=null) {
 
-            wrapperJSONSerialized = encryptor.encrypt(wrapperJSONSerialized);
-        }
+            buffer = encryptor.encrypt(wrapperJSONSerialized);
+        } else {
 
-        byte[] buffer = wrapperJSONSerialized.getBytes();
+            buffer = wrapperJSONSerialized.getBytes();
+        }
 
         // sink 此时不必关闭，DiskImpl 会实现 sink 的关闭
         try {

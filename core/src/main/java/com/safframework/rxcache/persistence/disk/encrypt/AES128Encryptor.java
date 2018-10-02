@@ -22,7 +22,7 @@ public class AES128Encryptor implements Encryptor {
     }
 
     @Override
-    public String encrypt(String json) {
+    public byte[] encrypt(String json) {
 
         byte[] clean = json.getBytes();
 
@@ -63,7 +63,7 @@ public class AES128Encryptor implements Encryptor {
             System.arraycopy(iv, 0, encryptedIVAndText, 0, ivSize);
             System.arraycopy(encrypted, 0, encryptedIVAndText, ivSize, encrypted.length);
 
-            return new String(encryptedIVAndText);
+            return encryptedIVAndText;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

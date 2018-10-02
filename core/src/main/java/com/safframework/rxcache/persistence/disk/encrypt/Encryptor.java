@@ -5,7 +5,7 @@ package com.safframework.rxcache.persistence.disk.encrypt;
  */
 public interface Encryptor {
 
-    String encrypt(String json);
+    byte[] encrypt(String json);
 
     String decrypt(String json);
 }

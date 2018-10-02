@@ -17,6 +17,7 @@ import org.reactivestreams.Publisher;
 import java.lang.reflect.Type;
 
 /**
+ * 缓存优先，并且缓存有有效时间
  * Created by tony on 2018/10/2.
  */
 public class CacheFirstTimeoutStrategy implements ObservableStrategy,

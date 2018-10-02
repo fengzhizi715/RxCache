@@ -13,6 +13,7 @@ import org.reactivestreams.Publisher;
 import java.lang.reflect.Type;
 
 /**
+ * 只获取缓存的策略
  * Created by tony on 2018/10/2.
  */
 public class CacheOnlyStrategy implements ObservableStrategy,

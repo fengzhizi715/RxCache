@@ -16,6 +16,7 @@ import org.reactivestreams.Publisher;
 import java.lang.reflect.Type;
 
 /**
+ * 只获取接口的数据，并且将获取到数据保持到缓存中。
  * Created by tony on 2018/10/2.
  */
 public class RemoteOnlyStrategy implements ObservableStrategy,

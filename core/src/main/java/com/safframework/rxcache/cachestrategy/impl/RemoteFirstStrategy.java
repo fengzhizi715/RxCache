@@ -16,6 +16,7 @@ import org.reactivestreams.Publisher;
 import java.lang.reflect.Type;
 
 /**
+ * 接口的数据优先，接口取不到数据时获取缓存的数据。
  * Created by tony on 2018/10/2.
  */
 public class RemoteFirstStrategy implements ObservableStrategy,

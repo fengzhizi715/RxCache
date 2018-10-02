@@ -16,6 +16,7 @@ import org.reactivestreams.Publisher;
 import java.lang.reflect.Type;
 
 /**
+ * 不使用缓存，也不保存缓存
  * Created by tony on 2018/10/2.
  */
 public class NoCacheStrategy implements ObservableStrategy,

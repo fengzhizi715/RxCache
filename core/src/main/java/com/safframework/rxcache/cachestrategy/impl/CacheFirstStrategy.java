@@ -12,6 +12,7 @@ import org.reactivestreams.Publisher;
 import java.lang.reflect.Type;
 
 /**
+ * 缓存优先的策略，缓存取不到时取接口的数据。
  * Created by tony on 2018/9/30.
  */
 public class CacheFirstStrategy implements ObservableStrategy,

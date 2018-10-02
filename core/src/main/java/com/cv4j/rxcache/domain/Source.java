@@ -6,5 +6,5 @@ package com.cv4j.rxcache.domain;
  */
 public enum Source {
 
-    MEMORY, PERSISTENCE, OTHER;
+    MEMORY, PERSISTENCE, CLOUD;
 }

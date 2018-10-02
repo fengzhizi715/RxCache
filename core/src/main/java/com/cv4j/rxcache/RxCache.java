@@ -4,7 +4,7 @@ import com.cv4j.rxcache.domain.Record;
 import com.cv4j.rxcache.memory.Memory;
 import com.cv4j.rxcache.memory.impl.DefaultMemoryImpl;
 import com.cv4j.rxcache.persistence.Persistence;
-import com.cv4j.rxcache.strategy.*;
+import com.cv4j.rxcache.cachestrategy.*;
 import io.reactivex.*;
 import org.reactivestreams.Publisher;
 

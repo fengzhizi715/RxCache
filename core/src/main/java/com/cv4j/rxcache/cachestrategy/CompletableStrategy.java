@@ -1,4 +1,4 @@
-package com.cv4j.rxcache.strategy;
+package com.cv4j.rxcache.cachestrategy;
 
 import com.cv4j.rxcache.RxCache;
 import io.reactivex.Completable;

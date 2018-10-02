@@ -1,8 +1,9 @@
 plugins {
     id 'java'
+    id 'com.novoda.bintray-release'
 }
 
-group 'com.cv4j.rxcache'
+group 'com.safframework.rxcache'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -22,4 +23,13 @@ dependencies {
     implementation 'com.github.ben-manes.caffeine:caffeine:2.6.2'
     implementation 'com.alibaba:fastjson:1.2.49'
     implementation "tony-common:tony-common-utils:${libs.tony_common_utils}"
+}
+
+publish{
+    userOrg = 'fengzhizi715'
+    groupId = 'com.safframework.rxcache'
+    artifactId = 'rxcache-extra'
+    publishVersion = '0.1.0'
+    desc = 'this is a local cache for Java and Android'
+    website = 'https://github.com/fengzhizi715/RxCache'
 }

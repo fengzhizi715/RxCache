@@ -13,9 +13,8 @@ import java.security.spec.KeySpec;
  */
 public class DESEncryptor implements Encryptor {
 
-    //加密算是是des
     private static final String ALGORITHM = "DES";
-    //转换格式
+
     private static final String TRANSFORMATION = "DES/ECB/PKCS5Padding";
 
     private String key;
@@ -77,7 +76,7 @@ public class DESEncryptor implements Encryptor {
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
-        
+
         return null;
     }
 }

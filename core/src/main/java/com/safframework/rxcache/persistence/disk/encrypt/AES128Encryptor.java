@@ -14,6 +14,10 @@ import java.security.*;
  */
 public class AES128Encryptor implements Encryptor {
 
+    private static final String ALGORITHM = "AES";
+
+    private static final String TRANSFORMATION = "AES/CBC/PKCS5Padding";
+
     private String key;
 
     public AES128Encryptor(String key) {
@@ -39,12 +43,12 @@ public class AES128Encryptor implements Encryptor {
             digest.update(key.getBytes("UTF-8"));
             byte[] keyBytes = new byte[16];
             System.arraycopy(digest.digest(), 0, keyBytes, 0, keyBytes.length);
-            SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
+            SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, ALGORITHM);
 
             // Encrypt.
             Cipher cipher = null;
             try {
-                cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                cipher = Cipher.getInstance(TRANSFORMATION);
                 cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
@@ -102,10 +106,10 @@ public class AES128Encryptor implements Encryptor {
             md = MessageDigest.getInstance("SHA-256");
             md.update(key.getBytes());
             System.arraycopy(md.digest(), 0, keyBytes, 0, keyBytes.length);
-            SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
+            SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, ALGORITHM);
 
             // Decrypt.
-            Cipher cipherDecrypt = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            Cipher cipherDecrypt = Cipher.getInstance(TRANSFORMATION);
             cipherDecrypt.init(Cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec);
             byte[] decrypted = cipherDecrypt.doFinal(encryptedBytes);
 

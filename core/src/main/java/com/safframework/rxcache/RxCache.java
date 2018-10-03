@@ -177,7 +177,7 @@ public class RxCache {
 
         public RxCache build() {
 
-            if (memory == null) {
+            if (memory == null && persistence == null) { // 至少保证 RxCache 可用
 
                 memory = new DefaultMemoryImpl(maxCacheSize);
             }

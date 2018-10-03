@@ -18,7 +18,7 @@ public class AES128Encryptor implements Encryptor {
 
     public AES128Encryptor(String key) {
 
-        this.key = key; // 使用AES 128的算法进行加密/解密，key是必须的
+        this.key = key; // 使用AES 128的算法进行加密/解密，key是必须的，且为16字节
     }
 
     @Override

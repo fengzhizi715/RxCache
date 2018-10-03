@@ -1,9 +1,9 @@
 package com.safframework.rxcache.extra.memory;
 
-import com.safframework.rxcache.domain.CacheHolder;
-import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.safframework.rxcache.domain.CacheHolder;
+import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 
 import java.util.Set;
 
@@ -20,6 +20,28 @@ public class CaffeineImpl extends AbstractMemoryImpl {
         cache = Caffeine.newBuilder()
                 .maximumSize(maxSize)
                 .build();
+    }
+
+    public CaffeineImpl(long maxSize, CacheConfig cacheConfig) {
+
+        super(maxSize);
+        Caffeine caffeine = Caffeine.newBuilder()
+                .maximumSize(maxSize);
+
+        if (cacheConfig!=null) {
+
+            if (cacheConfig.expireDuration>0 && cacheConfig.expireTimeUnit!=null) {
+
+                caffeine.expireAfterWrite(cacheConfig.expireDuration,cacheConfig.expireTimeUnit);
+            }
+
+            if (cacheConfig.refreshDuration>0 && cacheConfig.refreshTimeUnit!=null) {
+
+                caffeine.refreshAfterWrite(cacheConfig.refreshDuration,cacheConfig.refreshTimeUnit);
+            }
+        }
+
+        cache = caffeine.build();
     }
 
     @Override

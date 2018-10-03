@@ -1,10 +1,10 @@
 package com.safframework.rxcache.extra.memory;
 
-import com.safframework.rxcache.domain.CacheHolder;
-import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.safframework.rxcache.domain.CacheHolder;
+import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 
 import java.util.Set;
 
@@ -22,6 +22,34 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
                 .newBuilder()
                 .maximumSize(maxSize)
                 .build(new CacheLoader<String, Object>(){
+                    @Override
+                    public String load(String key) throws Exception {
+                        return key;
+                    }
+                });
+    }
+
+    public GuavaCacheImpl(long maxSize, CacheConfig cacheConfig) {
+
+        super(maxSize);
+        CacheBuilder cacheBuilder = CacheBuilder
+                .newBuilder()
+                .maximumSize(maxSize);
+
+        if (cacheConfig!=null) {
+
+            if (cacheConfig.expireDuration>0 && cacheConfig.expireTimeUnit!=null) {
+
+                cacheBuilder.expireAfterWrite(cacheConfig.expireDuration,cacheConfig.expireTimeUnit);
+            }
+
+            if (cacheConfig.refreshDuration>0 && cacheConfig.refreshTimeUnit!=null) {
+
+                cacheBuilder.refreshAfterWrite(cacheConfig.refreshDuration,cacheConfig.refreshTimeUnit);
+            }
+        }
+
+        cache = cacheBuilder.build(new CacheLoader<String, Object>(){
                     @Override
                     public String load(String key) throws Exception {
                         return key;

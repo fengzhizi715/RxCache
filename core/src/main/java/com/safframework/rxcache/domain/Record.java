@@ -38,4 +38,9 @@ public class Record<T> {
         this.timestamp = timestamp;
         this.expireTime = expireTime;
     }
+
+    public boolean isExpired() {
+
+        return timestamp + expireTime < System.currentTimeMillis();
+    }
 }

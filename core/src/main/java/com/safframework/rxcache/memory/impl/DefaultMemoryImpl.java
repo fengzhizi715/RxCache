@@ -3,6 +3,8 @@ package com.safframework.rxcache.memory.impl;
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheHolder;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,11 +18,13 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
 
     private Map<String,Object> cache;
     private Lock lock = new ReentrantLock();
+    private List<String> keys;
 
     public DefaultMemoryImpl(long maxSize) {
 
         super(maxSize);
         cache = new ConcurrentHashMap<String,Object>((int)maxSize);
+        keys = new LinkedList<>();
     }
 
     @Override
@@ -42,8 +46,6 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
                 } else {                     // 缓存的数据已经过期
 
                     evict(key);
-                    timestampMap.remove(key);
-                    expireTimeMap.remove(key);
 
                     return null;
                 }
@@ -75,9 +77,26 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
                 cache.put(key,value);
                 timestampMap.put(key,System.currentTimeMillis());
                 expireTimeMap.put(key,expireTime);
+                keys.add(key);
             } else {                       // 缓存空间不足，需要删除一个
 
+                if (containsKey(key)) {
 
+                    keys.remove(key);
+
+                    cache.put(key,value);
+                    timestampMap.put(key,System.currentTimeMillis());
+                    expireTimeMap.put(key,expireTime);
+                    keys.add(key);
+                } else {
+
+                    keys.remove(0);  // 删除最早缓存的数据
+
+                    cache.put(key,value);
+                    timestampMap.put(key,System.currentTimeMillis());
+                    expireTimeMap.put(key,expireTime);
+                    keys.add(key);
+                }
             }
 
         } finally {
@@ -104,6 +123,7 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
         cache.remove(key);
         timestampMap.remove(key);
         expireTimeMap.remove(key);
+        keys.remove(key);
     }
 
     @Override
@@ -112,5 +132,6 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
         cache.clear();
         timestampMap.clear();
         expireTimeMap.clear();
+        keys.clear();
     }
 }

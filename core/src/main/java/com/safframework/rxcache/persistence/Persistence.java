@@ -14,6 +14,8 @@ public interface Persistence {
 
     <T> void save(String key, T value);
 
+    <T> void save(String key, T value, long expireTime);
+
     List<String> allKeys();
 
     boolean containsKey(String key);

@@ -39,15 +39,17 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
                 if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
 
                     result = (T) cache.get(key);
-                } else { // 缓存的数据已经过期
+                } else {                     // 缓存的数据已经过期
 
                     evict(key);
                     timestampMap.remove(key);
                     expireTimeMap.remove(key);
+
+                    return null;
                 }
             }
 
-            return result != null ? new CacheHolder<>(result, timestampMap.get(key)) : null;
+            return result != null ? new CacheHolder<>(result, timestampMap.get(key),expireTimeMap.get(key)) : null;
 
         } finally {
 

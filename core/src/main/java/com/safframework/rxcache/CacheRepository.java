@@ -31,7 +31,7 @@ class CacheRepository {
 
             if (result!=null) {
 
-                return new Record<>(Source.MEMORY,key,result.data,result.timestamp);
+                return new Record<>(Source.MEMORY,key,result.data,result.timestamp,result.expireTime);
             }
         }
 
@@ -41,7 +41,7 @@ class CacheRepository {
 
             if (result!=null) {
 
-                return new Record<>(Source.PERSISTENCE,key,result.data,result.timestamp);
+                return new Record<>(Source.PERSISTENCE,key,result.data,result.timestamp,result.expireTime);
             }
         }
 
@@ -54,6 +54,30 @@ class CacheRepository {
 
             if (memory != null) {
                 memory.put(key, value);
+            }
+
+            if (persistence != null) {
+                persistence.save(key, value);
+            }
+
+        } else {
+
+            if (memory != null) {
+                memory.evict(key);
+            }
+
+            if (persistence != null) {
+                persistence.evict(key);
+            }
+        }
+    }
+
+    <T> void save(String key, T value, long expireTime) {
+
+        if (value != null) {
+
+            if (memory != null) {
+                memory.put(key, value,expireTime);
             }
 
             if (persistence != null) {

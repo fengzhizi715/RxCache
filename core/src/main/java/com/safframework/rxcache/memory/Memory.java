@@ -13,6 +13,8 @@ public interface Memory {
 
     <T> void put(String key, T value);
 
+    <T> void put(String key, T value, long expireTime);
+
     Set<String> keySet();
 
     boolean containsKey(String key);

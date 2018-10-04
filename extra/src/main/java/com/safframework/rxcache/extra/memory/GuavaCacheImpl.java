@@ -84,7 +84,7 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
 
         if (expireTime>0) {
 
-            expire(key, expireTime);
+            expireKey(key, expireTime);
         }
     }
 
@@ -116,7 +116,7 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
         expireTimeMap.clear();
     }
 
-    private void expire(String key, long expireTime) {
+    private void expireKey(String key, long expireTime) {
 
         timer.schedule(new CacheEvictTask(this, key), expireTime);
     }

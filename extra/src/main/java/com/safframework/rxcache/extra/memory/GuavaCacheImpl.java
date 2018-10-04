@@ -4,10 +4,12 @@ import com.google.common.base.Optional;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 
 import java.util.Set;
+import java.util.Timer;
 
 /**
  * Created by tony on 2018/9/29.
@@ -15,6 +17,8 @@ import java.util.Set;
 public class GuavaCacheImpl extends AbstractMemoryImpl {
 
     private LoadingCache<String,Object > cache;
+
+    private Timer timer = new Timer();
 
     public GuavaCacheImpl(long maxSize) {
 
@@ -68,14 +72,20 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value) {
 
-        cache.put(key,Optional.fromNullable(value));
-        timestampMap.put(key,System.currentTimeMillis());
+        put(key,value, Constant.NEVER_EXPIRE);
     }
 
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
+        cache.put(key,Optional.fromNullable(value));
+        timestampMap.put(key,System.currentTimeMillis());
+        expireTimeMap.put(key,expireTime);
 
+        if (expireTime>0) {
+
+            expire(key, expireTime);
+        }
     }
 
     @Override
@@ -100,5 +110,10 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
     public void evictAll() {
 
         cache.invalidateAll();
+    }
+
+    private void expire(String key, long expireTime) {
+
+        timer.schedule(new CacheEvictTask(this, key), expireTime);
     }
 }

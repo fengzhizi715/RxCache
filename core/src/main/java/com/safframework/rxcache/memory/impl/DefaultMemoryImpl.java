@@ -73,7 +73,7 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
                 cache.put(key,value);
                 timestampMap.put(key,System.currentTimeMillis());
                 expireTimeMap.put(key,expireTime);
-            } else {                       // 缓存空间不足
+            } else {                       // 缓存空间不足，需要删除一个
 
 
             }

@@ -100,11 +100,15 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
     public void evict(String key) {
 
         cache.remove(key);
+        timestampMap.remove(key);
+        expireTimeMap.remove(key);
     }
 
     @Override
     public void evictAll() {
 
         cache.clear();
+        timestampMap.clear();
+        expireTimeMap.clear();
     }
 }

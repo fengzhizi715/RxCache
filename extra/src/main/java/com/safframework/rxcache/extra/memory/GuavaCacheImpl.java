@@ -104,12 +104,16 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
     public void evict(String key) {
 
         cache.invalidate(key);
+        timestampMap.remove(key);
+        expireTimeMap.remove(key);
     }
 
     @Override
     public void evictAll() {
 
         cache.invalidateAll();
+        timestampMap.clear();
+        expireTimeMap.clear();
     }
 
     private void expire(String key, long expireTime) {

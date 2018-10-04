@@ -132,6 +132,11 @@ public class RxCache {
         cacheRepository.save(key, value);
     }
 
+    public <T> void save(String key, T value, long expireTime) {
+
+        cacheRepository.save(key, value, expireTime);
+    }
+
     public boolean containsKey(String key) {
 
         return cacheRepository.containsKey(key);

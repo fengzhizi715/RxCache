@@ -53,7 +53,7 @@ public class CaffeineImpl extends AbstractMemoryImpl {
     public <T> CacheHolder<T> getIfPresent(String key) {
 
         Optional<T> optional = (Optional<T>) cache.getIfPresent(key);
-        return optional != null ? new CacheHolder<>(optional.orNull(), timestampMap.get(key)) : null;
+        return optional != null ? new CacheHolder<>(optional.orNull(), timestampMap.get(key), expireTimeMap.get(key)) : null;
     }
 
     @Override

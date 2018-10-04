@@ -10,11 +10,13 @@ import java.util.HashMap;
 public abstract class AbstractMemoryImpl implements Memory {
 
     protected HashMap<String, Long> timestampMap;
+    protected HashMap<String, Long> expireTimeMap;
     protected long maxSize;
 
     public AbstractMemoryImpl(long maxSize) {
 
         timestampMap = new HashMap<>();
+        expireTimeMap = new HashMap<>();
         this.maxSize = maxSize;
     }
 }

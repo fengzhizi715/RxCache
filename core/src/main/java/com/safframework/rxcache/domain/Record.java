@@ -1,5 +1,6 @@
 package com.safframework.rxcache.domain;
 
+import com.safframework.rxcache.config.Constant;
 import lombok.Data;
 
 /**
@@ -17,17 +18,12 @@ public class Record<T> {
 
     public Record(Source from,String key,T value) {
 
-        this.from = from;
-        this.key = key;
-        this.data = value;
+        this(from,key,value,System.currentTimeMillis());
     }
 
     public Record(Source from,String key,T value,long timestamp) {
 
-        this.from = from;
-        this.key = key;
-        this.data = value;
-        this.timestamp = timestamp;
+        this(from,key,value,System.currentTimeMillis(), Constant.NEVER_EXPIRE);
     }
 
     public Record(Source from,String key,T value,long timestamp,long expireTime) {

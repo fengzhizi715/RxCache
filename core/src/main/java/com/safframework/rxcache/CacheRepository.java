@@ -60,15 +60,6 @@ class CacheRepository {
                 persistence.save(key, value);
             }
 
-        } else {
-
-            if (memory != null) {
-                memory.evict(key);
-            }
-
-            if (persistence != null) {
-                persistence.evict(key);
-            }
         }
     }
 
@@ -81,18 +72,9 @@ class CacheRepository {
             }
 
             if (persistence != null) {
-                persistence.save(key, value);
+                persistence.save(key, value, expireTime);
             }
 
-        } else {
-
-            if (memory != null) {
-                memory.evict(key);
-            }
-
-            if (persistence != null) {
-                persistence.evict(key);
-            }
         }
     }
 

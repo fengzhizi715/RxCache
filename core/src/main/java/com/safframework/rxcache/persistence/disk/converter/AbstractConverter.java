@@ -28,24 +28,24 @@ public abstract class AbstractConverter implements Converter {
     public <T> T read(InputStream source, Type type) {
 
         String json = null;
-        ByteArrayOutputStream outSteam = null;
+        ByteArrayOutputStream outputStream = null;
         try {
 
-            outSteam = new ByteArrayOutputStream();
+            outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
             int len = 0;
             while( (len = source.read(buffer)) !=-1 ){
                 if (len!=0) {
-                    outSteam.write(buffer, 0, len);
+                    outputStream.write(buffer, 0, len);
                 }
             }
 
-            json = new String(outSteam.toByteArray(), "UTF-8");
+            json = new String(outputStream.toByteArray(), "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
 
-            IOUtils.closeQuietly(outSteam);
+            IOUtils.closeQuietly(outputStream);
         }
 
         if (encryptor!=null) {

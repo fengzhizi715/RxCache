@@ -21,7 +21,7 @@ public class DESEncryptor implements Encryptor {
 
     public DESEncryptor(String key) {
 
-        this.key = key;
+        this.key = key; // 对 key 无特殊要求
     }
 
     @Override

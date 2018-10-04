@@ -2,7 +2,6 @@ package com.safframework.rxcache.extra.memory;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.google.common.base.Optional;
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
@@ -52,8 +51,8 @@ public class CaffeineImpl extends AbstractMemoryImpl {
     @Override
     public <T> CacheHolder<T> getIfPresent(String key) {
 
-        Optional<T> optional = (Optional<T>) cache.getIfPresent(key);
-        return optional != null ? new CacheHolder<>(optional.orNull(), timestampMap.get(key), expireTimeMap.get(key)) : null;
+        T result = (T) cache.getIfPresent(key);
+        return result!=null?new CacheHolder<>(result, timestampMap.get(key), expireTimeMap.get(key)) : null;
     }
 
     @Override
@@ -65,7 +64,7 @@ public class CaffeineImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
-        cache.put(key,Optional.fromNullable(value));
+        cache.put(key,value);
         timestampMap.put(key,System.currentTimeMillis());
         expireTimeMap.put(key,expireTime);
 

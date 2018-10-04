@@ -1,13 +1,11 @@
 package com.safframework.rxcache.domain;
 
 import com.safframework.rxcache.config.Constant;
-import lombok.Data;
 
 /**
  * 封装缓存的数据
  * Created by tony on 2018/9/28.
  */
-@Data
 public class Record<T> {
 
     private Source from;    // 缓存的来源
@@ -32,6 +30,46 @@ public class Record<T> {
         this.key = key;
         this.data = value;
         this.timestamp = timestamp;
+        this.expireTime = expireTime;
+    }
+
+    public Source getFrom() {
+        return from;
+    }
+
+    public void setFrom(Source from) {
+        this.from = from;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public long getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(long expireTime) {
         this.expireTime = expireTime;
     }
 

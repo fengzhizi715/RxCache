@@ -9,10 +9,11 @@ import lombok.Data;
 @Data
 public class Record<T> {
 
-    private Source from;
-    private String key;
-    private T data;
-    private long timestamp;
+    private Source from;    // 缓存的来源
+    private String key;     // 缓存的key
+    private T data;         // 缓存的数据
+    private long timestamp; // 缓存创建的时间
+    private long expireTime;// 缓存过期的时间
 
     public Record(Source from,String key,T value) {
 
@@ -27,5 +28,14 @@ public class Record<T> {
         this.key = key;
         this.data = value;
         this.timestamp = timestamp;
+    }
+
+    public Record(Source from,String key,T value,long timestamp,long expireTime) {
+
+        this.from = from;
+        this.key = key;
+        this.data = value;
+        this.timestamp = timestamp;
+        this.expireTime = expireTime;
     }
 }

@@ -161,6 +161,7 @@ public class DiskImpl implements Disk {
         file.delete();
 
         timestampMap.remove(key);
+        expireTimeMap.remove(key);
     }
 
     @Override
@@ -176,6 +177,7 @@ public class DiskImpl implements Disk {
         }
 
         timestampMap.clear();
+        expireTimeMap.clear();
     }
 
     private String safetyKey(String key) {

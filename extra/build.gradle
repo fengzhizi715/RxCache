@@ -29,7 +29,7 @@ publish{
     userOrg = 'fengzhizi715'
     groupId = 'com.safframework.rxcache'
     artifactId = 'rxcache-extra'
-    publishVersion = '0.3.0'
+    publishVersion = '0.3.1'
     desc = 'A local reactive cache for Java and Android.'
     website = 'https://github.com/fengzhizi715/RxCache'
 }

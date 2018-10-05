@@ -2,6 +2,7 @@ package com.safframework.rxcache.persistence.disk.impl;
 
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheHolder;
+import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.persistence.disk.Disk;
 import com.safframework.rxcache.persistence.disk.converter.Converter;
 import com.safframework.tony.common.utils.IOUtils;
@@ -116,7 +117,7 @@ public class DiskImpl implements Disk {
             timestampMap.put(key,System.currentTimeMillis());
             expireTimeMap.put(key,expireTime);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RxCacheException(e);
         } finally {
 
             IOUtils.closeQuietly(outputStream);

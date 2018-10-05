@@ -1,6 +1,7 @@
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.extra.memory.GuavaCacheImpl;
+import domain.User;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 

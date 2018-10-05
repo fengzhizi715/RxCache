@@ -1,5 +1,6 @@
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
+import domain.User;
 
 /**
  * Created by tony on 2018/10/5.

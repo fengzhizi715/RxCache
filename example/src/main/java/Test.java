@@ -1,5 +1,6 @@
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
+import domain.User;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 

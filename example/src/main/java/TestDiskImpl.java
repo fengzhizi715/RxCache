@@ -2,6 +2,7 @@ import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.persistence.disk.converter.GsonConverter;
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
+import domain.User;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 

@@ -1,34 +1,25 @@
+package spring;
+
 import com.safframework.rxcache.RxCache;
+
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.persistence.disk.converter.GsonConverter;
-import com.safframework.rxcache.persistence.disk.encrypt.AES128Encryptor;
-import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
 import domain.User;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.io.File;
 
 /**
- * Created by tony on 2018/10/2.
+ * Created by tony on 2018/10/5.
  */
-public class TestDiskImplWithEncrypt {
+public class TestWithSpring {
 
     public static void main(String[] args) {
 
-        File cacheDirectory = new File("aaa");
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
 
-        if (!cacheDirectory.exists()) {
-
-            cacheDirectory.mkdir();
-        }
-
-        AES128Encryptor encryptor = new AES128Encryptor("abcdefghijklmop");
-        DiskImpl diskImpl = new DiskImpl(cacheDirectory,new GsonConverter(encryptor));
-
-        RxCache.config(new RxCache.Builder().persistence(diskImpl));
-
-        RxCache rxCache = RxCache.getRxCache();
+        RxCache rxCache = ctx.getBean(RxCache.class);
 
         User u = new User();
         u.name = "tony";

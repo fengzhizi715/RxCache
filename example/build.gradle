@@ -20,4 +20,6 @@ dependencies {
     implementation project(":core")
     implementation project(":extra")
     implementation "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
+    implementation 'org.springframework:spring-core:5.1.0.RELEASE'
+    implementation 'org.springframework:spring-context:5.1.0.RELEASE'
 }

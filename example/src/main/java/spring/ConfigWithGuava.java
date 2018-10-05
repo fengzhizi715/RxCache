@@ -2,6 +2,7 @@ package spring;
 
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.extra.memory.GuavaCacheImpl;
+import com.safframework.rxcache.memory.Memory;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 
@@ -12,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 public class ConfigWithGuava {
 
     @Bean
-    public GuavaCacheImpl guavaCache(){
+    public Memory guavaCache(){
         return new GuavaCacheImpl(100);
     }
 

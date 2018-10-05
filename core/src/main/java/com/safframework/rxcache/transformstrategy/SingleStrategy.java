@@ -1,4 +1,4 @@
-package com.safframework.rxcache.cachestrategy;
+package com.safframework.rxcache.transformstrategy;
 
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;

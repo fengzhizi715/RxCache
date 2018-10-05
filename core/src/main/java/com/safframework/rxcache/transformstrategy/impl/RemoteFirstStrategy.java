@@ -1,9 +1,9 @@
-package com.safframework.rxcache.cachestrategy.impl;
+package com.safframework.rxcache.transformstrategy.impl;
 
 import com.safframework.rxcache.RxCache;
-import com.safframework.rxcache.cachestrategy.FlowableStrategy;
-import com.safframework.rxcache.cachestrategy.MaybeStrategy;
-import com.safframework.rxcache.cachestrategy.ObservableStrategy;
+import com.safframework.rxcache.transformstrategy.FlowableStrategy;
+import com.safframework.rxcache.transformstrategy.MaybeStrategy;
+import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import io.reactivex.Flowable;

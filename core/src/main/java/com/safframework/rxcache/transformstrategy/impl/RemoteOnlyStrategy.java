@@ -1,10 +1,14 @@
-package com.safframework.rxcache.cachestrategy.impl;
+package com.safframework.rxcache.transformstrategy.impl;
 
 import com.safframework.rxcache.RxCache;
+import com.safframework.rxcache.transformstrategy.FlowableStrategy;
+import com.safframework.rxcache.transformstrategy.MaybeStrategy;
+import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
-import com.safframework.rxcache.cachestrategy.*;
-import io.reactivex.*;
+import io.reactivex.Flowable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import org.reactivestreams.Publisher;
@@ -12,17 +16,15 @@ import org.reactivestreams.Publisher;
 import java.lang.reflect.Type;
 
 /**
- * 缓存优先的策略，缓存取不到时取接口的数据。
- * Created by tony on 2018/9/30.
+ * 只获取接口的数据，并且将获取到数据保持到缓存中。
+ * Created by tony on 2018/10/2.
  */
-public class CacheFirstStrategy implements ObservableStrategy,
+public class RemoteOnlyStrategy implements ObservableStrategy,
         FlowableStrategy,
-        MaybeStrategy  {
+        MaybeStrategy {
 
     @Override
     public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type) {
-
-        Flowable<Record<T>> cache = rxCache.<T>load2Flowable(key, type);
 
         Flowable<Record<T>> remote = source
                 .map(new Function<T, Record<T>>() {
@@ -35,13 +37,11 @@ public class CacheFirstStrategy implements ObservableStrategy,
                     }
                 });
 
-        return cache.switchIfEmpty(remote);
+        return remote;
     }
 
     @Override
     public <T> Maybe<Record<T>> execute(RxCache rxCache, String key, Maybe<T> source, Type type) {
-
-        Maybe<Record<T>> cache = rxCache.<T>load2Maybe(key, type);
 
         Maybe<Record<T>> remote = source
                 .map(new Function<T, Record<T>>() {
@@ -54,13 +54,11 @@ public class CacheFirstStrategy implements ObservableStrategy,
                     }
                 });
 
-        return cache.switchIfEmpty(remote);
+        return remote;
     }
 
     @Override
     public <T> Observable<Record<T>> execute(RxCache rxCache, String key, Observable<T> source, Type type) {
-
-        Observable<Record<T>> cache = rxCache.<T>load2Observable(key, type);
 
         Observable<Record<T>> remote = source
                 .map(new Function<T, Record<T>>() {
@@ -73,6 +71,6 @@ public class CacheFirstStrategy implements ObservableStrategy,
                     }
                 });
 
-        return cache.switchIfEmpty(remote);
+        return remote;
     }
 }

@@ -1,6 +1,6 @@
 package com.safframework.rxcache;
 
-import com.safframework.rxcache.cachestrategy.*;
+import com.safframework.rxcache.transformstrategy.*;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.DefaultMemoryImpl;

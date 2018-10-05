@@ -73,6 +73,10 @@ public class Record<T> {
         this.expireTime = expireTime;
     }
 
+    /**
+     * 缓存是否过期
+     * @return
+     */
     public boolean isExpired() {
 
         return timestamp + expireTime < System.currentTimeMillis();

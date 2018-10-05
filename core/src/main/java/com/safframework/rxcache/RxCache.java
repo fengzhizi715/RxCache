@@ -1,5 +1,6 @@
 package com.safframework.rxcache;
 
+import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.transformstrategy.*;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
@@ -159,7 +160,6 @@ public class RxCache {
     public static final class Builder {
 
         private Memory memory;
-        private int maxCacheSize = 100;
         private Persistence persistence;
 
         public Builder() {
@@ -175,16 +175,11 @@ public class RxCache {
             return this;
         }
 
-        public Builder maxCacheSize(int maxCacheSize) {
-            this.maxCacheSize = maxCacheSize;
-            return this;
-        }
-
         public RxCache build() {
 
             if (memory == null && persistence == null) { // 至少保证 RxCache 可用
 
-                memory = new DefaultMemoryImpl(maxCacheSize);
+                memory = new DefaultMemoryImpl(Constant.MAX_CACHE_SIZE);
             }
 
             return new RxCache(this);

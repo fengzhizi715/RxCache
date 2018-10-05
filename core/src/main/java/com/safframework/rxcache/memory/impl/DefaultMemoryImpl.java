@@ -87,7 +87,7 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
                     expireTimeMap.put(key,expireTime);
                     keys.add(key);
                 } else {
-                    
+
                     String oldKey = keys.get(0); // 最早缓存的key
                     evict(oldKey);               // 删除最早缓存的数据
 

@@ -87,8 +87,9 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
                     expireTimeMap.put(key,expireTime);
                     keys.add(key);
                 } else {
-
-                    keys.remove(0);  // 删除最早缓存的数据
+                    
+                    String oldKey = keys.get(0); // 最早缓存的key
+                    evict(oldKey);               // 删除最早缓存的数据
 
                     cache.put(key,value);
                     timestampMap.put(key,System.currentTimeMillis());

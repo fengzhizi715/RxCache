@@ -80,8 +80,6 @@ public class DiskImpl implements Disk {
                 } else {                     // 缓存的数据已经过期
 
                     evict(key);
-
-                    return null;
                 }
             }
 
@@ -105,10 +103,13 @@ public class DiskImpl implements Disk {
     @Override
     public <T> void save(String key, T value, long expireTime) {
 
-        key = safetyKey(key);
         FileOutputStream outputStream = null;
 
         try {
+            lock.lock();
+
+            key = safetyKey(key);
+
             File file = new File(cacheDirectory, key);
             outputStream = new FileOutputStream(file, false);
             converter.writer(outputStream,value);
@@ -119,6 +120,7 @@ public class DiskImpl implements Disk {
         } finally {
 
             IOUtils.closeQuietly(outputStream);
+            lock.unlock();
         }
     }
 

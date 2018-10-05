@@ -46,8 +46,6 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
                 } else {                     // 缓存的数据已经过期
 
                     evict(key);
-
-                    return null;
                 }
             }
 

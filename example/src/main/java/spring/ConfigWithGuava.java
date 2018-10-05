@@ -12,8 +12,13 @@ import org.springframework.context.annotation.Bean;
 public class ConfigWithGuava {
 
     @Bean
+    public GuavaCacheImpl guavaCache(){
+        return new GuavaCacheImpl(100);
+    }
+
+    @Bean
     public RxCache.Builder rxCacheBuilder(){
-        return new RxCache.Builder().memory(new GuavaCacheImpl(100));
+        return new RxCache.Builder().memory(guavaCache());
     }
 
     @Bean

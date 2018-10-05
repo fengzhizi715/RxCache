@@ -38,7 +38,7 @@ public class CacheFirstTimeoutStrategy implements ObservableStrategy,
                 .filter(new Predicate<Record<T>>() {
                     @Override
                     public boolean test(Record<T> record) throws Exception {
-                        return System.currentTimeMillis() - record.getTimestamp() <= timestamp;
+                        return System.currentTimeMillis() - record.getCreateTime() <= timestamp;
                     }
                 });
 
@@ -63,7 +63,7 @@ public class CacheFirstTimeoutStrategy implements ObservableStrategy,
                 .filter(new Predicate<Record<T>>() {
                     @Override
                     public boolean test(Record<T> record) throws Exception {
-                        return System.currentTimeMillis() - record.getTimestamp() <= timestamp;
+                        return System.currentTimeMillis() - record.getCreateTime() <= timestamp;
                     }
                 });
 
@@ -88,7 +88,7 @@ public class CacheFirstTimeoutStrategy implements ObservableStrategy,
                 .filter(new Predicate<Record<T>>() {
                     @Override
                     public boolean test(Record<T> record) throws Exception {
-                        return System.currentTimeMillis() - record.getTimestamp() <= timestamp;
+                        return System.currentTimeMillis() - record.getCreateTime() <= timestamp;
                     }
                 });
 

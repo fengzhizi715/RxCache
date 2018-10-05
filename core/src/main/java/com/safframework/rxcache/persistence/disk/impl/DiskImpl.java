@@ -84,7 +84,7 @@ public class DiskImpl implements Disk {
                 }
             }
 
-            return result != null ? new CacheHolder<>(result, timestampMap.get(key)) : null;
+            return result != null ? new CacheHolder<>(result, timestampMap.get(key), expireTimeMap.get(key)) : null;
         } catch (Exception ignore) {
 
             return null;

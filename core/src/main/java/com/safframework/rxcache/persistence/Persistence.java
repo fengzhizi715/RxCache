@@ -1,6 +1,5 @@
 package com.safframework.rxcache.persistence;
 
-import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.domain.Record;
 
 import java.lang.reflect.Type;

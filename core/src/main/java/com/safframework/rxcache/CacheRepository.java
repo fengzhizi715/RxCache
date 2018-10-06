@@ -1,8 +1,6 @@
 package com.safframework.rxcache;
 
-import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
 

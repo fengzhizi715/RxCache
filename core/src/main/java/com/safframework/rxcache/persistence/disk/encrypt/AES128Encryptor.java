@@ -1,5 +1,7 @@
 package com.safframework.rxcache.persistence.disk.encrypt;
 
+import com.safframework.rxcache.utils.Utils;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -67,7 +69,7 @@ public class AES128Encryptor implements Encryptor {
             System.arraycopy(iv, 0, encryptedIVAndText, 0, ivSize);
             System.arraycopy(encrypted, 0, encryptedIVAndText, ivSize, encrypted.length);
 
-            return parseByte2HexStr(encryptedIVAndText);
+            return Utils.parseByte2HexStr(encryptedIVAndText);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -85,11 +87,10 @@ public class AES128Encryptor implements Encryptor {
     public String decrypt(String json) {
 
 
-
         int ivSize = 16;
         int keySize = 16;
 
-        byte[] encryptedIvTextBytes = parseHexStr2Byte(json);
+        byte[] encryptedIvTextBytes = Utils.parseHexStr2Byte(json);
 
         // Extract IV.
         byte[] iv = new byte[ivSize];
@@ -132,36 +133,5 @@ public class AES128Encryptor implements Encryptor {
 
         return null;
     }
-
-    /**将二进制转换成16进制
-     * @param buf
-     * @return
-     */
-    public static String parseByte2HexStr(byte buf[]) {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < buf.length; i++) {
-            String hex = Integer.toHexString(buf[i] & 0xFF);
-            if (hex.length() == 1) {
-                hex = '0' + hex;
-            }
-            sb.append(hex.toUpperCase());
-        }
-        return sb.toString();
-    }
-
-    /**将16进制转换为二进制
-     * @param hexStr
-     * @return
-     */
-    public static byte[] parseHexStr2Byte(String hexStr) {
-        if (hexStr.length() < 1)
-            return null;
-        byte[] result = new byte[hexStr.length()/2];
-        for (int i = 0;i< hexStr.length()/2; i++) {
-            int high = Integer.parseInt(hexStr.substring(i*2, i*2+1), 16);
-            int low = Integer.parseInt(hexStr.substring(i*2+1, i*2+2), 16);
-            result[i] = (byte) (high * 16 + low);
-        }
-        return result;
-    }
 }
+

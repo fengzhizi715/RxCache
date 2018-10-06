@@ -8,7 +8,6 @@ import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.persistence.disk.Disk;
 import com.safframework.rxcache.persistence.disk.converter.Converter;
 import com.safframework.tony.common.utils.IOUtils;
-import com.safframework.tony.common.utils.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -163,7 +162,7 @@ public class DiskImpl implements Disk {
     @Override
     public void evict(String key) {
         key = safetyKey(key);
-        final File file = new File(cacheDirectory, key);
+        File file = new File(cacheDirectory, key);
         file.delete();
     }
 

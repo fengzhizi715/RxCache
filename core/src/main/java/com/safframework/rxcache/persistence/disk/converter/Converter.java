@@ -12,4 +12,8 @@ public interface Converter {
     <T> T read(InputStream source, Type type);
 
     void writer(OutputStream sink, Object data);
+
+    <T> T fromJson(String json, Type type);
+
+    String toJson(Object data);
 }

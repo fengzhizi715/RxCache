@@ -16,13 +16,13 @@ public class FastJSONConverter extends AbstractConverter {
     }
 
     @Override
-    protected <T> T fromJson(String json, Type type) {
+    public <T> T fromJson(String json, Type type) {
 
         return JSON.parseObject(json, type);
     }
 
     @Override
-    protected String toJson(Object data) {
+    public String toJson(Object data) {
 
         return JSON.toJSONString(data);
     }

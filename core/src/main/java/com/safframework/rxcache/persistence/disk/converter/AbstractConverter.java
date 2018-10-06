@@ -78,8 +78,8 @@ public abstract class AbstractConverter implements Converter {
             e.printStackTrace();
         }
     }
-
-    protected abstract <T> T fromJson(String json, Type type);
-
-    protected abstract String toJson(Object data);
+//
+//    protected abstract <T> T fromJson(String json, Type type);
+//
+//    protected abstract String toJson(Object data);
 }

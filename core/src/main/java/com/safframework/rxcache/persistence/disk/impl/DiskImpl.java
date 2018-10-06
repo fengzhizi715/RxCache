@@ -8,13 +8,13 @@ import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.persistence.disk.Disk;
 import com.safframework.rxcache.persistence.disk.converter.Converter;
 import com.safframework.tony.common.utils.IOUtils;
+import com.safframework.tony.common.utils.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -26,16 +26,13 @@ public class DiskImpl implements Disk {
 
     private File cacheDirectory;
     private Converter converter;
-    private HashMap<String, Long> timestampMap;
-    private HashMap<String, Long> expireTimeMap;
+
     private Lock lock = new ReentrantLock();
 
     public DiskImpl(File cacheDirectory,Converter converter) {
 
         this.cacheDirectory = cacheDirectory;
         this.converter = converter;
-        this.timestampMap = new HashMap<>();
-        this.expireTimeMap = new HashMap<>();
     }
 
     @Override
@@ -62,31 +59,36 @@ public class DiskImpl implements Disk {
         try {
             lock.lock();
 
-            File file = null;
+            key = safetyKey(key);
+            File file = new File(cacheDirectory, key);
+            inputStream = new FileInputStream(file);
+
+            CacheHolder holder = converter.read(inputStream,CacheHolder.class);
+
+            long timestamp = holder.timestamp;
+            long expireTime = holder.expireTime;
+
             T result = null;
 
-            if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
+            if (expireTime<0) { // 缓存的数据从不过期
 
-                key = safetyKey(key);
-                file = new File(cacheDirectory, key);
-                inputStream = new FileInputStream(file);
-                result = converter.read(inputStream,type);
+                String json = holder.data;
+
+                result = converter.fromJson(json,type);
             } else {
 
-                if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+                if (timestamp + expireTime > System.currentTimeMillis()) {  // 缓存的数据还没有过期
 
-                    key = safetyKey(key);
-                    file = new File(cacheDirectory, key);
-                    inputStream = new FileInputStream(file);
-                    result = converter.read(inputStream,type);
+                    String json = holder.data;
 
-                } else {                     // 缓存的数据已经过期
+                    result = converter.fromJson(json,type);
+                } else {        // 缓存的数据已经过期
 
                     evict(key);
                 }
             }
 
-            return result != null ? new Record<>(Source.PERSISTENCE, key, result, timestampMap.get(key), expireTimeMap.get(key)) : null;
+            return result != null ? new Record<>(Source.PERSISTENCE, key, result, timestamp, expireTime) : null;
         } catch (Exception ignore) {
 
             return null;
@@ -115,9 +117,8 @@ public class DiskImpl implements Disk {
 
             File file = new File(cacheDirectory, key);
             outputStream = new FileOutputStream(file, false);
-            converter.writer(outputStream,value);
-            timestampMap.put(key,System.currentTimeMillis());
-            expireTimeMap.put(key,expireTime);
+            CacheHolder holder = new CacheHolder(StringUtils.printObject(value),System.currentTimeMillis(),expireTime);
+            converter.writer(outputStream,holder);
         } catch (Exception e) {
             throw new RxCacheException(e);
         } finally {
@@ -164,9 +165,6 @@ public class DiskImpl implements Disk {
         key = safetyKey(key);
         final File file = new File(cacheDirectory, key);
         file.delete();
-
-        timestampMap.remove(key);
-        expireTimeMap.remove(key);
     }
 
     @Override
@@ -180,9 +178,6 @@ public class DiskImpl implements Disk {
                     file.delete();
             }
         }
-
-        timestampMap.clear();
-        expireTimeMap.clear();
     }
 
     private String safetyKey(String key) {

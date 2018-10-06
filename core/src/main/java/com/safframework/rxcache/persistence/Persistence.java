@@ -1,6 +1,7 @@
 package com.safframework.rxcache.persistence;
 
 import com.safframework.rxcache.domain.CacheHolder;
+import com.safframework.rxcache.domain.Record;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface Persistence {
 
-    <T> CacheHolder<T> retrieve(String key, Type type);
+    <T> Record<T> retrieve(String key, Type type);
 
     <T> void save(String key, T value);
 

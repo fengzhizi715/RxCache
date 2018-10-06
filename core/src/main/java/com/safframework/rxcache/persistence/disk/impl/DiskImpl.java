@@ -2,6 +2,8 @@ package com.safframework.rxcache.persistence.disk.impl;
 
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheHolder;
+import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.persistence.disk.Disk;
 import com.safframework.rxcache.persistence.disk.converter.Converter;
@@ -53,7 +55,7 @@ public class DiskImpl implements Disk {
     }
 
     @Override
-    public <T> CacheHolder<T> retrieve(String key, Type type) {
+    public <T> Record<T> retrieve(String key, Type type) {
 
         FileInputStream inputStream = null;
 
@@ -84,7 +86,7 @@ public class DiskImpl implements Disk {
                 }
             }
 
-            return result != null ? new CacheHolder<>(result, timestampMap.get(key), expireTimeMap.get(key)) : null;
+            return result != null ? new Record<>(Source.PERSISTENCE, key, result, timestampMap.get(key), expireTimeMap.get(key)) : null;
         } catch (Exception ignore) {
 
             return null;

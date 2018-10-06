@@ -179,7 +179,7 @@ public class RxCache {
 
             if (memory == null && persistence == null) { // 至少保证 RxCache 可用
 
-                memory = new DefaultMemoryImpl(Constant.MAX_CACHE_SIZE);
+                memory = new DefaultMemoryImpl(Constant.DEFAULT_CACHE_SIZE);
             }
 
             return new RxCache(this);

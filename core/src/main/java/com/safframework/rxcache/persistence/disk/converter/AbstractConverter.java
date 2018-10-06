@@ -65,7 +65,9 @@ public abstract class AbstractConverter implements Converter {
 
         if (encryptor!=null) {
 
-            buffer = encryptor.encrypt(wrapperJSONSerialized);
+            String encryptResult = encryptor.encrypt(wrapperJSONSerialized);
+
+            buffer = encryptResult.getBytes();
         } else {
 
             buffer = wrapperJSONSerialized.getBytes();

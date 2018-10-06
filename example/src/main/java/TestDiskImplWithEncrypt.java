@@ -23,7 +23,7 @@ public class TestDiskImplWithEncrypt {
             cacheDirectory.mkdir();
         }
 
-        AES128Encryptor encryptor = new AES128Encryptor("abcdefghijklmop");
+        AES128Encryptor encryptor = new AES128Encryptor("abcdefghijklmnop");
         DiskImpl diskImpl = new DiskImpl(cacheDirectory,new GsonConverter(encryptor));
 
         RxCache.config(new RxCache.Builder().persistence(diskImpl));

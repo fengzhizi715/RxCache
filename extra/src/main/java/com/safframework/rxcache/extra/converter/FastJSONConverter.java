@@ -11,6 +11,9 @@ import java.lang.reflect.Type;
  */
 public class FastJSONConverter extends AbstractConverter {
 
+    public FastJSONConverter() {
+    }
+
     public FastJSONConverter(Encryptor encryptor) {
         super(encryptor);
     }

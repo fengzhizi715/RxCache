@@ -117,7 +117,7 @@ public class DiskImpl implements Disk {
 
             File file = new File(cacheDirectory, key);
             outputStream = new FileOutputStream(file, false);
-            CacheHolder holder = new CacheHolder(StringUtils.printObject(value),System.currentTimeMillis(),expireTime);
+            CacheHolder holder = new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime);
             converter.writer(outputStream,holder);
         } catch (Exception e) {
             throw new RxCacheException(e);

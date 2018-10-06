@@ -1,7 +1,8 @@
 package com.safframework.rxcache.memory.impl;
 
 import com.safframework.rxcache.config.Constant;
-import com.safframework.rxcache.domain.CacheHolder;
+import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.domain.Source;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
     }
 
     @Override
-    public <T> CacheHolder<T> getIfPresent(String key) {
+    public <T> Record<T> getIfPresent(String key) {
 
         try {
             lock.lock();
@@ -49,7 +50,7 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
                 }
             }
 
-            return result != null ? new CacheHolder<>(result, timestampMap.get(key),expireTimeMap.get(key)) : null;
+            return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
 
         } finally {
 

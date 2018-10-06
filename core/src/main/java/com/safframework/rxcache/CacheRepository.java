@@ -26,13 +26,15 @@ class CacheRepository {
     <T> Record<T> get(String key,Type type) {
 
         if (memory != null) {
+//
+//            CacheHolder<T> result = memory.getIfPresent(key);
+//
+//            if (result!=null) {
+//
+//                return new Record<>(Source.MEMORY,key,result.data,result.timestamp,result.expireTime);
+//            }
 
-            CacheHolder<T> result = memory.getIfPresent(key);
-
-            if (result!=null) {
-
-                return new Record<>(Source.MEMORY,key,result.data,result.timestamp,result.expireTime);
-            }
+            return memory.getIfPresent(key);
         }
 
         if (persistence != null) {

@@ -1,6 +1,6 @@
 package com.safframework.rxcache.memory;
 
-import com.safframework.rxcache.domain.CacheHolder;
+import com.safframework.rxcache.domain.Record;
 
 import java.util.Set;
 
@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public interface Memory {
 
-    <T> CacheHolder<T> getIfPresent(String key);
+    <T> Record<T> getIfPresent(String key);
 
     <T> void put(String key, T value);
 

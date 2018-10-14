@@ -1,5 +1,6 @@
 package com.safframework.rxcache.persistence.disk.converter;
 
+import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.persistence.disk.encrypt.Encryptor;
 import com.safframework.tony.common.utils.IOUtils;
 
@@ -57,9 +58,9 @@ public abstract class AbstractConverter implements Converter {
     }
 
     @Override
-    public void writer(OutputStream sink, Object data) {
+    public void writer(OutputStream sink, CacheHolder holder) {
 
-        String wrapperJSONSerialized = toJson(data);
+        String wrapperJSONSerialized = toJson(holder);
 
         byte[] buffer = null;
 

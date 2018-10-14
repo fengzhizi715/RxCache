@@ -7,6 +7,7 @@ import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.persistence.disk.Disk;
 import com.safframework.rxcache.persistence.disk.converter.Converter;
+import com.safframework.rxcache.persistence.disk.converter.GsonConverter;
 import com.safframework.tony.common.utils.IOUtils;
 import com.safframework.tony.common.utils.Preconditions;
 
@@ -28,6 +29,11 @@ public class DiskImpl implements Disk {
     private Converter converter;
 
     private Lock lock = new ReentrantLock();
+
+    public DiskImpl(File cacheDirectory) {
+
+        this(cacheDirectory,new GsonConverter());
+    }
 
     public DiskImpl(File cacheDirectory,Converter converter) {
 
@@ -117,8 +123,7 @@ public class DiskImpl implements Disk {
 
             File file = new File(cacheDirectory, key);
             outputStream = new FileOutputStream(file, false);
-            CacheHolder holder = new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime);
-            converter.writer(outputStream,holder);
+            converter.writer(outputStream,new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime));
         } catch (Exception e) {
 
             throw new RxCacheException(e);

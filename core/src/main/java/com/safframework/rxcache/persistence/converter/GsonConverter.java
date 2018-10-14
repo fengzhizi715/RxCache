@@ -1,7 +1,7 @@
-package com.safframework.rxcache.persistence.disk.converter;
+package com.safframework.rxcache.persistence.converter;
 
 import com.google.gson.Gson;
-import com.safframework.rxcache.persistence.disk.encrypt.Encryptor;
+import com.safframework.rxcache.persistence.encrypt.Encryptor;
 
 import java.lang.reflect.Type;
 

@@ -1,4 +1,4 @@
-package com.safframework.rxcache.persistence.disk.encrypt;
+package com.safframework.rxcache.persistence.encrypt;
 
 import com.safframework.rxcache.utils.Utils;
 

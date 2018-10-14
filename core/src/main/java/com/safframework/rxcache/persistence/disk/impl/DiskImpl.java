@@ -6,8 +6,8 @@ import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.persistence.disk.Disk;
-import com.safframework.rxcache.persistence.disk.converter.Converter;
-import com.safframework.rxcache.persistence.disk.converter.GsonConverter;
+import com.safframework.rxcache.persistence.converter.Converter;
+import com.safframework.rxcache.persistence.converter.GsonConverter;
 import com.safframework.tony.common.utils.IOUtils;
 import com.safframework.tony.common.utils.Preconditions;
 

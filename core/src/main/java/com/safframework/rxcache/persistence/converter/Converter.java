@@ -1,4 +1,4 @@
-package com.safframework.rxcache.persistence.disk.converter;
+package com.safframework.rxcache.persistence.converter;
 
 import com.safframework.rxcache.domain.CacheHolder;
 

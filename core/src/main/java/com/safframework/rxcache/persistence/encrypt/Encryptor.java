@@ -1,4 +1,4 @@
-package com.safframework.rxcache.persistence.disk.encrypt;
+package com.safframework.rxcache.persistence.encrypt;
 
 /**
  * Created by tony on 2018/9/30.

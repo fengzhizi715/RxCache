@@ -11,7 +11,7 @@ public class CacheHolder implements Serializable {
 
     private static final long serialVersionUID = -1795020035448398592L;
 
-    public String data;
+    public String data; // 对象转换的 json 字符串
     public long timestamp;
     public long expireTime;
 
@@ -21,6 +21,7 @@ public class CacheHolder implements Serializable {
     }
 
     public CacheHolder(String data, long timestamp,long expireTime) {
+
         this.data = data;
         this.timestamp = timestamp;
         this.expireTime = expireTime;

@@ -15,8 +15,8 @@ public abstract class AbstractMemoryImpl implements Memory {
 
     public AbstractMemoryImpl(long maxSize) {
 
-        timestampMap = new HashMap<>();
-        expireTimeMap = new HashMap<>();
+        this.timestampMap = new HashMap<>();
+        this.expireTimeMap = new HashMap<>();
         this.maxSize = maxSize;
     }
 }

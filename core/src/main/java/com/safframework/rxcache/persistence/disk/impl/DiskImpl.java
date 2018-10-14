@@ -8,6 +8,7 @@ import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.persistence.disk.Disk;
 import com.safframework.rxcache.persistence.disk.converter.Converter;
 import com.safframework.tony.common.utils.IOUtils;
+import com.safframework.tony.common.utils.Preconditions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -90,7 +91,7 @@ public class DiskImpl implements Disk {
             return result != null ? new Record<>(Source.PERSISTENCE, key, result, timestamp, expireTime) : null;
         } catch (Exception ignore) {
 
-            return null;
+            throw new RxCacheException(ignore);
         } finally {
 
             IOUtils.closeQuietly(inputStream);
@@ -119,6 +120,7 @@ public class DiskImpl implements Disk {
             CacheHolder holder = new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime);
             converter.writer(outputStream,holder);
         } catch (Exception e) {
+
             throw new RxCacheException(e);
         } finally {
 
@@ -171,7 +173,7 @@ public class DiskImpl implements Disk {
 
         File[] files = cacheDirectory.listFiles();
 
-        if (null != files) {
+        if (Preconditions.isNotBlank(files)){
             for (File file : files) {
                 if (file != null)
                     file.delete();

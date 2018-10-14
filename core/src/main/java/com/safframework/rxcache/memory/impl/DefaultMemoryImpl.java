@@ -73,29 +73,20 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
 
             if (keySet().size()<maxSize) { // 缓存还有空间
 
-                cache.put(key,value);
-                timestampMap.put(key,System.currentTimeMillis());
-                expireTimeMap.put(key,expireTime);
-                keys.add(key);
+                saveValue(key,value,expireTime);
             } else {                       // 缓存空间不足，需要删除一个
 
                 if (containsKey(key)) {
 
                     keys.remove(key);
 
-                    cache.put(key,value);
-                    timestampMap.put(key,System.currentTimeMillis());
-                    expireTimeMap.put(key,expireTime);
-                    keys.add(key);
+                    saveValue(key,value,expireTime);
                 } else {
 
                     String oldKey = keys.get(0); // 最早缓存的key
                     evict(oldKey);               // 删除最早缓存的数据
 
-                    cache.put(key,value);
-                    timestampMap.put(key,System.currentTimeMillis());
-                    expireTimeMap.put(key,expireTime);
-                    keys.add(key);
+                    saveValue(key,value,expireTime);
                 }
             }
 
@@ -103,6 +94,14 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
 
             lock.unlock();
         }
+    }
+
+    private <T> void saveValue(String key, T value, long expireTime) {
+
+        cache.put(key,value);
+        timestampMap.put(key,System.currentTimeMillis());
+        expireTimeMap.put(key,expireTime);
+        keys.add(key);
     }
 
     @Override

@@ -16,6 +16,10 @@
 * 各个缓存拥有有效时间，超过时间就会过期
 * 持久层的缓存拥有加密功能，默认支持AES 128、DES加密
 * Memory 支持 Guava Cache、Caffeine 的实现
-* 支持 RxJava
+* 支持 RxJava 2
+
+
+![](images/rxjava.png)
+
 
 详见：https://www.jianshu.com/p/bd924b182bcb

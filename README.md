@@ -10,7 +10,23 @@
 ---|:-------------:|:-------------:
 最新版本|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extra/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extra/_latestVersion)
 
-# 功能特点
+# 下载：
+
+rxcache-core
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-core:0.4.4'
+```
+
+rxcache-extra
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-extra:0.4.4'
+```
+
+
+
+# 功能特点：
 
 * 二级缓存：Memory、Persistence
 * 各个缓存拥有有效时间，超过时间就会过期

@@ -256,6 +256,12 @@ public class TestWithGuava {
 }
 ```
 
+
+# 支持 Android
+
+为了更好地支持 Android，我创建了 RxCache4a: https://github.com/fengzhizi715/RxCache4a
+
+
 联系方式
 ===
 

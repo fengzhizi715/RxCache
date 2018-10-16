@@ -19,7 +19,7 @@
 * 支持 RxJava 2
 
 
-![](images/rxjava.png)
+![](images/rxcache_uml.png)
 
 
 详见：https://www.jianshu.com/p/bd924b182bcb

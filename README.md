@@ -61,7 +61,7 @@ Memory 的默认实现 DefaultMemoryImpl 使用 ConcurrentHashMap 来缓存数�
 
 Persistence 的接口跟 Memory 很类似。
 
-考虑到持久层可能包括 Disk、DB。于是分别单独抽象了 Disk、DB 接口继承 Persistence。
+考虑到持久层包括 Disk、DB。于是分别单独抽象了 Disk、DB 接口继承 Persistence。
 
 在 Disk 的实现类 DiskImpl 中，它的构造方法注入了 Converter 接口：
 

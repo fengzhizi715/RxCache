@@ -84,7 +84,7 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
                 } else {
 
                     String oldKey = keys.get(0); // 最早缓存的key
-                    evict(oldKey);               // 删除最早缓存的数据
+                    evict(oldKey);               // 删除最早缓存的数据 FIFO算法
 
                     saveValue(key,value,expireTime);
                 }

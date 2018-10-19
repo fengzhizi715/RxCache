@@ -5,7 +5,9 @@ ext {
 
             rxjava                    : "2.2.1",
 
-            tony_common_utils         : "1.2.6"
+            tony_common_utils         : "1.2.6",
+
+            spring                    : "5.1.0.RELEASE"
     ]
 }
 

@@ -2,5 +2,3 @@ rootProject.name = 'rxcache'
 include 'core'
 include 'example'
 include 'extra'
-include 'springcache'
-

@@ -9,7 +9,6 @@ import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 
 import java.util.Set;
-import java.util.Timer;
 
 /**
  * Created by tony on 2018/9/29.
@@ -17,8 +16,6 @@ import java.util.Timer;
 public class GuavaCacheImpl extends AbstractMemoryImpl {
 
     private LoadingCache<String,Object > cache;
-
-    private Timer timer = new Timer();
 
     public GuavaCacheImpl(long maxSize) {
 
@@ -65,8 +62,23 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
     @Override
     public <T> Record<T> getIfPresent(String key) {
 
-        T result = (T) cache.getIfPresent(key);
-        return result!=null?new Record<>(Source.MEMORY, key, result, timestampMap.get(key), expireTimeMap.get(key)) : null;
+        T result = null;
+
+        if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
+
+            result = (T) cache.getIfPresent(key);
+        } else {
+
+            if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                result = (T) cache.getIfPresent(key);
+            } else {                     // 缓存的数据已经过期
+
+                evict(key);
+            }
+        }
+
+        return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
     }
 
     @Override
@@ -81,11 +93,6 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
         cache.put(key,value);
         timestampMap.put(key,System.currentTimeMillis());
         expireTimeMap.put(key,expireTime);
-
-        if (expireTime>0) {
-
-            expireKey(key, expireTime);
-        }
     }
 
     @Override
@@ -114,10 +121,5 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
         cache.invalidateAll();
         timestampMap.clear();
         expireTimeMap.clear();
-    }
-
-    private void expireKey(String key, long expireTime) {
-
-        timer.schedule(new CacheEvictTask(this, key), expireTime);
     }
 }

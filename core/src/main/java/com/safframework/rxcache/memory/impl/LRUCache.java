@@ -68,14 +68,32 @@ public class LRUCache<K,V> {
         cache.put(key,value);
     }
 
+    /**
+     * 获取最近最少使用的值
+     * @return
+     */
     public V getLeastRecentlyUsed() {
+
         K remove = queue.remove();
         queue.add(remove);
         return(cache.get(remove));
     }
 
+    public void remove(K key) {
+
+        cache.remove(key);
+        queue.remove(key);
+    }
+
+    public void clear() {
+
+        cache.clear();
+        queue.clear();
+    }
+
     @Override
     public synchronized String toString() {
+
         Iterator<K> iterator = queue.iterator();
         StringBuilder stringBuilder = new StringBuilder();
 

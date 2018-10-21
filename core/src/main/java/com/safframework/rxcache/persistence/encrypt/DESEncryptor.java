@@ -18,9 +18,12 @@ public class DESEncryptor implements Encryptor {
     private static final String ALGORITHM = "DES";
     private static final String TRANSFORMATION = "DES/ECB/PKCS5Padding";
     private String key;
+
     public DESEncryptor(String key) {
-        this.key = key; // 对 key 无特殊要求
+
+        this.key = key;
     }
+
     @Override
     public String encrypt(String json) {
         try {

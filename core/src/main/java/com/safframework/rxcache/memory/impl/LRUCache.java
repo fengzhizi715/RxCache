@@ -1,5 +1,7 @@
 package com.safframework.rxcache.memory.impl;
 
+import com.safframework.rxcache.exception.RxCacheException;
+
 import java.util.AbstractQueue;
 import java.util.Iterator;
 import java.util.Map;
@@ -29,7 +31,8 @@ public class LRUCache<K,V> {
     }
 
     public boolean containsKey(K key) {
-        return(cache.containsKey(key));
+
+        return cache.containsKey(key);
     }
 
     public V get(K key) {
@@ -41,13 +44,14 @@ public class LRUCache<K,V> {
     }
 
     public V getSilent(K key) {
+
         return cache.get(key);
     }
 
     public void put(K key, V value) {
 
         //ConcurrentHashMap doesn't allow null key or values
-        if(key == null || value == null) throw new NullPointerException();
+        if(key == null || value == null) throw new RxCacheException("key is null or value is null");
 
         if(cache.containsKey(key)) {
             queue.remove(key);

@@ -19,7 +19,6 @@ public class DefaultMemoryImpl extends AbstractMemoryImpl {
 
     private Map<String,Object> cache;
     private Lock lock = new ReentrantLock();
-    private List<String> keys;
 
     public DefaultMemoryImpl(long maxSize) {
 

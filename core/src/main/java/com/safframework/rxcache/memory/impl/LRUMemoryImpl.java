@@ -15,7 +15,6 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
 
     private LRUCache<String,Object> cache;
     private Lock lock = new ReentrantLock();
-    private List<String> keys;
 
     public LRUMemoryImpl(long maxSize) {
 

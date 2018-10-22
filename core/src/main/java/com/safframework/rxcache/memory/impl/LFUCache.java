@@ -9,7 +9,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class LFUCache<K, V> {
 
-
     private Map<K, CacheNode<K, V>> map;
     private CacheDeque<K, V>[] freqTable;
 

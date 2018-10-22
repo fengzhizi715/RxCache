@@ -60,10 +60,18 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
-        cache.put(key,value);
-        timestampMap.put(key,System.currentTimeMillis());
-        expireTimeMap.put(key,expireTime);
-        keys.add(key);
+        try {
+            lock.lock();
+
+            cache.put(key,value);
+            timestampMap.put(key,System.currentTimeMillis());
+            expireTimeMap.put(key,expireTime);
+            keys.add(key);
+        } finally {
+
+            lock.unlock();
+        }
+
     }
 
     @Override

@@ -4,13 +4,9 @@ import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by tony on 2018/9/29.
@@ -18,13 +14,11 @@ import java.util.concurrent.locks.ReentrantLock;
 public class DefaultMemoryImpl extends AbstractMemoryImpl {
 
     private Map<String,Object> cache;
-    private Lock lock = new ReentrantLock();
 
     public DefaultMemoryImpl(long maxSize) {
 
         super(maxSize);
         cache = new ConcurrentHashMap<String,Object>((int)maxSize);
-        keys = new LinkedList<>();
     }
 
     @Override

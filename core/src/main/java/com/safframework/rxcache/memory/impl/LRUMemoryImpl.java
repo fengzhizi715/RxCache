@@ -4,9 +4,8 @@ import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 
-import java.util.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by tony on 2018/10/22.
@@ -14,13 +13,11 @@ import java.util.concurrent.locks.ReentrantLock;
 public class LRUMemoryImpl extends AbstractMemoryImpl {
 
     private LRUCache<String,Object> cache;
-    private Lock lock = new ReentrantLock();
 
     public LRUMemoryImpl(long maxSize) {
 
         super(maxSize);
         cache = new LRUCache<String,Object>((int)maxSize);
-        keys = new ArrayList<>();
     }
 
     @Override

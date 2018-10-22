@@ -1,8 +1,6 @@
 package com.safframework.rxcache.memory.algorithm.lfu;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by tony on 2018/10/22.
@@ -31,19 +29,10 @@ public class LFUCache<K, V> {
         frequencyMap = new HashMap<Integer, FrequencyNode>();
     }
 
-    public void delete(LFUCacheEntry<K, V> entry) {
-        if (!kvStore.containsKey(entry.key))
-            return;
+    public boolean containsKey(K key) {
 
-        kvStore.remove(entry.key);
-        entry.frequencyNode.lfuCacheEntryList.remove(entry);
-        if (entry.frequencyNode.lfuCacheEntryList.length <= 0) {
-            frequencyMap.remove(entry.frequencyNode.frequency);
-            freqList.remove(entry.frequencyNode);
-        }
-        size--;
+        return kvStore.containsKey(key);
     }
-
 
     public FrequencyNode getFrequencyNode(int frequency) {
         if (!frequencyMap.containsKey(frequency - 1) &&
@@ -69,19 +58,19 @@ public class LFUCache<K, V> {
         return frequencyMap.get(frequency);
     }
 
-    public void set(K key, V value) {
+    public void put(K key, V value) {
         if (capacity == 0)
             return;
         FrequencyNode newFrequencyNode = null;
         if (kvStore.containsKey(key)) {
             /* Remove old key if exists */
             newFrequencyNode = getFrequencyNode(kvStore.get(key).frequencyNode.frequency + 1);
-            delete(kvStore.get(key));
+            remove(kvStore.get(key));
         } else if (size == capacity) {
             /* If cache size if full remove first element from freq list */
             FrequencyNode fNode = (FrequencyNode) freqList.head;
             LFUCacheEntry<K, V> entry = (LFUCacheEntry<K, V>) fNode.lfuCacheEntryList.head;
-            delete(entry);
+            remove(entry);
             System.out.println("Cache full. Removed entry " + entry);
         }
         if (newFrequencyNode == null)
@@ -111,5 +100,26 @@ public class LFUCache<K, V> {
         entry.frequencyNode = newFrequencyNode;
 
         return entry.value;
+    }
+
+    public void remove(LFUCacheEntry<K, V> entry) {
+        if (!kvStore.containsKey(entry.key))
+            return;
+
+        kvStore.remove(entry.key);
+        entry.frequencyNode.lfuCacheEntryList.remove(entry);
+        if (entry.frequencyNode.lfuCacheEntryList.length <= 0) {
+            frequencyMap.remove(entry.frequencyNode.frequency);
+            freqList.remove(entry.frequencyNode);
+        }
+        size--;
+    }
+
+    public void clear() {
+
+        kvStore.clear();
+        frequencyMap.clear();
+        freqList.clear();
+        size = 0;
     }
 }

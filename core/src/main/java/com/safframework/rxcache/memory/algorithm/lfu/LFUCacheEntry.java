@@ -3,7 +3,7 @@ package com.safframework.rxcache.memory.algorithm.lfu;
 /**
  * Created by tony on 2018/10/22.
  */
-class LFUCacheEntry<K, V> extends Node {
+public class LFUCacheEntry<K, V> extends Node {
 
     K key;
     V value;

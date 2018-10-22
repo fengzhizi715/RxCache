@@ -75,13 +75,13 @@ public class NodeList {
         length--;
     }
 
+    public void clear() {
 
-    public void printList() {
         Node walk = head;
         while (walk != null) {
-            System.out.print("[" + walk + "] -> ");
+            Node temp = walk;
             walk = walk.next;
+            remove(temp);
         }
-        System.out.println();
     }
 }

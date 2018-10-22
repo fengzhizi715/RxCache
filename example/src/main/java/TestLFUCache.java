@@ -45,5 +45,15 @@ public class TestLFUCache {
         rxCache.save("test14",14);
 
         System.out.println(rxCache.get("test1",Integer.class).getData());
+
+        rxCache.clear();
+
+        rxCache.save("test1",1);
+        rxCache.save("test2",2);
+        rxCache.save("test3",3);
+        rxCache.save("test4",4);
+        rxCache.save("test5",5);
+
+        System.out.println(rxCache.get("test1",Integer.class).getData());
     }
 }

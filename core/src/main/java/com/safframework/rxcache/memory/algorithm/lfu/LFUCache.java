@@ -117,6 +117,7 @@ public class LFUCache<K, V> {
 
     public void clear() {
 
+        System.out.println("Remove all entry");
         kvStore.clear();
         frequencyMap.clear();
         freqList.clear();

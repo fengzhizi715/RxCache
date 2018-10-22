@@ -11,7 +11,7 @@ public class Utils {
      * @return
      */
     public static String parseByte2HexStr(byte buf[]) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < buf.length; i++) {
             String hex = Integer.toHexString(buf[i] & 0xFF);
             if (hex.length() == 1) {

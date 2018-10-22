@@ -3,6 +3,7 @@ package com.safframework.rxcache.memory.impl;
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
+import com.safframework.rxcache.memory.algorithm.LRUCache;
 
 import java.util.HashSet;
 import java.util.Set;

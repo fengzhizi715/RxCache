@@ -1,4 +1,4 @@
-package com.safframework.rxcache.memory.impl;
+package com.safframework.rxcache.memory.algorithm;
 
 import java.util.HashMap;
 import java.util.Map;

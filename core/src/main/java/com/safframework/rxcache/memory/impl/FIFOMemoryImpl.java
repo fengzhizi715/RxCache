@@ -11,11 +11,11 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by tony on 2018/9/29.
  */
-public class DefaultMemoryImpl extends AbstractMemoryImpl {
+public class FIFOMemoryImpl extends AbstractMemoryImpl {
 
     private Map<String,Object> cache;
 
-    public DefaultMemoryImpl(long maxSize) {
+    public FIFOMemoryImpl(long maxSize) {
 
         super(maxSize);
         cache = new ConcurrentHashMap<String,Object>((int)maxSize);

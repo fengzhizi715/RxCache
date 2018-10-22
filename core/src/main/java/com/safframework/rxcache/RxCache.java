@@ -3,7 +3,7 @@ package com.safframework.rxcache;
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
-import com.safframework.rxcache.memory.impl.DefaultMemoryImpl;
+import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
 import com.safframework.rxcache.persistence.Persistence;
 import com.safframework.rxcache.transformstrategy.*;
 import io.reactivex.*;
@@ -179,7 +179,7 @@ public class RxCache {
 
             if (memory == null && persistence == null) { // 至少保证 RxCache 可用
 
-                memory = new DefaultMemoryImpl(Constant.DEFAULT_CACHE_SIZE);
+                memory = new FIFOMemoryImpl(Constant.DEFAULT_CACHE_SIZE);
             }
 
             return new RxCache(this);

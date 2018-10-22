@@ -1,4 +1,4 @@
-package com.safframework.rxcache.memory.impl;
+package com.safframework.rxcache.memory.algorithm;
 
 import com.safframework.rxcache.exception.RxCacheException;
 

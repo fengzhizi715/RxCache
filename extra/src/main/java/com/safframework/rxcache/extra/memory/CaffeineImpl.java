@@ -8,7 +8,6 @@ import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 
 import java.util.Set;
-import java.util.Timer;
 
 /**
  * Created by tony on 2018/9/29.
@@ -99,11 +98,15 @@ public class CaffeineImpl extends AbstractMemoryImpl {
     public void evict(String key) {
 
         cache.invalidate(key);
+        timestampMap.remove(key);
+        expireTimeMap.remove(key);
     }
 
     @Override
     public void evictAll() {
 
         cache.invalidateAll();
+        timestampMap.clear();
+        expireTimeMap.clear();
     }
 }

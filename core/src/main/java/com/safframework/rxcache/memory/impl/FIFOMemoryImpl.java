@@ -3,6 +3,7 @@ package com.safframework.rxcache.memory.impl;
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
+import com.safframework.tony.common.utils.Preconditions;
 
 import java.util.Map;
 import java.util.Set;
@@ -18,11 +19,16 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
     public FIFOMemoryImpl(long maxSize) {
 
         super(maxSize);
-        cache = new ConcurrentHashMap<String,Object>((int)maxSize);
+        cache = new ConcurrentHashMap<>((int)maxSize);
     }
 
     @Override
     public <T> Record<T> getIfPresent(String key) {
+
+        if (Preconditions.isBlank(key)) {
+
+            return null;
+        }
 
         try {
             lock.lock();
@@ -54,7 +60,10 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value) {
 
-        put(key,value, Constant.NEVER_EXPIRE);
+        if (Preconditions.isNotBlanks(key,value)) {
+
+            put(key,value, Constant.NEVER_EXPIRE);
+        }
     }
 
     @Override
@@ -106,16 +115,24 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
     @Override
     public boolean containsKey(String key) {
 
-        return cache.containsKey(key);
+        if (Preconditions.isNotBlank(key)) {
+
+            return cache.containsKey(key);
+        }
+
+        return false;
     }
 
     @Override
     public void evict(String key) {
 
-        cache.remove(key);
-        timestampMap.remove(key);
-        expireTimeMap.remove(key);
-        keys.remove(key);
+        if (containsKey(key)) {
+
+            cache.remove(key);
+            timestampMap.remove(key);
+            expireTimeMap.remove(key);
+            keys.remove(key);
+        }
     }
 
     @Override

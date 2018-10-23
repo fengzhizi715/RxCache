@@ -5,6 +5,7 @@ import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.algorithm.lfu.LFUCache;
 import com.safframework.rxcache.memory.algorithm.lfu.LFUCacheEntry;
+import com.safframework.tony.common.utils.Preconditions;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +25,11 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
 
     @Override
     public <T> Record<T> getIfPresent(String key) {
+
+        if (Preconditions.isBlank(key)) {
+
+            return null;
+        }
 
         try {
             lock.lock();
@@ -55,7 +61,10 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value) {
 
-        put(key,value, Constant.NEVER_EXPIRE);
+        if (Preconditions.isNotBlanks(key,value)) {
+
+            put(key,value, Constant.NEVER_EXPIRE);
+        }
     }
 
     @Override
@@ -83,7 +92,12 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
     @Override
     public boolean containsKey(String key) {
 
-        return cache.containsKey(key);
+        if (Preconditions.isNotBlank(key)) {
+
+            return cache.containsKey(key);
+        }
+
+        return false;
     }
 
     @Override

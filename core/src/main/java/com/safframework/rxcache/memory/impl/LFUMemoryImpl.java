@@ -61,25 +61,26 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value) {
 
-        if (Preconditions.isNotBlanks(key,value)) {
-
-            put(key,value, Constant.NEVER_EXPIRE);
-        }
+        put(key,value, Constant.NEVER_EXPIRE);
     }
 
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
-        try {
-            lock.lock();
+        if (Preconditions.isNotBlanks(key,value)) {
 
-            cache.put(key,value);
-            timestampMap.put(key,System.currentTimeMillis());
-            expireTimeMap.put(key,expireTime);
-            keys.add(key);
-        } finally {
+            try {
+                lock.lock();
 
-            lock.unlock();
+                cache.put(key,value);
+                timestampMap.put(key,System.currentTimeMillis());
+                expireTimeMap.put(key,expireTime);
+                keys.add(key);
+
+            } finally {
+
+                lock.unlock();
+            }
         }
     }
 

@@ -87,12 +87,15 @@ class CacheRepository {
 
     void remove(String key) {
 
-        if (memory != null) {
-            memory.evict(key);
-        }
+        if (Preconditions.isNotBlank(key)) {
 
-        if (persistence != null) {
-            persistence.evict(key);
+            if (memory != null) {
+                memory.evict(key);
+            }
+
+            if (persistence != null) {
+                persistence.evict(key);
+            }
         }
     }
 

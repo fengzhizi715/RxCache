@@ -71,7 +71,6 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
 
             lock.unlock();
         }
-
     }
 
     @Override

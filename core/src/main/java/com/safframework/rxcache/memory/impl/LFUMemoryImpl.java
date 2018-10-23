@@ -5,7 +5,6 @@ import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.algorithm.lfu.LFUCache;
 import com.safframework.rxcache.memory.algorithm.lfu.LFUCacheEntry;
-import com.safframework.tony.common.utils.Preconditions;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,11 +24,6 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
 
     @Override
     public <T> Record<T> getIfPresent(String key) {
-
-        if (Preconditions.isBlank(key)) {
-
-            return null;
-        }
 
         try {
             lock.lock();
@@ -67,20 +61,17 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
-        if (Preconditions.isNotBlanks(key,value)) {
+        try {
+            lock.lock();
 
-            try {
-                lock.lock();
+            cache.put(key,value);
+            timestampMap.put(key,System.currentTimeMillis());
+            expireTimeMap.put(key,expireTime);
+            keys.add(key);
 
-                cache.put(key,value);
-                timestampMap.put(key,System.currentTimeMillis());
-                expireTimeMap.put(key,expireTime);
-                keys.add(key);
+        } finally {
 
-            } finally {
-
-                lock.unlock();
-            }
+            lock.unlock();
         }
     }
 
@@ -93,25 +84,16 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
     @Override
     public boolean containsKey(String key) {
 
-        if (Preconditions.isNotBlank(key)) {
-
-            return cache.containsKey(key);
-        }
-
-        return false;
+        return cache.containsKey(key);
     }
 
     @Override
     public void evict(String key) {
 
-        if (containsKey(key)) {
-
-            cache.remove((LFUCacheEntry<String, Object>) cache.get(key));
-            timestampMap.remove(key);
-            expireTimeMap.remove(key);
-            keys.remove(key);
-        }
-
+        cache.remove((LFUCacheEntry<String, Object>) cache.get(key));
+        timestampMap.remove(key);
+        expireTimeMap.remove(key);
+        keys.remove(key);
     }
 
     @Override

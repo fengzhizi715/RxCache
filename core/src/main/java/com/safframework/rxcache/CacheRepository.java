@@ -1,8 +1,10 @@
 package com.safframework.rxcache;
 
+import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
+import com.safframework.tony.common.utils.Preconditions;
 
 import java.lang.reflect.Type;
 import java.util.HashSet;
@@ -17,20 +19,24 @@ class CacheRepository {
     private Persistence persistence;
 
     CacheRepository(Memory memory, Persistence persistence) {
+
         this.memory = memory;
         this.persistence = persistence;
     }
 
     <T> Record<T> get(String key,Type type) {
 
-        if (memory != null) {
+        if (Preconditions.isNotBlanks(key,type)) {
 
-            return memory.getIfPresent(key);
-        }
+            if (memory != null) {
 
-        if (persistence != null) {
+                return memory.getIfPresent(key);
+            }
 
-            return persistence.retrieve(key,type);
+            if (persistence != null) {
+
+                return persistence.retrieve(key,type);
+            }
         }
 
         return null;
@@ -38,22 +44,12 @@ class CacheRepository {
 
     <T> void save(String key, T value) {
 
-        if (value != null) {
-
-            if (memory != null) {
-                memory.put(key, value);
-            }
-
-            if (persistence != null) {
-                persistence.save(key, value);
-            }
-
-        }
+        save(key,value, Constant.NEVER_EXPIRE);
     }
 
     <T> void save(String key, T value, long expireTime) {
 
-        if (value != null) {
+        if (Preconditions.isNotBlanks(key,value)) {
 
             if (memory != null) {
                 memory.put(key, value, expireTime);
@@ -62,11 +58,12 @@ class CacheRepository {
             if (persistence != null) {
                 persistence.save(key, value, expireTime);
             }
-
         }
     }
 
     boolean containsKey(String key) {
+
+        if (Preconditions.isBlank(key)) return false;
 
         return (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
     }

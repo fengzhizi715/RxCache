@@ -2,6 +2,7 @@ package com.safframework.rxcache.persistence.converter;
 
 import com.safframework.rxcache.persistence.encrypt.Encryptor;
 import com.safframework.tony.common.utils.IOUtils;
+import com.safframework.tony.common.utils.Preconditions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,6 +27,11 @@ public abstract class AbstractConverter implements Converter {
 
     @Override
     public <T> T read(InputStream source, Type type) {
+
+        if (Preconditions.isBlank(source) || Preconditions.isBlank(type)) {
+
+            return null;
+        }
 
         String json = null;
         ByteArrayOutputStream outputStream = null;
@@ -59,25 +65,28 @@ public abstract class AbstractConverter implements Converter {
     @Override
     public void writer(OutputStream sink, Object data) {
 
-        String wrapperJSONSerialized = toJson(data);
+        if (Preconditions.isNotBlanks(sink,data)) {
 
-        byte[] buffer = null;
+            String wrapperJSONSerialized = toJson(data);
 
-        if (encryptor!=null) {
+            byte[] buffer = null;
 
-            String encryptResult = encryptor.encrypt(wrapperJSONSerialized);
+            if (encryptor!=null) {
 
-            buffer = encryptResult.getBytes();
-        } else {
+                String encryptResult = encryptor.encrypt(wrapperJSONSerialized);
 
-            buffer = wrapperJSONSerialized.getBytes();
-        }
+                buffer = encryptResult.getBytes();
+            } else {
 
-        // sink 此时不必关闭，DiskImpl 会实现 sink 的关闭
-        try {
-            sink.write(buffer, 0, buffer.length);
-        } catch (IOException e) {
-            e.printStackTrace();
+                buffer = wrapperJSONSerialized.getBytes();
+            }
+
+            // sink 此时不必关闭，DiskImpl 会实现 sink 的关闭
+            try {
+                sink.write(buffer, 0, buffer.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -56,9 +56,9 @@ implementation 'com.safframework.rxcache:rxcache-extra:0.5.2'
 
 RxCache 包含了两级缓存： Memory 和 Persistence 。
 
-Memory 的默认实现 DefaultMemoryImpl 使用 ConcurrentHashMap 来缓存数据。
+Memory 的默认实现 FIFOMemoryImpl、LRUMemoryImpl、LFUMemoryImpl 分别使用 FIFO、LRU、LFU 算法来缓存数据。
 
-在 extra 模块还有 Guava Cache、Caffeine 的实现。它们都是成熟的 Local Cache，如果不想使用 DefaultMemoryImpl ，完全可以使用 extra 模块成熟的替代方案。
+在 extra 模块还有 Guava Cache、Caffeine 的实现。它们都是成熟的 Local Cache，如果不想使用默认的 MemoryImpl ，完全可以使用 extra 模块成熟的替代方案。
 
 
 Persistence 的接口跟 Memory 很类似。

@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class LRUCache<K,V> {
 
-
     private Map<K,V> cache = null;
     private AbstractQueue<K> queue = null;
     private int size = 0;
@@ -77,7 +76,7 @@ public class LRUCache<K,V> {
 
         K remove = queue.remove();
         queue.add(remove);
-        return(cache.get(remove));
+        return cache.get(remove);
     }
 
     public void remove(K key) {
@@ -96,19 +95,19 @@ public class LRUCache<K,V> {
     public synchronized String toString() {
 
         Iterator<K> iterator = queue.iterator();
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         while (iterator.hasNext()) {
             K key = iterator.next();
-            stringBuilder.append("{ ");
-            stringBuilder.append(key);
-            stringBuilder.append(":");
-            stringBuilder.append(this.getSilent(key));
-            stringBuilder.append(" }");
+            sb.append("{ ");
+            sb.append(key);
+            sb.append(":");
+            sb.append(this.getSilent(key));
+            sb.append(" }");
             if(iterator.hasNext()) {
-                stringBuilder.append(", ");
+                sb.append(", ");
             }
         }
-        return(stringBuilder.toString());
+        return sb.toString();
     }
 }

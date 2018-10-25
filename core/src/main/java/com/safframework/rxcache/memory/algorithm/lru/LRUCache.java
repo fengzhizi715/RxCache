@@ -1,5 +1,6 @@
 package com.safframework.rxcache.memory.algorithm.lru;
 
+import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.exception.RxCacheException;
 
 import java.util.AbstractQueue;
@@ -13,14 +14,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class LRUCache<K,V> {
 
-    private static final int DEFAULT_CACHE_SIZE = 512;
+
     private Map<K,V> cache = null;
     private AbstractQueue<K> queue = null;
     private int size = 0;
 
     public LRUCache() {
 
-        this(DEFAULT_CACHE_SIZE);
+        this(Constant.DEFAULT_CACHE_SIZE);
     }
 
     public LRUCache(int size) {

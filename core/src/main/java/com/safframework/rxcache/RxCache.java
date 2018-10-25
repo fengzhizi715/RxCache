@@ -41,10 +41,7 @@ public class RxCache {
 
     private RxCache(Builder builder) {
 
-        Memory memory= builder.memory;
-        Persistence persistence = builder.persistence;
-
-        cacheRepository = new CacheRepository(memory, persistence);
+        cacheRepository = new CacheRepository(builder.memory, builder.persistence);
     }
 
     public <T> ObservableTransformer<T, Record<T>> transformObservable(final String key, final Type type, final ObservableStrategy strategy) {

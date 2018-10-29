@@ -25,7 +25,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
     public <T> Record<T> getIfPresent(String key) {
 
         try {
-            lock.lock();
+            readLock.lock();
 
             T result = null;
 
@@ -47,7 +47,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
 
         } finally {
 
-            lock.unlock();
+            readLock.unlock();
         }
     }
 
@@ -61,8 +61,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
     public <T> void put(String key, T value, long expireTime) {
 
         try {
-
-            lock.lock();
+            writeLock.lock();
 
             if (keySet().size()<maxSize) { // 缓存还有空间
 
@@ -85,7 +84,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
 
         } finally {
 
-            lock.unlock();
+            writeLock.unlock();
         }
     }
 
@@ -100,30 +99,59 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
     @Override
     public Set<String> keySet() {
 
-        return cache.keySet();
+        try {
+            readLock.lock();
+
+            return cache.keySet();
+        } finally {
+
+            readLock.unlock();
+        }
+
     }
 
     @Override
     public boolean containsKey(String key) {
 
-        return cache.containsKey(key);
+        try {
+            readLock.lock();
+
+            return cache.containsKey(key);
+        } finally {
+
+            readLock.unlock();
+        }
     }
 
     @Override
     public void evict(String key) {
 
-        cache.remove(key);
-        timestampMap.remove(key);
-        expireTimeMap.remove(key);
-        keys.remove(key);
+        try {
+            writeLock.lock();
+
+            cache.remove(key);
+            timestampMap.remove(key);
+            expireTimeMap.remove(key);
+            keys.remove(key);
+        } finally {
+
+            writeLock.unlock();
+        }
     }
 
     @Override
     public void evictAll() {
 
-        cache.clear();
-        timestampMap.clear();
-        expireTimeMap.clear();
-        keys.clear();
+        try {
+            writeLock.lock();
+
+            cache.clear();
+            timestampMap.clear();
+            expireTimeMap.clear();
+            keys.clear();
+        } finally {
+
+            writeLock.unlock();
+        }
     }
 }

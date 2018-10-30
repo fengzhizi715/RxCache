@@ -1,9 +1,7 @@
 package com.safframework.rxcache.proxy;
 
 import com.safframework.rxcache.RxCache;
-import com.safframework.rxcache.proxy.annotation.CacheKey;
-import com.safframework.rxcache.proxy.annotation.CacheLifecycle;
-import com.safframework.rxcache.proxy.annotation.CacheMethod;
+import com.safframework.rxcache.proxy.annotation.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
@@ -16,6 +14,11 @@ public class CacheProxy implements InvocationHandler {
 
     RxCache rxCache;
 
+    public CacheProxy(RxCache rxCache) {
+
+        this.rxCache = rxCache;
+    }
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
@@ -25,10 +28,48 @@ public class CacheProxy implements InvocationHandler {
 
         Annotation[][] allParamsAnnotations = method.getParameterAnnotations();
 
-        long duration = 0;
+        Class cacheClazz = null;
+        Object cacheValue = null;
 
-        if (cacheLifecycle != null) {
-            duration = cacheLifecycle.duration();
+        if (allParamsAnnotations != null) {
+            for (int i = 0; i < allParamsAnnotations.length; i++) {
+                Annotation[] paramAnnotations = allParamsAnnotations[i];
+                if (paramAnnotations != null) {
+                    for (Annotation annotation : paramAnnotations) {
+                        if (annotation instanceof CacheClass) {
+                            cacheClazz = (Class) args[i];
+                        }
+
+                        if (annotation instanceof CacheValue) {
+                            cacheValue = args[i];
+                        }
+                    }
+                }
+            }
+        }
+
+        if (cacheMethod!=null) {
+
+            MethodType methodType = cacheMethod.methodType();
+
+            long duration = 0;
+
+            if (cacheLifecycle != null) {
+                duration = cacheLifecycle.duration();
+            }
+
+            if (methodType == MethodType.GET) {
+
+                rxCache.get(cacheKey.value(),cacheClazz);
+
+            } else if (methodType == MethodType.SAVE) {
+
+                rxCache.save(cacheKey.value(),cacheValue,duration);
+
+            } else if (methodType == MethodType.REMOVE) {
+
+                rxCache.remove(cacheKey.value());
+            }
         }
 
         return null;

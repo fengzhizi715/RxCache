@@ -1,5 +1,7 @@
 package com.safframework.rxcache.proxy;
 
+import com.safframework.rxcache.RxCache;
+
 import java.lang.reflect.Proxy;
 
 /**
@@ -7,14 +9,42 @@ import java.lang.reflect.Proxy;
  */
 public final class CacheProvider {
 
-    public static <T> T create(Class<T> clazz) {
+    private RxCache rxCache;
 
-        CacheProxy proxy = new CacheProxy();
+    private CacheProvider(CacheProvider.Builder builder) {
+
+        this.rxCache = builder.rxCache;
+    }
+
+    public <T> T create(Class<T> clazz) {
+
+        CacheProxy proxy = new CacheProxy(rxCache);
+
         try {
             return (T) Proxy.newProxyInstance(CacheProvider.class.getClassLoader(), new Class[]{clazz}, proxy);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return null;
+    }
+
+    public static final class Builder {
+
+        private RxCache rxCache;
+
+        public Builder() {
+        }
+
+        public CacheProvider.Builder rxCache(RxCache rxCache) {
+
+            this.rxCache = rxCache;
+            return this;
+        }
+
+        public CacheProvider build() {
+
+            return new CacheProvider(this);
+        }
     }
 }

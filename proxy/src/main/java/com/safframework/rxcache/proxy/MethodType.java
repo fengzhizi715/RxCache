@@ -5,5 +5,5 @@ package com.safframework.rxcache.proxy;
  */
 public enum MethodType {
 
-    GET,PUT
+    GET,SAVE,REMOVE
 }

@@ -60,7 +60,7 @@ public class CacheProxy implements InvocationHandler {
 
             if (methodType == MethodType.GET) {
 
-                rxCache.get(cacheKey.value(),cacheClazz);
+                return  rxCache.get(cacheKey.value(),cacheClazz);
 
             } else if (methodType == MethodType.SAVE) {
 

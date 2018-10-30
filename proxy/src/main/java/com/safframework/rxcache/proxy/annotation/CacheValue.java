@@ -6,11 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by tony on 2018/10/30.
+ * Created by tony on 2018/10/31.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface CacheKey {
-
-    String value();
+@Target(ElementType.PARAMETER)
+public @interface CacheValue {
 }

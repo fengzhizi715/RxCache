@@ -19,4 +19,9 @@ public interface Provider {
     @CacheMethod(methodType = MethodType.SAVE)
     @CacheLifecycle(duration = 2000)
     void putData(@CacheValue User user);
+
+
+    @CacheKey("user")
+    @CacheMethod(methodType = MethodType.REMOVE)
+    void removeUser();
 }

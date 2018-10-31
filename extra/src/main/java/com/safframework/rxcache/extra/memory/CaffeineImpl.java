@@ -66,7 +66,7 @@ public class CaffeineImpl extends AbstractMemoryImpl {
                 }
             }
         }
-        
+
         return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
     }
 

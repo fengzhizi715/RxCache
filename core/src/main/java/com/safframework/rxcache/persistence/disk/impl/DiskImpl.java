@@ -47,17 +47,24 @@ public class DiskImpl implements Disk {
     @Override
     public int storedMB() {
 
-        long bytes = 0;
+        try {
+            readLock.lock();
 
-        final File[] files = cacheDirectory.listFiles();
-        if (files == null) return 0;
+            long bytes = 0;
 
-        for (File file : files) {
-            bytes += file.length();
+            final File[] files = cacheDirectory.listFiles();
+            if (files == null) return 0;
+
+            for (File file : files) {
+                bytes += file.length();
+            }
+
+            double megabytes = Math.ceil((double) bytes / 1024 / 1024);
+            return (int) megabytes;
+        } finally {
+
+            readLock.unlock();
         }
-
-        double megabytes = Math.ceil((double) bytes / 1024 / 1024);
-        return (int) megabytes;
     }
 
     @Override

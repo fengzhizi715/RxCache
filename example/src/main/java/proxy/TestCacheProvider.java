@@ -27,16 +27,16 @@ public class TestCacheProvider {
         u.name = "tony";
         u.password = "123456";
 
-        provider.putData(u);
+        provider.putData(u); // 将u存入缓存中
 
-        Record<User> record = provider.getData(User.class);
+        Record<User> record = provider.getData(User.class); // 从缓存中获取key="user"的数据
 
         if (record!=null) {
 
             System.out.println(record.getData().name);
         }
 
-        provider.removeUser();
+        provider.removeUser(); // 从缓存中删除key="user"的数据
 
         record = provider.getData(User.class);
 
@@ -50,7 +50,7 @@ public class TestCacheProvider {
         u2.password = "000000";
         rxCache.save("test",u2);
 
-        Maybe<Record<User>> maybe = provider.getMaybe(User.class);
+        Maybe<Record<User>> maybe = provider.getMaybe(User.class); // 从缓存中获取key="test"的数据，返回的类型为Maybe
         maybe.subscribe(new Consumer<Record<User>>() {
             @Override
             public void accept(Record<User> userRecord) throws Exception {

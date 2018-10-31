@@ -18,10 +18,10 @@ public final class CacheProvider {
 
     public <T> T create(Class<T> clazz) {
 
-        CacheProxy proxy = new CacheProxy(rxCache);
+        CacheProxy cacheProxy = new CacheProxy(rxCache);
 
         try {
-            return (T) Proxy.newProxyInstance(CacheProvider.class.getClassLoader(), new Class[]{clazz}, proxy);
+            return (T) Proxy.newProxyInstance(CacheProvider.class.getClassLoader(), new Class[]{clazz}, cacheProxy);
         } catch (Exception e) {
             e.printStackTrace();
         }

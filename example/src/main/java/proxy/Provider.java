@@ -2,8 +2,10 @@ package proxy;
 
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.proxy.MethodType;
+import com.safframework.rxcache.proxy.ObservableType;
 import com.safframework.rxcache.proxy.annotation.*;
 import domain.User;
+import io.reactivex.Maybe;
 
 /**
  * Created by tony on 2018/10/31.
@@ -24,4 +26,8 @@ public interface Provider {
     @CacheKey("user")
     @CacheMethod(methodType = MethodType.REMOVE)
     void removeUser();
+
+    @CacheKey("test")
+    @CacheMethod(methodType = MethodType.GET, observableType = ObservableType.MAYBE)
+    <T> Maybe<Record<T>> getMaybe(@CacheClass Class<T> clazz);
 }

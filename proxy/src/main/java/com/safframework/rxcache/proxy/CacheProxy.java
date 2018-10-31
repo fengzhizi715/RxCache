@@ -60,7 +60,24 @@ public class CacheProxy implements InvocationHandler {
 
             if (methodType == MethodType.GET) {
 
-                return  rxCache.get(cacheKey.value(),cacheClazz);
+                ObservableType observableType = cacheMethod.observableType();
+
+                if (observableType==ObservableType.NOUSE) {
+
+                    return  rxCache.get(cacheKey.value(),cacheClazz);
+                } else if (observableType == ObservableType.OBSERVABLE){
+
+                    return  rxCache.load2Observable(cacheKey.value(),cacheClazz);
+                } else if (observableType==ObservableType.FLOWABLE) {
+
+                    return  rxCache.load2Flowable(cacheKey.value(),cacheClazz);
+                } else if (observableType==ObservableType.SINGLE) {
+
+                    return  rxCache.load2Single(cacheKey.value(),cacheClazz);
+                } else if (observableType==ObservableType.MAYBE) {
+
+                    return  rxCache.load2Maybe(cacheKey.value(),cacheClazz);
+                }
 
             } else if (methodType == MethodType.SAVE) {
 

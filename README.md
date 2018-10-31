@@ -8,9 +8,9 @@
 
 # 最新版本
 
-模块|rxcache-core|rxcache-extra
----|:-------------:|:-------------:
-最新版本|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extra/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extra/_latestVersion)
+模块|rxcache-core|rxcache-extra|rxcache-proxy
+---|:-------------:|:-------------:|:-------------:
+最新版本|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extra/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extra/_latestVersion)|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-proxy/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-proxy/_latestVersion)
 
 对于 Java 工程，如果使用 gradle 构建，由于默认没有使用 jcenter()，需要在相应 module 的 build.gradle 中配置
 
@@ -33,6 +33,12 @@ rxcache-extra
 
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-extra:0.6.3'
+```
+
+rxcache-proxy
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-proxy:0.6.3'
 ```
 
 

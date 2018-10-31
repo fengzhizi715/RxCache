@@ -46,7 +46,9 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
                         result = (T) cache.get(key);
                     } else {                     // 缓存的数据已经过期
 
-                        removeKey(key);
+                        readLock.unlock();
+                        evict(key);
+                        readLock.lock();
                     }
                 }
             }

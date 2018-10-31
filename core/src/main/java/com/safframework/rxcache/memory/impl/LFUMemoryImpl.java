@@ -46,10 +46,9 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
                         result = (T) cache.get(key);
                     } else {                     // 缓存的数据已经过期
 
-                        cache.remove(key);
-                        timestampMap.remove(key);
-                        expireTimeMap.remove(key);
-                        keys.remove(key);
+                        readLock.unlock();
+                        evict(key);
+                        readLock.lock();
                     }
                 }
             }

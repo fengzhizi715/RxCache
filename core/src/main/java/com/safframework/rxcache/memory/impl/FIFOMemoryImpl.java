@@ -41,7 +41,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
                         result = (T) cache.get(key);
                     } else {                     // 缓存的数据已经过期
 
-                        evict(key);
+                        removeKey(key);
                     }
                 }
             }
@@ -79,7 +79,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
                 } else {
 
                     String oldKey = keys.get(0); // 最早缓存的key
-                    evict(oldKey);               // 删除最早缓存的数据 FIFO算法
+                    removeKey(oldKey);               // 删除最早缓存的数据 FIFO算法
 
                     saveValue(key,value,expireTime);
                 }
@@ -140,6 +140,14 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
 
             writeLock.unlock();
         }
+    }
+
+    private void removeKey(String key) {
+
+        cache.remove(key);
+        timestampMap.remove(key);
+        expireTimeMap.remove(key);
+        keys.remove(key);
     }
 
     @Override

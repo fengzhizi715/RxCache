@@ -2,6 +2,7 @@ package proxy;
 
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.memory.impl.LRUMemoryImpl;
 import com.safframework.rxcache.proxy.CacheProvider;
 import domain.User;
 
@@ -13,7 +14,7 @@ public class TestCacheProvider {
     public static void main(String[] args) {
 
 
-        RxCache.config(new RxCache.Builder());
+        RxCache.config(new RxCache.Builder().memory(new LRUMemoryImpl(512)));
 
         RxCache rxCache = RxCache.getRxCache();
 
@@ -27,14 +28,27 @@ public class TestCacheProvider {
 
         provider.putData(u);
 
-        Record<User> record = provider.getData(User.class);
+//        Record<User> record = provider.getData(User.class);
+//
+//        if (record==null) {
+//
+//            System.out.println("record is null");
+//        } else {
+//
+//            System.out.println(record.getData().name);
+//        };
+
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Record<User> record = rxCache.get("user",User.class);
 
         if (record==null) {
 
             System.out.println("record is null");
-        } else {
-
-            System.out.println(record.getData().name);
-        };
+        }
     }
 }

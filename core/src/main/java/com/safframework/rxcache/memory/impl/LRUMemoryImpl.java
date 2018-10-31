@@ -41,7 +41,10 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
                         result = (T) cache.get(key);
                     } else {                     // 缓存的数据已经过期
 
-                        evict(key);
+                        cache.remove(key);
+                        timestampMap.remove(key);
+                        expireTimeMap.remove(key);
+                        keys.remove(key);
                     }
                 }
             }

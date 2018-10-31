@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Created by tony on 2018/9/29.
@@ -28,7 +29,9 @@ public class DiskImpl implements Disk {
     private File cacheDirectory;
     private Converter converter;
 
-    private Lock lock = new ReentrantLock();
+    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private Lock readLock = lock.readLock();
+    private Lock writeLock = lock.writeLock();
 
     public DiskImpl(File cacheDirectory) {
 
@@ -63,7 +66,7 @@ public class DiskImpl implements Disk {
         FileInputStream inputStream = null;
 
         try {
-            lock.lock();
+            readLock.lock();
 
             key = safetyKey(key);
             File file = new File(cacheDirectory, key);
@@ -92,7 +95,9 @@ public class DiskImpl implements Disk {
                     result = converter.fromJson(json,type);
                 } else {        // 缓存的数据已经过期
 
+                    readLock.unlock();
                     evict(key);
+                    readLock.lock();
                 }
             }
 
@@ -103,7 +108,7 @@ public class DiskImpl implements Disk {
         } finally {
 
             IOUtils.closeQuietly(inputStream);
-            lock.unlock();
+            readLock.unlock();
         }
     }
 
@@ -119,7 +124,7 @@ public class DiskImpl implements Disk {
         FileOutputStream outputStream = null;
 
         try {
-            lock.lock();
+            writeLock.lock();
 
             key = safetyKey(key);
 
@@ -132,59 +137,88 @@ public class DiskImpl implements Disk {
         } finally {
 
             IOUtils.closeQuietly(outputStream);
-            lock.unlock();
+            writeLock.unlock();
         }
     }
 
     @Override
     public List<String> allKeys() {
 
-        List<String> result = new ArrayList<>();
+        try {
+            readLock.lock();
 
-        File[] files = cacheDirectory.listFiles();
-        if (files == null) return result;
+            List<String> result = new ArrayList<>();
 
-        for (File file : files) {
-            if (file.isFile()) {
-                result.add(file.getName());
+            File[] files = cacheDirectory.listFiles();
+            if (files == null) return result;
+
+            for (File file : files) {
+                if (file.isFile()) {
+                    result.add(file.getName());
+                }
             }
-        }
 
-        return result;
+            return result;
+        } finally {
+
+            readLock.unlock();
+        }
     }
 
     @Override
     public boolean containsKey(String key) {
 
-        File[] files = cacheDirectory.listFiles();
+        try {
+            readLock.lock();
 
-        for (File file:files) {
+            File[] files = cacheDirectory.listFiles();
 
-            if (file.isFile() && file.getName().equals(key)) {
+            for (File file : files) {
 
-                return true;
+                if (file.isFile() && file.getName().equals(key)) {
+
+                    return true;
+                }
             }
+            return false;
+        } finally {
+
+            readLock.unlock();
         }
-        return false;
     }
 
     @Override
     public void evict(String key) {
-        key = safetyKey(key);
-        File file = new File(cacheDirectory, key);
-        file.delete();
+
+        try {
+            writeLock.lock();
+
+            key = safetyKey(key);
+            File file = new File(cacheDirectory, key);
+            file.delete();
+        } finally {
+
+            writeLock.unlock();
+        }
     }
 
     @Override
     public void evictAll() {
 
-        File[] files = cacheDirectory.listFiles();
+        try {
+            writeLock.lock();
 
-        if (Preconditions.isNotBlank(files)){
-            for (File file : files) {
-                if (file != null)
-                    file.delete();
+            File[] files = cacheDirectory.listFiles();
+
+            if (Preconditions.isNotBlank(files)){
+                for (File file : files) {
+                    if (file != null)
+                        file.delete();
+                }
             }
+        } finally {
+
+            writeLock.unlock();
         }
     }
 

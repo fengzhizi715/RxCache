@@ -1,6 +1,5 @@
 package com.safframework.rxcache;
 
-import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
@@ -176,7 +175,7 @@ public class RxCache {
 
             if (memory == null && persistence == null) { // 至少保证 RxCache 可用
 
-                memory = new FIFOMemoryImpl(Constant.DEFAULT_CACHE_SIZE);
+                memory = new FIFOMemoryImpl();
             }
 
             return new RxCache(this);

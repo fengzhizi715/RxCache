@@ -15,6 +15,11 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
 
     private Map<String,Object> cache;
 
+    public FIFOMemoryImpl() {
+
+        this(Constant.DEFAULT_CACHE_SIZE);
+    }
+
     public FIFOMemoryImpl(long maxSize) {
 
         super(maxSize);

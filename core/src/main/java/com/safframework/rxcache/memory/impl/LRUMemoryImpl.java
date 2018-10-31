@@ -15,6 +15,11 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
 
     private LRUCache<String,Object> cache;
 
+    public LRUMemoryImpl() {
+
+        this(Constant.DEFAULT_CACHE_SIZE);
+    }
+
     public LRUMemoryImpl(long maxSize) {
 
         super(maxSize);

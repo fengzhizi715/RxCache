@@ -16,6 +16,11 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
 
     private LFUCache<String, Object> cache;
 
+    public LFUMemoryImpl() {
+
+        this(Constant.DEFAULT_CACHE_SIZE);
+    }
+
     public LFUMemoryImpl(long maxSize) {
 
         super(maxSize);

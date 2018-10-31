@@ -29,17 +29,20 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
 
             T result = null;
 
-            if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
+            if (expireTimeMap.get(key)!=null) {
 
-                result = (T) cache.get(key);
-            } else {
-
-                if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+                if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
 
                     result = (T) cache.get(key);
-                } else {                     // 缓存的数据已经过期
+                } else {
 
-                    evict(key);
+                    if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                        result = (T) cache.get(key);
+                    } else {                     // 缓存的数据已经过期
+
+                        evict(key);
+                    }
                 }
             }
 

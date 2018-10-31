@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 因为 Guava Cache 和 Caffeine 都是线程安全的，所以没有使用锁
  * Created by tony on 2018/10/31.
  */
 public abstract class AbstractMemoryImpl implements Memory {

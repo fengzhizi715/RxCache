@@ -4,7 +4,6 @@ import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.algorithm.lfu.LFUCache;
-import com.safframework.rxcache.memory.algorithm.lfu.LFUCacheEntry;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -47,7 +46,10 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
                         result = (T) cache.get(key);
                     } else {                     // 缓存的数据已经过期
 
-                        evict(key);
+                        cache.remove(key);
+                        timestampMap.remove(key);
+                        expireTimeMap.remove(key);
+                        keys.remove(key);
                     }
                 }
             }
@@ -115,7 +117,7 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
         try {
             writeLock.lock();
 
-            cache.remove((LFUCacheEntry<String, Object>) cache.get(key));
+            cache.remove(key);
             timestampMap.remove(key);
             expireTimeMap.remove(key);
             keys.remove(key);

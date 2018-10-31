@@ -102,6 +102,15 @@ public class LFUCache<K, V> {
         return entry.value;
     }
 
+    public void remove(String key) {
+        if (!kvStore.containsKey(key))
+            return;
+
+        LFUCacheEntry<K, V> entry = kvStore.get(key);
+
+        remove(entry);
+    }
+
     public void remove(LFUCacheEntry<K, V> entry) {
         if (!kvStore.containsKey(entry.key))
             return;

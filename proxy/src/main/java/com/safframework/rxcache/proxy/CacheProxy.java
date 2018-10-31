@@ -52,7 +52,7 @@ public class CacheProxy implements InvocationHandler {
 
             MethodType methodType = cacheMethod.methodType();
 
-            long duration = 0;
+            long duration = -1;
 
             if (cacheLifecycle != null) {
                 duration = cacheLifecycle.duration();

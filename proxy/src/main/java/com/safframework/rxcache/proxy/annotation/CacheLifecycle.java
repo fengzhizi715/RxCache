@@ -12,5 +12,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface CacheLifecycle {
 
-    long duration();
+    long duration() default -1;
 }

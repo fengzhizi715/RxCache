@@ -291,6 +291,97 @@ public class TestWithGuava {
 为了更好地支持 Android，我创建了 RxCache4a: https://github.com/fengzhizi715/RxCache4a
 
 
+## 3.3 基于 Annotation 完成缓存操作
+
+类似 Retrofit 风格的方式，支持通过标注 Annotation 来完成缓存的操作。
+
+例如先定义一个接口，用于定义缓存的各种操作。
+
+```java
+public interface Provider {
+
+    @CacheKey("user")
+    @CacheMethod(methodType = MethodType.GET)
+    <T> Record<T> getData(@CacheClass Class<T> clazz);
+
+
+    @CacheKey("user")
+    @CacheMethod(methodType = MethodType.SAVE)
+    @CacheLifecycle(duration = 2000)
+    void putData(@CacheValue User user);
+
+
+    @CacheKey("user")
+    @CacheMethod(methodType = MethodType.REMOVE)
+    void removeUser();
+
+    @CacheKey("test")
+    @CacheMethod(methodType = MethodType.GET, observableType = ObservableType.MAYBE)
+    <T> Maybe<Record<T>> getMaybe(@CacheClass Class<T> clazz);
+}
+```
+
+通过 CacheProvider  创建该接口，然后可以完成各种缓存操作。
+
+```java
+public class TestCacheProvider {
+
+    public static void main(String[] args) {
+
+
+        RxCache.config(new RxCache.Builder());
+
+        RxCache rxCache = RxCache.getRxCache();
+
+        CacheProvider cacheProvider = new CacheProvider.Builder().rxCache(rxCache).build();
+
+        Provider provider = cacheProvider.create(Provider.class);
+
+        User u = new User();
+        u.name = "tony";
+        u.password = "123456";
+
+        provider.putData(u); // 将u存入缓存中
+
+        Record<User> record = provider.getData(User.class); // 从缓存中获取key="user"的数据
+
+        if (record!=null) {
+
+            System.out.println(record.getData().name);
+        }
+
+        provider.removeUser(); // 从缓存中删除key="user"的数据
+
+        record = provider.getData(User.class);
+
+        if (record==null) {
+
+            System.out.println("record is null");
+        }
+
+        User u2 = new User();
+        u2.name = "tony2";
+        u2.password = "000000";
+        rxCache.save("test",u2);
+
+        Maybe<Record<User>> maybe = provider.getMaybe(User.class); // 从缓存中获取key="test"的数据，返回的类型为Maybe
+        maybe.subscribe(new Consumer<Record<User>>() {
+            @Override
+            public void accept(Record<User> userRecord) throws Exception {
+
+                User user = userRecord.getData();
+                if (user!=null) {
+
+                    System.out.println(user.name);
+                    System.out.println(user.password);
+                }
+            }
+        });
+    }
+}
+```
+
+
 联系方式
 ===
 

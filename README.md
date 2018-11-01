@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202-lightgrey.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 
-# 最新版本
+# 一. 最新版本
 
 模块|rxcache-core|rxcache-extra|rxcache-proxy
 ---|:-------------:|:-------------:|:-------------:
@@ -21,7 +21,7 @@ repositories {
 }
 ```
 
-# 下载：
+## 下载：
 
 rxcache-core
 
@@ -42,7 +42,7 @@ implementation 'com.safframework.rxcache:rxcache-proxy:0.6.3'
 ```
 
 
-# 功能特点：
+# 二. 功能特点：
 
 * 拥有二级缓存：Memory、Persistence
 * 各个缓存都拥有有效时间，超过时间缓存会过期
@@ -56,7 +56,7 @@ implementation 'com.safframework.rxcache:rxcache-proxy:0.6.3'
 * 支持 RxJava 2
 
 
-# Annotation
+## 支持的 Annotation：
 
 注解名称|作用|备注
 ---|-------------|-------------
@@ -67,7 +67,7 @@ implementation 'com.safframework.rxcache:rxcache-proxy:0.6.3'
 @CacheValue|设置缓存的值|参数注解
 
 
-# RxCache 的设计：
+# 三. RxCache 的设计：
 
 下图是 rxcache-core 模块的 uml 类图
 
@@ -125,7 +125,7 @@ public abstract class AbstractConverter implements Converter {
 
 Encryptor 接口用于将存储到 Disk 上的数据进行加密和解密，目前 RxCache 支持 AES128 和 DES 两种加密方式。不使用 Encryptor 接口，则存储到 Disk 上的数据是明文，也就是一串json字符串。
 
-# 支持 Java
+## 3.1 支持 Java
 
 在 example 模块下，包括了一些常见 Java 使用的例子。
 
@@ -286,7 +286,7 @@ public class TestWithGuava {
 ```
 
 
-# 支持 Android
+## 3.2 支持 Android
 
 为了更好地支持 Android，我创建了 RxCache4a: https://github.com/fengzhizi715/RxCache4a
 

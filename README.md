@@ -59,11 +59,11 @@ implementation 'com.safframework.rxcache:rxcache-proxy:0.6.3'
 # Annotation
 
 注解名称|作用|备注
----|:-------------:|:-------------:
+---|-------------|-------------
 @CacheClass|设置缓存类，标注一个Class对象|参数注解
 @CacheKey|设置缓存的key值|方法注解
 @CacheLifecycle|设置缓存的过期时间，只在缓存保存时有效|方法注解
-@CacheMethod|设置缓存的操作方法，返回的对象是 RxJava 的各种 Observable 类型，或者还是返回所存储的对象类型。|方法注解
+@CacheMethod|设置缓存的操作方法。以及返回的对象是 RxJava 的各种 Observable 类型，或者返回所存储的对象类型。|方法注解
 @CacheValue|设置缓存的值|参数注解
 
 

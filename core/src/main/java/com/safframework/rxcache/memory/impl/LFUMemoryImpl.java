@@ -62,7 +62,6 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
         cache.put(key, value);
         timestampMap.put(key, System.currentTimeMillis());
         expireTimeMap.put(key, expireTime);
-        keys.add(key);
     }
 
     @Override
@@ -83,7 +82,6 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
         cache.remove(key);
         timestampMap.remove(key);
         expireTimeMap.remove(key);
-        keys.remove(key);
     }
 
     @Override
@@ -92,6 +90,5 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
         cache.clear();
         timestampMap.clear();
         expireTimeMap.clear();
-        keys.clear();
     }
 }

@@ -5,8 +5,6 @@ import com.safframework.rxcache.memory.Memory;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Created by tony on 2018/9/29.

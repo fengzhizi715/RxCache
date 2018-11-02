@@ -5,9 +5,9 @@ import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.exception.RxCacheException;
-import com.safframework.rxcache.persistence.disk.Disk;
 import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.persistence.converter.GsonConverter;
+import com.safframework.rxcache.persistence.disk.Disk;
 import com.safframework.tony.common.utils.IOUtils;
 import com.safframework.tony.common.utils.Preconditions;
 
@@ -17,9 +17,6 @@ import java.io.FileOutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Created by tony on 2018/9/29.
@@ -28,10 +25,6 @@ public class DiskImpl implements Disk {
 
     private File cacheDirectory;
     private Converter converter;
-
-    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-    private Lock readLock = lock.readLock();
-    private Lock writeLock = lock.writeLock();
 
     public DiskImpl(File cacheDirectory) {
 
@@ -47,24 +40,17 @@ public class DiskImpl implements Disk {
     @Override
     public int storedMB() {
 
-        try {
-            readLock.lock();
+        long bytes = 0;
 
-            long bytes = 0;
+        final File[] files = cacheDirectory.listFiles();
+        if (files == null) return 0;
 
-            final File[] files = cacheDirectory.listFiles();
-            if (files == null) return 0;
-
-            for (File file : files) {
-                bytes += file.length();
-            }
-
-            double megabytes = Math.ceil((double) bytes / 1024 / 1024);
-            return (int) megabytes;
-        } finally {
-
-            readLock.unlock();
+        for (File file : files) {
+            bytes += file.length();
         }
+
+        double megabytes = Math.ceil((double) bytes / 1024 / 1024);
+        return (int) megabytes;
     }
 
     @Override
@@ -73,7 +59,6 @@ public class DiskImpl implements Disk {
         FileInputStream inputStream = null;
 
         try {
-            readLock.lock();
 
             key = safetyKey(key);
             File file = new File(cacheDirectory, key);
@@ -102,9 +87,7 @@ public class DiskImpl implements Disk {
                     result = converter.fromJson(json,type);
                 } else {        // 缓存的数据已经过期
 
-                    readLock.unlock();
                     evict(key);
-                    readLock.lock();
                 }
             }
 
@@ -115,7 +98,6 @@ public class DiskImpl implements Disk {
         } finally {
 
             IOUtils.closeQuietly(inputStream);
-            readLock.unlock();
         }
     }
 
@@ -131,7 +113,6 @@ public class DiskImpl implements Disk {
         FileOutputStream outputStream = null;
 
         try {
-            writeLock.lock();
 
             key = safetyKey(key);
 
@@ -144,88 +125,59 @@ public class DiskImpl implements Disk {
         } finally {
 
             IOUtils.closeQuietly(outputStream);
-            writeLock.unlock();
         }
     }
 
     @Override
     public List<String> allKeys() {
 
-        try {
-            readLock.lock();
+        List<String> result = new ArrayList<>();
 
-            List<String> result = new ArrayList<>();
+        File[] files = cacheDirectory.listFiles();
+        if (files == null) return result;
 
-            File[] files = cacheDirectory.listFiles();
-            if (files == null) return result;
-
-            for (File file : files) {
-                if (file.isFile()) {
-                    result.add(file.getName());
-                }
+        for (File file : files) {
+            if (file.isFile()) {
+                result.add(file.getName());
             }
-
-            return result;
-        } finally {
-
-            readLock.unlock();
         }
+
+        return result;
     }
 
     @Override
     public boolean containsKey(String key) {
 
-        try {
-            readLock.lock();
+        File[] files = cacheDirectory.listFiles();
 
-            File[] files = cacheDirectory.listFiles();
+        for (File file : files) {
 
-            for (File file : files) {
+            if (file.isFile() && file.getName().equals(key)) {
 
-                if (file.isFile() && file.getName().equals(key)) {
-
-                    return true;
-                }
+                return true;
             }
-            return false;
-        } finally {
-
-            readLock.unlock();
         }
+        return false;
     }
 
     @Override
     public void evict(String key) {
 
-        try {
-            writeLock.lock();
-
-            key = safetyKey(key);
-            File file = new File(cacheDirectory, key);
-            file.delete();
-        } finally {
-
-            writeLock.unlock();
-        }
+        key = safetyKey(key);
+        File file = new File(cacheDirectory, key);
+        file.delete();
     }
 
     @Override
     public void evictAll() {
 
-        try {
-            writeLock.lock();
+        File[] files = cacheDirectory.listFiles();
 
-            File[] files = cacheDirectory.listFiles();
-
-            if (Preconditions.isNotBlank(files)){
-                for (File file : files) {
-                    if (file != null)
-                        file.delete();
-                }
+        if (Preconditions.isNotBlank(files)){
+            for (File file : files) {
+                if (file != null)
+                    file.delete();
             }
-        } finally {
-
-            writeLock.unlock();
         }
     }
 

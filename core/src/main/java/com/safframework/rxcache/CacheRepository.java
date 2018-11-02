@@ -9,6 +9,8 @@ import com.safframework.tony.common.utils.Preconditions;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Created by tony on 2018/9/28.
@@ -18,28 +20,39 @@ class CacheRepository {
     private Memory memory;
     private Persistence persistence;
 
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    protected final Lock readLock = lock.readLock();
+    protected final Lock writeLock = lock.writeLock();
+
     CacheRepository(Memory memory, Persistence persistence) {
 
         this.memory = memory;
         this.persistence = persistence;
     }
 
-    <T> Record<T> get(String key,Type type) {
+    <T> Record<T> get(String key, Type type) {
 
-        if (Preconditions.isNotBlanks(key,type)) {
+        try {
+            readLock.lock();
 
-            if (memory != null) {
+            if (Preconditions.isNotBlanks(key, type)) {
 
-                return memory.getIfPresent(key);
+                if (memory != null) {
+
+                    return memory.getIfPresent(key);
+                }
+
+                if (persistence != null) {
+
+                    return persistence.retrieve(key, type);
+                }
             }
 
-            if (persistence != null) {
+            return null;
+        } finally {
 
-                return persistence.retrieve(key,type);
-            }
+            readLock.unlock();
         }
-
-        return null;
     }
 
     <T> void save(String key, T value) {
@@ -49,64 +62,104 @@ class CacheRepository {
 
     <T> void save(String key, T value, long expireTime) {
 
-        if (Preconditions.isNotBlanks(key,value)) {
+        try {
+            writeLock.lock();
 
-            if (memory != null) {
-                memory.put(key, value, expireTime);
+            if (Preconditions.isNotBlanks(key, value)) {
+
+                if (memory != null) {
+                    memory.put(key, value, expireTime);
+                }
+
+                if (persistence != null) {
+                    persistence.save(key, value, expireTime);
+                }
             }
 
-            if (persistence != null) {
-                persistence.save(key, value, expireTime);
-            }
+        } finally {
+
+            writeLock.unlock();
         }
     }
 
     boolean containsKey(String key) {
 
-        if (Preconditions.isBlank(key)) return false;
+        try {
+            readLock.lock();
 
-        return (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
+            if (Preconditions.isBlank(key)) return false;
+
+            return (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
+
+        } finally {
+
+            readLock.unlock();
+        }
     }
 
     Set<String> getAllKeys() {
 
-        Set<String> result = new HashSet<>();
+        try {
+            readLock.lock();
 
-        if (memory!=null) {
+            Set<String> result = new HashSet<>();
 
-            result.addAll(memory.keySet());
+            if (memory != null) {
+
+                result.addAll(memory.keySet());
+            }
+
+            if (persistence != null) {
+
+                result.addAll(persistence.allKeys());
+            }
+
+            return result;
+
+        } finally {
+
+            readLock.unlock();
         }
-
-        if (persistence!=null) {
-
-            result.addAll(persistence.allKeys());
-        }
-
-        return result;
     }
 
     void remove(String key) {
 
-        if (Preconditions.isNotBlank(key)) {
+        try {
+            writeLock.lock();
 
-            if (memory != null) {
-                memory.evict(key);
+            if (Preconditions.isNotBlank(key)) {
+
+                if (memory != null) {
+                    memory.evict(key);
+                }
+
+                if (persistence != null) {
+                    persistence.evict(key);
+                }
             }
 
-            if (persistence != null) {
-                persistence.evict(key);
-            }
+        } finally {
+
+            writeLock.unlock();
         }
     }
 
     void clear() {
 
-        if (memory != null) {
-            memory.evictAll();
-        }
+        try {
+            writeLock.lock();
 
-        if (persistence != null) {
-            persistence.evictAll();
+            if (memory != null) {
+                memory.evictAll();
+            }
+
+            if (persistence != null) {
+                persistence.evictAll();
+            }
+
+        } finally {
+
+            writeLock.unlock();
         }
     }
 }

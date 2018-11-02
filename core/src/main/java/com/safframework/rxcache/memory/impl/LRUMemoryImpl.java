@@ -29,36 +29,26 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
     @Override
     public <T> Record<T> getIfPresent(String key) {
 
-        try {
-            readLock.lock();
+        T result = null;
 
-            T result = null;
+        if (expireTimeMap.get(key)!=null) {
 
-            if (expireTimeMap.get(key)!=null) {
+            if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
 
-                if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
+                result = (T) cache.get(key);
+            } else {
+
+                if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
 
                     result = (T) cache.get(key);
-                } else {
+                } else {                     // 缓存的数据已经过期
 
-                    if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
-
-                        result = (T) cache.get(key);
-                    } else {                     // 缓存的数据已经过期
-
-                        readLock.unlock();
-                        evict(key);
-                        readLock.lock();
-                    }
+                    evict(key);
                 }
             }
-
-            return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
-
-        } finally {
-
-            readLock.unlock();
         }
+
+        return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
     }
 
     @Override
@@ -70,73 +60,39 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
-        try {
-            writeLock.lock();
-
-            cache.put(key,value);
-            timestampMap.put(key,System.currentTimeMillis());
-            expireTimeMap.put(key,expireTime);
-            keys.add(key);
-        } finally {
-
-            writeLock.unlock();
-        }
+        cache.put(key,value);
+        timestampMap.put(key,System.currentTimeMillis());
+        expireTimeMap.put(key,expireTime);
+        keys.add(key);
     }
 
     @Override
     public Set<String> keySet() {
 
-        try {
-            readLock.lock();
-
-            return new HashSet<>(keys);
-        } finally {
-
-            readLock.unlock();
-        }
+        return new HashSet<>(keys);
     }
 
     @Override
     public boolean containsKey(String key) {
 
-        try {
-            readLock.lock();
-
-            return cache.containsKey(key);
-        } finally {
-
-            readLock.unlock();
-        }
+        return cache.containsKey(key);
     }
 
     @Override
     public void evict(String key) {
 
-        try {
-            writeLock.lock();
-
-            cache.remove(key);
-            timestampMap.remove(key);
-            expireTimeMap.remove(key);
-            keys.remove(key);
-        } finally {
-
-            writeLock.unlock();
-        }
+        cache.remove(key);
+        timestampMap.remove(key);
+        expireTimeMap.remove(key);
+        keys.remove(key);
     }
 
     @Override
     public void evictAll() {
-        try {
-            writeLock.lock();
 
-            cache.clear();
-            timestampMap.clear();
-            expireTimeMap.clear();
-            keys.clear();
-        } finally {
-
-            writeLock.unlock();
-        }
+        cache.clear();
+        timestampMap.clear();
+        expireTimeMap.clear();
+        keys.clear();
     }
 }

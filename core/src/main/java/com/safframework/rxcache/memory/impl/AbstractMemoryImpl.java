@@ -18,10 +18,6 @@ public abstract class AbstractMemoryImpl implements Memory {
     protected List<String> keys;
     protected long maxSize;
 
-    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-    protected final Lock readLock = lock.readLock();
-    protected final Lock writeLock = lock.writeLock();
-
     public AbstractMemoryImpl(long maxSize) {
 
         this.timestampMap = new HashMap<>();

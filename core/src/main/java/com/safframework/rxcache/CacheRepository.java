@@ -21,8 +21,8 @@ class CacheRepository {
     private Persistence persistence;
 
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-    protected final Lock readLock = lock.readLock();
-    protected final Lock writeLock = lock.writeLock();
+    private final Lock readLock = lock.readLock();
+    private final Lock writeLock = lock.writeLock();
 
     CacheRepository(Memory memory, Persistence persistence) {
 

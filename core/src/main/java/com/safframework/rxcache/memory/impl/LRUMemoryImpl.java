@@ -63,13 +63,12 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
         cache.put(key,value);
         timestampMap.put(key,System.currentTimeMillis());
         expireTimeMap.put(key,expireTime);
-        keys.add(key);
     }
 
     @Override
     public Set<String> keySet() {
 
-        return new HashSet<>(keys);
+        return cache.keySet();
     }
 
     @Override
@@ -84,7 +83,6 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
         cache.remove(key);
         timestampMap.remove(key);
         expireTimeMap.remove(key);
-        keys.remove(key);
     }
 
     @Override
@@ -93,6 +91,5 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
         cache.clear();
         timestampMap.clear();
         expireTimeMap.clear();
-        keys.clear();
     }
 }

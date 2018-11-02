@@ -6,6 +6,7 @@ import com.safframework.rxcache.exception.RxCacheException;
 import java.util.AbstractQueue;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -77,6 +78,11 @@ public class LRUCache<K,V> {
         K remove = queue.remove();
         queue.add(remove);
         return cache.get(remove);
+    }
+
+    public Set<K> keySet() {
+
+        return cache.keySet();
     }
 
     public void remove(K key) {

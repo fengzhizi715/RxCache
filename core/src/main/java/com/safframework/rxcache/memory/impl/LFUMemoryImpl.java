@@ -5,7 +5,6 @@ import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.algorithm.lfu.LFUCache;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -69,7 +68,7 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
     @Override
     public Set<String> keySet() {
 
-        return new HashSet<>(keys);
+        return cache.keySet();
     }
 
     @Override

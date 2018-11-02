@@ -1,6 +1,7 @@
 package com.safframework.rxcache.memory.algorithm.lfu;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Created by tony on 2018/10/22.
@@ -100,6 +101,11 @@ public class LFUCache<K, V> {
         entry.frequencyNode = newFrequencyNode;
 
         return entry.value;
+    }
+
+    public Set<K> keySet() {
+
+        return kvStore.keySet();
     }
 
     public void remove(String key) {

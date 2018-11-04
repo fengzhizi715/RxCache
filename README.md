@@ -26,19 +26,19 @@ repositories {
 rxcache-core
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-core:0.6.3'
+implementation 'com.safframework.rxcache:rxcache-core:0.7.0'
 ```
 
 rxcache-extra
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-extra:0.6.3'
+implementation 'com.safframework.rxcache:rxcache-extra:0.7.0'
 ```
 
 rxcache-proxy
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-proxy:0.6.3'
+implementation 'com.safframework.rxcache:rxcache-proxy:0.7.0'
 ```
 
 

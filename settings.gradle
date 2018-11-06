@@ -5,4 +5,6 @@ include 'extra'
 include 'proxy'
 include 'fastjson'
 include 'moshi'
+include 'guava-cache'
+include 'caffeine'
 

@@ -23,6 +23,7 @@ dependencies {
     implementation 'com.github.ben-manes.caffeine:caffeine:2.6.2'
     implementation 'com.alibaba:fastjson:1.2.49'
     implementation "tony-common:tony-common-utils:${libs.tony_common_utils}"
+    implementation 'com.squareup.moshi:moshi:1.7.0'
 }
 
 publish{

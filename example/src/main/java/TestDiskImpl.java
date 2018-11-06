@@ -1,6 +1,5 @@
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.persistence.converter.GsonConverter;
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
 import domain.User;
 import io.reactivex.Observable;
@@ -23,7 +22,7 @@ public class TestDiskImpl {
             cacheDirectory.mkdir();
         }
 
-        DiskImpl diskImpl = new DiskImpl(cacheDirectory,new GsonConverter());
+        DiskImpl diskImpl = new DiskImpl(cacheDirectory);
 
         RxCache.config(new RxCache.Builder().persistence(diskImpl));
 

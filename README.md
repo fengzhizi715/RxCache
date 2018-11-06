@@ -8,9 +8,15 @@
 
 # 一. 最新版本
 
-模块|rxcache-core|rxcache-extra|rxcache-proxy
----|:-------------:|:-------------:|:-------------:
-最新版本|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extra/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extra/_latestVersion)|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-proxy/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-proxy/_latestVersion)
+模块|最新版本
+---|:-------------:
+rxcache-core|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|
+rxcache-proxy|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-proxy/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-proxy/_latestVersion)|
+rxcache-guava-cache|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-guava-cache/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-guava-cache/_latestVersion)|
+rxcache-caffeine|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-caffeine/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-caffeine/_latestVersion)|
+rxcache-fastjson|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-fastjson/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-fastjson/_latestVersion)|
+rxcache-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-moshi/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-moshi/_latestVersion)|
+
 
 对于 Java 工程，如果使用 gradle 构建，由于默认没有使用 jcenter()，需要在相应 module 的 build.gradle 中配置
 
@@ -29,17 +35,13 @@ rxcache-core
 implementation 'com.safframework.rxcache:rxcache-core:0.7.0'
 ```
 
-rxcache-extra
-
-```groovy
-implementation 'com.safframework.rxcache:rxcache-extra:0.7.0'
-```
-
 rxcache-proxy
 
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-proxy:0.7.0'
 ```
+
+
 
 
 # 二. 功能特点：

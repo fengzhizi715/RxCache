@@ -1,7 +1,6 @@
 rootProject.name = 'rxcache'
 include 'core'
 include 'example'
-include 'extra'
 include 'proxy'
 include 'fastjson'
 include 'moshi'

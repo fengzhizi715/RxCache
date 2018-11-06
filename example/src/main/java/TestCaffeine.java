@@ -1,18 +1,18 @@
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.memory.GuavaCacheImpl;
+import com.safframework.rxcache.memory.CaffeineImpl;
 import domain.User;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by tony on 2018/9/29.
+ * Created by tony on 2018/11/6.
  */
-public class TestGuavaCache {
+public class TestCaffeine {
 
     public static void main(String[] args) {
 
-        RxCache.config(new RxCache.Builder().memory(new GuavaCacheImpl(100)));
+        RxCache.config(new RxCache.Builder().memory(new CaffeineImpl(100)));
 
         RxCache rxCache = RxCache.getRxCache();
 

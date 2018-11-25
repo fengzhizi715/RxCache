@@ -179,7 +179,7 @@ class CacheRepository {
                 return 0;
             }
 
-            return record.getExpireTime()-record.getCreateTime();
+            return  record.getExpireTime()- (System.currentTimeMillis() - record.getCreateTime());
 
         } finally {
 

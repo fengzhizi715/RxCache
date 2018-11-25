@@ -144,6 +144,49 @@ class CacheRepository {
         }
     }
 
+    long ttl(String key, Type type) {
+
+        try {
+            readLock.lock();
+
+            Record record = null;
+
+            if (Preconditions.isNotBlanks(key, type)) {
+
+                if (memory != null) {
+
+                    record =  memory.getIfPresent(key);
+                }
+
+                if (persistence != null) {
+
+                    record = persistence.retrieve(key, type);
+                }
+            }
+
+            if (record == null) {
+
+                return -2;
+            }
+
+            if (record.isNeverExpire()) {
+
+                return -1;
+            }
+
+            if (record.isExpired()) {
+
+                return 0;
+            }
+
+            return record.getExpireTime()-record.getCreateTime();
+
+        } finally {
+
+            readLock.unlock();
+        }
+    }
+
     void clear() {
 
         try {

@@ -149,6 +149,21 @@ public class RxCache {
         cacheRepository.remove(key);
     }
 
+    /**
+     * 某一条记录还剩下的存活时间
+     * 没有某条记录，则返回-2
+     * 记录永不过期，则返回-1
+     * 记录已经过期，则返回0
+     * 记录还未过期，则返回还余下的时间
+     * @param key
+     * @param type
+     * @return
+     */
+    public long ttl(String key, Type type) {
+
+        return cacheRepository.ttl(key,type);
+    }
+
     public void clear() {
         cacheRepository.clear();
     }

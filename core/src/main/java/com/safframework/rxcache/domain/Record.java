@@ -74,11 +74,20 @@ public class Record<T> {
     }
 
     /**
-     * 缓存是否过期
+     * 判断Record是否已经过期
      * @return
      */
     public boolean isExpired() {
 
         return createTime + expireTime < System.currentTimeMillis();
+    }
+
+    /**
+     * 判断Record是否永不过期
+     * @return
+     */
+    public boolean isNeverExpire() {
+
+        return expireTime == Constant.NEVER_EXPIRE;
     }
 }

@@ -16,7 +16,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-    implementation 'com.squareup.moshi:moshi:1.7.0'
+    implementation 'com.squareup.moshi:moshi:1.8.0'
 }
 
 publish{

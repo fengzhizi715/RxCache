@@ -68,21 +68,21 @@ public class DiskImpl implements Disk {
 
             if (holder == null) return null;
 
-            long timestamp = holder.timestamp;
-            long expireTime = holder.expireTime;
+            long timestamp = holder.getTimestamp();
+            long expireTime = holder.getExpireTime();
 
             T result = null;
 
             if (expireTime<0) { // 缓存的数据从不过期
 
-                String json = holder.data;
+                String json = holder.getData();
 
                 result = converter.fromJson(json,type);
             } else {
 
                 if (timestamp + expireTime > System.currentTimeMillis()) {  // 缓存的数据还没有过期
 
-                    String json = holder.data;
+                    String json = holder.getData();
 
                     result = converter.fromJson(json,type);
                 } else {        // 缓存的数据已经过期

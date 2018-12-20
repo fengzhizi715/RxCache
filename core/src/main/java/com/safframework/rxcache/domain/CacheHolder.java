@@ -1,7 +1,5 @@
 package com.safframework.rxcache.domain;
 
-import com.safframework.rxcache.config.Constant;
-
 import java.io.Serializable;
 
 /**
@@ -14,17 +12,14 @@ public final class CacheHolder implements Serializable {
     private final String data; // 对象转换的 json 字符串
     private final long timestamp;
     private final long expireTime;
+    private final String converterName;
 
-    public CacheHolder(String data, long timestamp) {
-
-        this(data,timestamp,Constant.NEVER_EXPIRE);
-    }
-
-    public CacheHolder(String data, long timestamp,long expireTime) {
+    public CacheHolder(String data, long timestamp,long expireTime,String converterName) {
 
         this.data = data;
         this.timestamp = timestamp;
         this.expireTime = expireTime;
+        this.converterName = converterName;
     }
 
     public String getData() {
@@ -37,5 +32,9 @@ public final class CacheHolder implements Serializable {
 
     public long getExpireTime() {
         return expireTime;
+    }
+
+    public String getConverterName() {
+        return converterName;
     }
 }

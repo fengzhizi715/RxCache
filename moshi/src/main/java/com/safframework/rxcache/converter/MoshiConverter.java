@@ -47,4 +47,9 @@ public class MoshiConverter extends AbstractConverter {
 
         return jsonAdapter.toJson(data);
     }
+
+    @Override
+    public String converterName() {
+        return "moshi";
+    }
 }

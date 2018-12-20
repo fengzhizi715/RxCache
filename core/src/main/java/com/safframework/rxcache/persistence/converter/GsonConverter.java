@@ -32,4 +32,9 @@ public class GsonConverter extends AbstractConverter {
     public String toJson(Object data) {
         return gson.toJson(data);
     }
+
+    @Override
+    public String converterName() {
+        return "gson";
+    }
 }

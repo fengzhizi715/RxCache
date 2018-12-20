@@ -29,4 +29,9 @@ public class FastJSONConverter extends AbstractConverter {
 
         return JSON.toJSONString(data);
     }
+
+    @Override
+    public String converterName() {
+        return "fastjson";
+    }
 }

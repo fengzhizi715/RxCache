@@ -16,4 +16,6 @@ public interface Converter {
     <T> T fromJson(String json, Type type);
 
     String toJson(Object data);
+
+    String converterName();
 }

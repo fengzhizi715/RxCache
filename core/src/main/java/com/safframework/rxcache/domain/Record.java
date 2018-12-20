@@ -3,16 +3,16 @@ package com.safframework.rxcache.domain;
 import com.safframework.rxcache.config.Constant;
 
 /**
- * 封装缓存的数据
+ * 封装缓存的数据，使用Immutable对象
  * Created by tony on 2018/9/28.
  */
-public class Record<T> {
+public final class Record<T> {
 
-    private Source from;     // 缓存的来源
-    private String key;      // 缓存的key
-    private T data;          // 缓存的数据
-    private long createTime; // 缓存创建的时间
-    private long expireTime; // 缓存过期的时间
+    private final Source from;     // 缓存的来源
+    private final String key;      // 缓存的key
+    private final T data;          // 缓存的数据
+    private final long createTime; // 缓存创建的时间
+    private final long expireTime; // 缓存过期的时间
 
     public Record(Source from,String key,T value) {
 
@@ -37,40 +37,20 @@ public class Record<T> {
         return from;
     }
 
-    public void setFrom(Source from) {
-        this.from = from;
-    }
-
     public String getKey() {
         return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 
     public T getData() {
         return data;
     }
 
-    public void setData(T data) {
-        this.data = data;
-    }
-
     public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
-    }
-
     public long getExpireTime() {
         return expireTime;
-    }
-
-    public void setExpireTime(long expireTime) {
-        this.expireTime = expireTime;
     }
 
     /**

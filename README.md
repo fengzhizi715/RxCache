@@ -32,37 +32,37 @@ repositories {
 rxcache-core
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-core:1.0.3'
+implementation 'com.safframework.rxcache:rxcache-core:1.0.4'
 ```
 
 rxcache-proxy
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-proxy:1.0.3'
+implementation 'com.safframework.rxcache:rxcache-proxy:1.0.4'
 ```
 
 rxcache-guava-cache
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-guava-cache:1.0.3'
+implementation 'com.safframework.rxcache:rxcache-guava-cache:1.0.4'
 ```
 
 rxcache-caffeine
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-caffeine:1.0.3'
+implementation 'com.safframework.rxcache:rxcache-caffeine:1.0.4'
 ```
 
 rxcache-fastjson
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-fastjson:1.0.3'
+implementation 'com.safframework.rxcache:rxcache-fastjson:1.0.4'
 ```
 
 rxcache-moshi
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-moshi:1.0.3'
+implementation 'com.safframework.rxcache:rxcache-moshi:1.0.4'
 ```
 
 

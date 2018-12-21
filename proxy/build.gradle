@@ -26,7 +26,7 @@ publish{
     userOrg = 'fengzhizi715'
     groupId = 'com.safframework.rxcache'
     artifactId = 'rxcache-proxy'
-    publishVersion = '1.0.3'
+    publishVersion = '1.0.4'
     desc = 'A local reactive cache for Java and Android.'
     website = 'https://github.com/fengzhizi715/RxCache'
 }

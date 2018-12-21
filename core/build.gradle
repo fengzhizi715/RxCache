@@ -18,7 +18,7 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    implementation "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
+    compileOnly "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "tony-common:tony-common-utils:${libs.tony_common_utils}"
 }
@@ -27,7 +27,7 @@ publish{
     userOrg = 'fengzhizi715'
     groupId = 'com.safframework.rxcache'
     artifactId = 'rxcache-core'
-    publishVersion = '1.0.3'
+    publishVersion = '1.0.4'
     desc = 'A local reactive cache for Java and Android.'
     website = 'https://github.com/fengzhizi715/RxCache'
 }

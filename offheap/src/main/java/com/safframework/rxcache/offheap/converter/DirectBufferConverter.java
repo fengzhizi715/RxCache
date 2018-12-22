@@ -1,7 +1,5 @@
 package com.safframework.rxcache.offheap.converter;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 
 /**
@@ -10,23 +8,8 @@ import java.nio.ByteBuffer;
 public abstract class DirectBufferConverter<V> {
 
     public void dispose(ByteBuffer direct) {
-        if(direct == null) return;
 
-        Method cleaner = null;
-        Method cleanerClean = null;
-        try {
-            cleaner = Class.forName("java.nio.DirectByteBuffer").getMethod("cleaner");
-            cleaner.setAccessible(true);
-
-            cleanerClean = Class.forName("sun.misc.Cleaner").getMethod("clean");
-            cleanerClean.setAccessible(true);
-
-            cleaner.invoke(cleaner.invoke(direct));
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        Cleaner.clean(direct);
     }
 
     public ByteBuffer to(V from) {

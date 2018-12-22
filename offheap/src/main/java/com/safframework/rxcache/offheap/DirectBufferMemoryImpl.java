@@ -84,6 +84,7 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
         cache.put(key,value);
         timestampMap.put(key,System.currentTimeMillis());
         expireTimeMap.put(key,expireTime);
+        keys.add(key);
     }
 
     @Override

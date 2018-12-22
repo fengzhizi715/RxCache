@@ -6,4 +6,6 @@ include 'fastjson'
 include 'moshi'
 include 'guava-cache'
 include 'caffeine'
+include 'offheap'
+findProject(':offheap')?.name = 'off-heap'
 

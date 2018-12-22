@@ -38,7 +38,7 @@ public class TestOffHeap {
 
         Observable<Record<User>> observable = rxCache.load2Observable("test1", User.class);
 
-//        if (observable!=null) {
+        if (observable!=null) {
 
             observable.subscribe(new Consumer<Record<User>>() {
                 @Override
@@ -49,6 +49,6 @@ public class TestOffHeap {
                     System.out.println(user.password);
                 }
             });
-//        }
+        }
     }
 }

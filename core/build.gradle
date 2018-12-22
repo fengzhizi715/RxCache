@@ -20,7 +20,7 @@ dependencies {
 
     compileOnly "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation "tony-common:tony-common-utils:${libs.tony_common_utils}"
+    compile "tony-common:tony-common-utils:${libs.tony_common_utils}"
 }
 
 publish{

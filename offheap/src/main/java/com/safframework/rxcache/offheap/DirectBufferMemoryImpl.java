@@ -4,7 +4,7 @@ import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
-import com.safframework.rxcache.offheap.memory.ConcurrentStringObjectDirectHashMap;
+import com.safframework.rxcache.offheap.map.ConcurrentStringObjectDirectHashMap;
 
 import java.util.LinkedList;
 import java.util.List;

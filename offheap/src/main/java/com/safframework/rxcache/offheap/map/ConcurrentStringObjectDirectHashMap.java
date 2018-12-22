@@ -1,4 +1,4 @@
-package com.safframework.rxcache.offheap.memory;
+package com.safframework.rxcache.offheap.map;
 
 import com.safframework.tony.common.utils.IOUtils;
 

@@ -12,7 +12,7 @@ public class TestOffHeap {
 
     public static void main(String[] args) {
 
-        RxCache.config(new RxCache.Builder().memory(new DirectBufferMemoryImpl(5)));
+        RxCache.config(new RxCache.Builder().memory(new DirectBufferMemoryImpl(3)));
 
         RxCache rxCache = RxCache.getRxCache();
 
@@ -36,9 +36,9 @@ public class TestOffHeap {
         u4.password = "123456";
         rxCache.save("test4",u4);
 
-        Observable<Record<User>> observable = rxCache.load2Observable("test2", User.class);
+        Observable<Record<User>> observable = rxCache.load2Observable("test1", User.class);
 
-        if (observable!=null) {
+//        if (observable!=null) {
 
             observable.subscribe(new Consumer<Record<User>>() {
                 @Override
@@ -49,7 +49,6 @@ public class TestOffHeap {
                     System.out.println(user.password);
                 }
             });
-        }
-
+//        }
     }
 }

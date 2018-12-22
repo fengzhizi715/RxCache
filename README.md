@@ -5,7 +5,6 @@
 [![@Tony沈哲 on weibo](https://img.shields.io/badge/weibo-%40Tony%E6%B2%88%E5%93%B2-blue.svg)](http://www.weibo.com/fengzhizi715)
 [![License](https://img.shields.io/badge/license-Apache%202-lightgrey.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-
 # 一. 最新版本
 
 模块|最新版本
@@ -65,8 +64,6 @@ rxcache-moshi
 implementation 'com.safframework.rxcache:rxcache-moshi:1.0.4'
 ```
 
-
-
 # 二. 功能特点：
 
 * 拥有二级缓存：Memory、Persistence
@@ -80,7 +77,6 @@ implementation 'com.safframework.rxcache:rxcache-moshi:1.0.4'
 * 支持 Retrofit 风格使用缓存
 * 支持 RxJava 2
 
-
 ## 支持的 Annotation：
 
 注解名称|作用|备注
@@ -90,7 +86,6 @@ implementation 'com.safframework.rxcache:rxcache-moshi:1.0.4'
 @CacheLifecycle|设置缓存的过期时间，只在缓存保存时有效|方法注解
 @CacheMethod|设置缓存的操作方法。以及返回的对象是 RxJava 的各种 Observable 类型，或者返回所存储的对象类型。|方法注解
 @CacheValue|设置缓存的值|参数注解
-
 
 # 三. RxCache 的设计：
 
@@ -402,6 +397,68 @@ public class TestCacheProvider {
                 }
             }
         });
+    }
+}
+```
+
+## 3.3 支持堆外内存(off-heap)
+
+DirectBufferMemoryImpl 支持堆外内存，并采用FIFO的方式。
+
+```java
+import com.safframework.rxcache.RxCache;
+import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.offheap.DirectBufferMemoryImpl;
+import domain.User;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+
+/**
+ * Created by tony on 2018-12-22.
+ */
+public class TestOffHeap {
+
+    public static void main(String[] args) {
+
+        RxCache.config(new RxCache.Builder().memory(new DirectBufferMemoryImpl(5)));
+
+        RxCache rxCache = RxCache.getRxCache();
+
+        User u1 = new User();
+        u1.name = "tony1";
+        u1.password = "123456";
+        rxCache.save("test1",u1);
+
+        User u2 = new User();
+        u2.name = "tony2";
+        u2.password = "123456";
+        rxCache.save("test2",u2);
+
+        User u3 = new User();
+        u3.name = "tony3";
+        u3.password = "123456";
+        rxCache.save("test3",u3);
+
+        User u4 = new User();
+        u4.name = "tony4";
+        u4.password = "123456";
+        rxCache.save("test4",u4);
+
+        Observable<Record<User>> observable = rxCache.load2Observable("test2", User.class);
+
+        if (observable!=null) {
+
+            observable.subscribe(new Consumer<Record<User>>() {
+                @Override
+                public void accept(Record<User> record) throws Exception {
+
+                    User user = record.getData();
+                    System.out.println(user.name);
+                    System.out.println(user.password);
+                }
+            });
+        }
+
     }
 }
 ```

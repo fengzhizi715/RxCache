@@ -12,6 +12,7 @@ def libs = rootProject.ext.libraries // 库
 repositories {
     jcenter()
     mavenCentral()
+    maven{url 'https://dl.bintray.com/fengzhizi715/maven/'}
 }
 
 dependencies {
@@ -30,4 +31,5 @@ dependencies {
     implementation "org.springframework:spring-context:${libs.spring}"
 
     implementation "tony-common:tony-common-utils:${libs.tony_common_utils}"
+    implementation 'com.safframework.bytekit:bytekit:1.0.0'
 }

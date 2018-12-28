@@ -1,5 +1,6 @@
 package com.safframework.rxcache;
 
+import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
@@ -121,7 +122,12 @@ public class RxCache {
 
     public <T> Record<T> get(String key, Type type) {
 
-        return cacheRepository.get(key,type);
+        return cacheRepository.get(key,type,CacheStrategy.ALL);
+    }
+
+    public <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
+
+        return cacheRepository.get(key,type,cacheStrategy);
     }
 
     public <T> void save(String key, T value) {

@@ -1,6 +1,7 @@
 package com.safframework.rxcache;
 
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
@@ -30,7 +31,7 @@ class CacheRepository {
         this.persistence = persistence;
     }
 
-    <T> Record<T> get(String key, Type type) {
+    <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
 
         try {
             readLock.lock();
@@ -39,19 +40,30 @@ class CacheRepository {
 
             if (Preconditions.isNotBlanks(key, type)) {
 
-                if (memory != null) {
+                switch (cacheStrategy) {
 
-                    record = memory.getIfPresent(key);
-
-                    if (record!=null) {
-
-                        return record;
+                    case MEMORY: {
+                        record = memory.getIfPresent(key);
+                        break;
                     }
-                }
 
-                if (persistence != null) {
+                    case PERSISTENCE: {
+                        record = persistence.retrieve(key, type);
+                        break;
+                    }
 
-                    record = persistence.retrieve(key, type);
+                    case ALL: {
+                        if (memory != null) {
+
+                            record = memory.getIfPresent(key);
+                        }
+
+                        if (record == null && persistence != null) {
+
+                            record = persistence.retrieve(key, type);
+                        }
+                        break;
+                    }
                 }
             }
 

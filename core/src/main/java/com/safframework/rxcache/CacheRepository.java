@@ -35,20 +35,27 @@ class CacheRepository {
         try {
             readLock.lock();
 
+            Record<T> record = null;
+
             if (Preconditions.isNotBlanks(key, type)) {
 
                 if (memory != null) {
 
-                    return memory.getIfPresent(key);
+                    record = memory.getIfPresent(key);
+
+                    if (record!=null) {
+
+                        return record;
+                    }
                 }
 
                 if (persistence != null) {
 
-                    return persistence.retrieve(key, type);
+                    record = persistence.retrieve(key, type);
                 }
             }
 
-            return null;
+            return record;
         } finally {
 
             readLock.unlock();

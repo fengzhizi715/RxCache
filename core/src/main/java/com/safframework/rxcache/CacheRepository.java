@@ -43,16 +43,27 @@ class CacheRepository {
                 switch (cacheStrategy) {
 
                     case MEMORY: {
-                        record = memory.getIfPresent(key);
+
+                        if (memory!=null) {
+
+                            record = memory.getIfPresent(key);
+                        }
+
                         break;
                     }
 
                     case PERSISTENCE: {
-                        record = persistence.retrieve(key, type);
+
+                        if (persistence!=null) {
+
+                            record = persistence.retrieve(key, type);
+                        }
+
                         break;
                     }
 
                     case ALL: {
+
                         if (memory != null) {
 
                             record = memory.getIfPresent(key);

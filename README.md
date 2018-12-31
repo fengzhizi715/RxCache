@@ -478,7 +478,7 @@ Wechat：fengzhizi715
 License
 -------
 
-    Copyright (C) 2017 Tony Shen.
+    Copyright (C) 2018 - present, Tony Shen.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

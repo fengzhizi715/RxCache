@@ -174,6 +174,15 @@ public class RxCache {
         cacheRepository.clear();
     }
 
+    /**
+     * 判断 RxCache 是否可用
+     * @return
+     */
+    public boolean test() {
+
+        return cacheRepository!=null;
+    }
+
     public static final class Builder {
 
         private Memory memory;

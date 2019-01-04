@@ -8,4 +8,5 @@ include 'guava-cache'
 include 'caffeine'
 include 'offheap'
 findProject(':offheap')?.name = 'off-heap'
+include 'mapdb'
 

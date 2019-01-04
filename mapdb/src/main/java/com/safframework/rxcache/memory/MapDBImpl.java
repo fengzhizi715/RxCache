@@ -28,7 +28,7 @@ public class MapDBImpl extends AbstractMemoryImpl {
                 .executorEnable()
                 .make();
 
-        map = db.hashMap("test")
+        map = db.hashMap("rxcache")
                 .keySerializer(Serializer.STRING)
                 .valueSerializer(Serializer.JAVA)
                 .create();

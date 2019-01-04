@@ -12,20 +12,16 @@ public class TestMapDB {
 
     public static void main(String[] args) {
 
-        RxCache.config(new RxCache.Builder().memory(new MapDBImpl(5)));
+        RxCache.config(new RxCache.Builder().memory(new MapDBImpl(100)));
 
         RxCache rxCache = RxCache.getRxCache();
 
-        for (int i=0;i<6;i++) {
+        User u = new User();
+        u.name = "tony";
+        u.password = "123456";
+        rxCache.save("test",u);
 
-            User u = new User();
-            u.name = "tony"+i;
-            u.password = "123456";
-            rxCache.save("test"+i,u);
-        }
-
-        System.out.println(rxCache.getAllKeys().size());
-        Observable<Record<User>> observable = rxCache.load2Observable("test1", User.class);
+        Observable<Record<User>> observable = rxCache.load2Observable("test", User.class);
 
         observable.subscribe(new Consumer<Record<User>>() {
             @Override

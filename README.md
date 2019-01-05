@@ -69,7 +69,7 @@ implementation 'com.safframework.rxcache:rxcache-moshi:1.1.1'
 * 拥有二级缓存：Memory、Persistence
 * 各个缓存都拥有有效时间，超过时间缓存会过期
 * Memory 默认支持 FIFO、LRU、LFU 算法的实现
-* Memory 额外支持 Guava Cache、Caffeine 的实现
+* Memory 额外支持 Guava Cache、Caffeine、MapDB 的实现
 * Memory 支持堆外内存(off-heap)
 * Persistence 默认使用 gson 实现对象的序列化和反序列化
 * Persistence 额外支持使用 fastjson 实现对象的序列化和反序列化

@@ -1,11 +1,11 @@
 package com.safframework.rxcache;
 
+import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
-import com.safframework.tony.common.utils.Preconditions;
 
 import java.lang.reflect.Type;
 import java.util.HashSet;

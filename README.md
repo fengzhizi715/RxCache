@@ -73,7 +73,7 @@ implementation 'com.safframework.rxcache:rxcache-moshi:1.1.1'
 * Memory 支持堆外内存(off-heap)
 * Persistence 默认使用 gson 实现对象的序列化和反序列化
 * Persistence 额外支持使用 fastjson、moshi 实现对象的序列化和反序列化
-* Persistence 的缓存拥有加密功能，默认支持 AES 128、DES 加密
+* Persistence 的 DiskImpl 拥有加密功能，默认支持 AES 128、DES 加密
 * 线程安全
 * 支持 Retrofit 风格使用缓存
 * 支持 RxJava 2

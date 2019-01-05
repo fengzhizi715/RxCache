@@ -20,7 +20,7 @@ dependencies {
 
     compileOnly "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.safframework.bytekit:bytekit-core:1.2.2'
+    implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"
 }
 
 publish{

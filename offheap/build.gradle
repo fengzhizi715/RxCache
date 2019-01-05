@@ -18,5 +18,5 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-    implementation "com.safframework.bytekit:bytekit:${libs.bytekit}"
+    implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"
 }

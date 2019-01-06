@@ -5,7 +5,7 @@ ext {
 
             rxjava                    : "2.2.4",
 
-            bytekit                   : "1.2.2",
+            bytekit                   : "1.2.3",
 
             spring                    : "5.1.0.RELEASE"
     ]

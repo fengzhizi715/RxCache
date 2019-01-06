@@ -1,6 +1,7 @@
 package com.safframework.rxcache.persistence.encrypt;
 
-import com.safframework.rxcache.utils.Utils;
+import com.safframework.bytekit.Bytes;
+import com.safframework.bytekit.bytes.ByteBufferBytes;
 
 import javax.crypto.*;
 import javax.crypto.spec.DESKeySpec;
@@ -33,7 +34,8 @@ public class DESEncryptor implements Encryptor {
             SecretKey secretKey = secretKeyFactory.generateSecret(keySpec);
             cipher.init(Cipher.ENCRYPT_MODE, secretKey,new SecureRandom());
             byte[] enMsgBytes = cipher.doFinal(json.getBytes());
-            return Utils.parseByte2HexStr(enMsgBytes);
+
+            return ByteBufferBytes.create(enMsgBytes).toHexString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
@@ -57,7 +59,7 @@ public class DESEncryptor implements Encryptor {
             KeySpec deKeySpec = new DESKeySpec(key.getBytes());
             SecretKey deSecretKey = deDecretKeyFactory.generateSecret(deKeySpec);
             deCipher.init(Cipher.DECRYPT_MODE, deSecretKey,new SecureRandom());
-            byte[] deMsgBytes = deCipher.doFinal(Utils.parseHexStr2Byte(json));
+            byte[] deMsgBytes = deCipher.doFinal(Bytes.getByteArray(json));
             return new String(deMsgBytes);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.safframework.rxcache.persistence.encrypt;
 
-import com.safframework.rxcache.utils.Utils;
+import com.safframework.bytekit.Bytes;
+import com.safframework.bytekit.bytes.ByteBufferBytes;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -69,7 +70,7 @@ public class AES128Encryptor implements Encryptor {
             System.arraycopy(iv, 0, encryptedIVAndText, 0, ivSize);
             System.arraycopy(encrypted, 0, encryptedIVAndText, ivSize, encrypted.length);
 
-            return Utils.parseByte2HexStr(encryptedIVAndText);
+            return ByteBufferBytes.create(encryptedIVAndText).toHexString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -86,11 +87,10 @@ public class AES128Encryptor implements Encryptor {
     @Override
     public String decrypt(String json) {
 
-
         int ivSize = 16;
         int keySize = 16;
 
-        byte[] encryptedIvTextBytes = Utils.parseHexStr2Byte(json);
+        byte[] encryptedIvTextBytes = Bytes.getByteArray(json);
 
         // Extract IV.
         byte[] iv = new byte[ivSize];

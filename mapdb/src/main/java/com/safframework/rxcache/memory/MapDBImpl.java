@@ -9,7 +9,6 @@ import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
 import org.mapdb.Serializer;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -24,16 +23,18 @@ public class MapDBImpl extends AbstractMemoryImpl {
 
     public MapDBImpl(long maxSize) {
         super(maxSize);
-        db = DBMaker.memoryDB()
-                .executorEnable()
+        db = DBMaker.heapDB()
                 .make();
 
         map = db.hashMap("rxcache")
+                .expireMaxSize(maxSize)
+                .expireAfterCreate()
+                .expireAfterUpdate()
+                .expireAfterGet()
                 .keySerializer(Serializer.STRING)
                 .valueSerializer(Serializer.JAVA)
+                .counterEnable()
                 .create();
-
-        this.keys = new LinkedList<>();
     }
 
     @Override
@@ -70,32 +71,9 @@ public class MapDBImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
-        if (keySet().size()<maxSize) { // 缓存还有空间
-
-            saveValue(key,value,expireTime);
-        } else {                       // 缓存空间不足，需要删除一个
-
-            if (containsKey(key)) {
-
-                keys.remove(key);
-
-                saveValue(key,value,expireTime);
-            } else {
-
-                String oldKey = keys.get(0); // 最早缓存的key
-                evict(oldKey);               // 删除最早缓存的数据 FIFO算法
-
-                saveValue(key,value,expireTime);
-            }
-        }
-    }
-
-    private <T> void saveValue(String key, T value, long expireTime) {
-
         map.put(key,value);
         timestampMap.put(key,System.currentTimeMillis());
         expireTimeMap.put(key,expireTime);
-        keys.add(key);
     }
 
     @Override

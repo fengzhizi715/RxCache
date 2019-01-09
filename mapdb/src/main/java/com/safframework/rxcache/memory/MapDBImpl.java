@@ -26,13 +26,11 @@ public class MapDBImpl extends AbstractMemoryImpl {
         db = DBMaker.heapDB()
                 .make();
 
-        map = db.hashMap("rxcache")
+        map = db.hashMap("rxcache",Serializer.STRING,Serializer.JAVA)
                 .expireMaxSize(maxSize)
                 .expireAfterCreate()
                 .expireAfterUpdate()
                 .expireAfterGet()
-                .keySerializer(Serializer.STRING)
-                .valueSerializer(Serializer.JAVA)
                 .counterEnable()
                 .create();
     }

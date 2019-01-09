@@ -35,6 +35,21 @@ public class MapDBImpl extends AbstractMemoryImpl {
                 .create();
     }
 
+
+    public MapDBImpl(long maxSize, MapDBCacheConfig cacheConfig) {
+        super(maxSize);
+        db = DBMaker.heapDB()
+                .make();
+
+        map = db.hashMap("rxcache",Serializer.STRING,Serializer.JAVA)
+                .expireMaxSize(maxSize)
+                .expireAfterCreate(cacheConfig.expireDuration,cacheConfig.expireTimeUnit)
+                .expireAfterUpdate(cacheConfig.expireDuration,cacheConfig.expireTimeUnit)
+                .expireAfterGet(cacheConfig.expireAfterGetDuration,cacheConfig.expireAfterGetTimeUnit)
+                .counterEnable()
+                .create();
+    }
+
     @Override
     public <T> Record<T> getIfPresent(String key) {
 

@@ -72,6 +72,21 @@ class CacheRepository {
                         if (record == null && persistence != null) {
 
                             record = persistence.retrieve(key, type);
+
+                            if (memory!=null) {
+
+                                readLock.unlock();
+                                writeLock.lock();
+
+                                try {
+
+                                    memory.put(record.getKey(),record.getData(),record.getExpireTime());
+                                } finally {
+
+                                    writeLock.unlock();
+                                    readLock.lock();
+                                }
+                            }
                         }
                         break;
                     }

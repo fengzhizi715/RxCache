@@ -73,14 +73,15 @@ class CacheRepository {
 
                             record = persistence.retrieve(key, type);
 
-                            if (memory!=null) { // 如果 memory 不为空，
+                            if (memory!=null && !record.isExpired()) { // 如果 memory 不为空
 
                                 readLock.unlock(); // 先释放读锁
                                 writeLock.lock();  // 再获取写锁
 
                                 try {
 
-                                    memory.put(record.getKey(),record.getData(),record.getExpireTime());
+                                    long ttl = record.getExpireTime()- (System.currentTimeMillis() - record.getCreateTime());
+                                    memory.put(record.getKey(),record.getData(), ttl);
                                 } finally {
 
                                     writeLock.unlock(); // 释放写锁

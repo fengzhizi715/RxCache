@@ -6,5 +6,7 @@ package com.safframework.rxcache.domain;
  */
 public enum CacheStrategy {
 
-    MEMORY, PERSISTENCE, ALL
+    MEMORY,
+    PERSISTENCE,
+    ALL
 }

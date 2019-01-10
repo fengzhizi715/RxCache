@@ -73,7 +73,7 @@ class CacheRepository {
 
                             record = persistence.retrieve(key, type);
 
-                            if (memory!=null && record!=null && !record.isExpired()) { // 如果 memory 不为空
+                            if (memory!=null && record!=null && !record.isExpired()) { // 如果 memory 不为空，record 不为空，并且没有过期
 
                                 readLock.unlock(); // 先释放读锁
                                 writeLock.lock();  // 再获取写锁
@@ -113,9 +113,9 @@ class CacheRepository {
 
             if (Preconditions.isNotBlanks(key, value)) {
 
-//                if (memory != null) {
-//                    memory.put(key, value, expireTime);
-//                }
+                if (memory != null) {
+                    memory.put(key, value, expireTime);
+                }
 
                 if (persistence != null) {
                     persistence.save(key, value, expireTime);

@@ -1,5 +1,6 @@
 package com.safframework.rxcache.domain;
 
+import com.google.gson.Gson;
 import com.safframework.rxcache.config.Constant;
 
 /**
@@ -54,7 +55,7 @@ public final class Record<T> {
     }
 
     /**
-     * 判断Record是否已经过期
+     * 判断Record是否已经过期,true表示已经过期，false表示没有过期
      * @return
      */
     public boolean isExpired() {
@@ -69,5 +70,10 @@ public final class Record<T> {
     public boolean isNeverExpire() {
 
         return expireTime == Constant.NEVER_EXPIRE;
+    }
+
+    public String toString() {
+
+        return new Gson().toJson(this);
     }
 }

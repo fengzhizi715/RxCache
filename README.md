@@ -15,7 +15,7 @@ rxcache-guava-cache|[ ![Download](https://api.bintray.com/packages/fengzhizi715/
 rxcache-caffeine|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-caffeine/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-caffeine/_latestVersion)|
 rxcache-fastjson|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-fastjson/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-fastjson/_latestVersion)|
 rxcache-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-moshi/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-moshi/_latestVersion)|
-
+rxcache-off-heap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-off-heap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-off-heap/_latestVersion)|
 
 对于 Java 工程，如果使用 gradle 构建，由于默认没有使用 jcenter()，需要在相应 module 的 build.gradle 中配置
 
@@ -62,6 +62,12 @@ rxcache-moshi
 
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-moshi:1.1.4'
+```
+
+rxcache-off-heap
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-off-heap:1.1.4'
 ```
 
 # 二. 功能特点：

@@ -72,6 +72,21 @@ public final class Record<T> {
         return expireTime == Constant.NEVER_EXPIRE;
     }
 
+    public long ttl() {
+
+        if (isNeverExpire()) {
+
+            return Constant.NEVER_EXPIRE;
+        }
+
+        if (isExpired()) {
+
+            return Constant.HAS_EXPIRED;
+        }
+
+        return getExpireTime()- (System.currentTimeMillis() - getCreateTime());
+    }
+
     public String toString() {
 
         return new Gson().toJson(this);

@@ -215,17 +215,7 @@ class CacheRepository {
                 return Constant.NO_RECORD;
             }
 
-            if (record.isNeverExpire()) {
-
-                return Constant.NEVER_EXPIRE;
-            }
-
-            if (record.isExpired()) {
-
-                return Constant.HAS_EXPIRED;
-            }
-
-            return  record.getExpireTime()- (System.currentTimeMillis() - record.getCreateTime());
+            return  record.ttl();
 
         } finally {
 

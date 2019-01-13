@@ -212,17 +212,17 @@ class CacheRepository {
 
             if (record == null) {
 
-                return -2;
+                return Constant.NO_RECORD;
             }
 
             if (record.isNeverExpire()) {
 
-                return -1;
+                return Constant.NEVER_EXPIRE;
             }
 
             if (record.isExpired()) {
 
-                return 0;
+                return Constant.HAS_EXPIRED;
             }
 
             return  record.getExpireTime()- (System.currentTimeMillis() - record.getCreateTime());

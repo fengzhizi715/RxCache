@@ -211,7 +211,7 @@ class CacheRepository {
                     record =  memory.getIfPresent(key);
                 }
 
-                if (persistence != null) {
+                if (record == null && persistence != null) {
 
                     record = persistence.retrieve(key, type);
                 }

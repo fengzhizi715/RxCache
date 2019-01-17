@@ -82,10 +82,11 @@ class CacheRepository {
 
                                     long ttl = record.getExpireTime()- (System.currentTimeMillis() - record.getCreateTime());
                                     memory.put(record.getKey(),record.getData(), ttl);
+
+                                    readLock.lock();    // 写锁在没有释放之前，获得读锁 (降级锁)
                                 } finally {
 
                                     writeLock.unlock(); // 释放写锁
-                                    readLock.lock();    // 获取读锁
                                 }
                             }
                         }

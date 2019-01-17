@@ -31,43 +31,43 @@ repositories {
 rxcache-core
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-core:1.1.5'
+implementation 'com.safframework.rxcache:rxcache-core:1.1.6'
 ```
 
 rxcache-proxy
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-proxy:1.1.5'
+implementation 'com.safframework.rxcache:rxcache-proxy:1.1.6'
 ```
 
 rxcache-guava-cache
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-guava-cache:1.1.5'
+implementation 'com.safframework.rxcache:rxcache-guava-cache:1.1.6'
 ```
 
 rxcache-caffeine
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-caffeine:1.1.5'
+implementation 'com.safframework.rxcache:rxcache-caffeine:1.1.6'
 ```
 
 rxcache-fastjson
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-fastjson:1.1.5'
+implementation 'com.safframework.rxcache:rxcache-fastjson:1.1.6'
 ```
 
 rxcache-moshi
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-moshi:1.1.5'
+implementation 'com.safframework.rxcache:rxcache-moshi:1.1.6'
 ```
 
 rxcache-off-heap
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-off-heap:1.1.5'
+implementation 'com.safframework.rxcache:rxcache-off-heap:1.1.6'
 ```
 
 # 二. 功能特点：

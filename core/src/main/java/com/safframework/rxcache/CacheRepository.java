@@ -89,7 +89,7 @@ class CacheRepository {
                                         memory.put(record.getKey(),record.getData(), ttl);
                                     }
 
-                                    readLock.lock();    // 写锁在没有释放之前，获得读锁 (降级锁)
+                                    readLock.lock();    // 写锁在没有释放之前，获得读锁 (锁降级)
                                 } finally {
 
                                     writeLock.unlock(); // 释放写锁

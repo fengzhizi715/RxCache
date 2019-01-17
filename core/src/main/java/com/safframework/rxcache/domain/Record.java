@@ -60,6 +60,11 @@ public final class Record<T> {
      */
     public boolean isExpired() {
 
+        if (isNeverExpire()) {
+
+            return false;
+        }
+
         return createTime + expireTime < System.currentTimeMillis();
     }
 

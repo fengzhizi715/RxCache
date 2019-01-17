@@ -80,8 +80,14 @@ class CacheRepository {
 
                                 try {
 
-                                    long ttl = record.getExpireTime()- (System.currentTimeMillis() - record.getCreateTime());
-                                    memory.put(record.getKey(),record.getData(), ttl);
+                                    if (record.isNeverExpire()) { // record永不过期的话，直接保存不需要计算ttl
+
+                                        memory.put(record.getKey(),record.getData());
+                                    } else {
+
+                                        long ttl = record.getExpireTime()- (System.currentTimeMillis() - record.getCreateTime());
+                                        memory.put(record.getKey(),record.getData(), ttl);
+                                    }
 
                                     readLock.lock();    // 写锁在没有释放之前，获得读锁 (降级锁)
                                 } finally {

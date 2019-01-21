@@ -113,6 +113,13 @@ class CacheRepository {
         save(key,value, Constant.NEVER_EXPIRE);
     }
 
+    /**
+     * 保存缓存，并设置过期的时间
+     * @param key
+     * @param value
+     * @param expireTime 过期的时间单位是毫秒
+     * @param <T>
+     */
     <T> void save(String key, T value, long expireTime) {
 
         try {

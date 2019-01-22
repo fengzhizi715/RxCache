@@ -151,7 +151,7 @@ class CacheRepository {
         writeLock.lock();
 
         try {
-            remove(key); // 先删除，写锁是可重入锁
+            remove(key); // 由于record是不可变对象，所以先删除。（写锁是可重入锁）
             save(key,value,expireTime); // 再保存
         } finally {
 

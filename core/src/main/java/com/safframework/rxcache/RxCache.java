@@ -140,6 +140,16 @@ public class RxCache {
         cacheRepository.save(key, value, expireTime);
     }
 
+    public <T> void  update(String key, T value) {
+
+        cacheRepository.update(key, value);
+    }
+
+    public <T> void update(String key, T value, long expireTime) {
+
+        cacheRepository.update(key, value, expireTime);
+    }
+
     public boolean containsKey(String key) {
 
         return cacheRepository.containsKey(key);

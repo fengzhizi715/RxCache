@@ -141,6 +141,24 @@ class CacheRepository {
         }
     }
 
+    <T> void update(String key, T value) {
+
+        update(key,value, Constant.NEVER_EXPIRE);
+    }
+
+    <T> void update(String key, T value, long expireTime) {
+
+        writeLock.lock();
+
+        try {
+            remove(key); // 先删除，写锁是可重入锁
+            save(key,value,expireTime); // 再保存
+        } finally {
+
+            writeLock.unlock();
+        }
+    }
+
     boolean containsKey(String key) {
 
         readLock.lock();

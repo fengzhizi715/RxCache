@@ -33,9 +33,9 @@ class CacheRepository {
 
     <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
 
-        try {
-            readLock.lock();
+        readLock.lock();
 
+        try {
             Record<T> record = null;
 
             if (Preconditions.isNotBlanks(key, type)) {
@@ -79,7 +79,6 @@ class CacheRepository {
                                 writeLock.lock();  // 再获取写锁
 
                                 try {
-
                                     if (record.isNeverExpire()) { // record永不过期的话，直接保存不需要计算ttl
 
                                         memory.put(record.getKey(),record.getData());
@@ -122,9 +121,9 @@ class CacheRepository {
      */
     <T> void save(String key, T value, long expireTime) {
 
-        try {
-            writeLock.lock();
+        writeLock.lock();
 
+        try {
             if (Preconditions.isNotBlanks(key, value)) {
 
                 if (memory != null) {
@@ -144,9 +143,9 @@ class CacheRepository {
 
     boolean containsKey(String key) {
 
-        try {
-            readLock.lock();
+        readLock.lock();
 
+        try {
             if (Preconditions.isBlank(key)) return false;
 
             return (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
@@ -159,9 +158,9 @@ class CacheRepository {
 
     Set<String> getAllKeys() {
 
-        try {
-            readLock.lock();
+        readLock.lock();
 
+        try {
             Set<String> result = new HashSet<>();
 
             if (memory != null) {
@@ -184,9 +183,9 @@ class CacheRepository {
 
     void remove(String key) {
 
-        try {
-            writeLock.lock();
+        writeLock.lock();
 
+        try {
             if (Preconditions.isNotBlank(key)) {
 
                 if (memory != null) {
@@ -206,9 +205,9 @@ class CacheRepository {
 
     long ttl(String key, Type type) {
 
-        try {
-            readLock.lock();
+        readLock.lock();
 
+        try {
             Record record = null;
 
             if (Preconditions.isNotBlanks(key, type)) {
@@ -239,9 +238,9 @@ class CacheRepository {
 
     void clear() {
 
-        try {
-            writeLock.lock();
+        writeLock.lock();
 
+        try {
             if (memory != null) {
                 memory.evictAll();
             }

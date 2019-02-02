@@ -159,19 +159,6 @@ class CacheRepository {
         }
     }
 
-    <T> void expire(String key, T value, long expireTime) {
-
-        writeLock.lock();
-
-        try {
-            remove(key); // 由于 record 是不可变对象，所以先删除。（此时并没有先释放写锁，因为写锁是可重入锁，所以不需要释放写锁）
-            save(key,value,expireTime); // 再保存
-        } finally {
-
-            writeLock.unlock();
-        }
-    }
-
     boolean containsKey(String key) {
 
         readLock.lock();

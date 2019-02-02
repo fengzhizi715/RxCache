@@ -94,30 +94,30 @@ public class RxCache {
 
     public <T> Observable<Record<T>> load2Observable(final String key, final Type type) {
 
-        Record<T> recodrd = get(key,type);
+        Record<T> recodrd = get(key, type);
 
-        return recodrd!=null?Observable.just(recodrd):Observable.empty();
+        return recodrd != null ? Observable.just(recodrd) : Observable.empty();
     }
 
     public <T> Flowable<Record<T>> load2Flowable(final String key, final Type type) {
 
-        Record<T> recodrd = get(key,type);
+        Record<T> recodrd = get(key, type);
 
-        return recodrd!=null?Flowable.just(recodrd):Flowable.empty();
+        return recodrd != null ? Flowable.just(recodrd) : Flowable.empty();
     }
 
     public <T> Single<Record<T>> load2Single(final String key, final Type type) {
 
-        Record<T> recodrd = get(key,type);
+        Record<T> recodrd = get(key, type);
 
-        return recodrd!=null?Single.just(recodrd):Single.never();
+        return recodrd != null ? Single.just(recodrd) : Single.never();
     }
 
     public <T> Maybe<Record<T>> load2Maybe(final String key, final Type type) {
 
-        Record<T> recodrd = get(key,type);
+        Record<T> recodrd = get(key, type);
 
-        return recodrd!=null?Maybe.just(recodrd):Maybe.empty();
+        return recodrd != null ? Maybe.just(recodrd) : Maybe.empty();
     }
 
     public <T> Record<T> get(String key, Type type) {
@@ -130,21 +130,47 @@ public class RxCache {
         return cacheRepository.get(key,type,cacheStrategy);
     }
 
+    /**
+     * 保存缓存
+     * @param key   缓存的key
+     * @param value 缓存的对象，需要序列化
+     * @param <T>
+     */
     public <T> void save(String key, T value) {
 
         cacheRepository.save(key, value);
     }
 
+    /**
+     * 保存缓存
+     * @param key        缓存的key
+     * @param value      缓存的对象，需要序列化
+     * @param expireTime 过期时间，默认单位是毫秒
+     * @param <T>
+     */
     public <T> void save(String key, T value, long expireTime) {
 
         cacheRepository.save(key, value, expireTime);
     }
 
+    /**
+     * 更新缓存
+     * @param key
+     * @param value
+     * @param <T>
+     */
     public <T> void  update(String key, T value) {
 
         cacheRepository.update(key, value);
     }
 
+    /**
+     * 更新缓存的值、过期的时间
+     * @param key
+     * @param value
+     * @param expireTime
+     * @param <T>
+     */
     public <T> void update(String key, T value, long expireTime) {
 
         cacheRepository.update(key, value, expireTime);

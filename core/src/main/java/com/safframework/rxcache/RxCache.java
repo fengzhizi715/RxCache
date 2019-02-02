@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Created by tony on 2018/9/28.
  */
-public class RxCache {
+public final class RxCache {
 
     private final CacheRepository cacheRepository;
 
@@ -168,7 +168,7 @@ public class RxCache {
      * 更新缓存的值、过期的时间
      * @param key
      * @param value
-     * @param expireTime
+     * @param expireTime 过期时间，默认单位是毫秒
      * @param <T>
      */
     public <T> void update(String key, T value, long expireTime) {

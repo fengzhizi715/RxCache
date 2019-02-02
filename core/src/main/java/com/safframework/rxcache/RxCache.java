@@ -120,11 +120,26 @@ public final class RxCache {
         return recodrd != null ? Maybe.just(recodrd) : Maybe.empty();
     }
 
+    /**
+     * 从 RxCache 中获取一条记录，该记录返回是一个 Record 类型的对象
+     * @param key  缓存的key
+     * @param type 缓存所存储的类型
+     * @param <T>
+     * @return
+     */
     public <T> Record<T> get(String key, Type type) {
 
         return cacheRepository.get(key,type,CacheStrategy.ALL);
     }
 
+    /**
+     * 根据相应的缓存策略，从 RxCache 中获取 Record
+     * @param key   缓存的key
+     * @param type  缓存所存储的类型
+     * @param cacheStrategy 缓存策略
+     * @param <T>
+     * @return
+     */
     public <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
 
         return cacheRepository.get(key,type,cacheStrategy);
@@ -176,16 +191,30 @@ public final class RxCache {
         cacheRepository.update(key, value, expireTime);
     }
 
+    /**
+     * 判断 RxCache 是否包含这个key
+     * @param key
+     * @return
+     */
     public boolean containsKey(String key) {
 
         return cacheRepository.containsKey(key);
     }
 
+    /**
+     * 获取缓存中所有的key
+     * @return
+     */
     public Set<String> getAllKeys() {
 
         return cacheRepository.getAllKeys();
     }
 
+    /**
+     * 删除缓存中某个key
+     * 如果 memory、persistence 中包含这个可以，则根据key来删除Value
+     * @param key
+     */
     public void remove(String key) {
 
         cacheRepository.remove(key);
@@ -206,6 +235,9 @@ public final class RxCache {
         return cacheRepository.ttl(key,type);
     }
 
+    /**
+     * 清空缓存
+     */
     public void clear() {
         cacheRepository.clear();
     }

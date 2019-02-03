@@ -1,12 +1,10 @@
 import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
 import domain.User;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

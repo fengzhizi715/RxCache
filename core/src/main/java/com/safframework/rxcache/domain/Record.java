@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.safframework.rxcache.config.Constant;
 
 /**
- * 封装缓存的数据，使用Immutable对象
+ * 封装缓存的数据，使用Immutable对象，保证线程安全
  * Created by tony on 2018/9/28.
  */
 public final class Record<T> {

@@ -36,15 +36,8 @@ public abstract class AbstractConverter implements Converter {
         String json = null;
         ByteArrayOutputStream outputStream = null;
         try {
-
             outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len = 0;
-            while( (len = source.read(buffer)) !=-1 ){
-                if (len!=0) {
-                    outputStream.write(buffer, 0, len);
-                }
-            }
+            IOUtils.copyStream(source,outputStream);
 
             json = new String(outputStream.toByteArray(), "UTF-8");
         } catch (IOException e) {

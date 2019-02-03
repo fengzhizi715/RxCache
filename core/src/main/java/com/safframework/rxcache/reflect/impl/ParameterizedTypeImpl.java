@@ -17,6 +17,7 @@ public class ParameterizedTypeImpl implements ParameterizedType {
     private final Type owner;
 
     public ParameterizedTypeImpl(Class raw, Type[] args, Type owner) {
+
         this.raw = raw;
         this.args = args != null ? args : new Type[0];
         this.owner = owner;
@@ -24,9 +25,11 @@ public class ParameterizedTypeImpl implements ParameterizedType {
     }
 
     private void checkArgs() {
+
         if (raw == null) {
             throw new RxCacheException("raw class can't be null");
         }
+
         TypeVariable[] typeParameters = raw.getTypeParameters();
         if (args.length != 0 && typeParameters.length != args.length) {
             throw new RxCacheException(raw.getName() + " expect " + typeParameters.length + " arg(s), got " + args.length);

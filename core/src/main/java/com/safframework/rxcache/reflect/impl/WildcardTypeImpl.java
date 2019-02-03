@@ -8,11 +8,12 @@ import java.util.Arrays;
  * Created by tony on 2019-02-03.
  */
 public class WildcardTypeImpl implements WildcardType {
-    
+
     private final Class[] upper;
     private final Class[] lower;
 
     public WildcardTypeImpl(Class[] lower, Class[] upper) {
+
         this.lower = lower != null ? lower : new Class[0];
         this.upper = upper != null ? upper : new Class[0];
 
@@ -20,6 +21,7 @@ public class WildcardTypeImpl implements WildcardType {
     }
 
     private void checkArgs() {
+
         if (lower.length == 0 && upper.length == 0) {
             throw new IllegalArgumentException("lower or upper can't be null");
         }
@@ -29,6 +31,7 @@ public class WildcardTypeImpl implements WildcardType {
     }
 
     private void checkArgs(Class[] args) {
+
         for (int i = 1; i < args.length; i++) {
             Class clazz = args[i];
             if (!clazz.isInterface()) {

@@ -19,7 +19,6 @@ public class TypeBuilder {
 
 
     private TypeBuilder(Class raw, TypeBuilder parent) {
-        assert raw != null;
         this.raw = raw;
         this.parent = parent;
     }
@@ -32,12 +31,12 @@ public class TypeBuilder {
         return new TypeBuilder(raw, parent);
     }
 
-
     public TypeBuilder beginSubType(Class raw) {
         return newInstance(raw, this);
     }
 
     public TypeBuilder endSubType() {
+
         if (parent == null) {
             throw new RxCacheException("expect beginSubType() before endSubType()");
         }
@@ -52,6 +51,7 @@ public class TypeBuilder {
     }
 
     public TypeBuilder addTypeParamExtends(Class... classes) {
+
         if (classes == null) {
             throw new NullPointerException("addTypeParamExtends() expect not null Class");
         }
@@ -62,6 +62,7 @@ public class TypeBuilder {
     }
 
     public TypeBuilder addTypeParamSuper(Class... classes) {
+
         if (classes == null) {
             throw new NullPointerException("addTypeParamSuper() expect not null Class");
         }
@@ -72,6 +73,7 @@ public class TypeBuilder {
     }
 
     public TypeBuilder addTypeParam(Type type) {
+
         if (type == null) {
             throw new NullPointerException("addTypeParam expect not null Type");
         }
@@ -82,6 +84,7 @@ public class TypeBuilder {
     }
 
     public Type build() {
+
         if (parent != null) {
             throw new RxCacheException("expect endSubType() before build()");
         }
@@ -90,6 +93,7 @@ public class TypeBuilder {
     }
 
     private Type getType() {
+
         if (args.isEmpty()) {
             return raw;
         }

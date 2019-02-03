@@ -17,5 +17,5 @@ public @interface CacheMethod {
 
     MethodType methodType();
 
-    ObservableType observableType() default ObservableType.NOUSE;
+    ObservableType observableType() default ObservableType.NO_USE;
 }

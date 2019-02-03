@@ -5,6 +5,8 @@ ext {
 
             rxjava                    : "2.2.4",
 
+            gson                      : "2.8.5",
+
             bytekit                   : "1.2.6",
 
             spring                    : "5.1.0.RELEASE"

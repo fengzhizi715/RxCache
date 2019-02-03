@@ -5,7 +5,34 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前，支持堆�
 [![@Tony沈哲 on weibo](https://img.shields.io/badge/weibo-%40Tony%E6%B2%88%E5%93%B2-blue.svg)](http://www.weibo.com/fengzhizi715)
 [![License](https://img.shields.io/badge/license-Apache%202-lightgrey.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-# 一. 最新版本
+
+# 一. 功能特点：
+
+* 拥有二级缓存：Memory、Persistence
+* 各个缓存可以拥有有效时间，超过时间缓存会过期
+* Memory 默认支持 FIFO、LRU、LFU 算法的实现
+* Memory 额外支持 Guava Cache、Caffeine、MapDB 的实现
+* Memory 支持堆外内存(off-heap)
+* Persistence 默认使用 gson 实现对象的序列化和反序列化
+* Persistence 额外支持使用 fastjson、moshi 实现对象的序列化和反序列化
+* Persistence 的 DiskImpl 拥有加密功能，默认支持 AES 128、DES 加密
+* 支持使用 Builder 模式生成范性
+* 线程安全
+* 支持 Retrofit 风格使用缓存
+* 支持 RxJava 2
+
+
+## 支持的 Annotation：
+
+注解名称|作用|备注
+---|-------------|-------------
+@CacheClass|设置缓存类，标注一个Class对象|参数注解
+@CacheKey|设置缓存的key值|方法注解
+@CacheLifecycle|设置缓存的过期时间，只在缓存保存时有效|方法注解
+@CacheMethod|设置缓存的操作方法。以及返回的对象是 RxJava 的各种 Observable 类型，或者返回所存储的对象类型。|方法注解
+@CacheValue|设置缓存的值|参数注解
+
+# 二. 最新版本
 
 模块|最新版本
 ---|:-------------:
@@ -31,70 +58,45 @@ repositories {
 rxcache-core
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-core:1.1.7'
+implementation 'com.safframework.rxcache:rxcache-core:1.2.0'
 ```
 
 rxcache-proxy
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-proxy:1.1.7'
+implementation 'com.safframework.rxcache:rxcache-proxy:1.2.0'
 ```
 
 rxcache-guava-cache
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-guava-cache:1.1.7'
+implementation 'com.safframework.rxcache:rxcache-guava-cache:1.2.0'
 ```
 
 rxcache-caffeine
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-caffeine:1.1.7'
+implementation 'com.safframework.rxcache:rxcache-caffeine:1.2.0'
 ```
 
 rxcache-fastjson
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-fastjson:1.1.7'
+implementation 'com.safframework.rxcache:rxcache-fastjson:1.2.0'
 ```
 
 rxcache-moshi
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-moshi:1.1.7'
+implementation 'com.safframework.rxcache:rxcache-moshi:1.2.0'
 ```
 
 rxcache-off-heap
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-off-heap:1.1.7'
+implementation 'com.safframework.rxcache:rxcache-off-heap:1.2.0'
 ```
 
-# 二. 功能特点：
-
-* 拥有二级缓存：Memory、Persistence
-* 各个缓存可以拥有有效时间，超过时间缓存会过期
-* Memory 默认支持 FIFO、LRU、LFU 算法的实现
-* Memory 额外支持 Guava Cache、Caffeine、MapDB 的实现
-* Memory 支持堆外内存(off-heap)
-* Persistence 默认使用 gson 实现对象的序列化和反序列化
-* Persistence 额外支持使用 fastjson、moshi 实现对象的序列化和反序列化
-* Persistence 的 DiskImpl 拥有加密功能，默认支持 AES 128、DES 加密
-* 支持使用 Builder 模式生成范性
-* 线程安全
-* 支持 Retrofit 风格使用缓存
-* 支持 RxJava 2
-
-
-## 支持的 Annotation：
-
-注解名称|作用|备注
----|-------------|-------------
-@CacheClass|设置缓存类，标注一个Class对象|参数注解
-@CacheKey|设置缓存的key值|方法注解
-@CacheLifecycle|设置缓存的过期时间，只在缓存保存时有效|方法注解
-@CacheMethod|设置缓存的操作方法。以及返回的对象是 RxJava 的各种 Observable 类型，或者返回所存储的对象类型。|方法注解
-@CacheValue|设置缓存的值|参数注解
 
 # 三. RxCache 的设计：
 
@@ -473,9 +475,9 @@ public class TestOffHeap {
 
 # 感谢
 
-* 参考了[TypeBuilder](https://github.com/ikidou/TypeBuilder)的实现
 * 参考了[RxCache](https://github.com/VictorAlbertos/RxCache)的实现
 * 参考了[RxCache](https://github.com/z-chu/RxCache)的实现
+* 参考了[TypeBuilder](https://github.com/ikidou/TypeBuilder)的实现
 
 
 联系方式

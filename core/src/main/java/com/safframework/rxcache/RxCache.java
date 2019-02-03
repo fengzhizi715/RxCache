@@ -221,6 +221,15 @@ public final class RxCache {
     }
 
     /**
+     * 删除缓存中多个key
+     * @param keys
+     */
+    public void remove(String... keys) {
+
+        cacheRepository.remove(keys);
+    }
+
+    /**
      * 某一条记录还剩下的存活时间
      * 没有某条记录，则返回-2
      * 记录永不过期，则返回-1

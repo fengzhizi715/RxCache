@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.stream.Stream;
 
 /**
  * Created by tony on 2018/9/28.
@@ -213,6 +214,31 @@ class CacheRepository {
                 if (persistence != null) {
                     persistence.evict(key);
                 }
+            }
+
+        } finally {
+
+            writeLock.unlock();
+        }
+    }
+
+    void remove(String... keys) {
+
+        writeLock.lock();
+
+        try {
+            if (Preconditions.isNotBlank(keys)) {
+
+                Stream.of(keys).forEach(key -> {
+
+                    if (memory != null) {
+                        memory.evict(key);
+                    }
+
+                    if (persistence != null) {
+                        persistence.evict(key);
+                    }
+                });
             }
 
         } finally {

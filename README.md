@@ -73,13 +73,14 @@ implementation 'com.safframework.rxcache:rxcache-off-heap:1.1.7'
 # 二. 功能特点：
 
 * 拥有二级缓存：Memory、Persistence
-* 各个缓存都拥有有效时间，超过时间缓存会过期
+* 各个缓存可以拥有有效时间，超过时间缓存会过期
 * Memory 默认支持 FIFO、LRU、LFU 算法的实现
 * Memory 额外支持 Guava Cache、Caffeine、MapDB 的实现
 * Memory 支持堆外内存(off-heap)
 * Persistence 默认使用 gson 实现对象的序列化和反序列化
 * Persistence 额外支持使用 fastjson、moshi 实现对象的序列化和反序列化
 * Persistence 的 DiskImpl 拥有加密功能，默认支持 AES 128、DES 加密
+* 支持使用 Builder 模式生成范性
 * 线程安全
 * 支持 Retrofit 风格使用缓存
 * 支持 RxJava 2
@@ -469,6 +470,12 @@ public class TestOffHeap {
     }
 }
 ```
+
+# 感谢
+
+* 参考了[TypeBuilder](https://github.com/ikidou/TypeBuilder)的实现
+* 参考了[RxCache](https://github.com/VictorAlbertos/RxCache)的实现
+* 参考了[RxCache](https://github.com/z-chu/RxCache)的实现
 
 
 联系方式

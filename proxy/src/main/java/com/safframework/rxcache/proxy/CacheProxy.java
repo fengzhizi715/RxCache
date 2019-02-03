@@ -62,7 +62,7 @@ public class CacheProxy implements InvocationHandler {
 
                 ObservableType observableType = cacheMethod.observableType();
 
-                if (observableType==ObservableType.NOUSE) {
+                if (observableType==ObservableType.NO_USE) {
 
                     return  rxCache.get(cacheKey.value(),cacheClazz);
                 } else if (observableType == ObservableType.OBSERVABLE){

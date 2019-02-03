@@ -5,5 +5,5 @@ package com.safframework.rxcache.proxy;
  */
 public enum ObservableType {
 
-    OBSERVABLE ,FLOWABLE ,MAYBE ,SINGLE ,NOUSE
+    OBSERVABLE ,FLOWABLE ,MAYBE ,SINGLE ,NO_USE
 }

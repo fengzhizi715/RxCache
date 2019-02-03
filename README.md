@@ -16,7 +16,7 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前，支持堆�
 * Persistence 默认使用 gson 实现对象的序列化和反序列化
 * Persistence 额外支持使用 fastjson、moshi 实现对象的序列化和反序列化
 * Persistence 的 DiskImpl 拥有加密功能，默认支持 AES 128、DES 加密
-* 支持使用 Builder 模式生成范性
+* 使用 Builder 模式生成 Type
 * 线程安全
 * 支持 Retrofit 风格使用缓存
 * 支持 RxJava 2
@@ -412,7 +412,7 @@ public class TestCacheProvider {
 }
 ```
 
-## 3.3 支持堆外内存(off-heap)
+## 3.4 支持堆外内存(off-heap)
 
 DirectBufferMemoryImpl 支持堆外内存，并采用FIFO的方式。
 

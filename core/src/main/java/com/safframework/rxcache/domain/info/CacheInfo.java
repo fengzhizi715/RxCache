@@ -5,6 +5,7 @@ import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
 
 /**
+ * 显示缓存的信息
  * Created by tony on 2019-02-06.
  */
 public class CacheInfo {
@@ -18,6 +19,7 @@ public class CacheInfo {
 
             memory = new MemoryInfo();
             memory.keys = builder.memory.keySet();
+            memory.memoryImpl = builder.memory.getClass().getSimpleName();
         }
 
         if (builder.persistence!=null) {

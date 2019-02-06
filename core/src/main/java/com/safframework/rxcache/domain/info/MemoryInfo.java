@@ -8,4 +8,6 @@ import java.util.Set;
 public class MemoryInfo {
 
     public Set<String> keys;
+
+    public String memoryImpl;
 }

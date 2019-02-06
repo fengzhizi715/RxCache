@@ -260,6 +260,10 @@ public final class RxCache {
         return cacheRepository!=null;
     }
 
+    /**
+     * 显示缓存中的信息
+     * @return
+     */
     public String info() {
 
         return cacheRepository.info();

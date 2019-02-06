@@ -289,9 +289,9 @@ public final class RxCache {
 
         public RxCache build() {
 
-            if (memory == null && persistence == null) { // 至少保证 RxCache 可用
+            if (memory == null && persistence == null) { // 如果 memory 和 persistence 都为空
 
-                memory = new FIFOMemoryImpl();
+                memory = new FIFOMemoryImpl();           // memory 使用 FIFOMemoryImpl，从而至少保证 RxCache 可用
             }
 
             return new RxCache(this);

@@ -26,6 +26,7 @@ public class CacheInfo {
 
             persistence = new PersistenceInfo();
             persistence.keys = builder.persistence.allKeys();
+            persistence.persistenceImpl = builder.persistence.getClass().getSimpleName();
         }
     }
 

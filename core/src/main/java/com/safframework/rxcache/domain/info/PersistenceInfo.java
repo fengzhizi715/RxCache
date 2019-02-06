@@ -8,4 +8,6 @@ import java.util.List;
 public class PersistenceInfo {
 
     public List<String> keys;
+
+    public String persistenceImpl;
 }

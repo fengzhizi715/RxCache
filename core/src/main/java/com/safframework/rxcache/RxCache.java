@@ -260,6 +260,11 @@ public final class RxCache {
         return cacheRepository!=null;
     }
 
+    public String info() {
+
+        return cacheRepository.info();
+    }
+
     public static final class Builder {
 
         private Memory memory;

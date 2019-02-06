@@ -17,6 +17,7 @@ public class CacheInfo {
 
         hasMemory = builder.hasMemory;
         hasPersistence = builder.hasPersistence;
+        keys = builder.keys;
     }
 
     public static final class Builder {

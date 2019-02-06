@@ -2,6 +2,7 @@ package com.safframework.rxcache;
 
 import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.domain.CacheInfo;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
@@ -296,6 +297,23 @@ class CacheRepository {
         } finally {
 
             writeLock.unlock();
+        }
+    }
+
+    String info() {
+
+        readLock.lock();
+
+        try {
+            CacheInfo cacheInfo = new CacheInfo.Builder()
+                    .hasMemory(memory!=null)
+                    .hasPersistence(persistence!=null)
+                    .keys(getAllKeys())
+                    .build();
+            return cacheInfo.toString();
+        } finally {
+
+            readLock.unlock();
         }
     }
 }

@@ -43,13 +43,11 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
             if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
 
                 result = (T) cache.get(key);
-                cacheStatistics.getHitCount();
             } else {
 
                 if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
 
                     result = (T) cache.get(key);
-                    cacheStatistics.getHitCount();
                 } else {                     // 缓存的数据已经过期
 
                     evict(key);
@@ -58,7 +56,15 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
             }
         }
 
-        return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
+        if (result!=null) {
+
+            cacheStatistics.incrementHitCount();
+            return new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key));
+        } else {
+
+            cacheStatistics.incrementMissCount();
+            return null;
+        }
     }
 
     @Override
@@ -128,7 +134,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
     @Override
     public void evictAll() {
 
-        cacheStatistics.incrementMissCount(keys.size());
+        cacheStatistics.incrementEvictionCount(keys.size());
         cache.clear();
         timestampMap.clear();
         expireTimeMap.clear();

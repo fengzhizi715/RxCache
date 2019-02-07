@@ -108,7 +108,7 @@ public class LRUCache<K,V> {
 
     public void clear() {
 
-        cacheStatistics.incrementMissCount(queue.size());
+        cacheStatistics.incrementEvictionCount(queue.size());
         cache.clear();
         queue.clear();
     }

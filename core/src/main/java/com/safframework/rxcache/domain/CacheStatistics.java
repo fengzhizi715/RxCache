@@ -29,12 +29,12 @@ public class CacheStatistics {
 
     public void incrementEvictionCount() { this.evictionCount++; }
 
+    public void incrementEvictionCount(int count) {
+
+        this.evictionCount =+ count;
+    }
+
     public void incrementHitCount() { this.hitCount++; }
 
     public void incrementMissCount() { this.missCount++; }
-
-    public void incrementMissCount(int count) {
-
-        this.missCount =+ count;
-    }
 }

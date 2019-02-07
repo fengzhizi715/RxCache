@@ -77,8 +77,6 @@ public class LFUCache<K, V> {
             FrequencyNode fNode = (FrequencyNode) freqList.head;
             LFUCacheEntry<K, V> entry = (LFUCacheEntry<K, V>) fNode.lfuCacheEntryList.head;
             remove(entry);
-
-            cacheStatistics.incrementEvictionCount();
             System.out.println("Cache full. Removed entry " + entry);
         }
         if (newFrequencyNode == null)
@@ -98,7 +96,6 @@ public class LFUCache<K, V> {
         if (capacity == 0) return null;
 
         if (!kvStore.containsKey(key)) {
-            System.out.println("11111111");
             cacheStatistics.incrementMissCount();
             return null;
         }

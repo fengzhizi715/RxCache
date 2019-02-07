@@ -1,6 +1,7 @@
 package com.safframework.rxcache.domain;
 
 /**
+ * 缓存统计的类
  * Created by tony on 2019-02-07.
  */
 public class CacheStatistics {

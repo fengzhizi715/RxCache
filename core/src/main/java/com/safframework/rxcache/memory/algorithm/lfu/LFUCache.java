@@ -152,7 +152,7 @@ public class LFUCache<K, V> {
 
     public void clear() {
 
-        System.out.println("Remove all entry");
+        System.out.println("Remove all entries");
         cacheStatistics.incrementEvictionCount(size);
         kvStore.clear();
         frequencyMap.clear();

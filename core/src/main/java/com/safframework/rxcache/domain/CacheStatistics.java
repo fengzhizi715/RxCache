@@ -16,6 +16,15 @@ public class CacheStatistics {
         this.size = size;
     }
 
+    public CacheStatistics(int size,int putCount,int evictionCount,int hitCount,int missCount) {
+
+        this.size = size;
+        this.putCount = putCount;
+        this.evictionCount = evictionCount;
+        this.hitCount = hitCount;
+        this.missCount = missCount;
+    }
+
     public int getSize() { return this.size; }
 
     public int getPutCount() { return this.putCount; }

@@ -1,14 +1,14 @@
 package com.safframework.rxcache.memory;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+import com.google.common.cache.*;
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by tony on 2018/9/29.
@@ -16,12 +16,14 @@ import java.util.Set;
 public class GuavaCacheImpl extends AbstractMemoryImpl {
 
     private LoadingCache<String,Object > cache;
+    private AtomicInteger putCount = new AtomicInteger();
 
     public GuavaCacheImpl(long maxSize) {
 
         super(maxSize);
         cache = CacheBuilder
                 .newBuilder()
+                .recordStats()
                 .maximumSize(maxSize)
                 .build(new CacheLoader<String, Object>(){
                     @Override
@@ -36,6 +38,7 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
         super(maxSize);
         CacheBuilder cacheBuilder = CacheBuilder
                 .newBuilder()
+                .recordStats()
                 .maximumSize(maxSize);
 
         if (cacheConfig!=null) {
@@ -96,6 +99,7 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
         cache.put(key,value);
         timestampMap.put(key,System.currentTimeMillis());
         expireTimeMap.put(key,expireTime);
+        putCount.incrementAndGet();
     }
 
     @Override
@@ -124,5 +128,16 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
         cache.invalidateAll();
         timestampMap.clear();
         expireTimeMap.clear();
+    }
+
+    public CacheStatistics getCacheStatistics() {
+
+        CacheStats cacheStats = cache.stats();
+
+        long evictionCount = cacheStats.evictionCount();
+        long hitCount = cacheStats.hitCount();
+        long missCount = cacheStats.missCount();
+
+        return new CacheStatistics((int)maxSize,putCount.get(),(int)evictionCount,(int)hitCount,(int)missCount);
     }
 }

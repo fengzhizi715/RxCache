@@ -48,7 +48,14 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
             }
         }
 
-        return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
+        if (result!=null) {
+
+            return new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key));
+        } else {
+
+            getCacheStatistics().incrementMissCount();
+            return null;
+        }
     }
 
     @Override

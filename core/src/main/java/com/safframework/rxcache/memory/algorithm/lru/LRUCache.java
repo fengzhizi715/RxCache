@@ -47,9 +47,9 @@ public class LRUCache<K,V> {
         V cacheValue = cache.get(key);
 
         if(cacheValue != null) {
-            cacheStatistics.incrementHitCount();
+            cacheStatistics.incrementHitCount(); // 缓存命中，则增加命中的数量
         } else {
-            cacheStatistics.incrementMissCount();
+            cacheStatistics.incrementMissCount();// 缓存没命中，则增加没命中的数量
         }
         return cacheValue;
     }
@@ -61,21 +61,20 @@ public class LRUCache<K,V> {
 
     public void put(K key, V value) {
 
-        //ConcurrentHashMap doesn't allow null key or values
         if(key == null || value == null) throw new RxCacheException("key is null or value is null");
 
         if(cache.containsKey(key)) {
             queue.remove(key);
         } else {
-            cacheStatistics.incrementMissCount();
-            cacheStatistics.incrementPutCount();
+            cacheStatistics.incrementMissCount(); // 缓存没命中，则增加没命中的数量
+            cacheStatistics.incrementPutCount();  // 增加缓存put的数量
         }
 
         if(queue.size() >= size) {
             K lruKey = queue.poll();
             if(lruKey != null) {
                 cache.remove(lruKey);
-                cacheStatistics.incrementEvictionCount();
+                cacheStatistics.incrementEvictionCount(); // 增加缓存删除的数量
             }
         }
 
@@ -91,6 +90,7 @@ public class LRUCache<K,V> {
 
         K remove = queue.remove();
         queue.add(remove);
+        cacheStatistics.incrementHitCount(); // 增加缓存命中的数量
         return cache.get(remove);
     }
 
@@ -103,6 +103,7 @@ public class LRUCache<K,V> {
 
         cache.remove(key);
         queue.remove(key);
+        cacheStatistics.incrementEvictionCount(); // 增加缓存删除的数量
     }
 
     public void clear() {

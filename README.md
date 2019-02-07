@@ -12,7 +12,7 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前，支持堆�
 * 各个缓存可以拥有有效时间，超过时间缓存会过期
 * Memory 默认支持 FIFO、LRU、LFU 算法的实现
 * Memory 额外支持 Guava Cache、Caffeine、MapDB 的实现
-* Memory 支持显示缓存性能的统计数据。
+* Memory 支持显示缓存使用的统计数据。
 * Memory 支持堆外内存(off-heap)
 * Persistence 默认使用 gson 实现对象的序列化和反序列化
 * Persistence 额外支持使用 fastjson、moshi 实现对象的序列化和反序列化

@@ -108,6 +108,7 @@ public class LRUCache<K,V> {
 
     public void clear() {
 
+        cacheStatistics.incrementMissCount(queue.size());
         cache.clear();
         queue.clear();
     }

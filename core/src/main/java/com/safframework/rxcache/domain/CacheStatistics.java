@@ -31,7 +31,7 @@ public class CacheStatistics {
 
     public void incrementEvictionCount(int count) {
 
-        this.evictionCount =+ count;
+        this.evictionCount += count;
     }
 
     public void incrementHitCount() { this.hitCount++; }

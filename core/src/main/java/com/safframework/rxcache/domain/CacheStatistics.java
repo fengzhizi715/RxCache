@@ -5,11 +5,11 @@ package com.safframework.rxcache.domain;
  */
 public class CacheStatistics {
 
-    private int size = 0;
-    private int putCount = 0;
-    private int evictionCount = 0;
-    private int hitCount = 0;
-    private int missCount = 0;
+    private int size = 0;         // 缓存的大小
+    private int putCount = 0;     // 缓存put的数量
+    private int evictionCount = 0;// 缓存删除的数量
+    private int hitCount = 0;     // 缓存的命中数
+    private int missCount = 0;    // 缓存的未命中数
 
     public CacheStatistics(int size) {
         this.size = size;

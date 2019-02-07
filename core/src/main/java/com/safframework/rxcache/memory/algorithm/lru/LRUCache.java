@@ -1,6 +1,7 @@
 package com.safframework.rxcache.memory.algorithm.lru;
 
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.exception.RxCacheException;
 
 import java.util.AbstractQueue;
@@ -17,6 +18,7 @@ public class LRUCache<K,V> {
 
     private Map<K,V> cache = null;
     private AbstractQueue<K> queue = null;
+    private CacheStatistics cacheStatistics;
     private int size = 0;
 
     public LRUCache() {
@@ -27,8 +29,9 @@ public class LRUCache<K,V> {
     public LRUCache(int size) {
 
         this.size = size;
-        cache = new ConcurrentHashMap<K,V>(size);
-        queue = new ConcurrentLinkedQueue<K>();
+        this.cache = new ConcurrentHashMap<K,V>(size);
+        this.queue = new ConcurrentLinkedQueue<K>();
+        this.cacheStatistics = new CacheStatistics(size);
     }
 
     public boolean containsKey(K key) {
@@ -41,7 +44,14 @@ public class LRUCache<K,V> {
         //Recently accessed, hence move it to the tail
         queue.remove(key);
         queue.add(key);
-        return cache.get(key);
+        V cacheValue = cache.get(key);
+
+        if(cacheValue != null) {
+            cacheStatistics.incrementHitCount();
+        } else {
+            cacheStatistics.incrementMissCount();
+        }
+        return cacheValue;
     }
 
     public V getSilent(K key) {
@@ -56,12 +66,16 @@ public class LRUCache<K,V> {
 
         if(cache.containsKey(key)) {
             queue.remove(key);
+        } else {
+            cacheStatistics.incrementMissCount();
+            cacheStatistics.incrementPutCount();
         }
 
         if(queue.size() >= size) {
             K lruKey = queue.poll();
             if(lruKey != null) {
                 cache.remove(lruKey);
+                cacheStatistics.incrementEvictionCount();
             }
         }
 
@@ -97,8 +111,12 @@ public class LRUCache<K,V> {
         queue.clear();
     }
 
+    public CacheStatistics getCacheStatistics() {
+        return cacheStatistics;
+    }
+
     @Override
-    public synchronized String toString() {
+    public String toString() {
 
         Iterator<K> iterator = queue.iterator();
         StringBuilder sb = new StringBuilder();

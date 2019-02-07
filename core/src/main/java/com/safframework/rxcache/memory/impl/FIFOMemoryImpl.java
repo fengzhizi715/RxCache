@@ -1,6 +1,7 @@
 package com.safframework.rxcache.memory.impl;
 
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 
@@ -17,6 +18,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
 
     private Map<String,Object> cache;
     private List<String> keys;
+    private CacheStatistics cacheStatistics;
 
     public FIFOMemoryImpl() {
 
@@ -28,6 +30,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
         super(maxSize);
         this.cache = new ConcurrentHashMap<>((int)maxSize);
         this.keys = new LinkedList<>();
+        this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
 
     @Override
@@ -40,14 +43,17 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
             if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
 
                 result = (T) cache.get(key);
+                cacheStatistics.getHitCount();
             } else {
 
                 if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
 
                     result = (T) cache.get(key);
+                    cacheStatistics.getHitCount();
                 } else {                     // 缓存的数据已经过期
 
                     evict(key);
+                    cacheStatistics.incrementEvictionCount();
                 }
             }
         }
@@ -67,19 +73,24 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
         if (keySet().size()<maxSize) { // 缓存还有空间
 
             saveValue(key,value,expireTime);
+            cacheStatistics.incrementPutCount();
         } else {                       // 缓存空间不足，需要删除一个
 
             if (containsKey(key)) {
 
                 keys.remove(key);
+                cacheStatistics.incrementEvictionCount();
 
                 saveValue(key,value,expireTime);
+                cacheStatistics.incrementPutCount();
             } else {
 
                 String oldKey = keys.get(0); // 最早缓存的key
                 evict(oldKey);               // 删除最早缓存的数据 FIFO算法
+                cacheStatistics.incrementEvictionCount();
 
                 saveValue(key,value,expireTime);
+                cacheStatistics.incrementPutCount();
             }
         }
     }
@@ -111,14 +122,21 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
         timestampMap.remove(key);
         expireTimeMap.remove(key);
         keys.remove(key);
+        cacheStatistics.incrementEvictionCount();
     }
 
     @Override
     public void evictAll() {
 
+        cacheStatistics.incrementMissCount(keys.size());
         cache.clear();
         timestampMap.clear();
         expireTimeMap.clear();
         keys.clear();
+    }
+
+    public CacheStatistics getCacheStatistics() {
+
+        return cacheStatistics;
     }
 }

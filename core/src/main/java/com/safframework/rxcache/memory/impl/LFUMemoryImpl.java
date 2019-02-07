@@ -1,6 +1,7 @@
 package com.safframework.rxcache.memory.impl;
 
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.algorithm.lfu.LFUCache;
@@ -45,6 +46,9 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
                     evict(key);
                 }
             }
+        } else {
+
+            cache.getCacheStatistics().incrementMissCount();
         }
 
         return result != null ? new Record<>(Source.MEMORY, key, result, timestampMap.get(key), expireTimeMap.get(key)) : null;
@@ -90,5 +94,10 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
         cache.clear();
         timestampMap.clear();
         expireTimeMap.clear();
+    }
+
+    public CacheStatistics getCacheStatistics() {
+
+        return cache.getCacheStatistics();
     }
 }

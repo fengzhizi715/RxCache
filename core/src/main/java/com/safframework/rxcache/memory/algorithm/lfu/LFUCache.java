@@ -1,5 +1,7 @@
 package com.safframework.rxcache.memory.algorithm.lfu;
 
+import com.safframework.rxcache.domain.CacheStatistics;
+
 import java.util.HashMap;
 import java.util.Set;
 
@@ -16,6 +18,8 @@ public class LFUCache<K, V> {
     /* HashMap for storing frequencyNode entries */
     HashMap<Integer, FrequencyNode> frequencyMap;
 
+    CacheStatistics cacheStatistics;
+
     /* Capacity of cache */
     int capacity;
 
@@ -28,6 +32,7 @@ public class LFUCache<K, V> {
         kvStore = new HashMap<K, LFUCacheEntry<K, V>>();
         freqList = new NodeList();
         frequencyMap = new HashMap<Integer, FrequencyNode>();
+        cacheStatistics = new CacheStatistics(capacity);
     }
 
     public boolean containsKey(K key) {
@@ -72,6 +77,8 @@ public class LFUCache<K, V> {
             FrequencyNode fNode = (FrequencyNode) freqList.head;
             LFUCacheEntry<K, V> entry = (LFUCacheEntry<K, V>) fNode.lfuCacheEntryList.head;
             remove(entry);
+
+            cacheStatistics.incrementEvictionCount();
             System.out.println("Cache full. Removed entry " + entry);
         }
         if (newFrequencyNode == null)
@@ -81,13 +88,20 @@ public class LFUCache<K, V> {
         kvStore.put(key, entry);
         newFrequencyNode.lfuCacheEntryList.append(entry);
         size++;
+
         System.out.println("Set new " + entry + " entry, cache size: " + size);
+        cacheStatistics.incrementPutCount();
     }
 
 
     public V get(K key) {
-        if (!kvStore.containsKey(key) || capacity == 0)
+        if (capacity == 0) return null;
+
+        if (!kvStore.containsKey(key)) {
+            System.out.println("11111111");
+            cacheStatistics.incrementMissCount();
             return null;
+        }
 
         LFUCacheEntry<K, V> entry = kvStore.get(key);
         FrequencyNode newFrequencyNode =
@@ -100,7 +114,15 @@ public class LFUCache<K, V> {
         }
         entry.frequencyNode = newFrequencyNode;
 
-        return entry.value;
+        if (entry.value!=null) {
+
+            cacheStatistics.incrementHitCount();
+            return entry.value;
+        } else {
+
+            cacheStatistics.incrementMissCount();
+            return null;
+        }
     }
 
     public Set<K> keySet() {
@@ -128,14 +150,20 @@ public class LFUCache<K, V> {
             freqList.remove(entry.frequencyNode);
         }
         size--;
+        cacheStatistics.incrementEvictionCount();
     }
 
     public void clear() {
 
         System.out.println("Remove all entry");
+        cacheStatistics.incrementEvictionCount(size);
         kvStore.clear();
         frequencyMap.clear();
         freqList.clear();
         size = 0;
+    }
+
+    public CacheStatistics getCacheStatistics() {
+        return cacheStatistics;
     }
 }

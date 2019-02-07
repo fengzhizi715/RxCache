@@ -9,9 +9,9 @@ import java.util.Set;
  */
 public class MemoryInfo {
 
-    public Set<String> keys;
+    public Set<String> keys;                // 缓存包含的key
 
-    public String memoryImpl;
+    public String memoryImpl;               // 缓存实现的类
 
-    public CacheStatistics cacheStatistics;
+    public CacheStatistics cacheStatistics; // 缓存的统计
 }

@@ -1,5 +1,7 @@
 package com.safframework.rxcache.domain.info;
 
+import com.safframework.rxcache.domain.CacheStatistics;
+
 import java.util.Set;
 
 /**
@@ -10,4 +12,6 @@ public class MemoryInfo {
     public Set<String> keys;
 
     public String memoryImpl;
+
+    public CacheStatistics cacheStatistics;
 }

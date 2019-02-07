@@ -85,10 +85,8 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
             if (containsKey(key)) {
 
                 keys.remove(key);
-                cacheStatistics.incrementEvictionCount();
 
                 saveValue(key,value,expireTime);
-                cacheStatistics.incrementPutCount();
             } else {
 
                 String oldKey = keys.get(0); // 最早缓存的key

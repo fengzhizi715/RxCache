@@ -1,5 +1,6 @@
 package com.safframework.rxcache.memory;
 
+import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
 
 import java.util.Set;
@@ -22,4 +23,9 @@ public interface Memory {
     void evict(String key);
 
     void evictAll();
+
+    default CacheStatistics getCacheStatistics() {
+
+        return null;
+    }
 }

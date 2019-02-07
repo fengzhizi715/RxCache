@@ -20,6 +20,7 @@ public class CacheInfo {
             memory = new MemoryInfo();
             memory.keys = builder.memory.keySet();
             memory.memoryImpl = builder.memory.getClass().getSimpleName();
+            memory.cacheStatistics = builder.memory.getCacheStatistics();
         }
 
         if (builder.persistence!=null) {

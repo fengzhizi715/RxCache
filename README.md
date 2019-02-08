@@ -49,43 +49,43 @@ repositories {
 rxcache-core
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-core:1.2.2'
+implementation 'com.safframework.rxcache:rxcache-core:1.2.3'
 ```
 
 rxcache-proxy
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-proxy:1.2.2'
+implementation 'com.safframework.rxcache:rxcache-proxy:1.2.3'
 ```
 
 rxcache-guava-cache
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-guava-cache:1.2.2'
+implementation 'com.safframework.rxcache:rxcache-guava-cache:1.2.3'
 ```
 
 rxcache-caffeine
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-caffeine:1.2.2'
+implementation 'com.safframework.rxcache:rxcache-caffeine:1.2.3'
 ```
 
 rxcache-fastjson
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-fastjson:1.2.2'
+implementation 'com.safframework.rxcache:rxcache-fastjson:1.2.3'
 ```
 
 rxcache-moshi
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-moshi:1.2.2'
+implementation 'com.safframework.rxcache:rxcache-moshi:1.2.3'
 ```
 
 rxcache-off-heap
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-off-heap:1.2.2'
+implementation 'com.safframework.rxcache:rxcache-off-heap:1.2.3'
 ```
 
 # 详细功能查看[wiki](https://github.com/fengzhizi715/RxCache/wiki)

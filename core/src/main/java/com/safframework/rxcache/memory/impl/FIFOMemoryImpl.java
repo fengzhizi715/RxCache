@@ -51,7 +51,6 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
                 } else {                     // 缓存的数据已经过期
 
                     evict(key);
-                    cacheStatistics.incrementEvictionCount();
                 }
             }
         }
@@ -91,7 +90,6 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
 
                 String oldKey = keys.get(0); // 最早缓存的key
                 evict(oldKey);               // 删除最早缓存的数据 FIFO算法
-                cacheStatistics.incrementEvictionCount();
 
                 saveValue(key,value,expireTime);
                 cacheStatistics.incrementPutCount();

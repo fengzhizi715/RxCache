@@ -17,7 +17,7 @@ public class TestWithGuava {
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigWithGuava.class);
 
-        RxCache rxCache = ctx.getBean(RxCache.class);
+        RxCache rxCache = (RxCache) ctx.getBean("rxCache");
 
         User u = new User();
         u.name = "tony";

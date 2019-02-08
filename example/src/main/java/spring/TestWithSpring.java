@@ -19,7 +19,7 @@ public class TestWithSpring {
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
 
-        RxCache rxCache = ctx.getBean(RxCache.class);
+        RxCache rxCache = (RxCache) ctx.getBean("rxCache");
 
         User u = new User();
         u.name = "tony";

@@ -8,7 +8,9 @@ import com.squareup.moshi.Types;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tony on 2018/11/6.
@@ -45,13 +47,22 @@ public class MoshiConverter extends AbstractConverter {
     @Override
     public String toJson(Object data) {
 
-        if (data instanceof List) {
-            if (((List) data).size() > 0) {
-                Type type = Types.newParameterizedType(List.class, ((List) data).get(0).getClass());
+        if (data instanceof Collection) {
+            if (((Collection) data).size() > 0) {
+                Type type = Types.newParameterizedType(List.class, ((Collection) data).iterator().next().getClass());
                 JsonAdapter jsonAdapter = moshi.adapter(type);
                 return jsonAdapter.toJson(data);
             } else {
                 return "[]";
+            }
+        } else if (data instanceof Map) {
+            if (((Map) data).size() > 0) {
+                Map.Entry entry = (Map.Entry) ((Map) data).entrySet().iterator().next();
+                Type type = Types.newParameterizedType(Map.class, entry.getKey().getClass(), entry.getValue().getClass());
+                JsonAdapter jsonAdapter = moshi.adapter(type);
+                return jsonAdapter.toJson(data);
+            } else {
+                return "";
             }
         } else {
             JsonAdapter jsonAdapter = moshi.adapter(data.getClass());

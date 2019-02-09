@@ -10,10 +10,7 @@ import io.reactivex.functions.Consumer;
 
 import java.io.File;
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by tony on 2018/11/6.
@@ -35,6 +32,14 @@ public class TestDiskImplWithFastjson {
 
         RxCache rxCache = RxCache.getRxCache();
 
+//        testObject(rxCache);
+//        testMap(rxCache);
+        testList(rxCache);
+//        testSet(rxCache);
+    }
+
+    private static void testObject(RxCache rxCache) {
+
         User u = new User();
         u.name = "tony";
         u.password = "123456";
@@ -52,11 +57,7 @@ public class TestDiskImplWithFastjson {
                 System.out.println(user.password);
             }
         });
-
-        testMap(rxCache);
-        testSet(rxCache);
     }
-
 
     private static void testMap(RxCache rxCache){
 
@@ -97,6 +98,45 @@ public class TestDiskImplWithFastjson {
                     User user2 = recordDataList.get("u2");
                     System.out.println(user2.name);
                     System.out.println(user2.password);
+                }
+            }
+        });
+    }
+
+    private static void testList(RxCache rxCache) {
+
+        List<User> list = new ArrayList<>();
+
+        User u1 = new User();
+        u1.name = "tonyList1";
+        u1.password = "list1123456";
+        list.add(u1);
+
+        User u2 = new User();
+        u2.name = "tonyList12";
+        u2.password = "list12345";
+        list.add(u2);
+        rxCache.save("list", list);
+
+        Type type = TypeBuilder
+                .newInstance(List.class)
+                .addTypeParam(User.class)
+                .build();
+
+        Observable<Record<List<User>>> observable = rxCache.load2Observable("list", type);
+
+        observable.subscribe(new Consumer<Record<List<User>>>() {
+
+            @Override
+            public void accept(Record<List<User>> record) throws Exception {
+
+                List<User> recordDataList = record.getData();
+
+                if (Preconditions.isNotBlank(recordDataList)) {
+                    for (User user : recordDataList) {
+                        System.out.println(user.name);
+                        System.out.println(user.password);
+                    }
                 }
             }
         });

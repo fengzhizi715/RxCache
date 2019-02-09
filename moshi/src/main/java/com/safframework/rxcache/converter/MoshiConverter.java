@@ -46,14 +46,13 @@ public class MoshiConverter extends AbstractConverter {
     public String toJson(Object data) {
 
         if (data instanceof List) {
-            if (((List) data).size() >0){
+            if (((List) data).size() > 0) {
                 Type type = Types.newParameterizedType(List.class, ((List) data).get(0).getClass());
                 JsonAdapter jsonAdapter = moshi.adapter(type);
                 return jsonAdapter.toJson(data);
             } else {
-                return "";
+                return "[]";
             }
-
         } else {
             JsonAdapter jsonAdapter = moshi.adapter(data.getClass());
             return jsonAdapter.toJson(data);

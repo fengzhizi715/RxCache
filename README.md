@@ -90,11 +90,17 @@ implementation 'com.safframework.rxcache:rxcache-off-heap:1.2.3'
 
 # 详细功能查看[wiki](https://github.com/fengzhizi715/RxCache/wiki)
 
+
 # 感谢
 
 * 参考了[RxCache](https://github.com/VictorAlbertos/RxCache)的实现
 * 参考了[RxCache](https://github.com/z-chu/RxCache)的实现
 * 参考了[TypeBuilder](https://github.com/ikidou/TypeBuilder)的实现
+
+
+# Contributors：
+
+* [snailflying](https://github.com/snailflying)
 
 
 联系方式

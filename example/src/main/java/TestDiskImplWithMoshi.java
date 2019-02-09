@@ -32,8 +32,8 @@ public class TestDiskImplWithMoshi {
 
         RxCache rxCache = RxCache.getRxCache();
 
-//        testObject(rxCache);
-//        testMap(rxCache);
+        testObject(rxCache);
+        testMap(rxCache);
         testList(rxCache);
         testSet(rxCache);
     }

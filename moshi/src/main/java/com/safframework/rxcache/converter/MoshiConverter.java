@@ -49,7 +49,7 @@ public class MoshiConverter extends AbstractConverter {
 
         if (data instanceof Collection) {
             if (((Collection) data).size() > 0) {
-                Type type = Types.newParameterizedType(List.class, ((Collection) data).iterator().next().getClass());
+                Type type = Types.newParameterizedType(Collection.class, ((Collection) data).iterator().next().getClass());
                 JsonAdapter jsonAdapter = moshi.adapter(type);
                 return jsonAdapter.toJson(data);
             } else {

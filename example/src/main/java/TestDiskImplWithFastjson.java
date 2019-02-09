@@ -32,10 +32,10 @@ public class TestDiskImplWithFastjson {
 
         RxCache rxCache = RxCache.getRxCache();
 
-//        testObject(rxCache);
-//        testMap(rxCache);
+        testObject(rxCache);
+        testMap(rxCache);
         testList(rxCache);
-//        testSet(rxCache);
+        testSet(rxCache);
     }
 
     private static void testObject(RxCache rxCache) {

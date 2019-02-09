@@ -62,6 +62,9 @@ public class DiskImpl implements Disk {
 
             key = safetyKey(key);
             File file = new File(cacheDirectory, key);
+            
+            if (file == null || !file.exists()) return null;
+
             inputStream = new FileInputStream(file);
 
             CacheHolder holder = converter.read(inputStream,CacheHolder.class);

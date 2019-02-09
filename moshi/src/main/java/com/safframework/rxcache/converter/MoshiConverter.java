@@ -4,9 +4,11 @@ import com.safframework.rxcache.persistence.converter.AbstractConverter;
 import com.safframework.rxcache.persistence.encrypt.Encryptor;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
+import com.squareup.moshi.Types;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * Created by tony on 2018/11/6.
@@ -43,9 +45,20 @@ public class MoshiConverter extends AbstractConverter {
     @Override
     public String toJson(Object data) {
 
-        JsonAdapter jsonAdapter = moshi.adapter(data.getClass());
+        if (data instanceof List) {
+            if (((List) data).size() >0){
+                Type type = Types.newParameterizedType(List.class, ((List) data).get(0).getClass());
+                JsonAdapter jsonAdapter = moshi.adapter(type);
+                return jsonAdapter.toJson(data);
+            } else {
+                return "";
+            }
 
-        return jsonAdapter.toJson(data);
+        } else {
+            JsonAdapter jsonAdapter = moshi.adapter(data.getClass());
+            return jsonAdapter.toJson(data);
+        }
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.RxCache;
+import com.safframework.rxcache.converter.MoshiConverter;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
 import com.safframework.rxcache.reflect.TypeBuilder;
@@ -43,7 +44,7 @@ public class TestTypeBuilder {
         u2.name = "tony2";
         u2.password = "123456";
         list.add(u2);
-        rxCache.save("test",list);
+        rxCache.save("test", list);
 
         Type type = TypeBuilder.newInstance(List.class)
                 .addTypeParam(User.class)
@@ -63,7 +64,37 @@ public class TestTypeBuilder {
                     User user = recordDataList.get(0);
                     System.out.println(user.name);
                     System.out.println(user.password);
+
+
+                    User user2 = recordDataList.get(1);
+                    System.out.println(user2.name);
+                    System.out.println(user2.password);
                 }
+            }
+        });
+
+        testBlankList(rxCache);
+    }
+
+    private static void testBlankList(RxCache rxCache) {
+
+        List list0 = new ArrayList();
+        rxCache.save("list0", list0);
+
+        Type type0 = TypeBuilder.newInstance(List.class)
+                .addTypeParam(String.class)
+                .build();
+
+        Observable<Record<List<String>>> observable0 = rxCache.load2Observable("list0", type0);
+
+        observable0.subscribe(new Consumer<Record<List<String>>>() {
+
+            @Override
+            public void accept(Record<List<String>> record) throws Exception {
+
+                List<String> recordDataList = record.getData();
+                System.out.println(recordDataList);
+
             }
         });
     }

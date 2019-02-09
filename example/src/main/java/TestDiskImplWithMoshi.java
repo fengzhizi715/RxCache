@@ -35,6 +35,13 @@ public class TestDiskImplWithMoshi {
 
         RxCache rxCache = RxCache.getRxCache();
 
+//        testObject(rxCache);
+//        testMap(rxCache);
+        testSet(rxCache);
+    }
+
+    private static void testObject(RxCache rxCache) {
+
         User u = new User();
         u.name = "tony";
         u.password = "123456";
@@ -52,9 +59,6 @@ public class TestDiskImplWithMoshi {
                 System.out.println(user.password);
             }
         });
-
-        testMap(rxCache);
-        testSet(rxCache);
     }
 
     private static void testMap(RxCache rxCache) {
@@ -85,16 +89,16 @@ public class TestDiskImplWithMoshi {
             @Override
             public void accept(Record<Map<String, User>> record) throws Exception {
 
-                Map<String, User> recordDataList = record.getData();
+                Map<String, User> data = record.getData();
 
-                if (Preconditions.isNotBlank(recordDataList)) {
+                if (Preconditions.isNotBlank(data)) {
 
-                    User user = recordDataList.get("u1");
+                    User user = data.get("u1");
                     System.out.println(user.name);
                     System.out.println(user.password);
 
 
-                    User user2 = recordDataList.get("u2");
+                    User user2 = data.get("u2");
                     System.out.println(user2.name);
                     System.out.println(user2.password);
                 }

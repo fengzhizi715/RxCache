@@ -99,7 +99,8 @@ implementation 'com.safframework.rxcache:rxcache-off-heap:1.3.0'
 
 # TODO List:
 
-* 重构Disk的实现
+* 重构 Disk 的实现
+* 尝试使用主动的缓存移除策略
 
 # Contributors：
 

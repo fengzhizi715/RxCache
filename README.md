@@ -97,6 +97,9 @@ implementation 'com.safframework.rxcache:rxcache-off-heap:1.3.0'
 * 参考了[RxCache](https://github.com/z-chu/RxCache)的实现
 * 参考了[TypeBuilder](https://github.com/ikidou/TypeBuilder)的实现
 
+# TODO List:
+
+* 重构Disk的实现
 
 # Contributors：
 

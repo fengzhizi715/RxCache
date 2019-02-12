@@ -25,12 +25,10 @@ public interface Memory {
     void evictAll();
 
     /**
-     * 部分Memory的实现类还未实现这个方法，所以暂时用default方法，并默认为null
-     * 等到它的实现类都实现了该方法，考虑去掉default
+     * 部分Memory的实现类还未实现这个方法，原先使用default方法，并默认为null
+     * 但是，android 需要26才支持Java 8的语法
+     * 所以，先去掉default，没有实现该方法的Memory的实现类，先返回null
      * @return
      */
-    default CacheStatistics getCacheStatistics() {
-
-        return null;
-    }
+    CacheStatistics getCacheStatistics();
 }

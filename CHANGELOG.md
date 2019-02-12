@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.3.1
+---
+2019-02-11
+* Memory 接口去掉 default 方法
+
 Version 1.3.0
 ---
 2019-02-10

@@ -1,6 +1,7 @@
 package com.safframework.rxcache.memory;
 
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
@@ -111,5 +112,10 @@ public class MapDBImpl extends AbstractMemoryImpl {
     public void evictAll() {
 
         map.clear();
+    }
+
+    @Override
+    public CacheStatistics getCacheStatistics() {
+        return null;
     }
 }

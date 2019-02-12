@@ -1,6 +1,7 @@
 package com.safframework.rxcache.offheap;
 
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
@@ -115,5 +116,10 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
         timestampMap.clear();
         expireTimeMap.clear();
         keys.clear();
+    }
+
+    @Override
+    public CacheStatistics getCacheStatistics() {
+        return null;
     }
 }

@@ -77,6 +77,10 @@ public final class Record<T> {
         return expireTime == Constant.NEVER_EXPIRE;
     }
 
+    /**
+     * 当前Record还剩下多久的存活时间
+     * @return
+     */
     public long ttl() {
 
         if (isNeverExpire()) {

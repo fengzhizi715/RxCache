@@ -23,7 +23,7 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
     public DirectBufferMemoryImpl(long maxSize) {
 
         super(maxSize);
-        cache = new ConcurrentStringObjectDirectHashMap();
+        this.cache = new ConcurrentStringObjectDirectHashMap();
         this.keys = new LinkedList<>();
         this.cacheStatistics = new CacheStatistics((int)maxSize);
     }

@@ -48,6 +48,7 @@ public class MoshiConverter extends AbstractConverter {
     public String toJson(Object data) {
 
         if (data instanceof Collection) {
+
             if (((Collection) data).size() > 0) {
                 Type type = Types.newParameterizedType(Collection.class, ((Collection) data).iterator().next().getClass());
                 JsonAdapter jsonAdapter = moshi.adapter(type);
@@ -56,6 +57,7 @@ public class MoshiConverter extends AbstractConverter {
                 return "[]";
             }
         } else if (data instanceof Map) {
+
             if (((Map) data).size() > 0) {
                 Map.Entry entry = (Map.Entry) ((Map) data).entrySet().iterator().next();
                 Type type = Types.newParameterizedType(Map.class, entry.getKey().getClass(), entry.getValue().getClass());

@@ -18,12 +18,14 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
 
     private ConcurrentStringObjectDirectHashMap cache;
     private List<String> keys;
+    private CacheStatistics cacheStatistics;
 
     public DirectBufferMemoryImpl(long maxSize) {
 
         super(maxSize);
         cache = new ConcurrentStringObjectDirectHashMap();
         this.keys = new LinkedList<>();
+        this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
 
     @Override
@@ -48,7 +50,15 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
             }
         }
 
-        return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
+        if (result!=null) {
+
+            cacheStatistics.incrementHitCount();
+            return new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key));
+        } else {
+
+            cacheStatistics.incrementMissCount();
+            return null;
+        }
     }
 
     @Override
@@ -63,6 +73,7 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
         if (keySet().size()<maxSize) { // 缓存还有空间
 
             saveValue(key,value,expireTime);
+            cacheStatistics.incrementPutCount();
         } else {                       // 缓存空间不足，需要删除一个
 
             if (containsKey(key)) {
@@ -76,6 +87,7 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
                 evict(oldKey);               // 删除最早缓存的数据 FIFO算法
 
                 saveValue(key,value,expireTime);
+                cacheStatistics.incrementPutCount();
             }
         }
     }
@@ -107,11 +119,13 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
         timestampMap.remove(key);
         expireTimeMap.remove(key);
         keys.remove(key);
+        cacheStatistics.incrementEvictionCount();
     }
 
     @Override
     public void evictAll() {
 
+        cacheStatistics.incrementEvictionCount(keys.size());
         cache.clear();
         timestampMap.clear();
         expireTimeMap.clear();
@@ -120,6 +134,7 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
 
     @Override
     public CacheStatistics getCacheStatistics() {
-        return null;
+
+        return cacheStatistics;
     }
 }

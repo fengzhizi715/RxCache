@@ -161,6 +161,21 @@ class CacheRepository {
         }
     }
 
+    <T> void expire(String key, Type type, long expireTime) {
+
+        writeLock.lock();
+
+        try {
+            Record<T> record = get(key,type,CacheStrategy.ALL);
+            T value = record.getData();
+            remove(key);
+            save(key,value,expireTime);
+        } finally {
+
+            writeLock.unlock();
+        }
+    }
+
     boolean containsKey(String key) {
 
         readLock.lock();

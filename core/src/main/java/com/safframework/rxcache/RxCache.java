@@ -192,6 +192,19 @@ public final class RxCache {
     }
 
     /**
+     * 更新某一条 Record 的过期时间
+     * @param key
+     * @param type
+     * @param expireTime 过期时间，默认单位是毫秒
+     * @param <T>
+     */
+    public <T> void expire(String key, Type type, long expireTime) {
+
+        cacheRepository.expire(key, type, expireTime);
+    }
+
+
+    /**
      * 判断 RxCache 是否包含这个key
      * @param key
      * @return

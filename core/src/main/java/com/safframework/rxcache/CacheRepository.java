@@ -160,9 +160,18 @@ class CacheRepository {
 
     <T> void update(String key, T value, long expireTime) {
 
+        update(key,value, Constant.NEVER_EXPIRE, TimeUnit.MILLISECONDS);
+    }
+
+    <T> void update(String key, T value, long expireTime, TimeUnit timeUnit) {
+
         writeLock.lock();
 
         try {
+            if (expireTime>0) {
+                expireTime = timeUnit.toMillis(expireTime);
+            }
+
             remove(key); // 由于 record 是不可变对象，所以先删除。（此时并没有先释放写锁，因为写锁是可重入锁，所以不需要释放写锁）
             save(key,value,expireTime); // 再保存
         } finally {

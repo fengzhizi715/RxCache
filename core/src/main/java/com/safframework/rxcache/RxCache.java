@@ -206,15 +206,16 @@ public final class RxCache {
     }
 
     /**
-     * 更新某一条 Record 的过期时间
+     * 更新缓存的值、过期的时间
      * @param key
-     * @param type
+     * @param value
      * @param expireTime 过期时间，默认单位是毫秒
+     * @param timeUnit   时间的单位，默认单位是毫秒
      * @param <T>
      */
-    public <T> void expire(String key, Type type, long expireTime, TimeUnit timeUnit) {
+    public <T> void update(String key, T value, long expireTime, TimeUnit timeUnit) {
 
-        cacheRepository.expire(key, type, expireTime, timeUnit);
+        cacheRepository.update(key, value, expireTime, timeUnit);
     }
 
     /**
@@ -227,6 +228,19 @@ public final class RxCache {
     public <T> void expire(String key, Type type, long expireTime) {
 
         cacheRepository.expire(key, type, expireTime);
+    }
+
+    /**
+     * 更新某一条 Record 的过期时间
+     * @param key
+     * @param type
+     * @param expireTime 过期时间
+     * @param timeUnit   时间的单位，默认单位是毫秒
+     * @param <T>
+     */
+    public <T> void expire(String key, Type type, long expireTime, TimeUnit timeUnit) {
+
+        cacheRepository.expire(key, type, expireTime, timeUnit);
     }
 
     /**

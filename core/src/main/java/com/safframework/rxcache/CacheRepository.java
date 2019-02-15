@@ -173,9 +173,18 @@ class CacheRepository {
 
     <T> void expire(String key, Type type, long expireTime) {
 
+        expire(key,type,expireTime,TimeUnit.MILLISECONDS);
+    }
+
+    <T> void expire(String key, Type type, long expireTime, TimeUnit timeUnit) {
+
         writeLock.lock();
 
         try {
+            if (expireTime>0) {
+                expireTime = timeUnit.toMillis(expireTime);
+            }
+
             Record<T> record = get(key,type,CacheStrategy.ALL);
             T value = record.getData();
             remove(key);

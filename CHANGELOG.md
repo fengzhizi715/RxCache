@@ -1,6 +1,12 @@
 RxCache
 ===
 
+Version 1.3.2
+---
+2019-02-15
+* RxCache 增加 expire 方法
+* RxCache 的 save、update、expire 方法增加 TimeUnit 参数
+
 Version 1.3.1
 ---
 2019-02-11

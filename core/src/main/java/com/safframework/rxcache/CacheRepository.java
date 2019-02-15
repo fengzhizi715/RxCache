@@ -195,9 +195,12 @@ class CacheRepository {
             }
 
             Record<T> record = get(key,type,CacheStrategy.ALL);
-            T value = record.getData();
-            remove(key);
-            save(key,value,expireTime);
+
+            if (record!=null && record.getData()!=null) {
+                T value = record.getData();
+                remove(key);
+                save(key,value,expireTime);
+            }
         } finally {
 
             writeLock.unlock();
@@ -209,9 +212,8 @@ class CacheRepository {
         readLock.lock();
 
         try {
-            if (Preconditions.isBlank(key)) return false;
 
-            return (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
+            return Preconditions.isBlank(key) ? false : (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
 
         } finally {
 

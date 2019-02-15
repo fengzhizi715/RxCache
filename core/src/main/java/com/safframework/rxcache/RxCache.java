@@ -11,6 +11,7 @@ import org.reactivestreams.Publisher;
 
 import java.lang.reflect.Type;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by tony on 2018/9/28.
@@ -166,6 +167,19 @@ public final class RxCache {
     public <T> void save(String key, T value, long expireTime) {
 
         cacheRepository.save(key, value, expireTime);
+    }
+
+    /**
+     * 保存缓存
+     * @param key        缓存的key
+     * @param value      缓存的对象，需要序列化
+     * @param expireTime 过期时间
+     * @param timeUnit   时间的单位，默认单位是毫秒
+     * @param <T>
+     */
+    public <T> void save(String key, T value, long expireTime, TimeUnit timeUnit) {
+
+        cacheRepository.save(key, value, expireTime,timeUnit);
     }
 
     /**

@@ -11,6 +11,7 @@ import com.safframework.rxcache.persistence.Persistence;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Stream;
@@ -123,10 +124,19 @@ class CacheRepository {
      */
     <T> void save(String key, T value, long expireTime) {
 
+        save(key,value,expireTime,TimeUnit.MILLISECONDS);
+    }
+
+    <T> void save(String key, T value, long expireTime, TimeUnit timeUnit) {
+
         writeLock.lock();
 
         try {
             if (Preconditions.isNotBlanks(key, value)) {
+
+                if (expireTime>0) {
+                    expireTime = timeUnit.toMillis(expireTime);
+                }
 
                 if (memory != null) {
                     memory.put(key, value, expireTime);

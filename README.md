@@ -100,7 +100,6 @@ implementation 'com.safframework.rxcache:rxcache-off-heap:1.3.2'
 # TODO List:
 
 * 重构 Disk 的实现
-* 考虑增加 okio 的实现
 
 # Contributors：
 

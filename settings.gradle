@@ -9,4 +9,5 @@ include 'caffeine'
 include 'offheap'
 findProject(':offheap')?.name = 'off-heap'
 include 'mapdb'
+include 'okio'
 

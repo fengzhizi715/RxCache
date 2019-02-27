@@ -25,6 +25,7 @@ dependencies {
     implementation project(":moshi")
     implementation project(":off-heap")
     implementation project(":mapdb")
+    implementation project(":okio")
 
     implementation "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
     implementation "org.springframework:spring-core:${libs.spring}"

@@ -20,7 +20,7 @@ dependencies {
     implementation project(":core")
     implementation project(":proxy")
     implementation project(":memory:guava-cache")
-    implementation project(":caffeine")
+    implementation project(":memory:caffeine")
     implementation project(":converter:fastjson")
     implementation project(":converter:moshi")
     implementation project(":off-heap")

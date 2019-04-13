@@ -38,11 +38,11 @@ buildscript {
     }
 }
 
-tasks.getByPath(":caffeine:bintrayUpload").enabled = false
-tasks.getByPath(":core:bintrayUpload").enabled = false
-tasks.getByPath(":guava-cache:bintrayUpload").enabled = false
-tasks.getByPath(":off-heap:bintrayUpload").enabled = false
-tasks.getByPath(":proxy:bintrayUpload").enabled = false
-
-tasks.getByPath(":converter:fastjson:bintrayUpload").enabled = true
-tasks.getByPath(":converter:moshi:bintrayUpload").enabled = true
+//tasks.getByPath(":caffeine:bintrayUpload").enabled = false
+//tasks.getByPath(":core:bintrayUpload").enabled = false
+//tasks.getByPath(":guava-cache:bintrayUpload").enabled = false
+//tasks.getByPath(":off-heap:bintrayUpload").enabled = false
+//tasks.getByPath(":proxy:bintrayUpload").enabled = false
+//
+//tasks.getByPath(":converter:fastjson:bintrayUpload").enabled = true
+//tasks.getByPath(":converter:moshi:bintrayUpload").enabled = true

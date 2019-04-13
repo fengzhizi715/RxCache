@@ -2,7 +2,6 @@ rootProject.name = 'rxcache'
 include 'core'
 include 'example'
 include 'proxy'
-include 'mapdb'
 
 include 'converter'
 include 'converter:fastjson'
@@ -17,8 +16,11 @@ include 'memory:caffeine'
 findProject(':memory:caffeine')?.name = 'caffeine'
 include 'memory:offheap'
 findProject(':memory:offheap')?.name = 'off-heap'
+include 'memory:mapdb'
+findProject(':memory:mapdb')?.name = 'mapdb'
 
 include 'persistence'
 include 'persistence:okio'
 findProject(':persistence:okio')?.name = 'okio'
+
 

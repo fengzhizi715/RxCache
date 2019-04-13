@@ -9,7 +9,9 @@ ext {
 
             bytekit                   : "1.2.6",
 
-            spring                    : "5.1.0.RELEASE"
+            spring                    : "5.1.0.RELEASE",
+
+            guava                     : "27.1-jre"
     ]
 }
 

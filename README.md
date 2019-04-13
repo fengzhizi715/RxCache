@@ -46,6 +46,8 @@ repositories {
 
 ## 下载：
 
+## 
+
 rxcache-core
 
 ```groovy
@@ -76,17 +78,18 @@ rxcache-off-heap
 implementation 'com.safframework.rxcache:rxcache-off-heap:1.3.2'
 ```
 
+## converter
 
 rxcache-fastjson
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-fastjson:1.3.2'
+implementation 'com.safframework.rxcache:rxcache-converter-fastjson:1.3.2'
 ```
 
 rxcache-moshi
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-moshi:1.3.2'
+implementation 'com.safframework.rxcache:rxcache-converter-moshi:1.3.2'
 ```
 
 

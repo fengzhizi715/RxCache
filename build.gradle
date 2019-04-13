@@ -11,7 +11,9 @@ ext {
 
             spring                    : "5.1.0.RELEASE",
 
-            guava                     : "27.1-jre"
+            guava                     : "27.1-jre",
+
+            caffeine                  : "2.7.0"
     ]
 }
 

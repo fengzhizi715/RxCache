@@ -1,4 +1,4 @@
-package com.safframework.rxcache.offheap.map;
+package com.safframework.rxcache.memory.offheap.map;
 
 import com.safframework.bytekit.Bytes;
 

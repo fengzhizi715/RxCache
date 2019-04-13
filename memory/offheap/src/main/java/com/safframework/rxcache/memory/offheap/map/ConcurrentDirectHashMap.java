@@ -1,6 +1,6 @@
-package com.safframework.rxcache.offheap.map;
+package com.safframework.rxcache.memory.offheap.map;
 
-import com.safframework.rxcache.offheap.converter.DirectBufferConverter;
+import com.safframework.rxcache.memory.offheap.converter.DirectBufferConverter;
 
 import java.nio.ByteBuffer;
 import java.util.*;

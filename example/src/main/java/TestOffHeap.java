@@ -1,6 +1,6 @@
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.offheap.DirectBufferMemoryImpl;
+import com.safframework.rxcache.memory.offheap.DirectBufferMemoryImpl;
 import domain.User;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;

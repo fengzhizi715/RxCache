@@ -46,19 +46,21 @@ repositories {
 
 ## 下载：
 
-## 
+## core:
 
 rxcache-core
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-core:1.3.2'
+implementation 'com.safframework.rxcache:rxcache-core:1.4.0'
 ```
 
 rxcache-proxy
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-proxy:1.3.2'
+implementation 'com.safframework.rxcache:rxcache-proxy:1.4.0'
 ```
+
+## memory:
 
 rxcache-guava-cache
 
@@ -78,18 +80,18 @@ rxcache-off-heap
 implementation 'com.safframework.rxcache:rxcache-off-heap:1.3.2'
 ```
 
-## converter
+## converter:
 
 rxcache-fastjson
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-fastjson:1.3.2'
+implementation 'com.safframework.rxcache:rxcache-converter-fastjson:1.4.0'
 ```
 
 rxcache-moshi
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-moshi:1.3.2'
+implementation 'com.safframework.rxcache:rxcache-converter-moshi:1.4.0'
 ```
 
 

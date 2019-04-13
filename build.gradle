@@ -44,11 +44,11 @@ buildscript {
 
 
 tasks.getByPath(":core:bintrayUpload").enabled = false
-tasks.getByPath(":proxy:bintrayUpload").enabled = false
+tasks.getByPath(":proxy:bintrayUpload").enabled = true
 
 tasks.getByPath(":converter:fastjson:bintrayUpload").enabled = false
 tasks.getByPath(":converter:moshi:bintrayUpload").enabled = false
 
-tasks.getByPath(":memory:guava-cache:bintrayUpload").enabled = true
-tasks.getByPath(":memory:caffeine:bintrayUpload").enabled = true
-tasks.getByPath(":memory:off-heap:bintrayUpload").enabled = true
+tasks.getByPath(":memory:guava-cache:bintrayUpload").enabled = false
+tasks.getByPath(":memory:caffeine:bintrayUpload").enabled = false
+tasks.getByPath(":memory:off-heap:bintrayUpload").enabled = false

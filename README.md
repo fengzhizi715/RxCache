@@ -1,6 +1,6 @@
 # RxCache
 
-RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前，支持堆内存、堆外内存、磁盘缓存。
+RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前，支持内存、堆外内存、磁盘缓存。
 
 [![@Tony沈哲 on weibo](https://img.shields.io/badge/weibo-%40Tony%E6%B2%88%E5%93%B2-blue.svg)](http://www.weibo.com/fengzhizi715)
 [![License](https://img.shields.io/badge/license-Apache%202-lightgrey.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
@@ -31,9 +31,9 @@ rxcache-core|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/r
 rxcache-proxy|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-proxy/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-proxy/_latestVersion)|
 rxcache-guava-cache|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-guava-cache/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-guava-cache/_latestVersion)|
 rxcache-caffeine|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-caffeine/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-caffeine/_latestVersion)|
-rxcache-fastjson|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-fastjson/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-fastjson/_latestVersion)|
-rxcache-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-moshi/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-moshi/_latestVersion)|
 rxcache-off-heap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-off-heap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-off-heap/_latestVersion)|
+rxcache-converter-fastjson|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-fastjson/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-fastjson/_latestVersion)|
+rxcache-converter-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-moshi/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-moshi/_latestVersion)|
 
 对于 Java 工程，如果使用 gradle 构建，由于默认没有使用 jcenter()，需要在相应 module 的 build.gradle 中配置
 
@@ -70,6 +70,13 @@ rxcache-caffeine
 implementation 'com.safframework.rxcache:rxcache-caffeine:1.3.2'
 ```
 
+rxcache-off-heap
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-off-heap:1.3.2'
+```
+
+
 rxcache-fastjson
 
 ```groovy
@@ -82,11 +89,6 @@ rxcache-moshi
 implementation 'com.safframework.rxcache:rxcache-moshi:1.3.2'
 ```
 
-rxcache-off-heap
-
-```groovy
-implementation 'com.safframework.rxcache:rxcache-off-heap:1.3.2'
-```
 
 # 详细功能查看[wiki](https://github.com/fengzhizi715/RxCache/wiki)
 

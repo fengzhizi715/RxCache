@@ -1,6 +1,6 @@
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.okio.OkioImpl;
+import com.safframework.rxcache.persistence.okio.OkioImpl;
 import domain.User;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;

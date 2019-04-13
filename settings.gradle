@@ -3,7 +3,6 @@ include 'core'
 include 'example'
 include 'proxy'
 include 'mapdb'
-include 'okio'
 
 include 'converter'
 include 'converter:fastjson'
@@ -18,4 +17,8 @@ include 'memory:caffeine'
 findProject(':memory:caffeine')?.name = 'caffeine'
 include 'memory:offheap'
 findProject(':memory:offheap')?.name = 'off-heap'
+
+include 'persistence'
+include 'persistence:okio'
+findProject(':persistence:okio')?.name = 'okio'
 

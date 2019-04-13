@@ -1,4 +1,4 @@
-package com.safframework.rxcache.okio;
+package com.safframework.rxcache.persistence.okio;
 
 import com.safframework.bytekit.utils.IOUtils;
 import com.safframework.bytekit.utils.Preconditions;
@@ -32,7 +32,7 @@ public class OkioImpl implements Disk {
         this(cacheDirectory,new GsonConverter());
     }
 
-    public OkioImpl(File cacheDirectory,Converter converter) {
+    public OkioImpl(File cacheDirectory, Converter converter) {
 
         this.cacheDirectory = cacheDirectory;
         this.converter = converter;

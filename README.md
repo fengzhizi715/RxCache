@@ -1,6 +1,6 @@
 # RxCache
 
-RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前，支持内存、堆外内存、磁盘缓存。
+RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存、堆外内存、磁盘缓存。
 
 [![@Tony沈哲 on weibo](https://img.shields.io/badge/weibo-%40Tony%E6%B2%88%E5%93%B2-blue.svg)](http://www.weibo.com/fengzhizi715)
 [![License](https://img.shields.io/badge/license-Apache%202-lightgrey.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
@@ -19,8 +19,8 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前，支持内�
 * Persistence 的 DiskImpl 拥有加密功能，默认使用 AES 128、DES 算法进行加密
 * 使用 Builder 模式生成 Type
 * 线程安全
-* 支持 Retrofit 风格使用缓存
 * 支持 RxJava 2
+* 支持 Retrofit 风格使用缓存
 
 
 # 最新版本

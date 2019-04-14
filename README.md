@@ -29,9 +29,9 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前，支持内�
 ---|:-------------:
 rxcache-core|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|
 rxcache-proxy|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-proxy/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-proxy/_latestVersion)|
-rxcache-guava-cache|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-guava-cache/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-guava-cache/_latestVersion)|
-rxcache-caffeine|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-caffeine/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-caffeine/_latestVersion)|
-rxcache-off-heap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-off-heap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-off-heap/_latestVersion)|
+rxcache-memory-guava-cache|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-guava-cache/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-guava-cache/_latestVersion)|
+rxcache-memory-caffeine|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-caffeine/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-caffeine/_latestVersion)|
+rxcache-memory-off-heap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-off-heap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-off-heap/_latestVersion)|
 rxcache-converter-fastjson|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-fastjson/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-fastjson/_latestVersion)|
 rxcache-converter-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-moshi/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-moshi/_latestVersion)|
 
@@ -62,33 +62,33 @@ implementation 'com.safframework.rxcache:rxcache-proxy:1.4.0'
 
 ## memory:
 
-rxcache-guava-cache
+rxcache-memory-guava-cache
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-guava-cache:1.3.2'
+implementation 'com.safframework.rxcache:rxcache-memory-guava-cache:1.4.0'
 ```
 
-rxcache-caffeine
+rxcache-memory-caffeine
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-caffeine:1.3.2'
+implementation 'com.safframework.rxcache:rxcache-memory-caffeine:1.4.0'
 ```
 
-rxcache-off-heap
+rxcache-memory-off-heap
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-off-heap:1.3.2'
+implementation 'com.safframework.rxcache:rxcache-memory-off-heap:1.4.0'
 ```
 
 ## converter:
 
-rxcache-fastjson
+rxcache-converter-fastjson
 
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-converter-fastjson:1.4.0'
 ```
 
-rxcache-moshi
+rxcache-converter-moshi
 
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-converter-moshi:1.4.0'

@@ -1,7 +1,7 @@
 package com.safframework.rxcache.persistence.converter;
 
-import com.google.gson.Gson;
 import com.safframework.rxcache.persistence.encrypt.Encryptor;
+import com.safframework.rxcache.utils.GsonUtils;
 
 import java.lang.reflect.Type;
 
@@ -10,27 +10,21 @@ import java.lang.reflect.Type;
  */
 public class GsonConverter extends AbstractConverter {
 
-    private Gson gson;
-
     public GsonConverter() {
-
-        gson = new Gson();
     }
 
     public GsonConverter(Encryptor encryptor) {
-
         super(encryptor);
-        gson = new Gson();
     }
 
     @Override
     public <T> T fromJson(String json, Type type) {
-        return gson.fromJson(json, type);
+        return GsonUtils.fromJson(json, type);
     }
 
     @Override
     public String toJson(Object data) {
-        return gson.toJson(data);
+        return GsonUtils.toJson(data);
     }
 
     @Override

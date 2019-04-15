@@ -1,8 +1,8 @@
 package com.safframework.rxcache.domain.info;
 
-import com.google.gson.Gson;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
+import com.safframework.rxcache.utils.GsonUtils;
 
 /**
  * 显示缓存的信息
@@ -57,6 +57,6 @@ public class CacheInfo {
 
     public String toString() {
 
-        return new Gson().toJson(this);
+        return GsonUtils.toJson(this);
     }
 }

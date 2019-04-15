@@ -9,6 +9,7 @@ import com.safframework.rxcache.transformstrategy.*;
 import io.reactivex.*;
 import org.reactivestreams.Publisher;
 
+import java.io.PrintStream;
 import java.lang.reflect.Type;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -304,7 +305,7 @@ public final class RxCache {
     }
 
     /**
-     * 判断 RxCache 是否可用
+     * 仅仅判断 RxCache 是否可用
      * @return
      */
     public boolean test() {
@@ -314,11 +315,19 @@ public final class RxCache {
 
     /**
      * 显示缓存中的信息
-     * @return
      */
-    public String info() {
+    public void info() {
 
-        return cacheRepository.info();
+        info(System.out);
+    }
+
+    /**
+     * 显示缓存中的信息
+     * @param out
+     */
+    public void info(PrintStream out) {
+
+        out.println(cacheRepository.info());
     }
 
     public static final class Builder {

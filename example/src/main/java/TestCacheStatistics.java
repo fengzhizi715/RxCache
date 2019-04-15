@@ -19,6 +19,6 @@ public class TestCacheStatistics {
 
         rxCache.save("test10",10);
 
-        System.out.println(rxCache.info());
+        rxCache.info();
     }
 }

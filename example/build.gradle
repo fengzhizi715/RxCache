@@ -26,6 +26,7 @@ dependencies {
 
     implementation project(":converter:fastjson")
     implementation project(":converter:moshi")
+    implementation project(":converter:fst")
 
     implementation project(":persistence:okio")
 

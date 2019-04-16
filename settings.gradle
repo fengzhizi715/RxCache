@@ -8,6 +8,8 @@ include 'converter:fastjson'
 findProject(':converter:fastjson')?.name = 'fastjson'
 include 'converter:moshi'
 findProject(':converter:moshi')?.name = 'moshi'
+include 'converter:fst'
+findProject(':converter:fst')?.name = 'fst'
 
 include 'memory'
 include 'memory:guava-cache'

@@ -32,6 +32,7 @@ rxcache-proxy|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/
 rxcache-memory-guava-cache|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-guava-cache/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-guava-cache/_latestVersion)|
 rxcache-memory-caffeine|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-caffeine/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-caffeine/_latestVersion)|
 rxcache-memory-off-heap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-off-heap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-off-heap/_latestVersion)|
+rxcache-memory-mapdb|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-mapdb/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-mapdb/_latestVersion)|
 rxcache-converter-fastjson|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-fastjson/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-fastjson/_latestVersion)|
 rxcache-converter-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-moshi/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-moshi/_latestVersion)|
 
@@ -79,6 +80,13 @@ rxcache-memory-off-heap
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-memory-off-heap:1.4.0'
 ```
+
+rxcache-memory-mapdb
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-memory-mapdb:1.4.0'
+```
+
 
 ## converter:
 

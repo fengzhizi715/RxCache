@@ -10,6 +10,9 @@ include 'converter:moshi'
 findProject(':converter:moshi')?.name = 'moshi'
 include 'converter:fst'
 findProject(':converter:fst')?.name = 'fst'
+include 'converter:kryo'
+findProject(':converter:kryo')?.name = 'kryo'
+
 
 include 'memory'
 include 'memory:guava-cache'

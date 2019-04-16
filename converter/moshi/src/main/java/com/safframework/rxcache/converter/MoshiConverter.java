@@ -71,9 +71,4 @@ public class MoshiConverter extends AbstractConverter {
         }
 
     }
-
-    @Override
-    public String converterName() {
-        return "moshi";
-    }
 }

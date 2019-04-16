@@ -84,4 +84,16 @@ public abstract class AbstractConverter implements Converter {
             }
         }
     }
+
+    public String converterName(){
+
+        String simpleName = this.getClass().getSimpleName();
+
+        int index = simpleName.lastIndexOf("Converter");
+        if (index>0) {
+            return simpleName.substring(0,index).toLowerCase();
+        } else {
+            return simpleName.toLowerCase();
+        }
+    }
 }

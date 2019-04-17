@@ -22,7 +22,6 @@ public class CacheHolderSerializer extends Serializer<CacheHolder> {
     @Override
     public CacheHolder read(Kryo kryo, Input input, Class<CacheHolder> type) {
 
-        CacheHolder cacheHolder = new CacheHolder(input.readString(),input.readLong(),input.readLong(),input.readString());
-        return cacheHolder;
+        return new CacheHolder(input.readString(),input.readLong(),input.readLong(),input.readString());
     }
 }

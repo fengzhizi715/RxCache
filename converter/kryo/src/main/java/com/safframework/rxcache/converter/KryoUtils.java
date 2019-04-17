@@ -19,7 +19,6 @@ public class KryoUtils {
 
     private static final String DEFAULT_ENCODING = "UTF-8";
 
-    //每个线程的 Kryo 实例
     private static final ThreadLocal<Kryo> kryoLocal = new ThreadLocal<Kryo>() {
         @Override
         protected Kryo initialValue() {
@@ -51,7 +50,7 @@ public class KryoUtils {
      *
      * @return 当前线程的 Kryo 实例
      */
-    public static Kryo getInstance() {
+    private static Kryo getInstance() {
         return kryoLocal.get();
     }
 

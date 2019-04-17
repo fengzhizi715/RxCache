@@ -27,5 +27,6 @@ findProject(':memory:mapdb')?.name = 'mapdb'
 include 'persistence'
 include 'persistence:okio'
 findProject(':persistence:okio')?.name = 'okio'
-
+include 'converter:hessian'
+findProject(':converter:hessian')?.name = 'hessian'
 

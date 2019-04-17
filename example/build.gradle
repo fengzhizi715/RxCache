@@ -28,6 +28,7 @@ dependencies {
     implementation project(":converter:moshi")
     implementation project(":converter:fst")
     implementation project(":converter:kryo")
+    implementation project(":converter:hessian")
 
     implementation project(":persistence:okio")
 

@@ -48,8 +48,11 @@ tasks.getByPath(":proxy:bintrayUpload").enabled = false
 
 tasks.getByPath(":converter:fastjson:bintrayUpload").enabled = false
 tasks.getByPath(":converter:moshi:bintrayUpload").enabled = false
+tasks.getByPath(":converter:fst:bintrayUpload").enabled = true
+tasks.getByPath(":converter:hessian:bintrayUpload").enabled = true
+tasks.getByPath(":converter:kryo:bintrayUpload").enabled = true
 
 tasks.getByPath(":memory:guava-cache:bintrayUpload").enabled = false
 tasks.getByPath(":memory:caffeine:bintrayUpload").enabled = false
 tasks.getByPath(":memory:off-heap:bintrayUpload").enabled = false
-tasks.getByPath(":memory:mapdb:bintrayUpload").enabled = true
+tasks.getByPath(":memory:mapdb:bintrayUpload").enabled = false

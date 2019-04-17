@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.novoda.bintray-release'
 }
 
 group 'com.safframework.rxcache'
@@ -21,4 +22,13 @@ dependencies {
 
     implementation 'com.esotericsoftware:kryo:4.0.2'
     implementation "com.safframework.bytekit:bytekit-core:$libs.bytekit"
+}
+
+publish{
+    userOrg = 'fengzhizi715'
+    groupId = 'com.safframework.rxcache'
+    artifactId = 'rxcache-converter-kryo'
+    publishVersion = '1.4.0'
+    desc = 'A local reactive cache for Java and Android.'
+    website = 'https://github.com/fengzhizi715/RxCache'
 }

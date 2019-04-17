@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.novoda.bintray-release'
 }
 
 group 'com.safframework.rxcache'
@@ -20,4 +21,13 @@ dependencies {
     implementation project(":core")
     implementation 'com.caucho:hessian:4.0.60'
     implementation "com.safframework.bytekit:bytekit-core:$libs.bytekit"
+}
+
+publish{
+    userOrg = 'fengzhizi715'
+    groupId = 'com.safframework.rxcache'
+    artifactId = 'rxcache-converter-hessian'
+    publishVersion = '1.4.0'
+    desc = 'A local reactive cache for Java and Android.'
+    website = 'https://github.com/fengzhizi715/RxCache'
 }

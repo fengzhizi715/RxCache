@@ -5,6 +5,7 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.safframework.bytekit.Bytes;
 import com.safframework.bytekit.bytes.ByteBufferBytes;
+import com.safframework.bytekit.utils.IOUtils;
 import com.safframework.rxcache.domain.CacheHolder;
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
@@ -66,14 +67,21 @@ public class KryoUtils {
      * @return 序列化后的字节数组
      */
     public static <T> byte[] writeToByteArray(T obj) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        Output output = new Output(byteArrayOutputStream);
 
-        Kryo kryo = getInstance();
-        kryo.writeClassAndObject(output, obj);
-        output.flush();
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        Output output = null;
+        try {
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            output = new Output(byteArrayOutputStream);
 
-        return byteArrayOutputStream.toByteArray();
+            Kryo kryo = getInstance();
+            kryo.writeClassAndObject(output, obj);
+            output.flush();
+
+            return byteArrayOutputStream.toByteArray();
+        } finally {
+            IOUtils.closeQuietly(output,byteArrayOutputStream);
+        }
     }
 
     /**
@@ -98,11 +106,18 @@ public class KryoUtils {
      */
     @SuppressWarnings("unchecked")
     public static <T> T readFromByteArray(byte[] byteArray) {
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
-        Input input = new Input(byteArrayInputStream);
 
-        Kryo kryo = getInstance();
-        return (T) kryo.readClassAndObject(input);
+        ByteArrayInputStream byteArrayInputStream = null;
+        Input input = null;
+        try {
+            byteArrayInputStream = new ByteArrayInputStream(byteArray);
+            input = new Input(byteArrayInputStream);
+
+            Kryo kryo = getInstance();
+            return (T) kryo.readClassAndObject(input);
+        } finally {
+            IOUtils.closeQuietly(input,byteArrayInputStream);
+        }
     }
 
     /**

@@ -10,14 +10,12 @@ import org.objenesis.strategy.StdInstantiatorStrategy;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by tony on 2019-04-17.
  */
 public class KryoUtils {
-
-    private static final String DEFAULT_ENCODING = "UTF-8";
 
     private static final ThreadLocal<Kryo> kryoLocal = new ThreadLocal<Kryo>() {
         @Override
@@ -88,11 +86,7 @@ public class KryoUtils {
      */
     public static <T> String writeToString(T obj) {
 
-        try {
-           return new String(ByteBufferBytes.create(writeToByteArray(obj)).encodeBase64(), DEFAULT_ENCODING);
-        } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException(e);
-        }
+        return new String(ByteBufferBytes.create(writeToByteArray(obj)).encodeBase64(), StandardCharsets.UTF_8);
     }
 
     /**

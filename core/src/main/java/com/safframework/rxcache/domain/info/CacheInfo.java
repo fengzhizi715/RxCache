@@ -36,9 +36,6 @@ public class CacheInfo {
         private Memory memory;
         private Persistence persistence;
 
-        public Builder() {
-        }
-
         public Builder memory(Memory memory) {
             this.memory = memory;
             return this;

@@ -53,7 +53,7 @@ public class TypeBuilder {
     public TypeBuilder addTypeParamExtends(Class... classes) {
 
         if (classes == null) {
-            throw new NullPointerException("addTypeParamExtends() expect not null Class");
+            throw new RxCacheException("addTypeParamExtends() expect not null Class");
         }
 
         WildcardTypeImpl wildcardType = new WildcardTypeImpl(null, classes);
@@ -64,7 +64,7 @@ public class TypeBuilder {
     public TypeBuilder addTypeParamSuper(Class... classes) {
 
         if (classes == null) {
-            throw new NullPointerException("addTypeParamSuper() expect not null Class");
+            throw new RxCacheException("addTypeParamSuper() expect not null Class");
         }
 
         WildcardTypeImpl wildcardType = new WildcardTypeImpl(classes, null);
@@ -75,7 +75,7 @@ public class TypeBuilder {
     public TypeBuilder addTypeParam(Type type) {
 
         if (type == null) {
-            throw new NullPointerException("addTypeParam expect not null Type");
+            throw new RxCacheException("addTypeParam expect not null Type");
         }
 
         args.add(type);

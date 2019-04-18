@@ -11,11 +11,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Cleaner implements Closeable {
 
-    private interface Unmapper {
-        void unmap(ByteBuffer buffer) throws Exception;
-    }
-
     private static final Unmapper UNMAP;
+    private final AtomicInteger referenceCount;
+    private ByteBuffer buffer;
 
     static {
 
@@ -59,6 +57,7 @@ public class Cleaner implements Closeable {
     }
 
     static void clean(ByteBuffer buffer) {
+        
         if (UNMAP != null) {
             try {
                 UNMAP.unmap(buffer);
@@ -67,9 +66,6 @@ public class Cleaner implements Closeable {
             }
         }
     }
-
-    private final AtomicInteger referenceCount;
-    private ByteBuffer buffer;
 
     Cleaner(ByteBuffer buffer) {
         this.referenceCount = new AtomicInteger();
@@ -89,6 +85,10 @@ public class Cleaner implements Closeable {
             }
             buffer = null;
         }
+    }
+
+    private interface Unmapper {
+        void unmap(ByteBuffer buffer) throws Exception;
     }
 
 }

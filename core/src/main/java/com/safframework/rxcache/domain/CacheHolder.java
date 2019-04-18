@@ -9,7 +9,7 @@ public final class CacheHolder implements Serializable {
 
     private static final long serialVersionUID = -1795020035448398592L;
 
-    private final String data; // 对象转换的 json 字符串
+    private final String data; // 所需存储的对象，在 Persistence 层将其转换成 json 字符串，方便存储
     private final long timestamp;
     private final long expireTime;
     private final String converterName;

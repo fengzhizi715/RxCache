@@ -60,8 +60,8 @@ public class DiskImpl implements Disk {
 
         try {
 
-            key = safetyKey(key);
-            File file = new File(cacheDirectory, key);
+            String safetyKey = safetyKey(key);
+            File file = new File(cacheDirectory, safetyKey);
             
             if (file == null || !file.exists()) return null;
 
@@ -90,11 +90,11 @@ public class DiskImpl implements Disk {
                     result = converter.fromJson(json,type);
                 } else {        // 缓存的数据已经过期
 
-                    evict(key);
+                    evict(safetyKey);
                 }
             }
 
-            return result != null ? new Record<>(Source.PERSISTENCE, key, result, timestamp, expireTime) : null;
+            return result != null ? new Record<>(Source.PERSISTENCE, safetyKey, result, timestamp, expireTime) : null;
         } catch (Exception ignore) {
 
             throw new RxCacheException(ignore);
@@ -117,9 +117,9 @@ public class DiskImpl implements Disk {
 
         try {
 
-            key = safetyKey(key);
+            String safetyKey = safetyKey(key);
 
-            File file = new File(cacheDirectory, key);
+            File file = new File(cacheDirectory, safetyKey);
             outputStream = new FileOutputStream(file, false);
             converter.writer(outputStream,new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime,converter.converterName()));
         } catch (Exception e) {
@@ -166,8 +166,8 @@ public class DiskImpl implements Disk {
     @Override
     public void evict(String key) {
 
-        key = safetyKey(key);
-        File file = new File(cacheDirectory, key);
+        String safetyKey = safetyKey(key);
+        File file = new File(cacheDirectory, safetyKey);
         file.delete();
     }
 

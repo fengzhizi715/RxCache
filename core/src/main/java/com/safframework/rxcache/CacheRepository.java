@@ -34,7 +34,7 @@ class CacheRepository {
         this.persistence = persistence;
     }
 
-    <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
+    protected <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
 
         readLock.lock();
 
@@ -113,7 +113,7 @@ class CacheRepository {
         }
     }
 
-    <T> void save(String key, T value) {
+    protected <T> void save(String key, T value) {
 
         save(key,value, Constant.NEVER_EXPIRE);
     }
@@ -125,12 +125,12 @@ class CacheRepository {
      * @param expireTime 过期的时间单位是毫秒
      * @param <T>
      */
-    <T> void save(String key, T value, long expireTime) {
+    protected <T> void save(String key, T value, long expireTime) {
 
         save(key,value,expireTime,TimeUnit.MILLISECONDS);
     }
 
-    <T> void save(String key, T value, long expireTime, TimeUnit timeUnit) {
+    protected <T> void save(String key, T value, long expireTime, TimeUnit timeUnit) {
 
         writeLock.lock();
 
@@ -156,17 +156,17 @@ class CacheRepository {
         }
     }
 
-    <T> void update(String key, T value) {
+    protected <T> void update(String key, T value) {
 
         update(key,value, Constant.NEVER_EXPIRE);
     }
 
-    <T> void update(String key, T value, long expireTime) {
+    protected <T> void update(String key, T value, long expireTime) {
 
         update(key,value, Constant.NEVER_EXPIRE, TimeUnit.MILLISECONDS);
     }
 
-    <T> void update(String key, T value, long expireTime, TimeUnit timeUnit) {
+    protected <T> void update(String key, T value, long expireTime, TimeUnit timeUnit) {
 
         writeLock.lock();
 
@@ -183,12 +183,12 @@ class CacheRepository {
         }
     }
 
-    <T> void expire(String key, Type type, long expireTime) {
+    protected <T> void expire(String key, Type type, long expireTime) {
 
         expire(key,type,expireTime,TimeUnit.MILLISECONDS);
     }
 
-    <T> void expire(String key, Type type, long expireTime, TimeUnit timeUnit) {
+    protected <T> void expire(String key, Type type, long expireTime, TimeUnit timeUnit) {
 
         writeLock.lock();
 
@@ -210,7 +210,7 @@ class CacheRepository {
         }
     }
 
-    boolean containsKey(String key) {
+    protected boolean containsKey(String key) {
 
         readLock.lock();
 
@@ -224,7 +224,7 @@ class CacheRepository {
         }
     }
 
-    Set<String> getAllKeys() {
+    protected Set<String> getAllKeys() {
 
         readLock.lock();
 
@@ -249,7 +249,7 @@ class CacheRepository {
         }
     }
 
-    void remove(String key) {
+    protected void remove(String key) {
 
         writeLock.lock();
 
@@ -271,7 +271,7 @@ class CacheRepository {
         }
     }
 
-    void remove(String... keys) {
+    protected void remove(String... keys) {
 
         writeLock.lock();
 
@@ -296,7 +296,7 @@ class CacheRepository {
         }
     }
 
-    long ttl(String key, Type type) {
+    protected long ttl(String key, Type type) {
 
         readLock.lock();
 
@@ -329,7 +329,7 @@ class CacheRepository {
         }
     }
 
-    void clear() {
+    protected void clear() {
 
         writeLock.lock();
 
@@ -348,7 +348,7 @@ class CacheRepository {
         }
     }
 
-    String info() {
+    protected String info() {
 
         readLock.lock();
 

@@ -120,9 +120,9 @@ public class OkioImpl implements Disk {
         BufferedSink bufferedSink = null;
 
         try {
-            key = safetyKey(key);
+            String safetyKey = safetyKey(key);
 
-            File file = new File(cacheDirectory, key);
+            File file = new File(cacheDirectory, safetyKey);
             outputStream = new FileOutputStream(file, false);
 
             bufferedSink = Okio.buffer(Okio.sink(outputStream));
@@ -168,8 +168,8 @@ public class OkioImpl implements Disk {
 
     @Override
     public void evict(String key) {
-        key = safetyKey(key);
-        File file = new File(cacheDirectory, key);
+        String safetyKey = safetyKey(key);
+        File file = new File(cacheDirectory, safetyKey);
         file.delete();
     }
 

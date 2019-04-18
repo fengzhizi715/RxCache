@@ -10,7 +10,6 @@ import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
 import org.mapdb.Serializer;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,7 +19,6 @@ public class MapDBImpl extends AbstractMemoryImpl {
 
     private DB db;
     private HTreeMap<String, Object> map;
-    private List<String> keys;
 
     public MapDBImpl(long maxSize) {
         super(maxSize);

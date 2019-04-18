@@ -44,7 +44,7 @@ public class NodeList {
 
     public void insertAfter(Node position, Node node) {
 
-        if (position == tail) {
+        if (position.equals(tail)) {
             append(node);
         } else {
             node.next = position.next;
@@ -57,13 +57,13 @@ public class NodeList {
 
     public void remove(Node node) {
 
-        if (node == tail && node == head) { /* single node in LinkedList */
+        if (node.equals(tail) && node.equals(head)) { /* single node in LinkedList */
             head = null;
             tail = null;
-        } else if (node == tail) {
+        } else if (node.equals(tail)) {
             tail = tail.prev;
             tail.next = null;
-        } else if (node == head) {
+        } else if (node.equals(head)) {
             head = head.next;
             head.prev = null;
         } else {

@@ -33,9 +33,6 @@ public final class CacheProvider {
 
         private RxCache rxCache;
 
-        public Builder() {
-        }
-
         public CacheProvider.Builder rxCache(RxCache rxCache) {
 
             this.rxCache = rxCache;

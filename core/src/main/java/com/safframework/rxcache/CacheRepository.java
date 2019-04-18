@@ -100,6 +100,9 @@ class CacheRepository {
                         }
                         break;
                     }
+
+                    default:
+                        break;
                 }
             }
 

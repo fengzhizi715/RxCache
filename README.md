@@ -35,6 +35,9 @@ rxcache-memory-off-heap|[ ![Download](https://api.bintray.com/packages/fengzhizi
 rxcache-memory-mapdb|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-mapdb/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-mapdb/_latestVersion)|
 rxcache-converter-fastjson|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-fastjson/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-fastjson/_latestVersion)|
 rxcache-converter-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-moshi/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-moshi/_latestVersion)|
+rxcache-converter-kryo|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-kryo/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-kryo/_latestVersion)|
+rxcache-converter-hessian|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-hessian/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-hessian/_latestVersion)|
+rxcache-converter-fst|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-fst/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-fst/_latestVersion)|
 
 对于 Java 工程，如果使用 gradle 构建，由于默认没有使用 jcenter()，需要在相应 module 的 build.gradle 中配置
 
@@ -102,6 +105,23 @@ rxcache-converter-moshi
 implementation 'com.safframework.rxcache:rxcache-converter-moshi:1.4.0'
 ```
 
+rxcache-converter-kryo
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-converter-kryo:1.4.0'
+```
+
+rxcache-converter-hessian
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-converter-hessian:1.4.0'
+```
+
+rxcache-converter-fst
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-converter-fst:1.4.0'
+```
 
 # 详细功能查看[wiki](https://github.com/fengzhizi715/RxCache/wiki)
 

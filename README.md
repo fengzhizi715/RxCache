@@ -22,6 +22,7 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存�
 * 支持 RxJava 2
 * 支持 Retrofit 风格使用缓存
 
+更详细的功能请查看[wiki](https://github.com/fengzhizi715/RxCache/wiki)
 
 # 最新版本
 
@@ -122,8 +123,6 @@ rxcache-converter-fst
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-converter-fst:1.4.0'
 ```
-
-# 详细功能查看[wiki](https://github.com/fengzhizi715/RxCache/wiki)
 
 
 # 感谢

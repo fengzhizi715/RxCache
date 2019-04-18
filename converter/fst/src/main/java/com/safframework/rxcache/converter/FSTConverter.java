@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
  */
 public class FSTConverter extends AbstractConverter {
 
-    static FSTConfiguration conf = FSTConfiguration.createJsonConfiguration();
+    private static FSTConfiguration conf = FSTConfiguration.createJsonConfiguration();
 
     @Override
     public <T> T fromJson(String json, Type type) {

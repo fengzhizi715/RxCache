@@ -61,8 +61,8 @@ public class OkioImpl implements Disk {
 
         try {
 
-            key = safetyKey(key);
-            File file = new File(cacheDirectory, key);
+            String safetyKey = safetyKey(key);
+            File file = new File(cacheDirectory, safetyKey);
 
             if (file == null || !file.exists()) return null;
 
@@ -94,11 +94,11 @@ public class OkioImpl implements Disk {
                     result = converter.fromJson(json,type);
                 } else {        // 缓存的数据已经过期
 
-                    evict(key);
+                    evict(safetyKey);
                 }
             }
 
-            return result != null ? new Record<>(Source.PERSISTENCE, key, result, timestamp, expireTime) : null;
+            return result != null ? new Record<>(Source.PERSISTENCE, safetyKey, result, timestamp, expireTime) : null;
         } catch (Exception ignore) {
 
             throw new RxCacheException(ignore);

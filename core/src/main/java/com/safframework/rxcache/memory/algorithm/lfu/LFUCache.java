@@ -10,21 +10,21 @@ import java.util.Set;
  */
 public class LFUCache<K, V> {
 
-    HashMap<K, LFUCacheEntry<K, V>> kvStore;
+    private HashMap<K, LFUCacheEntry<K, V>> kvStore;
 
     /* A Doubly linked list of frequency nodes */
-    NodeList freqList;
+    private NodeList freqList;
 
     /* HashMap for storing frequencyNode entries */
-    HashMap<Integer, FrequencyNode> frequencyMap;
+    private HashMap<Integer, FrequencyNode> frequencyMap;
 
-    CacheStatistics cacheStatistics;
+    private CacheStatistics cacheStatistics;
 
     /* Capacity of cache */
-    int capacity;
+    private int capacity;
 
     /* current size of Cache */
-    int size;
+    private int size;
 
     public LFUCache(int capacity) {
         this.capacity = capacity;

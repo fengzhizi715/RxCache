@@ -56,7 +56,7 @@ public class Cleaner implements Closeable {
         UNMAP = unmap;
     }
 
-    static void clean(ByteBuffer buffer) {
+    protected static void clean(ByteBuffer buffer) {
         
         if (UNMAP != null) {
             try {

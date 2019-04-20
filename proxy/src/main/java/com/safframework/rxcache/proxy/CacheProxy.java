@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  */
 public class CacheProxy implements InvocationHandler {
 
-    RxCache rxCache;
+    private RxCache rxCache;
 
     public CacheProxy(RxCache rxCache) {
 

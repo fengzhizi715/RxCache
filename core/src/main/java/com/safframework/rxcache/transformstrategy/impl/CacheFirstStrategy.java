@@ -3,8 +3,13 @@ package com.safframework.rxcache.transformstrategy.impl;
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
-import com.safframework.rxcache.transformstrategy.*;
-import io.reactivex.*;
+import com.safframework.rxcache.transformstrategy.FlowableStrategy;
+import com.safframework.rxcache.transformstrategy.MaybeStrategy;
+import com.safframework.rxcache.transformstrategy.ObservableStrategy;
+
+import io.reactivex.Flowable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import org.reactivestreams.Publisher;
@@ -17,7 +22,7 @@ import java.lang.reflect.Type;
  */
 public class CacheFirstStrategy implements ObservableStrategy,
         FlowableStrategy,
-        MaybeStrategy  {
+        MaybeStrategy {
 
     @Override
     public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type) {

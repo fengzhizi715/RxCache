@@ -1,7 +1,11 @@
 package com.safframework.rxcache.proxy;
 
 import com.safframework.rxcache.RxCache;
-import com.safframework.rxcache.proxy.annotation.*;
+import com.safframework.rxcache.proxy.annotation.CacheClass;
+import com.safframework.rxcache.proxy.annotation.CacheKey;
+import com.safframework.rxcache.proxy.annotation.CacheLifecycle;
+import com.safframework.rxcache.proxy.annotation.CacheMethod;
+import com.safframework.rxcache.proxy.annotation.CacheValue;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;

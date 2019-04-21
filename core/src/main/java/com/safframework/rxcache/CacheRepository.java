@@ -138,15 +138,24 @@ class CacheRepository {
             if (Preconditions.isNotBlanks(key, value)) {
 
                 if (expireTime>0) {
-                    expireTime = timeUnit.toMillis(expireTime);
-                }
+                    long newExpireTime = timeUnit.toMillis(expireTime);
 
-                if (memory != null) {
-                    memory.put(key, value, expireTime);
-                }
+                    if (memory != null) {
+                        memory.put(key, value, newExpireTime);
+                    }
 
-                if (persistence != null) {
-                    persistence.save(key, value, expireTime);
+                    if (persistence != null) {
+                        persistence.save(key, value, newExpireTime);
+                    }
+                } else {
+
+                    if (memory != null) {
+                        memory.put(key, value);
+                    }
+
+                    if (persistence != null) {
+                        persistence.save(key, value);
+                    }
                 }
             }
 
@@ -171,12 +180,18 @@ class CacheRepository {
         writeLock.lock();
 
         try {
+            long newExpireTime = 0;
             if (expireTime>0) {
-                expireTime = timeUnit.toMillis(expireTime);
+                newExpireTime = timeUnit.toMillis(expireTime);
             }
 
-            remove(key); // 由于 record 是不可变对象，所以先删除。（此时并没有先释放写锁，因为写锁是可重入锁，所以不需要释放写锁）
-            save(key,value,expireTime); // 再保存
+            remove(key);                       // 由于 record 是不可变对象，所以先删除。（此时并没有先释放写锁，因为写锁是可重入锁，所以不需要释放写锁）
+
+            if (newExpireTime>0) {
+                save(key,value,newExpireTime); // 再保存
+            } else {
+                save(key,value);               // 再保存
+            }
         } finally {
 
             writeLock.unlock();
@@ -193,8 +208,9 @@ class CacheRepository {
         writeLock.lock();
 
         try {
+            long newExpireTime = 0;
             if (expireTime>0) {
-                expireTime = timeUnit.toMillis(expireTime);
+                newExpireTime = timeUnit.toMillis(expireTime);
             }
 
             Record<T> record = get(key,type,CacheStrategy.ALL);
@@ -202,7 +218,12 @@ class CacheRepository {
             if (record!=null && record.getData()!=null) {
                 T value = record.getData();
                 remove(key);
-                save(key,value,expireTime);
+
+                if (newExpireTime>0) {
+                    save(key,value,expireTime);
+                } else {
+                    save(key,value);
+                }
             }
         } finally {
 

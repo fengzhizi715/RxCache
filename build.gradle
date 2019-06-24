@@ -3,7 +3,7 @@ apply plugin: 'java'
 ext {
     libraries = [
 
-            rxjava                    : "2.2.8",
+            rxjava                    : "2.2.10",
 
             gson                      : "2.8.5",
 

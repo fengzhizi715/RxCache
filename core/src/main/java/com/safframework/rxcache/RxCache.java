@@ -207,7 +207,7 @@ public final class RxCache {
      * @param value
      * @param <T>
      */
-    public <T> void  update(String key, T value) {
+    public <T> void update(String key, T value) {
 
         cacheRepository.update(key, value);
     }

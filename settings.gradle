@@ -2,6 +2,7 @@ rootProject.name = 'rxcache'
 include 'core'
 include 'example'
 include 'proxy'
+include 'extension'
 
 include 'converter'
 include 'converter:fastjson'

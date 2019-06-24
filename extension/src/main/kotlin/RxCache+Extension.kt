@@ -17,3 +17,5 @@ inline fun <reified T> RxCache.load2Flowable(key: String): Flowable<Record<T>> =
 inline fun <reified T> RxCache.load2Single(key: String): Single<Record<T>> = load2Single<T>(key, object : TypeToken<T>() {}.type)
 
 inline fun <reified T> RxCache.load2Maybe(key: String): Maybe<Record<T>> = load2Maybe<T>(key, object : TypeToken<T>() {}.type)
+
+inline fun <reified T> RxCache.get(key: String) = get<T>(key, object : TypeToken<T>() {}.type)

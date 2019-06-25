@@ -1,10 +1,11 @@
+package com.safframework.rxcache.ext
+
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.domain.CacheStrategy
 import com.safframework.rxcache.domain.Record
 import com.safframework.rxcache.reflect.TypeToken
 import com.safframework.rxcache.transformstrategy.*
 import io.reactivex.*
-import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 
 /**

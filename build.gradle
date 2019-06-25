@@ -33,6 +33,8 @@ dependencies {
 
 buildscript {
 
+    ext.rxcache_version = '1.4.0'
+
     repositories {
         jcenter()
         mavenCentral()

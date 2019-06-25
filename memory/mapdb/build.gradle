@@ -25,7 +25,7 @@ publish{
     userOrg = 'fengzhizi715'
     groupId = 'com.safframework.rxcache'
     artifactId = 'rxcache-memory-mapdb'
-    publishVersion = '1.4.0'
+    publishVersion = "$rxcache_version"
     desc = 'A local reactive cache for Java and Android.'
     website = 'https://github.com/fengzhizi715/RxCache'
 }

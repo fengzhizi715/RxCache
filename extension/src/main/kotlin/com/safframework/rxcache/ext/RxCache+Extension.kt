@@ -39,5 +39,3 @@ inline fun <reified T> RxCache.get(key: String, cacheStrategy: CacheStrategy):Re
 inline fun <reified T> RxCache.expire(key: String, expireTime: Long) = expire<T>(key, object : TypeToken<T>() {}.type, expireTime)
 
 inline fun <reified T> RxCache.expire(key: String, expireTime: Long, timeUnit: TimeUnit) = expire<T>(key, object : TypeToken<T>() {}.type, expireTime,timeUnit)
-
-inline fun <reified T> RxCache.ttl(key: String) = ttl(key, object : TypeToken<T>() {}.type)

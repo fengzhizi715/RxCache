@@ -9,35 +9,39 @@ import java.util.*
 /**
  * Created by tony on 2019-06-25.
  */
-fun main() {
+object TestList {
 
-    RxCache.config(RxCache.Builder())
+    @JvmStatic
+    fun main(args: Array<String>) {
 
-    val rxCache = RxCache.getRxCache()
+        RxCache.config(RxCache.Builder())
 
-    val list = ArrayList<User>()
+        val rxCache = RxCache.getRxCache()
 
-    val u1 = User()
-    u1.name = "tony1"
-    u1.password = "123456"
-    list.add(u1)
+        val list = ArrayList<User>()
 
-    val u2 = User()
-    u2.name = "tony2"
-    u2.password = "123456"
-    list.add(u2)
-    rxCache.save<List<User>>("test", list)
+        val u1 = User()
+        u1.name = "tony1"
+        u1.password = "123456"
+        list.add(u1)
 
-    val observable = rxCache.load2Observable<List<User>>("test")
+        val u2 = User()
+        u2.name = "tony2"
+        u2.password = "123456"
+        list.add(u2)
+        rxCache.save<List<User>>("test", list)
 
-    observable.subscribe { record ->
-        val recordDataList = record.data
+        val observable = rxCache.load2Observable<List<User>>("test")
 
-        if (Preconditions.isNotBlank(recordDataList)) {
+        observable.subscribe { record ->
+            val recordDataList = record.data
 
-            val user = recordDataList[0]
-            println(user.name)
-            println(user.password)
+            if (Preconditions.isNotBlank(recordDataList)) {
+
+                val user = recordDataList[0]
+                println(user.name)
+                println(user.password)
+            }
         }
     }
 }

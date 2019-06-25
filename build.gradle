@@ -33,7 +33,7 @@ dependencies {
 
 buildscript {
 
-    ext.rxcache_version = '1.4.0'
+    ext.rxcache_version = '1.4.2'
 
     repositories {
         jcenter()
@@ -43,18 +43,3 @@ buildscript {
         classpath 'com.novoda:bintray-release:0.5.0'
     }
 }
-
-
-tasks.getByPath(":core:bintrayUpload").enabled = false
-tasks.getByPath(":proxy:bintrayUpload").enabled = false
-
-tasks.getByPath(":converter:fastjson:bintrayUpload").enabled = false
-tasks.getByPath(":converter:moshi:bintrayUpload").enabled = false
-tasks.getByPath(":converter:fst:bintrayUpload").enabled = true
-tasks.getByPath(":converter:hessian:bintrayUpload").enabled = true
-tasks.getByPath(":converter:kryo:bintrayUpload").enabled = true
-
-tasks.getByPath(":memory:guava-cache:bintrayUpload").enabled = false
-tasks.getByPath(":memory:caffeine:bintrayUpload").enabled = false
-tasks.getByPath(":memory:off-heap:bintrayUpload").enabled = false
-tasks.getByPath(":memory:mapdb:bintrayUpload").enabled = false

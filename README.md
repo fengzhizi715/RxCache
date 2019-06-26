@@ -31,6 +31,7 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存�
 ---|:-------------:
 rxcache-core|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|
 rxcache-proxy|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-proxy/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-proxy/_latestVersion)|
+rxcache-extension|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension/_latestVersion)|
 rxcache-memory-guava-cache|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-guava-cache/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-guava-cache/_latestVersion)|
 rxcache-memory-caffeine|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-caffeine/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-caffeine/_latestVersion)|
 rxcache-memory-off-heap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-off-heap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-off-heap/_latestVersion)|
@@ -64,6 +65,12 @@ rxcache-proxy
 
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-proxy:1.4.2'
+```
+
+rxcache-extension
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-extension:1.4.2'
 ```
 
 ## memory:

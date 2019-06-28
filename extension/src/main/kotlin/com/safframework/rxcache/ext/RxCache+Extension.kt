@@ -34,7 +34,7 @@ inline fun <reified T> RxCache.load2Maybe(key: String): Maybe<Record<T>> = load2
 
 inline fun <reified T> RxCache.get(key: String):Record<T> = get<T>(key, object : TypeToken<T>() {}.type)
 
-inline fun <reified T> RxCache.get(key: String, cacheStrategy: CacheStrategy):Record<T> = get<T>(key, object : TypeToken<T>() {}.type, cacheStrategy)
+inline fun <reified T> RxCache.get(key: String, cacheStrategy: CacheStrategy):Record<T>? = get<T>(key, object : TypeToken<T>() {}.type, cacheStrategy)
 
 inline fun <reified T> RxCache.expire(key: String, expireTime: Long) = expire<T>(key, object : TypeToken<T>() {}.type, expireTime)
 

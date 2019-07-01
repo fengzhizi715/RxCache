@@ -58,19 +58,19 @@ repositories {
 rxcache-core
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-core:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-core:1.4.3'
 ```
 
 rxcache-proxy
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-proxy:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-proxy:1.4.3'
 ```
 
 rxcache-extension
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-extension:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-extension:1.4.3'
 ```
 
 ## memory:
@@ -78,25 +78,25 @@ implementation 'com.safframework.rxcache:rxcache-extension:1.4.2'
 rxcache-memory-guava-cache
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-memory-guava-cache:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-memory-guava-cache:1.4.3'
 ```
 
 rxcache-memory-caffeine
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-memory-caffeine:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-memory-caffeine:1.4.3'
 ```
 
 rxcache-memory-off-heap
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-memory-off-heap:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-memory-off-heap:1.4.3'
 ```
 
 rxcache-memory-mapdb
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-memory-mapdb:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-memory-mapdb:1.4.3'
 ```
 
 
@@ -105,31 +105,31 @@ implementation 'com.safframework.rxcache:rxcache-memory-mapdb:1.4.2'
 rxcache-converter-fastjson
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-fastjson:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-converter-fastjson:1.4.3'
 ```
 
 rxcache-converter-moshi
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-moshi:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-converter-moshi:1.4.3'
 ```
 
 rxcache-converter-kryo
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-kryo:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-converter-kryo:1.4.3'
 ```
 
 rxcache-converter-hessian
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-hessian:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-converter-hessian:1.4.3'
 ```
 
 rxcache-converter-fst
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-fst:1.4.2'
+implementation 'com.safframework.rxcache:rxcache-converter-fst:1.4.3'
 ```
 
 

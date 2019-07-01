@@ -29,8 +29,6 @@ object TestWithExpireTime {
 
         val record = rxCache.get<User>("test")
 
-        if (record == null) {
-            println("record is null")
-        }
+        record?:println("record is null")
     }
 }

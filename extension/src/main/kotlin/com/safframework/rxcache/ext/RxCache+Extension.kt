@@ -32,7 +32,7 @@ inline fun <reified T> RxCache.load2Single(key: String): Single<Record<T>> = loa
 inline fun <reified T> RxCache.load2Maybe(key: String): Maybe<Record<T>> = load2Maybe<T>(key, object : TypeToken<T>() {}.type)
 
 
-inline fun <reified T> RxCache.get(key: String):Record<T> = get<T>(key, object : TypeToken<T>() {}.type)
+inline fun <reified T> RxCache.get(key: String):Record<T>? = get<T>(key, object : TypeToken<T>() {}.type)
 
 inline fun <reified T> RxCache.get(key: String, cacheStrategy: CacheStrategy):Record<T>? = get<T>(key, object : TypeToken<T>() {}.type, cacheStrategy)
 

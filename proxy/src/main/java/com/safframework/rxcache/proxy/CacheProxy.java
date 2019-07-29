@@ -1,11 +1,12 @@
 package com.safframework.rxcache.proxy;
 
 import com.safframework.rxcache.RxCache;
-import com.safframework.rxcache.proxy.annotation.CacheClass;
-import com.safframework.rxcache.proxy.annotation.CacheKey;
-import com.safframework.rxcache.proxy.annotation.CacheLifecycle;
-import com.safframework.rxcache.proxy.annotation.CacheMethod;
-import com.safframework.rxcache.proxy.annotation.CacheValue;
+import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.proxy.annotation.*;
+import io.reactivex.Flowable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
@@ -64,23 +65,26 @@ public class CacheProxy implements InvocationHandler {
 
             if (methodType == MethodType.GET) {
 
-                ObservableType observableType = cacheMethod.observableType();
+                Class returnClazz = method.getReturnType();
 
-                if (observableType==ObservableType.NO_USE) {
+                if (returnClazz!=null) {
 
-                    return  rxCache.get(cacheKey.value(),cacheClazz);
-                } else if (observableType == ObservableType.OBSERVABLE){
+                    if (Observable.class.isAssignableFrom(returnClazz)) {
 
-                    return  rxCache.load2Observable(cacheKey.value(),cacheClazz);
-                } else if (observableType==ObservableType.FLOWABLE) {
+                        return rxCache.load2Observable(cacheKey.value(),cacheClazz);
+                    } else if (Flowable.class.isAssignableFrom(returnClazz)) {
 
-                    return  rxCache.load2Flowable(cacheKey.value(),cacheClazz);
-                } else if (observableType==ObservableType.SINGLE) {
+                        return rxCache.load2Flowable(cacheKey.value(),cacheClazz);
+                    } else if (Single.class.isAssignableFrom(returnClazz)) {
 
-                    return  rxCache.load2Single(cacheKey.value(),cacheClazz);
-                } else if (observableType==ObservableType.MAYBE) {
+                        return rxCache.load2Single(cacheKey.value(),cacheClazz);
+                    } else if (Maybe.class.isAssignableFrom(returnClazz)) {
 
-                    return  rxCache.load2Maybe(cacheKey.value(),cacheClazz);
+                        return rxCache.load2Maybe(cacheKey.value(),cacheClazz);
+                    } else if (Record.class.isAssignableFrom(returnClazz)) {
+
+                        return rxCache.get(cacheKey.value(),cacheClazz);
+                    }
                 }
 
             } else if (methodType == MethodType.SAVE) {

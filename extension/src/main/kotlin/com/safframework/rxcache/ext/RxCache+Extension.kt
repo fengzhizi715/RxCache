@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
  * Created by tony on 2019-06-24.
  */
 
-typealias valueFuc<T> = ()->T
+typealias valueFuc<T> = () -> T
 
 inline fun <reified T> RxCache.transformObservable(key: String, strategy: ObservableStrategy): ObservableTransformer<T, Record<T>> = transformObservable<T>(key, object : TypeToken<T>() {}.type, strategy)
 
@@ -34,25 +34,40 @@ inline fun <reified T> RxCache.load2Single(key: String): Single<Record<T>> = loa
 inline fun <reified T> RxCache.load2Maybe(key: String): Maybe<Record<T>> = load2Maybe<T>(key, object : TypeToken<T>() {}.type)
 
 
-inline fun <reified T> RxCache.get(key: String):Record<T>? = get<T>(key, object : TypeToken<T>() {}.type)
+inline fun <reified T> RxCache.get(key: String): Record<T>? = get<T>(key, object : TypeToken<T>() {}.type)
 
-inline fun <reified T> RxCache.get(key: String, cacheStrategy: CacheStrategy):Record<T>? = get<T>(key, object : TypeToken<T>() {}.type, cacheStrategy)
+inline fun <reified T> RxCache.get(key: String, cacheStrategy: CacheStrategy): Record<T>? = get<T>(key, object : TypeToken<T>() {}.type, cacheStrategy)
 
 inline fun <reified T> RxCache.expire(key: String, expireTime: Long) = expire<T>(key, object : TypeToken<T>() {}.type, expireTime)
 
-inline fun <reified T> RxCache.expire(key: String, expireTime: Long, timeUnit: TimeUnit) = expire<T>(key, object : TypeToken<T>() {}.type, expireTime,timeUnit)
+inline fun <reified T> RxCache.expire(key: String, expireTime: Long, timeUnit: TimeUnit) = expire<T>(key, object : TypeToken<T>() {}.type, expireTime, timeUnit)
 
 inline fun <reified T> RxCache.saveFunc(key: String, noinline value: valueFuc<T>) {
 
     save(key, value.invoke())
 }
 
-inline fun <reified T> RxCache.saveFunc(key: String, expireTime:Long, noinline value: valueFuc<T>) {
+inline fun <reified T> RxCache.saveFunc(key: String, expireTime: Long, noinline value: valueFuc<T>) {
 
-    save(key, value.invoke(),expireTime)
+    save(key, value.invoke(), expireTime)
 }
 
-inline fun <reified T> RxCache.saveFunc(key: String, expireTime:Long, timeUnit: TimeUnit , noinline value: valueFuc<T>) {
+inline fun <reified T> RxCache.saveFunc(key: String, expireTime: Long, timeUnit: TimeUnit, noinline value: valueFuc<T>) {
 
-    save(key, value.invoke(),expireTime,timeUnit)
+    save(key, value.invoke(), expireTime, timeUnit)
+}
+
+inline fun <reified T> RxCache.updateFunc(key: String, noinline value: valueFuc<T>) {
+
+    update(key, value.invoke())
+}
+
+inline fun <reified T> RxCache.updateFunc(key: String, expireTime: Long, noinline value: valueFuc<T>) {
+
+    update(key, value.invoke(), expireTime)
+}
+
+inline fun <reified T> RxCache.updateFunc(key: String, expireTime: Long, timeUnit: TimeUnit, noinline value: valueFuc<T>) {
+
+    update(key, value.invoke(), expireTime, timeUnit)
 }

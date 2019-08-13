@@ -11,6 +11,9 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by tony on 2019-06-24.
  */
+
+typealias valueFuc<T> = ()->T
+
 inline fun <reified T> RxCache.transformObservable(key: String, strategy: ObservableStrategy): ObservableTransformer<T, Record<T>> = transformObservable<T>(key, object : TypeToken<T>() {}.type, strategy)
 
 inline fun <reified T> RxCache.transformFlowable(key: String, strategy: FlowableStrategy): FlowableTransformer<T, Record<T>> = transformFlowable<T>(key, object : TypeToken<T>() {}.type, strategy)
@@ -39,17 +42,17 @@ inline fun <reified T> RxCache.expire(key: String, expireTime: Long) = expire<T>
 
 inline fun <reified T> RxCache.expire(key: String, expireTime: Long, timeUnit: TimeUnit) = expire<T>(key, object : TypeToken<T>() {}.type, expireTime,timeUnit)
 
-inline fun <reified T> RxCache.saveFunc(key: String, noinline value: ()->T) {
+inline fun <reified T> RxCache.saveFunc(key: String, noinline value: valueFuc<T>) {
 
     save(key, value.invoke())
 }
 
-inline fun <reified T> RxCache.saveFunc(key: String, expireTime:Long, noinline value: ()->T) {
+inline fun <reified T> RxCache.saveFunc(key: String, expireTime:Long, noinline value: valueFuc<T>) {
 
     save(key, value.invoke(),expireTime)
 }
 
-inline fun <reified T> RxCache.saveFunc(key: String, expireTime:Long, timeUnit: TimeUnit , noinline value: ()->T) {
+inline fun <reified T> RxCache.saveFunc(key: String, expireTime:Long, timeUnit: TimeUnit , noinline value: valueFuc<T>) {
 
     save(key, value.invoke(),expireTime,timeUnit)
 }

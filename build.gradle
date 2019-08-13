@@ -33,7 +33,7 @@ dependencies {
 
 buildscript {
 
-    ext.rxcache_version = '1.4.3'
+    ext.rxcache_version = '1.4.4'
 
     repositories {
         jcenter()

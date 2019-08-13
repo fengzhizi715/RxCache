@@ -33,8 +33,8 @@ object TestList {
 
         val observable = rxCache.load2Observable<List<User>>("test")
 
-        observable.subscribe { record ->
-            val recordDataList = record.data
+        observable.subscribe {
+            val recordDataList = it.data
 
             if (Preconditions.isNotBlank(recordDataList)) {
 

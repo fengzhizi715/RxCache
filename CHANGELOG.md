@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.4.4
+---
+2019-07-01
+* 完善 extension 模块
+
 Version 1.4.3
 ---
 2019-07-01

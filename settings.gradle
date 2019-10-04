@@ -13,6 +13,8 @@ include 'converter:fst'
 findProject(':converter:fst')?.name = 'fst'
 include 'converter:kryo'
 findProject(':converter:kryo')?.name = 'kryo'
+include 'converter:hessian'
+findProject(':converter:hessian')?.name = 'hessian'
 
 
 include 'memory'
@@ -25,9 +27,10 @@ findProject(':memory:offheap')?.name = 'off-heap'
 include 'memory:mapdb'
 findProject(':memory:mapdb')?.name = 'mapdb'
 
+
 include 'persistence'
 include 'persistence:okio'
 findProject(':persistence:okio')?.name = 'okio'
-include 'converter:hessian'
-findProject(':converter:hessian')?.name = 'hessian'
+include 'persistence:mapdb'
+findProject(':persistence:mapdb')?.name = 'mapdb'
 

@@ -13,7 +13,9 @@ ext {
 
             guava                     : "27.1-jre",
 
-            caffeine                  : "2.8.0"
+            caffeine                  : "2.8.0",
+
+            mapdb                     : "3.0.7"
     ]
 }
 

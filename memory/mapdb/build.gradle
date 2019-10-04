@@ -8,6 +8,8 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+def libs = rootProject.ext.libraries // 库
+
 repositories {
     jcenter()
     mavenCentral()
@@ -18,7 +20,7 @@ dependencies {
 
     implementation project(":core")
 
-    implementation 'org.mapdb:mapdb:3.0.7'
+    implementation "org.mapdb:mapdb:$libs.mapdb"
 }
 
 publish{

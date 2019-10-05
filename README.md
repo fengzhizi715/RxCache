@@ -55,10 +55,11 @@ repositories {
 }
 ```
 
+# [下载](https://github.com/fengzhizi715/RxCache/blob/master/Download.md)
+
+
 ![](images/RxCache.png)
 
-
-# [下载](https://github.com/fengzhizi715/RxCache/blob/master/Download.md)
 
 # 感谢
 

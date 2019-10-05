@@ -67,9 +67,6 @@ repositories {
 * 参考了[RxCache](https://github.com/z-chu/RxCache)的实现
 * 参考了[TypeBuilder](https://github.com/ikidou/TypeBuilder)的实现
 
-# TODO List:
-
-* 重构 Disk 的实现
 
 # Contributors：
 

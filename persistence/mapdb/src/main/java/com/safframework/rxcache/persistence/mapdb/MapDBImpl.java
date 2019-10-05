@@ -37,7 +37,7 @@ public class MapDBImpl implements Persistence {
 
         db = DBMaker
                 .fileDB(dbFile)
-                .fileMmapEnable()
+                .fileMmapEnableIfSupported()
                 .make();
 
         map = db.hashMap("rxcache", Serializer.STRING,Serializer.JAVA)

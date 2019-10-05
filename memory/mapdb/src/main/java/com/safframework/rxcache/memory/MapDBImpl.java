@@ -19,6 +19,7 @@ public class MapDBImpl extends AbstractMemoryImpl {
 
     private DB db;
     private HTreeMap<String, Object> map;
+    private CacheStatistics cacheStatistics;
 
     public MapDBImpl(long maxSize) {
         super(maxSize);
@@ -32,6 +33,8 @@ public class MapDBImpl extends AbstractMemoryImpl {
                 .expireAfterGet()
                 .counterEnable()
                 .create();
+
+        this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
 
 
@@ -47,6 +50,8 @@ public class MapDBImpl extends AbstractMemoryImpl {
                 .expireAfterGet(cacheConfig.expireAfterGetDuration,cacheConfig.expireAfterGetTimeUnit)
                 .counterEnable()
                 .create();
+
+        this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
 
     @Override
@@ -71,7 +76,15 @@ public class MapDBImpl extends AbstractMemoryImpl {
             }
         }
 
-        return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
+        if (result!=null) {
+
+            cacheStatistics.incrementHitCount();
+            return new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key));
+        } else {
+
+            cacheStatistics.incrementMissCount();
+            return null;
+        }
     }
 
     @Override
@@ -86,6 +99,8 @@ public class MapDBImpl extends AbstractMemoryImpl {
         map.put(key,value);
         timestampMap.put(key,System.currentTimeMillis());
         expireTimeMap.put(key,expireTime);
+
+        cacheStatistics.incrementPutCount();
     }
 
     @Override
@@ -104,16 +119,18 @@ public class MapDBImpl extends AbstractMemoryImpl {
     public void evict(String key) {
 
         map.remove(key);
+        cacheStatistics.incrementEvictionCount();
     }
 
     @Override
     public void evictAll() {
 
         map.clear();
+        cacheStatistics.incrementEvictionCount(keySet().size());
     }
 
     @Override
     public CacheStatistics getCacheStatistics() {
-        return null;
+        return cacheStatistics;
     }
 }

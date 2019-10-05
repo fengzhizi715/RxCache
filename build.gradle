@@ -48,17 +48,4 @@ buildscript {
     }
 }
 
-tasks.getByPath(":core:bintrayUpload").enabled = false
-tasks.getByPath(":proxy:bintrayUpload").enabled = false
-tasks.getByPath(":extension:bintrayUpload").enabled = false
-tasks.getByPath(":memory:caffeine:bintrayUpload").enabled = false
-tasks.getByPath(":memory:guava-cache:bintrayUpload").enabled = false
-tasks.getByPath(":memory:off-heap:bintrayUpload").enabled = false
-tasks.getByPath(":memory:mapdb:bintrayUpload").enabled = false
-tasks.getByPath(":converter:fastjson:bintrayUpload").enabled = false
-tasks.getByPath(":converter:moshi:bintrayUpload").enabled = false
-tasks.getByPath(":converter:fst:bintrayUpload").enabled = false
-tasks.getByPath(":converter:kryo:bintrayUpload").enabled = false
-tasks.getByPath(":converter:hessian:bintrayUpload").enabled = false
-
 tasks.getByPath(":example:compileJava").enabled = false

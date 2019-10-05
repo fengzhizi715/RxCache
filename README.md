@@ -6,6 +6,8 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存�
 [![License](https://img.shields.io/badge/license-Apache%202-lightgrey.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/78ffe7c5da004d82a48280aca9f50f42)](https://app.codacy.com/app/fengzhizi715/RxCache?utm_source=github.com&utm_medium=referral&utm_content=fengzhizi715/RxCache&utm_campaign=Badge_Grade_Dashboard)
 
+[](images/RxCache.png)
+
 # 功能特点：
 
 * 拥有二级缓存：Memory、Persistence

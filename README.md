@@ -140,13 +140,13 @@ implementation 'com.safframework.rxcache:rxcache-converter-fst:<latest-version>'
 rxcache-persistence-okio
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-persistence-okio:1.4.5'
+implementation 'com.safframework.rxcache:rxcache-persistence-okio:<latest-version>'
 ```
 
 rxcache-persistence-mapdb
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-persistence-mapdb:1.4.5'
+implementation 'com.safframework.rxcache:rxcache-persistence-mapdb:<latest-version>'
 ```
 
 

@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.novoda.bintray-release'
 }
 
 group 'com.safframework.rxcache'
@@ -18,6 +19,15 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-    implementation 'com.squareup.okio:okio:2.4.0'
+    implementation "com.squareup.okio:okio:${libs.okio}"
     implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"
+}
+
+publish{
+    userOrg = 'fengzhizi715'
+    groupId = 'com.safframework.rxcache'
+    artifactId = 'rxcache-persistence-okio'
+    publishVersion = "$rxcache_version"
+    desc = 'A local reactive cache for Java and Android.'
+    website = 'https://github.com/fengzhizi715/RxCache'
 }

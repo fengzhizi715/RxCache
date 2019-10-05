@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.safframework.rxcache.config.Constant;
 
 /**
- * 封装缓存的数据，使用Immutable对象，保证线程安全
+ * 封装缓存的数据，使用 Immutable 对象，保证线程安全
  * Created by tony on 2018/9/28.
  */
 public final class Record<T> {
@@ -55,7 +55,7 @@ public final class Record<T> {
     }
 
     /**
-     * 判断Record是否已经过期,true表示已经过期，false表示没有过期
+     * 判断 Record 是否已经过期,true 表示已经过期，false 表示没有过期
      * @return
      */
     public boolean isExpired() {
@@ -69,7 +69,7 @@ public final class Record<T> {
     }
 
     /**
-     * 判断Record是否永不过期
+     * 判断 Record 是否永不过期
      * @return
      */
     public boolean isNeverExpire() {
@@ -78,7 +78,7 @@ public final class Record<T> {
     }
 
     /**
-     * 当前Record还剩下多久的存活时间
+     * 当前 Record 还剩下多久的存活时间
      * @return
      */
     public long ttl() {

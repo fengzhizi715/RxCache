@@ -41,6 +41,9 @@ rxcache-converter-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi
 rxcache-converter-kryo|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-kryo/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-kryo/_latestVersion)|
 rxcache-converter-hessian|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-hessian/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-hessian/_latestVersion)|
 rxcache-converter-fst|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-fst/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-fst/_latestVersion)|
+rxcache-persistence-okio|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-okio/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-okio/_latestVersion)|
+rxcache-persistence-mapdb|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-mapdb/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-mapdb/_latestVersion)|
+
 
 对于 Java 工程，如果使用 gradle 构建，由于默认没有使用 jcenter()，需要在相应 module 的 build.gradle 中配置
 
@@ -130,6 +133,20 @@ rxcache-converter-fst
 
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-converter-fst:<latest-version>'
+```
+
+## persistence：
+
+rxcache-persistence-okio
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-persistence-okio:1.4.5'
+```
+
+rxcache-persistence-mapdb
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-persistence-mapdb:1.4.5'
 ```
 
 

@@ -32,7 +32,7 @@ public class MapDBImpl implements Persistence {
     }
 
     public MapDBImpl(File dbFile, Converter converter) {
-        
+
         this.converter = converter;
 
         db = DBMaker

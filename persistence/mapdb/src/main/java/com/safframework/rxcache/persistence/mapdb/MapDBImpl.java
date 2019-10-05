@@ -4,9 +4,9 @@ import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
+import com.safframework.rxcache.persistence.Persistence;
 import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.persistence.converter.GsonConverter;
-import com.safframework.rxcache.persistence.disk.Disk;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
@@ -20,9 +20,8 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Created by tony on 2019-10-05.
  */
-public class MapDBImpl implements Disk {
+public class MapDBImpl implements Persistence {
 
-    private File file;
     private Converter converter;
     private DB db;
     private ConcurrentMap<String,Object> map;
@@ -33,8 +32,7 @@ public class MapDBImpl implements Disk {
     }
 
     public MapDBImpl(File dbFile, Converter converter) {
-
-        this.file = dbFile;
+        
         this.converter = converter;
 
         db = DBMaker
@@ -44,15 +42,6 @@ public class MapDBImpl implements Disk {
 
         map = db.hashMap("rxcache", Serializer.STRING,Serializer.JAVA)
                 .createOrOpen();
-    }
-
-    @Override
-    public int storedMB() {
-
-        long bytes = file.length();
-
-        double megabytes = Math.ceil((double) bytes / 1024 / 1024);
-        return (int) megabytes;
     }
 
     @Override

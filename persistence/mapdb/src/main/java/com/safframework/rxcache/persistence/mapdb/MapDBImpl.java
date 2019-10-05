@@ -111,4 +111,9 @@ public class MapDBImpl implements Persistence {
 
         map.clear();
     }
+
+    public void close() {
+
+        db.close();
+    }
 }

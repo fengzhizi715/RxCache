@@ -25,7 +25,7 @@ findProject(':memory:caffeine')?.name = 'caffeine'
 include 'memory:offheap'
 findProject(':memory:offheap')?.name = 'off-heap'
 include 'memory:mapdb'
-findProject(':memory:mapdb')?.name = 'mapdb'
+findProject(':memory:mapdb')?.name = 'memory-mapdb'
 
 
 include 'persistence'

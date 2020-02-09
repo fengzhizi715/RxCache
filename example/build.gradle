@@ -28,7 +28,7 @@ dependencies {
     implementation project(":memory:guava-cache")
     implementation project(":memory:caffeine")
     implementation project(":memory:off-heap")
-    implementation project(":memory:mapdb")
+    implementation project(":memory:memory-mapdb")
 
     implementation project(":converter:fastjson")
     implementation project(":converter:moshi")

@@ -11,20 +11,7 @@ import com.safframework.rxcache.transformstrategy.MaybeStrategy;
 import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.transformstrategy.SingleStrategy;
 
-import io.reactivex.Completable;
-import io.reactivex.CompletableSource;
-import io.reactivex.CompletableTransformer;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableTransformer;
-import io.reactivex.Maybe;
-import io.reactivex.MaybeSource;
-import io.reactivex.MaybeTransformer;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.Single;
-import io.reactivex.SingleSource;
-import io.reactivex.SingleTransformer;
+import io.reactivex.*;
 import org.reactivestreams.Publisher;
 
 import java.io.PrintStream;
@@ -33,6 +20,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * RxCache 是单例，使用时先需要调用 config() 配置 RxCache
  * Created by tony on 2018/9/28.
  */
 public final class RxCache {
@@ -114,30 +102,66 @@ public final class RxCache {
 
     public <T> Observable<Record<T>> load2Observable(final String key, final Type type) {
 
-        Record<T> recodrd = get(key, type);
+        Record<T> record = get(key, type);
 
-        return recodrd != null ? Observable.just(recodrd) : Observable.empty();
+        return record != null ? Observable.create(new ObservableOnSubscribe<Record<T>>() {
+            @Override
+            public void subscribe(ObservableEmitter<Record<T>> emitter) throws Exception {
+                emitter.onNext(record);
+                emitter.onComplete();
+            }
+        }) : Observable.empty();
     }
 
     public <T> Flowable<Record<T>> load2Flowable(final String key, final Type type) {
 
-        Record<T> recodrd = get(key, type);
+        Record<T> record = get(key, type);
 
-        return recodrd != null ? Flowable.just(recodrd) : Flowable.empty();
+        return record != null ? Flowable.create(new FlowableOnSubscribe<Record<T>>() {
+            @Override
+            public void subscribe(FlowableEmitter<Record<T>> emitter) throws Exception {
+                emitter.onNext(record);
+                emitter.onComplete();
+            }
+        },BackpressureStrategy.MISSING) : Flowable.empty();
+    }
+
+    public <T> Flowable<Record<T>> load2Flowable(final String key, final Type type, BackpressureStrategy backpressureStrategy) {
+
+        Record<T> record = get(key, type);
+
+        return record != null ? Flowable.create(new FlowableOnSubscribe<Record<T>>() {
+            @Override
+            public void subscribe(FlowableEmitter<Record<T>> emitter) throws Exception {
+                emitter.onNext(record);
+                emitter.onComplete();
+            }
+        },backpressureStrategy) : Flowable.empty();
     }
 
     public <T> Single<Record<T>> load2Single(final String key, final Type type) {
 
-        Record<T> recodrd = get(key, type);
+        Record<T> record = get(key, type);
 
-        return recodrd != null ? Single.just(recodrd) : Single.never();
+        return record != null ? Single.create(new SingleOnSubscribe<Record<T>>() {
+            @Override
+            public void subscribe(SingleEmitter<Record<T>> emitter) throws Exception {
+                emitter.onSuccess(record);
+            }
+        }) : Single.never();
     }
 
     public <T> Maybe<Record<T>> load2Maybe(final String key, final Type type) {
 
-        Record<T> recodrd = get(key, type);
+        Record<T> record = get(key, type);
 
-        return recodrd != null ? Maybe.just(recodrd) : Maybe.empty();
+        return record != null ? Maybe.create(new MaybeOnSubscribe<Record<T>>() {
+            @Override
+            public void subscribe(MaybeEmitter<Record<T>> emitter) throws Exception {
+                emitter.onSuccess(record);
+                emitter.onComplete();
+            }
+        }) : Maybe.empty();
     }
 
     /**

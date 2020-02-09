@@ -70,6 +70,15 @@ public final class RxCache {
         };
     }
 
+    public <T> FlowableTransformer<T, Record<T>> transformFlowable(final String key, final Type type, final FlowableStrategy strategy, BackpressureStrategy backpressureStrategy) {
+        return new FlowableTransformer<T, Record<T>>() {
+            @Override
+            public Publisher<Record<T>> apply(Flowable<T> upstream) {
+                return strategy.execute(RxCache.this, key, upstream, type, backpressureStrategy);
+            }
+        };
+    }
+
     public <T> SingleTransformer<T, Record<T>> transformSingle(final String key, final Type type, final SingleStrategy strategy) {
         return new SingleTransformer<T, Record<T>>() {
 

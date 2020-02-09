@@ -18,6 +18,8 @@ inline fun <reified T> RxCache.transformObservable(key: String, strategy: Observ
 
 inline fun <reified T> RxCache.transformFlowable(key: String, strategy: FlowableStrategy): FlowableTransformer<T, Record<T>> = transformFlowable<T>(key, object : TypeToken<T>() {}.type, strategy)
 
+inline fun <reified T> RxCache.transformFlowable(key: String, strategy: FlowableStrategy,backpressureStrategy: BackpressureStrategy): FlowableTransformer<T, Record<T>> = transformFlowable<T>(key, object : TypeToken<T>() {}.type, strategy,backpressureStrategy)
+
 inline fun <reified T> RxCache.transformSingle(key: String, strategy: SingleStrategy): SingleTransformer<T, Record<T>> = transformSingle<T>(key, object : TypeToken<T>() {}.type, strategy)
 
 inline fun <reified T> RxCache.transformCompletable(key: String, strategy: CompletableStrategy): CompletableTransformer = transformCompletable<T>(key, object : TypeToken<T>() {}.type, strategy)

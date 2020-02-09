@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.5.0
+---
+2020-02-10
+* 重构RxCache的load相关的方法
+
 Version 1.4.7
 ---
 2020-02-09

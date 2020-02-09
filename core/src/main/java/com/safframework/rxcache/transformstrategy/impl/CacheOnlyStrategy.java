@@ -5,6 +5,7 @@ import com.safframework.rxcache.transformstrategy.FlowableStrategy;
 import com.safframework.rxcache.transformstrategy.MaybeStrategy;
 import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.domain.Record;
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -24,6 +25,12 @@ public class CacheOnlyStrategy implements ObservableStrategy,
     public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type) {
 
         return rxCache.<T>load2Flowable(key, type);
+    }
+
+    @Override
+    public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type, BackpressureStrategy backpressureStrategy) {
+
+        return rxCache.<T>load2Flowable(key, type, backpressureStrategy);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.safframework.rxcache.transformstrategy.MaybeStrategy;
 import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -27,6 +28,25 @@ public class RemoteFirstStrategy implements ObservableStrategy,
     public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type) {
 
         Flowable<Record<T>> cache = rxCache.<T>load2Flowable(key, type);
+
+        Flowable<Record<T>> remote = source
+                .map(new Function<T, Record<T>>() {
+                    @Override
+                    public Record<T> apply(@NonNull T t) throws Exception {
+
+                        rxCache.save(key, t);
+
+                        return new Record<>(Source.CLOUD, key, t);
+                    }
+                });
+
+        return remote.switchIfEmpty(cache);
+    }
+
+    @Override
+    public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type, BackpressureStrategy backpressureStrategy) {
+
+        Flowable<Record<T>> cache = rxCache.<T>load2Flowable(key, type, backpressureStrategy);
 
         Flowable<Record<T>> remote = source
                 .map(new Function<T, Record<T>>() {

@@ -115,15 +115,7 @@ public final class RxCache {
 
     public <T> Flowable<Record<T>> load2Flowable(final String key, final Type type) {
 
-        Record<T> record = get(key, type);
-
-        return record != null ? Flowable.create(new FlowableOnSubscribe<Record<T>>() {
-            @Override
-            public void subscribe(FlowableEmitter<Record<T>> emitter) throws Exception {
-                emitter.onNext(record);
-                emitter.onComplete();
-            }
-        },BackpressureStrategy.MISSING) : Flowable.empty();
+        return load2Flowable(key,type,BackpressureStrategy.MISSING);
     }
 
     public <T> Flowable<Record<T>> load2Flowable(final String key, final Type type, BackpressureStrategy backpressureStrategy) {

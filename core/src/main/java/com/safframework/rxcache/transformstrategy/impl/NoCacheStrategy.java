@@ -6,6 +6,7 @@ import com.safframework.rxcache.transformstrategy.MaybeStrategy;
 import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -25,6 +26,17 @@ public class NoCacheStrategy implements ObservableStrategy,
 
     @Override
     public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type) {
+
+        return source.map(new Function<T, Record<T>>() {
+            @Override
+            public Record<T> apply(@NonNull T t) throws Exception {
+                return new Record<>(Source.CLOUD, key, t);
+            }
+        });
+    }
+
+    @Override
+    public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type, BackpressureStrategy backpressureStrategy) {
 
         return source.map(new Function<T, Record<T>>() {
             @Override

@@ -2,6 +2,7 @@ package com.safframework.rxcache.transformstrategy;
 
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import org.reactivestreams.Publisher;
 
@@ -13,4 +14,6 @@ import java.lang.reflect.Type;
 public interface FlowableStrategy {
 
     <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type);
+
+    <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type, BackpressureStrategy backpressureStrategy);
 }

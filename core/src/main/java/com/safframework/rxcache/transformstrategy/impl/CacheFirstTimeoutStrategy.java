@@ -6,6 +6,7 @@ import com.safframework.rxcache.transformstrategy.MaybeStrategy;
 import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -35,6 +36,31 @@ public class CacheFirstTimeoutStrategy implements ObservableStrategy,
     public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type) {
 
         Flowable<Record<T>> cache = rxCache.<T>load2Flowable(key, type)
+                .filter(new Predicate<Record<T>>() {
+                    @Override
+                    public boolean test(Record<T> record) throws Exception {
+                        return System.currentTimeMillis() - record.getCreateTime() <= timestamp;
+                    }
+                });
+
+        Flowable<Record<T>> remote = source
+                .map(new Function<T, Record<T>>() {
+                    @Override
+                    public Record<T> apply(@NonNull T t) throws Exception {
+
+                        rxCache.save(key, t);
+
+                        return new Record<>(Source.CLOUD, key, t);
+                    }
+                });
+
+        return cache.switchIfEmpty(remote);
+    }
+
+    @Override
+    public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type, BackpressureStrategy backpressureStrategy) {
+
+        Flowable<Record<T>> cache = rxCache.<T>load2Flowable(key, type, backpressureStrategy)
                 .filter(new Predicate<Record<T>>() {
                     @Override
                     public boolean test(Record<T> record) throws Exception {

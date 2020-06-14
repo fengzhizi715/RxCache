@@ -2,8 +2,8 @@ import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
 import domain.User;
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;

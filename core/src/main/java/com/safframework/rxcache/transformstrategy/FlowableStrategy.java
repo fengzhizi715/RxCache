@@ -2,8 +2,9 @@ package com.safframework.rxcache.transformstrategy;
 
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
+
+import io.reactivex.rxjava3.core.BackpressureStrategy;
+import io.reactivex.rxjava3.core.Flowable;
 import org.reactivestreams.Publisher;
 
 import java.lang.reflect.Type;

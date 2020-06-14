@@ -2,7 +2,7 @@ package com.safframework.rxcache.transformstrategy;
 
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 
 import java.lang.reflect.Type;
 

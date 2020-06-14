@@ -11,7 +11,7 @@ import com.safframework.rxcache.transformstrategy.MaybeStrategy;
 import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.transformstrategy.SingleStrategy;
 
-import io.reactivex.*;
+import io.reactivex.rxjava3.core.*;
 import org.reactivestreams.Publisher;
 
 import java.io.PrintStream;

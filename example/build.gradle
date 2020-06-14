@@ -39,7 +39,7 @@ dependencies {
     implementation project(":persistence:okio")
     implementation project(":persistence:mapdb")
 
-    implementation "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
+    implementation "io.reactivex.rxjava3:rxjava:${libs.rxjava}"
     implementation "org.springframework:spring-core:${libs.spring}"
     implementation "org.springframework:spring-context:${libs.spring}"
     implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"

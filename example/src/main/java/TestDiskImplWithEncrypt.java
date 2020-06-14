@@ -4,8 +4,8 @@ import com.safframework.rxcache.persistence.converter.GsonConverter;
 import com.safframework.rxcache.persistence.encrypt.AES128Encryptor;
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
 import domain.User;
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Consumer;
 
 import java.io.File;
 

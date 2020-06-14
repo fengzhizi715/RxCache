@@ -3,10 +3,10 @@ package com.safframework.rxcache.proxy;
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.proxy.annotation.*;
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Maybe;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;

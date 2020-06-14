@@ -1,7 +1,7 @@
 package com.safframework.rxcache.transformstrategy;
 
 import com.safframework.rxcache.RxCache;
-import io.reactivex.Completable;
+import io.reactivex.rxjava3.core.Completable;
 
 import java.lang.reflect.Type;
 

@@ -5,10 +5,10 @@ import com.safframework.rxcache.transformstrategy.FlowableStrategy;
 import com.safframework.rxcache.transformstrategy.MaybeStrategy;
 import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.domain.Record;
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.BackpressureStrategy;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Maybe;
+import io.reactivex.rxjava3.core.Observable;
 import org.reactivestreams.Publisher;
 
 import java.lang.reflect.Type;

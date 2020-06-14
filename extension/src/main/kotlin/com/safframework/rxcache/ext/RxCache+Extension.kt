@@ -5,7 +5,7 @@ import com.safframework.rxcache.domain.CacheStrategy
 import com.safframework.rxcache.domain.Record
 import com.safframework.rxcache.reflect.TypeToken
 import com.safframework.rxcache.transformstrategy.*
-import io.reactivex.*
+import io.reactivex.rxjava3.core.*
 import java.util.concurrent.TimeUnit
 
 /**

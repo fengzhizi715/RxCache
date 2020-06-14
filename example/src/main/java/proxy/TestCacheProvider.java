@@ -4,8 +4,8 @@ import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.proxy.CacheProvider;
 import domain.User;
-import io.reactivex.Maybe;
-import io.reactivex.functions.Consumer;
+import io.reactivex.rxjava3.core.Maybe;
+import io.reactivex.rxjava3.functions.Consumer;
 
 /**
  * Created by tony on 2018/10/31.

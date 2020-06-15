@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.6.0
+---
+2020-06-15
+* 升级 RxJava 的版本，使用 RxJava 3.x
+
 Version 1.5.1
 ---
 2020-06-14

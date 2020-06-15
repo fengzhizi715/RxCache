@@ -26,6 +26,11 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存�
 
 ## 更详细的功能请查看[wiki](https://github.com/fengzhizi715/RxCache/wiki)
 
+## Tips
+
+RxCache 1.6.0 以及之后的版本使用 RxJava 3.x
+RxCache 1.5.1 以及之前的版本使用 RxJava 2.x
+
 # 最新版本
 
 模块|最新版本

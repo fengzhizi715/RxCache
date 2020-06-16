@@ -2,12 +2,16 @@ package converter;
 
 import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.RxCache;
+import com.safframework.rxcache.converter.FastJSONConverter;
 import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.persistence.converter.Converter;
+import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
 import com.safframework.rxcache.reflect.TypeBuilder;
 import domain.User;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -18,6 +22,27 @@ import java.util.*;
  * @version: V1.0 <描述当前版本功能>
  */
 public class BaseDiskWithConverter {
+
+    public BaseDiskWithConverter(Converter converter) {
+
+        File cacheDirectory = new File("aaa");
+
+        if (!cacheDirectory.exists()) {
+
+            cacheDirectory.mkdir();
+        }
+
+        DiskImpl diskImpl = new DiskImpl(cacheDirectory,converter);
+
+        RxCache.config(new RxCache.Builder().persistence(diskImpl));
+
+        RxCache rxCache = RxCache.getRxCache();
+
+        testObject(rxCache);
+        testMap(rxCache);
+        testList(rxCache);
+        testSet(rxCache);
+    }
 
     public static void testObject(RxCache rxCache) {
 

@@ -1,6 +1,7 @@
 package com.safframework.rxcache.converter;
 
 import com.safframework.rxcache.persistence.converter.AbstractConverter;
+import com.safframework.rxcache.persistence.encrypt.Encryptor;
 import org.nustaq.serialization.FSTConfiguration;
 
 import java.lang.reflect.Type;
@@ -11,6 +12,14 @@ import java.lang.reflect.Type;
 public class FSTConverter extends AbstractConverter {
 
     private static FSTConfiguration conf = FSTConfiguration.createJsonConfiguration();
+
+    public FSTConverter() {
+    }
+
+    public FSTConverter(Encryptor encryptor) {
+        super(encryptor);
+    }
+
 
     @Override
     public <T> T fromJson(String json, Type type) {

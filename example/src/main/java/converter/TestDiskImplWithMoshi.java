@@ -1,6 +1,8 @@
+package converter;
+
 import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.RxCache;
-import com.safframework.rxcache.converter.KryoConverter;
+import com.safframework.rxcache.converter.MoshiConverter;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
 import com.safframework.rxcache.reflect.TypeBuilder;
@@ -13,9 +15,9 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 /**
- * Created by tony on 2019-04-17.
+ * Created by tony on 2018/11/6.
  */
-public class TestDiskWithKryo {
+public class TestDiskImplWithMoshi {
 
     public static void main(String[] args) {
 
@@ -26,7 +28,7 @@ public class TestDiskWithKryo {
             cacheDirectory.mkdir();
         }
 
-        DiskImpl diskImpl = new DiskImpl(cacheDirectory,new KryoConverter());
+        DiskImpl diskImpl = new DiskImpl(cacheDirectory, new MoshiConverter());
 
         RxCache.config(new RxCache.Builder().persistence(diskImpl));
 
@@ -43,7 +45,7 @@ public class TestDiskWithKryo {
         User u = new User();
         u.name = "tony";
         u.password = "123456";
-        rxCache.save("test",u);
+        rxCache.save("test", u);
 
         Observable<Record<User>> observable = rxCache.load2Observable("test", User.class);
 
@@ -59,43 +61,44 @@ public class TestDiskWithKryo {
         });
     }
 
-    private static void testMap(RxCache rxCache){
+    private static void testMap(RxCache rxCache) {
 
-        Map<String,User> map = new HashMap<>();
+        Map<String, User> map = new HashMap<>();
 
         User u1 = new User();
         u1.name = "tonyMap1";
         u1.password = "map1123456";
-        map.put("u1",u1);
+        map.put("u1", u1);
 
         User u2 = new User();
         u2.name = "tonyMap12";
         u2.password = "map12345";
-        map.put("u2",u2);
-        rxCache.save("map",map);
+        map.put("u2", u2);
+        rxCache.save("map", map);
+
         Type type = TypeBuilder
-                .newInstance(HashMap.class)
+                .newInstance(Map.class)
                 .addTypeParam(String.class)
                 .addTypeParam(User.class)
                 .build();
 
-        Observable<Record<Map<String,User>>> observable = rxCache.load2Observable("map", type);
+        Observable<Record<Map<String, User>>> observable = rxCache.load2Observable("map", type);
 
-        observable.subscribe(new Consumer<Record<Map<String,User>>>() {
+        observable.subscribe(new Consumer<Record<Map<String, User>>>() {
 
             @Override
-            public void accept(Record<Map<String,User>> record) throws Exception {
+            public void accept(Record<Map<String, User>> record) throws Exception {
 
-                Map<String,User> recordDataList = record.getData();
+                Map<String, User> data = record.getData();
 
-                if (Preconditions.isNotBlank(recordDataList)) {
+                if (Preconditions.isNotBlank(data)) {
 
-                    User user = recordDataList.get("u1");
+                    User user = data.get("u1");
                     System.out.println(user.name);
                     System.out.println(user.password);
 
 
-                    User user2 = recordDataList.get("u2");
+                    User user2 = data.get("u2");
                     System.out.println(user2.name);
                     System.out.println(user2.password);
                 }

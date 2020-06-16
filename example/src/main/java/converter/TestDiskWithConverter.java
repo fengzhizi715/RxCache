@@ -1,43 +1,25 @@
+package converter;
+
 import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.RxCache;
-import com.safframework.rxcache.converter.FastJSONConverter;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
 import com.safframework.rxcache.reflect.TypeBuilder;
 import domain.User;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.core.Observable;
-import java.io.File;
+import io.reactivex.rxjava3.functions.Consumer;
+
 import java.lang.reflect.Type;
 import java.util.*;
 
 /**
- * Created by tony on 2018/11/6.
+ * @FileName: converter.TestDiskWithConverters
+ * @author: Tony Shen
+ * @date: 2020-06-16 11:16
+ * @version: V1.0 <描述当前版本功能>
  */
-public class TestDiskImplWithFastjson {
+public class TestDiskWithConverter {
 
-    public static void main(String[] args) {
-
-        File cacheDirectory = new File("aaa");
-
-        if (!cacheDirectory.exists()) {
-
-            cacheDirectory.mkdir();
-        }
-
-        DiskImpl diskImpl = new DiskImpl(cacheDirectory,new FastJSONConverter());
-
-        RxCache.config(new RxCache.Builder().persistence(diskImpl));
-
-        RxCache rxCache = RxCache.getRxCache();
-
-        testObject(rxCache);
-        testMap(rxCache);
-        testList(rxCache);
-        testSet(rxCache);
-    }
-
-    private static void testObject(RxCache rxCache) {
+    public static void testObject(RxCache rxCache) {
 
         User u = new User();
         u.name = "tony";
@@ -58,7 +40,7 @@ public class TestDiskImplWithFastjson {
         });
     }
 
-    private static void testMap(RxCache rxCache){
+    public static void testMap(RxCache rxCache){
 
         Map<String,User> map = new HashMap<>();
 
@@ -102,7 +84,7 @@ public class TestDiskImplWithFastjson {
         });
     }
 
-    private static void testList(RxCache rxCache) {
+    public static void testList(RxCache rxCache) {
 
         List<User> list = new ArrayList<>();
 
@@ -141,7 +123,7 @@ public class TestDiskImplWithFastjson {
         });
     }
 
-    private static void testSet(RxCache rxCache) {
+    public static void testSet(RxCache rxCache) {
 
         Set<User> set = new HashSet<>();
 

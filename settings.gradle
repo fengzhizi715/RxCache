@@ -33,4 +33,3 @@ include 'persistence:okio'
 findProject(':persistence:okio')?.name = 'okio'
 include 'persistence:mapdb'
 findProject(':persistence:mapdb')?.name = 'mapdb'
-

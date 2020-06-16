@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.6.1
+---
+2020-06-16
+* 更新部分 Converters
+
 Version 1.6.0
 ---
 2020-06-15

@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * Created by tony on 2019-04-17.
  */
-public class TestDiskImplWithHessian extends TestDiskWithConverter  {
+public class TestDiskImplWithHessian extends BaseDiskWithConverter {
 
     public static void main(String[] args) {
 

@@ -17,7 +17,7 @@ import java.util.*;
  * @date: 2020-06-16 11:16
  * @version: V1.0 <描述当前版本功能>
  */
-public class TestDiskWithConverter {
+public class BaseDiskWithConverter {
 
     public static void testObject(RxCache rxCache) {
 

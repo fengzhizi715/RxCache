@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * Created by tony on 2018/11/6.
  */
-public class TestDiskImplWithFastjson extends TestDiskWithConverter {
+public class TestDiskImplWithFastjson extends BaseDiskWithConverter {
 
     public static void main(String[] args) {
 

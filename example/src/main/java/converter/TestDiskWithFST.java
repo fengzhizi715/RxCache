@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * Created by tony on 2019-04-16.
  */
-public class TestDiskWithFST extends TestDiskWithConverter {
+public class TestDiskWithFST extends BaseDiskWithConverter {
 
     public static void main(String[] args) {
 

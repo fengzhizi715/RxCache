@@ -1,7 +1,7 @@
 package com.safframework.rxcache.converter;
 
-import com.google.common.collect.Maps;
 import com.safframework.rxcache.domain.CacheHolder;
+import com.safframework.rxcache.exception.RxCacheException;
 import io.protostuff.*;
 import io.protostuff.runtime.DefaultIdStrategy;
 import io.protostuff.runtime.Delegate;
@@ -11,6 +11,7 @@ import io.protostuff.runtime.RuntimeSchema;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -42,7 +43,7 @@ public class ProtostuffUtils {
     /**
      * 缓存对象及对象schema信息集合
      */
-    private static final Map<Class<?>, Schema<?>> CACHE_SCHEMA = Maps.newConcurrentMap();
+    private static final Map<Class<?>, Schema<?>> CACHE_SCHEMA = new ConcurrentHashMap<>();
 
 
     /**
@@ -61,9 +62,11 @@ public class ProtostuffUtils {
         WRAPPER_SET.add(TreeMap.class);
         WRAPPER_SET.add(Hashtable.class);
         WRAPPER_SET.add(SortedMap.class);
-        WRAPPER_SET.add(Map.class);
 
         WRAPPER_SET.add(Set.class);
+        WRAPPER_SET.add(SortedSet.class);
+        WRAPPER_SET.add(HashSet.class);
+        WRAPPER_SET.add(TreeSet.class);
 
         WRAPPER_SET.add(CacheHolder.class);
         WRAPPER_SET.add(Object.class);
@@ -106,7 +109,11 @@ public class ProtostuffUtils {
      */
     @SuppressWarnings("unchecked")
     public static <T> byte[] serialize(T obj) {
-//        Assert.notNull(obj, "序列号对象不能为空");
+
+        if (obj == null) {
+            throw new RxCacheException("序列号对象不能为空");
+        }
+
         Class<T> clazz = (Class<T>) obj.getClass();
         LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
         try {
@@ -119,7 +126,6 @@ public class ProtostuffUtils {
             }
             return ProtostuffIOUtil.toByteArray(serializeObject, schema, buffer);
         } catch (Exception e) {
-//            logger.error("序列化对象异常 [" + obj + "]", e);
             throw new IllegalStateException(e.getMessage(), e);
         } finally {
             buffer.clear();
@@ -135,7 +141,11 @@ public class ProtostuffUtils {
      * @return 反序列化后的对象集合
      */
     public static <T> T deserialize(byte[] data, Class<T> clazz) {
-//        Assert.notNull(data, "反序列号对象不能为空");
+
+        if (data == null) {
+            throw new RxCacheException("反序列号对象不能为空");
+        }
+
         try {
             if (!WRAPPER_SET.contains(clazz)) {
                 T message = clazz.newInstance();
@@ -148,17 +158,13 @@ public class ProtostuffUtils {
                 return wrapper.getData();
             }
         } catch (Exception e) {
-//            logger.error("反序列化对象异常 [" + clazz.getName() + "]", e);
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
 
-
     /**
      * protostuff timestamp Delegate
      *
-     * @author jiujie
-     * @version $Id: TimestampDelegate.java, v 0.1 2016年7月20日 下午2:08:11 jiujie Exp $
      */
     static class TimestampDelegate implements Delegate<Timestamp> {
 
@@ -189,4 +195,3 @@ public class ProtostuffUtils {
 
     }
 }
-

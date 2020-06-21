@@ -22,5 +22,4 @@ dependencies {
     implementation 'io.protostuff:protostuff-core:1.7.2'
     implementation 'io.protostuff:protostuff-runtime:1.7.2'
     implementation "com.safframework.bytekit:bytekit-core:$libs.bytekit"
-    implementation "com.google.guava:guava:$libs.guava"
 }

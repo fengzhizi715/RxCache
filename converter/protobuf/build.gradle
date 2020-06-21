@@ -18,8 +18,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-    implementation 'com.squareup.moshi:moshi:1.8.0'
-    implementation 'io.protostuff:protostuff-core:1.7.2'
-    implementation 'io.protostuff:protostuff-runtime:1.7.2'
+    implementation "com.squareup.moshi:moshi:$libs.moshi"
+    implementation "io.protostuff:protostuff-core:$libs.protostuff"
+    implementation "io.protostuff:protostuff-runtime:$libs.protostuff"
     implementation "com.safframework.bytekit:bytekit-core:$libs.bytekit"
 }

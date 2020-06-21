@@ -15,7 +15,8 @@ include 'converter:kryo'
 findProject(':converter:kryo')?.name = 'kryo'
 include 'converter:hessian'
 findProject(':converter:hessian')?.name = 'hessian'
-
+include 'converter:protobuf'
+findProject(':converter:protobuf')?.name = 'protobuf'
 
 include 'memory'
 include 'memory:guava-cache'

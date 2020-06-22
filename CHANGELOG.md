@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.6.4
+---
+2020-06-23
+* RxCache 增加 saveMemory(), 用于保存缓存并且只存于内存中。
+
 Version 1.6.3
 ---
 2020-06-22

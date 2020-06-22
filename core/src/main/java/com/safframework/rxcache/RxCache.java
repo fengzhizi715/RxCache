@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * RxCache 是单例，使用时先需要调用 config() 配置 RxCache
+ * RxCache 是单例，使用时需要先调用 config() 配置 RxCache
  * Created by tony on 2018/9/28.
  */
 public final class RxCache {
@@ -224,6 +224,42 @@ public final class RxCache {
     public <T> void save(String key, T value, long expireTime, TimeUnit timeUnit) {
 
         cacheRepository.save(key, value, expireTime,timeUnit);
+    }
+
+    /**
+     * 保存缓存，只存于内存中
+     * @param key   缓存的key
+     * @param value 缓存的对象，需要序列化
+     * @param <T>
+     */
+    public <T> void saveMemory(String key, T value) {
+
+        cacheRepository.saveMemory(key, value);
+    }
+
+    /**
+     * 保存缓存，只存于内存中
+     * @param key        缓存的key
+     * @param value      缓存的对象，需要序列化
+     * @param expireTime 过期时间，默认单位是毫秒
+     * @param <T>
+     */
+    public <T> void saveMemory(String key, T value, long expireTime) {
+
+        cacheRepository.saveMemory(key, value, expireTime);
+    }
+
+    /**
+     * 保存缓存，只存于内存中
+     * @param key        缓存的key
+     * @param value      缓存的对象，需要序列化
+     * @param expireTime 过期时间
+     * @param timeUnit   时间的单位，默认单位是毫秒
+     * @param <T>
+     */
+    public <T> void saveMemory(String key, T value, long expireTime, TimeUnit timeUnit) {
+
+        cacheRepository.saveMemory(key, value, expireTime,timeUnit);
     }
 
     /**

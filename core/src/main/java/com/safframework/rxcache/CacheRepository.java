@@ -165,6 +165,49 @@ class CacheRepository {
         }
     }
 
+    /**
+     * 缓存的数据只保存在内存中
+     * @param key
+     * @param value
+     * @param <T>
+     */
+    protected <T> void saveMemory(String key, T value) {
+
+        saveMemory(key,value, Constant.NEVER_EXPIRE);
+    }
+
+    protected <T> void saveMemory(String key, T value, long expireTime) {
+
+        saveMemory(key,value,expireTime,TimeUnit.MILLISECONDS);
+    }
+
+    protected <T> void saveMemory(String key, T value, long expireTime, TimeUnit timeUnit) {
+
+        writeLock.lock();
+
+        try {
+            if (Preconditions.isNotBlanks(key, value)) {
+
+                if (expireTime>0) {
+                    long newExpireTime = timeUnit.toMillis(expireTime);
+
+                    if (memory != null) {
+                        memory.put(key, value, newExpireTime);
+                    }
+                } else {
+
+                    if (memory != null) {
+                        memory.put(key, value);
+                    }
+                }
+            }
+
+        } finally {
+
+            writeLock.unlock();
+        }
+    }
+
     protected <T> void update(String key, T value) {
 
         update(key,value, Constant.NEVER_EXPIRE);

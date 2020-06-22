@@ -47,31 +47,25 @@ inline fun <reified T> RxCache.expire(key: String, expireTime: Long) = expire<T>
 inline fun <reified T> RxCache.expire(key: String, expireTime: Long, timeUnit: TimeUnit) = expire<T>(key, object : TypeToken<T>() {}.type, expireTime, timeUnit)
 
 inline fun <reified T> RxCache.saveFunc(key: String, noinline value: valueFuc<T>) {
-
     save(key, value.invoke())
 }
 
 inline fun <reified T> RxCache.saveFunc(key: String, expireTime: Long, noinline value: valueFuc<T>) {
-
     save(key, value.invoke(), expireTime)
 }
 
 inline fun <reified T> RxCache.saveFunc(key: String, expireTime: Long, timeUnit: TimeUnit, noinline value: valueFuc<T>) {
-
     save(key, value.invoke(), expireTime, timeUnit)
 }
 
 inline fun <reified T> RxCache.updateFunc(key: String, noinline value: valueFuc<T>) {
-
     update(key, value.invoke())
 }
 
 inline fun <reified T> RxCache.updateFunc(key: String, expireTime: Long, noinline value: valueFuc<T>) {
-
     update(key, value.invoke(), expireTime)
 }
 
 inline fun <reified T> RxCache.updateFunc(key: String, expireTime: Long, timeUnit: TimeUnit, noinline value: valueFuc<T>) {
-
     update(key, value.invoke(), expireTime, timeUnit)
 }

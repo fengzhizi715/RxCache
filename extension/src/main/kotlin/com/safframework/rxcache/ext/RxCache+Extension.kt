@@ -58,6 +58,18 @@ inline fun <reified T> RxCache.saveFunc(key: String, expireTime: Long, timeUnit:
     save(key, value.invoke(), expireTime, timeUnit)
 }
 
+inline fun <reified T> RxCache.saveMemoryFunc(key: String, noinline value: valueFuc<T>) {
+    saveMemory(key, value.invoke())
+}
+
+inline fun <reified T> RxCache.saveMemoryFunc(key: String, expireTime: Long, noinline value: valueFuc<T>) {
+    saveMemory(key, value.invoke(), expireTime)
+}
+
+inline fun <reified T> RxCache.saveMemoryFunc(key: String, expireTime: Long, timeUnit: TimeUnit, noinline value: valueFuc<T>) {
+    saveMemory(key, value.invoke(), expireTime, timeUnit)
+}
+
 inline fun <reified T> RxCache.updateFunc(key: String, noinline value: valueFuc<T>) {
     update(key, value.invoke())
 }

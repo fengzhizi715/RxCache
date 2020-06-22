@@ -166,7 +166,7 @@ class CacheRepository {
     }
 
     /**
-     * 缓存的数据只保存在内存中
+     * 缓存的数据只保存在内存中（除非必要，否则建议内存、持久层同时保存数据）
      * @param key
      * @param value
      * @param <T>

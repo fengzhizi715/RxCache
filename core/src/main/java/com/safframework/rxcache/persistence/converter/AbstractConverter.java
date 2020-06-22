@@ -11,8 +11,10 @@ import java.io.OutputStream;
 import java.lang.reflect.Type;
 
 /**
- * 抽象的对象转换类，实现了read、write方法，支持加密、解密
- * 而fromJson、toJson方法需要AbstractConverter的继承者来实现
+ * 抽象的对象转换类，实现了 Converter 接口 的 read、write 方法，支持加密、解密
+ * 而 fromJson、toJson 方法需要 AbstractConverter 的继承者来实现
+ * （当然，开发者也可以自己实现 Converter 接口，不必继承 AbstractConverter 类）
+ *
  * Created by tony on 2018/10/1.
  */
 public abstract class AbstractConverter implements Converter {

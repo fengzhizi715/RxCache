@@ -16,7 +16,7 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存�
 * Memory 支持显示缓存使用的统计数据。
 * Memory 支持堆外内存(off-heap)
 * Persistence 默认使用 Gson 实现对象的序列化和反序列化
-* Persistence 额外支持使用 FastJSON、Moshi、Kryo、Hessian、FST 实现对象的序列化和反序列化
+* Persistence 额外支持使用 FastJSON、Moshi、Kryo、Hessian、FST、Protobuf 实现对象的序列化和反序列化
 * Persistence 的 DiskImpl 拥有加密功能，默认使用 AES 128、DES 算法进行加密
 * 支持 Kotlin, 特别是使用 kotlin extension 模块，可以规避范型擦除
 * 使用 Builder 模式生成 Type
@@ -48,6 +48,7 @@ rxcache-converter-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi
 rxcache-converter-kryo|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-kryo/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-kryo/_latestVersion)|
 rxcache-converter-hessian|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-hessian/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-hessian/_latestVersion)|
 rxcache-converter-fst|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-fst/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-fst/_latestVersion)|
+rxcache-converter-protobuf|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-protobuf/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-protobuf/_latestVersion)|
 rxcache-persistence-okio|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-okio/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-okio/_latestVersion)|
 rxcache-persistence-mapdb|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-mapdb/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-mapdb/_latestVersion)|
 

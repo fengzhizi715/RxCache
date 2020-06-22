@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.6.3
+---
+2020-06-22
+* 增加 rxcache-converter-protobuf 模块
+
 Version 1.6.1
 ---
 2020-06-16

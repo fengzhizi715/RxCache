@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.novoda.bintray-release'
 }
 
 group 'com.safframework.rxcache'
@@ -22,4 +23,13 @@ dependencies {
     implementation "io.protostuff:protostuff-core:$libs.protostuff"
     implementation "io.protostuff:protostuff-runtime:$libs.protostuff"
     implementation "com.safframework.bytekit:bytekit-core:$libs.bytekit"
+}
+
+publish{
+    userOrg = 'fengzhizi715'
+    groupId = 'com.safframework.rxcache'
+    artifactId = 'rxcache-converter-protobuf'
+    publishVersion = "$rxcache_version"
+    desc = 'A local reactive cache for Java and Android.'
+    website = 'https://github.com/fengzhizi715/RxCache'
 }

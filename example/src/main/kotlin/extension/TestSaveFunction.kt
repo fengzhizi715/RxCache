@@ -30,7 +30,15 @@ fun main() {
         println(u.password)
     }
 
-    rxCache.saveFunc("test2",5, TimeUnit.SECONDS) {
+    rxCache.saveFunc("test2") {
+        "hello world"
+    }
+
+    rxCache.get<String>("test2")?.let {
+        println(it.data)
+    }
+
+    rxCache.saveFunc("test3",5, TimeUnit.SECONDS) {
 
         val u = User()
         u.name = "tony"
@@ -44,5 +52,5 @@ fun main() {
         e.printStackTrace()
     }
 
-    println("ttl=" + rxCache.ttl("test2", User::class.java))
+    println("ttl=" + rxCache.ttl("test3", User::class.java))
 }

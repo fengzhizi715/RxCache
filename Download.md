@@ -79,6 +79,12 @@ rxcache-converter-fst
 implementation 'com.safframework.rxcache:rxcache-converter-fst:<latest-version>'
 ```
 
+rxcache-converter-protobuf
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-converter-protobuf:<latest-version>'
+```
+
 ## persistence：
 
 rxcache-persistence-okio

@@ -1,7 +1,7 @@
 package com.safframework.rxcache.domain;
 
-import com.google.gson.Gson;
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.utils.GsonUtils;
 
 /**
  * 封装缓存的数据，使用 Immutable 对象，保证线程安全
@@ -98,6 +98,6 @@ public final class Record<T> {
 
     public String toString() {
 
-        return new Gson().toJson(this);
+        return GsonUtils.toJson(this);
     }
 }

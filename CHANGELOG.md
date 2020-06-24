@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.6.5
+---
+2020-06-24
+* 优化 ProtobufConverter
+
 Version 1.6.4
 ---
 2020-06-23

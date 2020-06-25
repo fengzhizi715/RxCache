@@ -1,18 +1,20 @@
+package memory;
+
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.memory.CaffeineImpl;
+import com.safframework.rxcache.memory.MapDBImpl;
 import domain.User;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 
 /**
- * Created by tony on 2018/11/6.
+ * Created by tony on 2019-01-04.
  */
-public class TestCaffeine {
+public class TestMapDB {
 
     public static void main(String[] args) {
 
-        RxCache.config(new RxCache.Builder().memory(new CaffeineImpl(100)));
+        RxCache.config(new RxCache.Builder().memory(new MapDBImpl(100)));
 
         RxCache rxCache = RxCache.getRxCache();
 

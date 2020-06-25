@@ -1,3 +1,5 @@
+package memory;
+
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.GuavaCacheImpl;

@@ -2,7 +2,6 @@ package converter;
 
 import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.RxCache;
-import com.safframework.rxcache.converter.FastJSONConverter;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl;

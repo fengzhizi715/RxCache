@@ -1,6 +1,9 @@
+package persistence;
+
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache.persistence.okio.OkioImpl;
+
+import com.safframework.rxcache.persistence.mapdb.MapDBImpl;
 import domain.User;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -8,22 +11,15 @@ import io.reactivex.rxjava3.functions.Consumer;
 import java.io.File;
 
 /**
- * Created by tony on 2019-02-27.
+ * Created by tony on 2019-10-05.
  */
-public class TestOkio {
+public class TestMapDBWithPersistence {
 
     public static void main(String[] args) {
 
-        File cacheDirectory = new File("aaa");
-
-        if (!cacheDirectory.exists()) {
-
-            cacheDirectory.mkdir();
-        }
-
-        OkioImpl okioImpl = new OkioImpl(cacheDirectory);
-
-        RxCache.config(new RxCache.Builder().persistence(okioImpl));
+        File file = new File("aaa/db");
+        MapDBImpl mapdbImpl = new MapDBImpl(file);
+        RxCache.config(new RxCache.Builder().persistence(mapdbImpl));
 
         RxCache rxCache = RxCache.getRxCache();
 
@@ -35,7 +31,6 @@ public class TestOkio {
         Observable<Record<User>> observable = rxCache.load2Observable("test", User.class);
 
         observable.subscribe(new Consumer<Record<User>>() {
-
             @Override
             public void accept(Record<User> record) throws Exception {
 
@@ -45,6 +40,6 @@ public class TestOkio {
             }
         });
 
-
+        mapdbImpl.close();
     }
 }

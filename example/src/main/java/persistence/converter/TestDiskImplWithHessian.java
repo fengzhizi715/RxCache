@@ -1,6 +1,7 @@
-package converter;
+package persistence.converter;
 
 import com.safframework.rxcache.converter.HessianConverter;
+import persistence.BaseDiskWithConverter;
 
 /**
  * Created by tony on 2019-04-17.

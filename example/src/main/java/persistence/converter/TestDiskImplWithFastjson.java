@@ -1,6 +1,7 @@
-package converter;
+package persistence.converter;
 
 import com.safframework.rxcache.converter.FastJSONConverter;
+import persistence.BaseDiskWithConverter;
 
 /**
  * Created by tony on 2018/11/6.

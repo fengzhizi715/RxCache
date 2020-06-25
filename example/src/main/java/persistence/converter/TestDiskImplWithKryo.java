@@ -6,7 +6,7 @@ import persistence.BaseDiskWithConverter;
 /**
  * Created by tony on 2019-04-17.
  */
-public class TestDiskWithKryo {
+public class TestDiskImplWithKryo {
 
     public static void main(String[] args) {
 

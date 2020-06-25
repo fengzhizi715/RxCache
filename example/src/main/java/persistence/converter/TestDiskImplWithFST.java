@@ -6,7 +6,7 @@ import persistence.BaseDiskWithConverter;
 /**
  * Created by tony on 2019-04-16.
  */
-public class TestDiskWithFST {
+public class TestDiskImplWithFST {
 
     public static void main(String[] args) {
 

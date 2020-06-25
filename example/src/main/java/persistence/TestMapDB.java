@@ -13,7 +13,7 @@ import java.io.File;
 /**
  * Created by tony on 2019-10-05.
  */
-public class TestMapDBWithPersistence {
+public class TestMapDB {
 
     public static void main(String[] args) {
 

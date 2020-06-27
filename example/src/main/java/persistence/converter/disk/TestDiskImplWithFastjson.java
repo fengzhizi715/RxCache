@@ -1,4 +1,4 @@
-package persistence.converter;
+package persistence.converter.disk;
 
 import com.safframework.rxcache.converter.FastJSONConverter;
 import persistence.BaseDiskWithConverter;

@@ -41,7 +41,7 @@ dependencies {
 
 buildscript {
     ext.kotlin_version = '1.3.72'
-    ext.rxcache_version = '1.6.5'
+    ext.rxcache_version = '1.6.6'
 
     repositories {
         jcenter()
@@ -52,5 +52,5 @@ buildscript {
     }
 }
 
-
+tasks.getByPath(":core:javadoc").enabled = false
 tasks.getByPath(":converter:protobuf:javadoc").enabled = false

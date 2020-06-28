@@ -17,7 +17,7 @@ public class TestSaveMemoryOnly {
 
         RxCache.config(new RxCache.Builder());
 
-        RxCache rxCache = RxCache.getRxCache();
+        RxCache rxCache = RxCache.getRxCache(); // 使用默认的 FIFOMemoryImpl 作为 memory 的实现
 
         User u = new User();
         u.name = "tony";

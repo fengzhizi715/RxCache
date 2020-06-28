@@ -227,7 +227,7 @@ public final class RxCache {
     }
 
     /**
-     * 保存缓存，只存于内存中
+     * 保存缓存只存于内存中，所以需要确保有 memory 的实现，否则缓存数据保存不了。
      * @param key   缓存的key
      * @param value 缓存的对象，需要序列化
      * @param <T>
@@ -238,7 +238,7 @@ public final class RxCache {
     }
 
     /**
-     * 保存缓存，只存于内存中
+     * 保存缓存只存于内存中，所以需要确保有 memory 的实现，否则缓存数据保存不了。
      * @param key        缓存的key
      * @param value      缓存的对象，需要序列化
      * @param expireTime 过期时间，默认单位是毫秒
@@ -250,7 +250,7 @@ public final class RxCache {
     }
 
     /**
-     * 保存缓存，只存于内存中
+     * 保存缓存只存于内存中，所以需要确保有 memory 的实现，否则缓存数据保存不了。
      * @param key        缓存的key
      * @param value      缓存的对象，需要序列化
      * @param expireTime 过期时间

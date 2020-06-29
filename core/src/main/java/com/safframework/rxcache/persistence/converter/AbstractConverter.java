@@ -3,6 +3,7 @@ package com.safframework.rxcache.persistence.converter;
 import com.safframework.bytekit.utils.IOUtils;
 import com.safframework.bytekit.utils.Preconditions;
 import com.safframework.rxcache.persistence.encrypt.Encryptor;
+import com.safframework.rxcache.reflect.TypeUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -89,7 +90,7 @@ public abstract class AbstractConverter implements Converter {
 
     public String converterName(){
 
-        String simpleName = this.getClass().getSimpleName();
+        String simpleName = TypeUtils.getClassSimpleName(this);
 
         int index = simpleName.lastIndexOf("Converter");
         if (index>0) {

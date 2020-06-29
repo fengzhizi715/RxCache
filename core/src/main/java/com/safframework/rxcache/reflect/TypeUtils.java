@@ -16,4 +16,9 @@ public class TypeUtils {
 
         return TypeToken.get(type).getRawType();
     }
+
+    public static <T> String getClassSimpleName(T t) {
+
+        return t.getClass().getSimpleName();
+    }
 }

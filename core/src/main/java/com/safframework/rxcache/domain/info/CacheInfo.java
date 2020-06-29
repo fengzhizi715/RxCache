@@ -2,6 +2,7 @@ package com.safframework.rxcache.domain.info;
 
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
+import com.safframework.rxcache.reflect.TypeUtils;
 import com.safframework.rxcache.utils.GsonUtils;
 
 /**
@@ -19,7 +20,7 @@ public class CacheInfo {
 
             memory = new MemoryInfo();
             memory.keys = builder.memory.keySet();
-            memory.memoryImpl = builder.memory.getClass().getSimpleName();
+            memory.memoryImpl = TypeUtils.getClassSimpleName(builder.memory);
             memory.cacheStatistics = builder.memory.getCacheStatistics();
         }
 
@@ -27,7 +28,7 @@ public class CacheInfo {
 
             persistence = new PersistenceInfo();
             persistence.keys = builder.persistence.allKeys();
-            persistence.persistenceImpl = builder.persistence.getClass().getSimpleName();
+            persistence.persistenceImpl = TypeUtils.getClassSimpleName(builder.persistence);
         }
     }
 

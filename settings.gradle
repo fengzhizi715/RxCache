@@ -3,6 +3,7 @@ include 'core'
 include 'example'
 include 'proxy'
 include 'extension'
+include 'browser'
 
 include 'converter'
 include 'converter:fastjson'

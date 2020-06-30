@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.3.72'
-    id 'com.novoda.bintray-release'
+    id 'com.github.johnrengelman.shadow'
 }
 
 group 'com.safframework.rxcache'
@@ -17,11 +17,14 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-    compileOnly "io.reactivex.rxjava3:rxjava:$libs.rxjava"
+    implementation project(":persistence:okio")
+    implementation "io.ktor:ktor-server-core:${libs.ktor}"
+    implementation "io.ktor:ktor-server-netty:${libs.ktor}"
+    implementation "io.ktor:ktor-freemarker:${libs.ktor}"
 }
 
 compileKotlin {
@@ -31,11 +34,9 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-publish{
-    userOrg = 'fengzhizi715'
-    groupId = 'com.safframework.rxcache'
-    artifactId = 'rxcache-extension'
-    publishVersion = "$rxcache_version"
-    desc = 'A local reactive cache for Java and Android.'
-    website = 'https://github.com/fengzhizi715/RxCache'
+shadowJar {
+    baseName = 'browser'
+    manifest {
+        attributes["Main-Class"] = "com.safframework.rxcache.disk.browser.ApplicationKt"
+    }
 }

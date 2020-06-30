@@ -11,5 +11,6 @@ package com.safframework.rxcache.disk.browser
 object Config {
 
     var path:String = ""
-    var type:String = "gson"
+    var type:String = "disk"
+    var converter:String = "gson"
 }

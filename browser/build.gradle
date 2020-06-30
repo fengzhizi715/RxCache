@@ -21,7 +21,14 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
+    implementation project(":converter:fastjson")
+    implementation project(":converter:moshi")
+    implementation project(":converter:fst")
+    implementation project(":converter:kryo")
+    implementation project(":converter:hessian")
+    implementation project(":converter:protobuf")
     implementation project(":persistence:okio")
+    implementation project(":persistence:mapdb")
     implementation "io.ktor:ktor-server-core:${libs.ktor}"
     implementation "io.ktor:ktor-server-netty:${libs.ktor}"
     implementation "io.ktor:ktor-freemarker:${libs.ktor}"

@@ -6,9 +6,22 @@
 </head>
 <body>
 <div>Browser 配置</div>
-<form action="/saveConfig">
-    本地路径: <input type="text" name="path"><br/>
-    序列化方式: <input type="text" name="type"><br/>
+<form action="/saveConfig" method="post">
+    本地路径:   <input type="text" name="path"><br/>
+    持久化方式: <select name="type">
+                 <option value="disk">disk</option>
+                 <option value="okio">okio</option>
+                 <option value="mapdb">mapdb</option>
+               </select><br/>
+    序列化方式: <select name="converter">
+                <option value="gson">gson</option>
+                <option value="fastjson">fastjson</option>
+                <option value="moshi">moshi</option>
+                <option value="kryo">kryo</option>
+                <option value="hessian">hessian</option>
+                <option value="fst">fst</option>
+                <option value="protobuf">protobuf</option>
+               </select><br/>
     <input type="submit">
 </form>
 </body>

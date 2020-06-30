@@ -7,10 +7,10 @@ import io.ktor.application.install
 import io.ktor.features.CallLogging
 import io.ktor.features.DefaultHeaders
 import io.ktor.freemarker.FreeMarker
-import io.ktor.freemarker.FreeMarkerContent
 import io.ktor.http.ContentType
-import io.ktor.response.respond
-import io.ktor.response.respondRedirect
+import io.ktor.http.content.defaultResource
+import io.ktor.http.content.resources
+import io.ktor.http.content.static
 import io.ktor.response.respondText
 import io.ktor.routing.Routing
 import io.ktor.routing.get
@@ -35,12 +35,12 @@ fun Application.module() {
         templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
     }
     install(Routing) {
-        get("/") {
-            call.respondRedirect("/index")
+
+        static("/") {
+            defaultResource("index.html", "web")
+            resources("web")
         }
-        get("/index") {
-            call.respond(FreeMarkerContent("hello.ftl",null))
-        }
+
         get("/saveConfig") {
 
             Config.path = call.parameters["path"]?:""

@@ -193,6 +193,13 @@ public final class RxCache {
         return cacheRepository.getStringData(key);
     }
 
+    /**
+     * 可以解析 getStringData() 返回的内容，转换成 json 字符串
+     * @param converter
+     * @param data
+     * @param type
+     * @return
+     */
     public String parseStringData(Converter converter, String data, Type type) {
 
         return cacheRepository.parseStringData(converter, data, type);

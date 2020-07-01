@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.7.0
+---
+2020-07-01
+* RxCache 增加 getStringData()、parseStringData() 
+
 Version 1.6.6
 ---
 2020-06-27

@@ -12,6 +12,8 @@ public interface Persistence {
 
     <T> Record<T> retrieve(String key, Type type);
 
+    String getJSONData(String key);
+
     <T> void save(String key, T value);
 
     <T> void save(String key, T value, long expireTime);

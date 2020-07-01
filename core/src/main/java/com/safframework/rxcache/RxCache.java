@@ -178,13 +178,15 @@ public final class RxCache {
     }
 
     /**
-     * 根据相应的缓存策略，从 RxCache 中获取 Record
-     * @param key   缓存的key
-     * @param type  缓存所存储的类型
-     * @param cacheStrategy 缓存策略
-     * @param <T>
+     *
+     * @param key
      * @return
      */
+    public String getJSONData(String key) {
+
+        return cacheRepository.getJSONData(key);
+    }
+
     public <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
 
         return cacheRepository.get(key,type,cacheStrategy);

@@ -113,6 +113,17 @@ class CacheRepository {
         }
     }
 
+    protected String getJSONData(String key) {
+
+        readLock.lock();
+
+        try {
+            return Preconditions.isNotBlank(key) && persistence!=null ? persistence.getJSONData(key) : null;
+        } finally {
+            readLock.unlock();
+        }
+    }
+
     protected <T> void save(String key, T value) {
 
         save(key,value, Constant.NEVER_EXPIRE);

@@ -109,6 +109,56 @@ public class OkioImpl implements Disk {
     }
 
     @Override
+    public String getJSONData(String key) {
+
+        FileInputStream inputStream = null;
+        BufferedSource bufferedSource = null;
+
+        try {
+            String safetyKey = safetyKey(key);
+            File file = new File(cacheDirectory, safetyKey);
+
+            if (file == null || !file.exists()) return null;
+
+            inputStream = new FileInputStream(file);
+
+            bufferedSource = Okio.buffer(Okio.source(inputStream));
+            String line = bufferedSource.readUtf8();
+
+            CacheHolder holder = converter.fromJson(line,CacheHolder.class);
+
+            if (holder == null) return null;
+
+            long timestamp = holder.getTimestamp();
+            long expireTime = holder.getExpireTime();
+
+            String json = null;
+
+            if (expireTime<0) { // 缓存的数据从不过期
+
+                json = holder.getData();
+            } else {
+
+                if (timestamp + expireTime > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                    json = holder.getData();
+                } else {        // 缓存的数据已经过期
+
+                    evict(safetyKey);
+                }
+            }
+
+            return json;
+        } catch (Exception ignore) {
+
+            throw new RxCacheException(ignore);
+        } finally {
+
+            IOUtils.closeQuietly(inputStream,bufferedSource);
+        }
+    }
+
+    @Override
     public <T> void save(String key, T value) {
         save(key, value, Constant.NEVER_EXPIRE);
     }

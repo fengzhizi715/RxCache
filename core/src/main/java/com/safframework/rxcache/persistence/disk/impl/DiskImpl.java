@@ -59,7 +59,6 @@ public class DiskImpl implements Disk {
         FileInputStream inputStream = null;
 
         try {
-
             String safetyKey = safetyKey(key);
             File file = new File(cacheDirectory, safetyKey);
             
@@ -105,6 +104,52 @@ public class DiskImpl implements Disk {
     }
 
     @Override
+    public String getJSONData(String key) {
+
+        FileInputStream inputStream = null;
+
+        try {
+            String safetyKey = safetyKey(key);
+            File file = new File(cacheDirectory, safetyKey);
+
+            if (file == null || !file.exists()) return null;
+
+            inputStream = new FileInputStream(file);
+
+            CacheHolder holder = converter.read(inputStream,CacheHolder.class);
+
+            if (holder == null) return null;
+
+            long timestamp = holder.getTimestamp();
+            long expireTime = holder.getExpireTime();
+
+            String json = null;
+
+            if (expireTime<0) { // 缓存的数据从不过期
+
+                json = holder.getData();
+            } else {
+
+                if (timestamp + expireTime > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                    json = holder.getData();
+                } else {        // 缓存的数据已经过期
+
+                    evict(safetyKey);
+                }
+            }
+
+            return json;
+        } catch (Exception ignore) {
+
+            throw new RxCacheException(ignore);
+        } finally {
+
+            IOUtils.closeQuietly(inputStream);
+        }
+    }
+
+    @Override
     public <T> void save(String key, T value) {
 
         save(key, value, Constant.NEVER_EXPIRE);
@@ -116,7 +161,6 @@ public class DiskImpl implements Disk {
         FileOutputStream outputStream = null;
 
         try {
-
             String safetyKey = safetyKey(key);
 
             File file = new File(cacheDirectory, safetyKey);

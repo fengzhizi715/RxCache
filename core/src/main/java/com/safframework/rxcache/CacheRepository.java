@@ -113,12 +113,12 @@ class CacheRepository {
         }
     }
 
-    protected String getJSONData(String key) {
+    protected String getStringData(String key) {
 
         readLock.lock();
 
         try {
-            return Preconditions.isNotBlank(key) && persistence!=null ? persistence.getJSONData(key) : null;
+            return Preconditions.isNotBlank(key) && persistence!=null ? persistence.getStringData(key) : null;
         } finally {
             readLock.unlock();
         }

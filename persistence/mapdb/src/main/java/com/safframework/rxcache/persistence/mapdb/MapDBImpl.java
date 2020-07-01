@@ -78,7 +78,7 @@ public class MapDBImpl implements Persistence {
     }
 
     @Override
-    public String getJSONData(String key) {
+    public String getStringData(String key) {
 
         CacheHolder holder = (CacheHolder) map.get(key);;
 

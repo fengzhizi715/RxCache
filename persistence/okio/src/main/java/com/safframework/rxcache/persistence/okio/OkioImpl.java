@@ -109,7 +109,7 @@ public class OkioImpl implements Disk {
     }
 
     @Override
-    public String getJSONData(String key) {
+    public String getStringData(String key) {
 
         FileInputStream inputStream = null;
         BufferedSource bufferedSource = null;

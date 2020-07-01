@@ -104,7 +104,7 @@ public class DiskImpl implements Disk {
     }
 
     @Override
-    public String getJSONData(String key) {
+    public String getStringData(String key) {
 
         FileInputStream inputStream = null;
 

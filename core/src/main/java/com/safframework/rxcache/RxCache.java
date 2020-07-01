@@ -182,9 +182,9 @@ public final class RxCache {
      * @param key
      * @return
      */
-    public String getJSONData(String key) {
+    public String getStringData(String key) {
 
-        return cacheRepository.getJSONData(key);
+        return cacheRepository.getStringData(key);
     }
 
     public <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {

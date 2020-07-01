@@ -1,5 +1,6 @@
 package com.safframework.rxcache.disk.browser
 
+import com.safframework.rxcache.RxCache
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.Application
 import io.ktor.application.call
@@ -70,7 +71,8 @@ fun Application.module() {
         get("/detail/{key}") {
 
             val key = call.parameters["key"]
-
+            val json = RxCache.getRxCache().getJSONData(key)
+            call.respond(json)
         }
     }
 }

@@ -7,6 +7,8 @@ import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
+import com.safframework.rxcache.persistence.converter.Converter;
+import com.safframework.rxcache.utils.GsonUtils;
 
 import java.lang.reflect.Type;
 import java.util.HashSet;
@@ -119,6 +121,17 @@ class CacheRepository {
 
         try {
             return Preconditions.isNotBlank(key) && persistence!=null ? persistence.getStringData(key) : null;
+        } finally {
+            readLock.unlock();
+        }
+    }
+
+    protected String parseStringData(Converter converter, String data, Type type) {
+
+        readLock.lock();
+
+        try {
+            return Preconditions.isNotBlanks(converter,data,type)? GsonUtils.toJson(converter.fromJson(data,type)) : null;
         } finally {
             readLock.unlock();
         }

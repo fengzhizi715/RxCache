@@ -5,6 +5,7 @@ import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
 import com.safframework.rxcache.persistence.Persistence;
+import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.transformstrategy.CompletableStrategy;
 import com.safframework.rxcache.transformstrategy.FlowableStrategy;
 import com.safframework.rxcache.transformstrategy.MaybeStrategy;
@@ -190,6 +191,11 @@ public final class RxCache {
     public String getStringData(String key) {
 
         return cacheRepository.getStringData(key);
+    }
+
+    public String parseStringData(Converter converter, String data, Type type) {
+
+        return cacheRepository.parseStringData(converter, data, type);
     }
 
     /**

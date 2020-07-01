@@ -33,6 +33,8 @@ dependencies {
     implementation "io.ktor:ktor-server-netty:${libs.ktor}"
     implementation "io.ktor:ktor-freemarker:${libs.ktor}"
     implementation "io.ktor:ktor-gson:${libs.ktor}"
+
+    implementation "io.reactivex.rxjava3:rxjava:$libs.rxjava"
 }
 
 compileKotlin {

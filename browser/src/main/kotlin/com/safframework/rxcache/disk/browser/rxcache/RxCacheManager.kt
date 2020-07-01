@@ -26,22 +26,22 @@ val rxCache: RxCache by lazy {
         cacheDirectory.mkdir()
     }
 
-    val converter:Converter = when(Config.converter) {
-        "gson"      -> GsonConverter()
-        "fastjson"  -> FastJSONConverter()
-        "moshi"     -> MoshiConverter()
-        "kryo"      -> KryoConverter()
-        "hessian"   -> HessianConverter()
-        "fst"       -> FSTConverter()
-        "protobuf"  -> ProtobufConverter()
-        else        -> GsonConverter()
+    val converter: Converter = when (Config.converter) {
+        "gson" -> GsonConverter()
+        "fastjson" -> FastJSONConverter()
+        "moshi" -> MoshiConverter()
+        "kryo" -> KryoConverter()
+        "hessian" -> HessianConverter()
+        "fst" -> FSTConverter()
+        "protobuf" -> ProtobufConverter()
+        else -> GsonConverter()
     }
 
-    val persistence:Persistence = when(Config.type) {
-        "disk"      -> DiskImpl(cacheDirectory, converter)
-        "okio"      -> OkioImpl(cacheDirectory, converter)
-        "mapdb"     -> MapDBImpl(cacheDirectory, converter)
-        else        -> DiskImpl(cacheDirectory, converter)
+    val persistence: Persistence = when (Config.type) {
+        "disk" -> DiskImpl(cacheDirectory, converter)
+        "okio" -> OkioImpl(cacheDirectory, converter)
+        "mapdb" -> MapDBImpl(cacheDirectory, converter)
+        else -> DiskImpl(cacheDirectory, converter)
     }
 
     RxCache.config(RxCache.Builder().persistence(persistence))

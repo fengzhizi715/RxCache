@@ -1,6 +1,6 @@
 package com.safframework.rxcache.disk.browser
 
-import com.safframework.rxcache.RxCache
+import com.safframework.rxcache.disk.browser.rxcache.rxCache
 import freemarker.cache.ClassTemplateLoader
 import io.ktor.application.Application
 import io.ktor.application.call
@@ -16,6 +16,7 @@ import io.ktor.http.content.defaultResource
 import io.ktor.http.content.static
 import io.ktor.request.receiveParameters
 import io.ktor.response.respond
+import io.ktor.response.respondText
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.post
@@ -32,7 +33,6 @@ import java.text.DateFormat
  * @date: 2020-06-30 14:24
  * @version: V1.0 <描述当前版本功能>
  */
-
 fun Application.module() {
 
     install(DefaultHeaders)
@@ -56,9 +56,9 @@ fun Application.module() {
 
             val postParameters: Parameters = call.receiveParameters()
 
-            Config.path = postParameters["path"]?:""
-            Config.type = postParameters["type"]?:""
-            Config.converter = postParameters["converter"]?:""
+            Config.path = postParameters["path"] ?: ""
+            Config.type = postParameters["type"] ?: ""
+            Config.converter = postParameters["converter"] ?: ""
 
             call.respond(FreeMarkerContent("save.ftl", mapOf("config" to Config)))
         }
@@ -71,8 +71,8 @@ fun Application.module() {
         get("/detail/{key}") {
 
             val key = call.parameters["key"]
-            val json = RxCache.getRxCache().getJSONData(key)
-            call.respond(json)
+            val json = rxCache.getStringData(key)
+            call.respondText(json)
         }
     }
 }

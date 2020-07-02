@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.7.1
+---
+2020-07-02
+* RxCache+Extension 增加 memory()、persistence() 
+
 Version 1.7.0
 ---
 2020-07-01

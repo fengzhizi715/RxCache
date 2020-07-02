@@ -3,7 +3,7 @@ package com.safframework.rxcache.disk.browser.rxcache
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.converter.*
 import com.safframework.rxcache.disk.browser.Config
-import com.safframework.rxcache.persistence.Persistence
+import com.safframework.rxcache.ext.persistence
 import com.safframework.rxcache.persistence.converter.Converter
 import com.safframework.rxcache.persistence.converter.GsonConverter
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl
@@ -27,24 +27,24 @@ val rxCache: RxCache by lazy {
     }
 
     val converter: Converter = when (Config.converter) {
-        "gson" -> GsonConverter()
-        "fastjson" -> FastJSONConverter()
-        "moshi" -> MoshiConverter()
-        "kryo" -> KryoConverter()
-        "hessian" -> HessianConverter()
-        "fst" -> FSTConverter()
-        "protobuf" -> ProtobufConverter()
-        else -> GsonConverter()
+        "gson"      -> GsonConverter()
+        "fastjson"  -> FastJSONConverter()
+        "moshi"     -> MoshiConverter()
+        "kryo"      -> KryoConverter()
+        "hessian"   -> HessianConverter()
+        "fst"       -> FSTConverter()
+        "protobuf"  -> ProtobufConverter()
+        else        -> GsonConverter()
     }
 
-    val persistence: Persistence = when (Config.type) {
-        "disk" -> DiskImpl(cacheDirectory, converter)
-        "okio" -> OkioImpl(cacheDirectory, converter)
-        "mapdb" -> MapDBImpl(cacheDirectory, converter)
-        else -> DiskImpl(cacheDirectory, converter)
-    }
-
-    RxCache.config(RxCache.Builder().persistence(persistence))
+    RxCache.config(RxCache.Builder().persistence {
+        when (Config.type) {
+            "disk"      -> DiskImpl(cacheDirectory, converter)
+            "okio"      -> OkioImpl(cacheDirectory, converter)
+            "mapdb"     -> MapDBImpl(cacheDirectory, converter)
+            else        -> DiskImpl(cacheDirectory, converter)
+        }
+    })
 
     RxCache.getRxCache()
 }

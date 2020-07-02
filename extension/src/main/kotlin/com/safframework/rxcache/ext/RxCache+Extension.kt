@@ -3,6 +3,8 @@ package com.safframework.rxcache.ext
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.domain.CacheStrategy
 import com.safframework.rxcache.domain.Record
+import com.safframework.rxcache.memory.Memory
+import com.safframework.rxcache.persistence.Persistence
 import com.safframework.rxcache.reflect.TypeToken
 import com.safframework.rxcache.transformstrategy.*
 import io.reactivex.rxjava3.core.*
@@ -80,4 +82,12 @@ inline fun <reified T> RxCache.updateFunc(key: String, expireTime: Long, noinlin
 
 inline fun <reified T> RxCache.updateFunc(key: String, expireTime: Long, timeUnit: TimeUnit, noinline value: valueFuc<T>) {
     update(key, value.invoke(), expireTime, timeUnit)
+}
+
+fun RxCache.Builder.memory(init:RxCache.Builder.()->Memory) = this.apply {
+    this.memory(init())
+}
+
+fun RxCache.Builder.persistence(init:RxCache.Builder.()-> Persistence) = this.apply {
+    this.persistence(init())
 }

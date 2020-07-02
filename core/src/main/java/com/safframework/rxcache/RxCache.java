@@ -40,6 +40,10 @@ public final class RxCache {
         return mRxCache;
     }
 
+    /**
+     * 配置 RxCache，配置一次即可，以后无需再配置。只有配置完了 RxCache，才可以使用。
+     * @param builder
+     */
     public static void config(Builder builder) {
 
         if (mRxCache == null) {

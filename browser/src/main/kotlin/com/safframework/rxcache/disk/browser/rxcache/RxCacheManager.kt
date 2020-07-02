@@ -39,10 +39,10 @@ val rxCache: RxCache by lazy {
 
     RxCache.config(RxCache.Builder().persistence {
         when (Config.type) {
-            "disk"      -> DiskImpl(cacheDirectory, converter)
-            "okio"      -> OkioImpl(cacheDirectory, converter)
-            "mapdb"     -> MapDBImpl(cacheDirectory, converter)
-            else        -> DiskImpl(cacheDirectory, converter)
+            "disk"  -> DiskImpl(cacheDirectory, converter)
+            "okio"  -> OkioImpl(cacheDirectory, converter)
+            "mapdb" -> MapDBImpl(cacheDirectory, converter)
+            else    -> DiskImpl(cacheDirectory, converter)
         }
     })
 

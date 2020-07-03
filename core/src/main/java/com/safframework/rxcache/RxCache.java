@@ -202,7 +202,7 @@ public final class RxCache {
     }
 
     /**
-     * 从 RxCache 中获取一条记录(并不是 Record 的包装类)，该记录返回是一个 json 对象 或者是一个 Base64 加密过的字符串
+     * 从 RxCache 中获取一条记录(并不是 Record 的包装类，而是 Record 对应的 data)，该记录返回是一个 json 对象 或者是一个 Base64 加密过的字符串
      * @param key
      * @return
      */

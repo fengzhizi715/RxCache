@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.7.2
+---
+2020-07-03
+* RxCache 增加 config() 
+
 Version 1.7.1
 ---
 2020-07-02

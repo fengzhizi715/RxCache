@@ -19,6 +19,7 @@ import java.io.PrintStream;
 import java.lang.reflect.Type;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 /**
  * RxCache 是单例，使用时需要先调用 config() 配置 RxCache
@@ -49,6 +50,19 @@ public final class RxCache {
         if (mRxCache == null) {
 
             RxCache.mRxCache = builder.build();
+        }
+    }
+
+    /**
+     * 配置 RxCache，配置一次即可，以后无需再配置。只有配置完了 RxCache，才可以使用。
+     * 方便使用 Kotlin 时，可以使用dsl
+     * @param builder
+     */
+    public static void config(Supplier<Builder> builder) {
+
+        if (mRxCache == null) {
+
+            RxCache.mRxCache = builder.get().build();
         }
     }
 

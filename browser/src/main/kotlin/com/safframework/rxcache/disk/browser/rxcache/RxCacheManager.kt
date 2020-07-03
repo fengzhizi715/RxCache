@@ -37,14 +37,16 @@ val rxCache: RxCache by lazy {
         else        -> GsonConverter()
     }
 
-    RxCache.config(RxCache.Builder().persistence {
-        when (Config.type) {
-            "disk"  -> DiskImpl(cacheDirectory, converter)
-            "okio"  -> OkioImpl(cacheDirectory, converter)
-            "mapdb" -> MapDBImpl(cacheDirectory, converter)
-            else    -> DiskImpl(cacheDirectory, converter)
+    RxCache.config {
+        RxCache.Builder().persistence {
+            when (Config.type) {
+                "disk"  -> DiskImpl(cacheDirectory, converter)
+                "okio"  -> OkioImpl(cacheDirectory, converter)
+                "mapdb" -> MapDBImpl(cacheDirectory, converter)
+                else    -> DiskImpl(cacheDirectory, converter)
+            }
         }
-    })
+    }
 
     RxCache.getRxCache()
 }

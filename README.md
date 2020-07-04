@@ -51,7 +51,7 @@ rxcache-converter-fst|[ ![Download](https://api.bintray.com/packages/fengzhizi71
 rxcache-converter-protobuf|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-protobuf/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-protobuf/_latestVersion)|
 rxcache-persistence-okio|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-okio/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-okio/_latestVersion)|
 rxcache-persistence-mapdb|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-mapdb/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-mapdb/_latestVersion)|
-
+rxcache-persistence-diskmap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-diskmap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-diskmap/_latestVersion)|
 
 对于 Java 工程，如果使用 gradle 构建，由于默认没有使用 jcenter()，需要在相应 module 的 build.gradle 中配置
 

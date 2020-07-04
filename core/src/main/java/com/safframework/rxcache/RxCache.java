@@ -55,7 +55,7 @@ public final class RxCache {
 
     /**
      * 配置 RxCache，配置一次即可，以后无需再配置。只有配置完了 RxCache，才可以使用。
-     * 方便使用 Kotlin 时，可以使用dsl
+     * 方便使用 Kotlin 时，可以使用 dsl 来配置 RxCache
      * @param builder
      */
     public static void config(Supplier<Builder> builder) {

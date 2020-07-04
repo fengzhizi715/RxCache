@@ -5,6 +5,7 @@ import com.safframework.rxcache.domain.CacheStrategy
 import com.safframework.rxcache.domain.Record
 import com.safframework.rxcache.memory.Memory
 import com.safframework.rxcache.persistence.Persistence
+import com.safframework.rxcache.persistence.converter.Converter
 import com.safframework.rxcache.reflect.TypeToken
 import com.safframework.rxcache.transformstrategy.*
 import io.reactivex.rxjava3.core.*
@@ -43,6 +44,8 @@ inline fun <reified T> RxCache.load2Maybe(key: String): Maybe<Record<T>> = load2
 inline fun <reified T> RxCache.get(key: String): Record<T>? = get<T>(key, object : TypeToken<T>() {}.type)
 
 inline fun <reified T> RxCache.get(key: String, cacheStrategy: CacheStrategy): Record<T>? = get<T>(key, object : TypeToken<T>() {}.type, cacheStrategy)
+
+inline fun <reified T> RxCache.parseStringData(converter: Converter, data: String) = parseStringData(converter,data,object : TypeToken<T>() {}.type)
 
 inline fun <reified T> RxCache.expire(key: String, expireTime: Long) = expire<T>(key, object : TypeToken<T>() {}.type, expireTime)
 

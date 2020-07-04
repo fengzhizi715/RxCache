@@ -1,5 +1,7 @@
 package com.safframework.rxcache.persistence.diskmap;
 
+import com.safframework.rxcache.persistence.converter.Converter;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -11,14 +13,14 @@ import java.util.Set;
  * @FileName: com.safframework.rxcache.persistence.diskmap.CachedFileMap
  * @author: Tony Shen
  * @date: 2020-07-03 23:50
- * @version: V1.0 <描述当前版本功能>
+ * @version: V1.7
  */
 public class CachedFileMap<K,V> extends AbstractFileMap<K,V> {
 
     private Map<K,V> internal;
 
-    public CachedFileMap(File file, Class<K> keyType, Class<V> valueType) throws IOException {
-        super(file, keyType, valueType);
+    public CachedFileMap(File file, Class<K> keyType, Class<V> valueType, Converter converter) throws IOException {
+        super(file, keyType, valueType,converter);
     }
 
     @Override

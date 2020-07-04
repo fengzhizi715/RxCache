@@ -39,6 +39,7 @@ dependencies {
 
     implementation project(":persistence:okio")
     implementation project(":persistence:mapdb")
+    implementation project(":persistence:diskmap")
 
     implementation "io.reactivex.rxjava3:rxjava:${libs.rxjava}"
     implementation "org.springframework:spring-core:${libs.spring}"

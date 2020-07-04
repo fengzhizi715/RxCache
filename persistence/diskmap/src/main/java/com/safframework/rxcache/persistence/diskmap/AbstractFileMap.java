@@ -1,6 +1,6 @@
 package com.safframework.rxcache.persistence.diskmap;
 
-import com.safframework.rxcache.utils.GsonUtils;
+import com.safframework.rxcache.persistence.converter.Converter;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.Map;
  * @FileName: com.safframework.rxcache.persistence.diskmap.AbstractFileMap
  * @author: Tony Shen
  * @date: 2020-07-03 20:55
- * @version: V1.0 <描述当前版本功能>
+ * @version: V1.7
  */
 public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
 
@@ -22,13 +22,16 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
     private static final String MODE = "rw";
     private long entriesWritten;
 
+    private Converter converter;
+
     Class<K> keyType;
     Class<V> valueType;
 
-    public AbstractFileMap(File file, Class<K> keyType, Class<V> valueType) throws IOException {
+    public AbstractFileMap(File file, Class<K> keyType, Class<V> valueType, Converter converter) throws IOException {
         this.file = file;
         this.keyType = keyType;
         this.valueType = valueType;
+        this.converter = converter;
         init();
         if(fileio != null)
             fileio.close();
@@ -80,12 +83,12 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
 
         @Override
         public K getKey() {
-            return GsonUtils.fromJson(getKeyJson(),keyType);
+            return converter.fromJson(getKeyJson(),keyType);
         }
 
         @Override
         public V getValue() {
-            return GsonUtils.fromJson(getValueJson(),valueType);
+            return converter.fromJson(getValueJson(),valueType);
         }
 
         public String getValueJson() {
@@ -107,8 +110,8 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
         }
         String keyJson = line.substring(0, i);
         String valueJson = line.substring(i+1);
-        K key = GsonUtils.fromJson(keyJson,keyType);
-        V value = GsonUtils.fromJson(valueJson,valueType);
+        K key = converter.fromJson(keyJson,keyType);
+        V value = converter.fromJson(valueJson,valueType);
 
         return new AbstractMap.SimpleEntry<K,V>(key, value);
     }
@@ -119,7 +122,7 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
             throw new IOException("Failed to parse line: " + line);
         }
         String keyJson = line.substring(0, i);
-        K key = GsonUtils.fromJson(keyJson,keyType);
+        K key = converter.fromJson(keyJson,keyType);
         return key;
     }
 
@@ -129,7 +132,7 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
             throw new IOException("Failed to parse line: " + line);
         }
         String valueJson = line.substring(i+1);
-        V value = GsonUtils.fromJson(valueJson,valueType);
+        V value = converter.fromJson(valueJson,valueType);
 
         return value;
     }
@@ -143,8 +146,8 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
         try {
             entriesWritten++;
 
-            String keyJson = GsonUtils.toJson(key);
-            String valueJson = GsonUtils.toJson(value);
+            String keyJson = converter.toJson(key);
+            String valueJson = converter.toJson(value);
             String line = keyJson + "\t" + valueJson + "\n";
 
             long offset = fileio.length();

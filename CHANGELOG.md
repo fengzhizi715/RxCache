@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.7.3
+---
+2020-07-04
+* 增加 rxcache-persistence-mapdb 模块
+
 Version 1.7.2
 ---
 2020-07-03

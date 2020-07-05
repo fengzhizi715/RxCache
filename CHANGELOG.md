@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.7.4
+---
+2020-07-05
+* 完善 RxCache 的 info()
+
 Version 1.7.3
 ---
 2020-07-04

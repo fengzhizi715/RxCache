@@ -443,7 +443,7 @@ public final class RxCache {
     }
 
     /**
-     * 返回缓存中的信息
+     * 获取缓存中的信息
      * @return
      */
     public String getInfo() {

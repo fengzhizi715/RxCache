@@ -10,4 +10,6 @@ public class PersistenceInfo {
     public List<String> keys;
 
     public String persistenceImpl;
+
+    public String converterName;
 }

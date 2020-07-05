@@ -2,8 +2,11 @@ package com.safframework.rxcache.domain.info;
 
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
+import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.reflect.TypeUtils;
 import com.safframework.rxcache.utils.GsonUtils;
+
+import static org.joor.Reflect.on;
 
 /**
  * 显示缓存的信息
@@ -29,6 +32,8 @@ public class CacheInfo {
             persistence = new PersistenceInfo();
             persistence.keys = builder.persistence.allKeys();
             persistence.persistenceImpl = TypeUtils.getClassSimpleName(builder.persistence);
+            Converter converter = on(builder.persistence).field("converter").get();
+            persistence.converterName = converter.converterName();
         }
     }
 

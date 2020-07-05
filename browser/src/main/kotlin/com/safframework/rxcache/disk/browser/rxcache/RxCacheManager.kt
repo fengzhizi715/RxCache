@@ -7,6 +7,7 @@ import com.safframework.rxcache.ext.persistence
 import com.safframework.rxcache.persistence.converter.Converter
 import com.safframework.rxcache.persistence.converter.GsonConverter
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl
+import com.safframework.rxcache.persistence.diskmap.DiskMapImpl
 import com.safframework.rxcache.persistence.mapdb.MapDBImpl
 import com.safframework.rxcache.persistence.okio.OkioImpl
 import java.io.File
@@ -20,11 +21,6 @@ import java.io.File
  * @version: V1.0 <描述当前版本功能>
  */
 val rxCache: RxCache by lazy {
-
-    val cacheDirectory = File(Config.path) // rxCache 持久层存放地址
-    if (!cacheDirectory.exists()) {
-        cacheDirectory.mkdir()
-    }
 
     val converter: Converter = when (Config.converter) {
         "gson"      -> GsonConverter()
@@ -40,10 +36,35 @@ val rxCache: RxCache by lazy {
     RxCache.config {
         RxCache.Builder().persistence {
             when (Config.type) {
-                "disk"  -> DiskImpl(cacheDirectory, converter)
-                "okio"  -> OkioImpl(cacheDirectory, converter)
-                "mapdb" -> MapDBImpl(cacheDirectory, converter)
-                else    -> DiskImpl(cacheDirectory, converter)
+                "disk"   -> {
+                    val cacheDirectory = File(Config.path) // rxCache 持久层存放地址
+                    if (!cacheDirectory.exists()) {
+                        cacheDirectory.mkdir()
+                    }
+                    DiskImpl(cacheDirectory, converter)
+                }
+                "okio"   -> {
+                    val cacheDirectory = File(Config.path) // rxCache 持久层存放地址
+                    if (!cacheDirectory.exists()) {
+                        cacheDirectory.mkdir()
+                    }
+                    OkioImpl(cacheDirectory, converter)
+                }
+                "mapdb"  -> {
+                    val cacheDirectory = File(Config.path) // rxCache 持久层存放地址
+                    MapDBImpl(cacheDirectory, converter)
+                }
+                "diskmap"-> {
+                    val cacheDirectory = File(Config.path) // rxCache 持久层存放地址
+                    DiskMapImpl(cacheDirectory, converter)
+                }
+                else     -> {
+                    val cacheDirectory = File(Config.path) // rxCache 持久层存放地址
+                    if (!cacheDirectory.exists()) {
+                        cacheDirectory.mkdir()
+                    }
+                    DiskImpl(cacheDirectory, converter)
+                }
             }
         }
     }

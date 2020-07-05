@@ -30,6 +30,7 @@ dependencies {
     implementation project(":converter:protobuf")
     implementation project(":persistence:okio")
     implementation project(":persistence:mapdb")
+    implementation project(":persistence:diskmap")
     implementation "io.ktor:ktor-server-core:${libs.ktor}"
     implementation "io.ktor:ktor-server-netty:${libs.ktor}"
     implementation "io.ktor:ktor-freemarker:${libs.ktor}"

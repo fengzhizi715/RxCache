@@ -442,6 +442,15 @@ public final class RxCache {
         out.println(cacheRepository.info());
     }
 
+    /**
+     * 返回缓存中的信息
+     * @return
+     */
+    public String getInfo() {
+
+        return cacheRepository.info();
+    }
+
     public static final class Builder {
 
         private Memory memory;

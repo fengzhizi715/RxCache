@@ -74,6 +74,11 @@ fun Application.module() {
             val json = rxCache.getStringData(key)
             call.respondText(json)
         }
+        get("/info") {
+
+            val json = rxCache.getInfo()
+            call.respondText(json)
+        }
     }
 }
 

@@ -98,3 +98,9 @@ rxcache-persistence-mapdb
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-persistence-mapdb:<latest-version>'
 ```
+
+rxcache-persistence-diskmap
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-persistence-diskmap:<latest-version>'
+```

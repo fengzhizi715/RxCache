@@ -37,7 +37,7 @@ public class DiskMapImpl implements Disk {
         this.cacheDirectory = cacheDirectory;
         this.converter = converter;
         try {
-            map = new CachedFileMap(cacheDirectory, String.class, CacheHolder.class, converter);
+            map = new DiskMap(cacheDirectory, String.class, CacheHolder.class, converter);
         } catch (IOException e) {
             e.printStackTrace();
         }

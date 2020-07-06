@@ -15,11 +15,11 @@ import java.util.Set;
  * @date: 2020-07-03 23:50
  * @version: V1.7
  */
-public class CachedFileMap<K,V> extends AbstractFileMap<K,V> {
+public class DiskMap<K,V> extends AbstractFileMap<K,V> {
 
     private Map<K,V> internal;
 
-    public CachedFileMap(File file, Class<K> keyType, Class<V> valueType, Converter converter) throws IOException {
+    public DiskMap(File file, Class<K> keyType, Class<V> valueType, Converter converter) throws IOException {
         super(file, keyType, valueType,converter);
     }
 

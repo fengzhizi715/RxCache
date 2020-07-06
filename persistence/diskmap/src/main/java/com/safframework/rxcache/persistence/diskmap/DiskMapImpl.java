@@ -55,7 +55,7 @@ public class DiskMapImpl implements Disk {
     @Override
     public <T> Record<T> retrieve(String key, Type type) {
 
-        CacheHolder holder = map.get(key);;
+        CacheHolder holder = map.get(key);
 
         if (holder == null) return null;
 
@@ -88,7 +88,7 @@ public class DiskMapImpl implements Disk {
     @Override
     public String getStringData(String key) {
 
-        CacheHolder holder = (CacheHolder) map.get(key);;
+        CacheHolder holder = (CacheHolder) map.get(key);
 
         if (holder == null) return null;
 

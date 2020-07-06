@@ -1,5 +1,6 @@
 package com.safframework.rxcache.persistence.diskmap;
 
+import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.persistence.converter.Converter;
 
 import java.io.File;
@@ -17,7 +18,7 @@ import java.util.Map;
 public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
 
     protected File file;
-    protected BufferedRandomAccessFile fileio;
+    protected BufferedRandomAccessFile fileIO;
 
     private static final String MODE = "rw";
     private long entriesWritten;
@@ -33,16 +34,16 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
         this.valueType = valueType;
         this.converter = converter;
         init();
-        if(fileio != null)
-            fileio.close();
+        if(fileIO != null)
+            fileIO.close();
 
         entriesWritten = 0;
-        fileio = new BufferedRandomAccessFile(file, MODE);
+        fileIO = new BufferedRandomAccessFile(file, MODE);
 
-        while(!fileio.isEOF()) {
-            long offset = fileio.pos();
+        while(!fileIO.isEOF()) {
+            long offset = fileIO.pos();
 
-            String line = fileio.readLine();
+            String line = fileIO.readLine();
             if( line == null ||  line.isEmpty() || line.startsWith("#") )
                 continue;
 
@@ -98,7 +99,7 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
 
         @Override
         public V setValue(V value) {
-            throw new RuntimeException("This operation is not supported.");
+            throw new RxCacheException("This operation is not supported.");
         }
 
     }
@@ -138,8 +139,8 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
     }
 
     protected String readLine(long offset) throws IOException {
-        fileio.seek(offset);
-        return fileio.readLine();
+        fileIO.seek(offset);
+        return fileIO.readLine();
     }
 
     protected long writeLine(K key, V value) {
@@ -150,12 +151,12 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
             String valueJson = converter.toJson(value);
             String line = keyJson + "\t" + valueJson + "\n";
 
-            long offset = fileio.length();
-            fileio.seek(offset);
-            fileio.write( line.getBytes(StandardCharsets.UTF_8) );
+            long offset = fileIO.length();
+            fileIO.seek(offset);
+            fileIO.write( line.getBytes(StandardCharsets.UTF_8) );
             return offset;
         } catch (IOException e) {
-            throw new RuntimeException("Failed to save entry for " + key, e);
+            throw new RxCacheException("Failed to save entry for " + key, e);
         }
     }
 
@@ -168,11 +169,11 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
 
     protected synchronized void clearLines() {
         try {
-            fileio.seek(0);
-            fileio.truncate(0);
+            fileIO.seek(0);
+            fileIO.truncate(0);
             entriesWritten = 0;
         } catch (IOException e) {
-            throw new RuntimeException("Failed to clear persistent map", e);
+            throw new RxCacheException("Failed to clear persistent map", e);
         }
     }
 
@@ -189,11 +190,11 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
 
 
     public long diskSize() {
-        return fileio.length();
+        return fileIO.length();
     }
 
 
     public void close() throws IOException {
-        fileio.close();
+        fileIO.close();
     }
 }

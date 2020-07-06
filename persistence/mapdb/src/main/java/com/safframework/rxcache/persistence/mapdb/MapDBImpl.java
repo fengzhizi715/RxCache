@@ -47,7 +47,7 @@ public class MapDBImpl implements Persistence {
     @Override
     public <T> Record<T> retrieve(String key, Type type) {
 
-        CacheHolder holder = (CacheHolder) map.get(key);;
+        CacheHolder holder = (CacheHolder) map.get(key);
 
         if (holder == null) return null;
 
@@ -80,7 +80,7 @@ public class MapDBImpl implements Persistence {
     @Override
     public String getStringData(String key) {
 
-        CacheHolder holder = (CacheHolder) map.get(key);;
+        CacheHolder holder = (CacheHolder) map.get(key);
 
         if (holder == null) return null;
 

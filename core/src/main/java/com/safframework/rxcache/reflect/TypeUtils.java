@@ -12,11 +12,22 @@ import java.lang.reflect.Type;
  */
 public class TypeUtils {
 
+    /**
+     * 基于 type 获取对象的 Class
+     * @param type
+     * @return
+     */
     public static Class<?> getRawType(Type type) {
 
         return TypeToken.get(type).getRawType();
     }
 
+    /**
+     * 获取对象的 SimpleName
+     * @param t
+     * @param <T>
+     * @return
+     */
     public static <T> String getClassSimpleName(T t) {
 
         return t.getClass().getSimpleName();

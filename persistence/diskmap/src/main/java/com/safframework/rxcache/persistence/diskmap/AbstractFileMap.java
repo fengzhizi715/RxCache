@@ -25,8 +25,8 @@ public abstract class AbstractFileMap<K,V>  implements FileMap<K,V> {
 
     private Converter converter;
 
-    Class<K> keyType;
-    Class<V> valueType;
+    private Class<K> keyType;
+    private Class<V> valueType;
 
     public AbstractFileMap(File file, Class<K> keyType, Class<V> valueType, Converter converter) throws IOException {
         this.file = file;

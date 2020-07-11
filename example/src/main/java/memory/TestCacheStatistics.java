@@ -19,7 +19,7 @@ public class TestCacheStatistics {
             rxCache.save("test"+i,i);
         }
 
-        rxCache.save("test10",10);
+        rxCache.save("test10",10); // 保存第十一个数据，在内存缓存中移除第一个数据
 
         rxCache.info();
     }

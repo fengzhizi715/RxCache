@@ -239,7 +239,7 @@ class CacheRepository {
 
     protected <T> void update(String key, T value, long expireTime) {
 
-        update(key,value, Constant.NEVER_EXPIRE, TimeUnit.MILLISECONDS);
+        update(key,value, expireTime, TimeUnit.MILLISECONDS);
     }
 
     protected <T> void update(String key, T value, long expireTime, TimeUnit timeUnit) {
@@ -272,7 +272,7 @@ class CacheRepository {
 
     protected <T> void saveOrUpdate(String key, T value, long expireTime) {
 
-        saveOrUpdate(key,value, Constant.NEVER_EXPIRE);
+        saveOrUpdate(key,value, expireTime, TimeUnit.MILLISECONDS);
     }
 
     protected <T> void saveOrUpdate(String key, T value, long expireTime, TimeUnit timeUnit) {

@@ -110,7 +110,6 @@ class CacheRepository {
 
             return record;
         } finally {
-
             readLock.unlock();
         }
     }
@@ -172,7 +171,6 @@ class CacheRepository {
                         persistence.save(key, value, newExpireTime);
                     }
                 } else {
-
                     if (memory != null) {
                         memory.put(key, value);
                     }
@@ -182,9 +180,7 @@ class CacheRepository {
                     }
                 }
             }
-
         } finally {
-
             writeLock.unlock();
         }
     }
@@ -219,15 +215,12 @@ class CacheRepository {
                         memory.put(key, value, newExpireTime);
                     }
                 } else {
-
                     if (memory != null) {
                         memory.put(key, value);
                     }
                 }
             }
-
         } finally {
-
             writeLock.unlock();
         }
     }
@@ -260,7 +253,6 @@ class CacheRepository {
                 save(key,value);               // 再保存
             }
         } finally {
-
             writeLock.unlock();
         }
     }
@@ -286,7 +278,6 @@ class CacheRepository {
                 save(key,value,expireTime,timeUnit);
             }
         } finally {
-
             writeLock.unlock();
         }
     }
@@ -319,7 +310,6 @@ class CacheRepository {
                 }
             }
         } finally {
-
             writeLock.unlock();
         }
     }
@@ -329,11 +319,8 @@ class CacheRepository {
         readLock.lock();
 
         try {
-
             return Preconditions.isBlank(key) ? false : (memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key));
-
         } finally {
-
             readLock.unlock();
         }
     }
@@ -346,19 +333,15 @@ class CacheRepository {
             Set<String> result = new HashSet<>();
 
             if (memory != null) {
-
                 result.addAll(memory.keySet());
             }
 
             if (persistence != null) {
-
                 result.addAll(persistence.allKeys());
             }
 
             return result;
-
         } finally {
-
             readLock.unlock();
         }
     }
@@ -378,9 +361,7 @@ class CacheRepository {
                     persistence.evict(key);
                 }
             }
-
         } finally {
-
             writeLock.unlock();
         }
     }
@@ -403,9 +384,7 @@ class CacheRepository {
                     }
                 });
             }
-
         } finally {
-
             writeLock.unlock();
         }
     }
@@ -431,14 +410,11 @@ class CacheRepository {
             }
 
             if (record == null) {
-
                 return Constant.NO_RECORD;
             }
 
             return  record.ttl();
-
         } finally {
-
             readLock.unlock();
         }
     }
@@ -455,9 +431,7 @@ class CacheRepository {
             if (persistence != null) {
                 persistence.evictAll();
             }
-
         } finally {
-
             writeLock.unlock();
         }
     }
@@ -474,7 +448,6 @@ class CacheRepository {
 
             return cacheInfo.toString();
         } finally {
-
             readLock.unlock();
         }
     }

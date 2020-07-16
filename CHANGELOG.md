@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 1.8.0
+---
+2020-07-16
+* RxCache 增加 saveOrUpdate()
+
 Version 1.7.4
 ---
 2020-07-05

@@ -32,7 +32,6 @@ public final class RxCache {
     private static RxCache mRxCache;
 
     public static RxCache getRxCache() {
-
         if (mRxCache == null) {
 
             mRxCache = new RxCache.Builder().build();
@@ -196,13 +195,21 @@ public final class RxCache {
         return cacheRepository.get(key,type,CacheStrategy.ALL);
     }
 
+    /**
+     * 基于缓存存放的策略，获取 RxCache 中一条记录，该记录返回是一个 Record 类型的对象
+     * @param key  缓存的key
+     * @param type 缓存所存储的类型
+     * @param cacheStrategy 缓存存放的策略
+     * @param <T>
+     * @return
+     */
     public <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
 
         return cacheRepository.get(key,type,cacheStrategy);
     }
 
     /**
-     * 从 RxCache 中获取一条记录(并不是 Record 的包装类，而是 Record 对应的 data)，该记录返回是一个 json 对象 或者是一个 Base64 加密过的字符串
+     * 从 RxCache 中获取一条记录(并不是 Record 这个真实缓存内容的包装类，而是 Record 对应的 data)，该记录返回是一个 json 对象或者是一个 Base64 加密过的字符串
      * @param key
      * @return
      */
@@ -503,7 +510,6 @@ public final class RxCache {
         }
 
         public RxCache build() {
-
             if (memory == null && persistence == null) { // 如果 memory 和 persistence 都为空
 
                 memory = new FIFOMemoryImpl();           // memory 使用 FIFOMemoryImpl 作为默认实现，从而至少保证 RxCache 可用

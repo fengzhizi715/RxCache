@@ -332,6 +332,42 @@ public final class RxCache {
     }
 
     /**
+     * 保存或更新缓存
+     * @param key
+     * @param value
+     * @param <T>
+     */
+    public <T> void saveOrUpdate(String key, T value) {
+
+        cacheRepository.saveOrUpdate(key, value);
+    }
+
+    /**
+     * 保存或更新缓存的值、过期的时间
+     * @param key
+     * @param value
+     * @param expireTime 过期时间，默认单位是毫秒
+     * @param <T>
+     */
+    public <T> void saveOrUpdate(String key, T value, long expireTime) {
+
+        cacheRepository.saveOrUpdate(key, value, expireTime);
+    }
+
+    /**
+     * 保存或更新缓存的值、过期的时间
+     * @param key
+     * @param value
+     * @param expireTime 过期时间，默认单位是毫秒
+     * @param timeUnit   时间的单位，默认单位是毫秒
+     * @param <T>
+     */
+    public <T> void saveOrUpdate(String key, T value, long expireTime, TimeUnit timeUnit) {
+
+        cacheRepository.saveOrUpdate(key, value, expireTime, timeUnit);
+    }
+
+    /**
      * 更新某一条 Record 的过期时间
      * @param key
      * @param type

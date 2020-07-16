@@ -265,6 +265,32 @@ class CacheRepository {
         }
     }
 
+    protected <T> void saveOrUpdate(String key, T value) {
+
+        saveOrUpdate(key,value, Constant.NEVER_EXPIRE);
+    }
+
+    protected <T> void saveOrUpdate(String key, T value, long expireTime) {
+
+        saveOrUpdate(key,value, Constant.NEVER_EXPIRE);
+    }
+
+    protected <T> void saveOrUpdate(String key, T value, long expireTime, TimeUnit timeUnit) {
+
+        writeLock.lock();
+
+        try {
+            if ((memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key))) { // rxCache 里包含了 key，则更新
+                update(key,value,expireTime,timeUnit);
+            } else { // rxCache 里没有该 key，则保存
+                save(key,value,expireTime,timeUnit);
+            }
+        } finally {
+
+            writeLock.unlock();
+        }
+    }
+
     protected <T> void expire(String key, Type type, long expireTime) {
 
         expire(key,type,expireTime,TimeUnit.MILLISECONDS);

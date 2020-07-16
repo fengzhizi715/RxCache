@@ -273,7 +273,7 @@ class CacheRepository {
 
         try {
             if ((memory != null && memory.containsKey(key)) || (persistence != null && persistence.containsKey(key))) { // rxCache 里包含了 key，则更新
-                update(key,value,expireTime,timeUnit);
+                update(key,value,expireTime,timeUnit); // 因为写锁是可重入锁，所以不需要释放写锁
             } else { // rxCache 里没有该 key，则保存
                 save(key,value,expireTime,timeUnit);
             }
@@ -409,11 +409,7 @@ class CacheRepository {
                 }
             }
 
-            if (record == null) {
-                return Constant.NO_RECORD;
-            }
-
-            return  record.ttl();
+            return record == null ? Constant.NO_RECORD : record.ttl();
         } finally {
             readLock.unlock();
         }

@@ -12,6 +12,6 @@ import java.lang.reflect.Type
  * @date: 2020-07-17 14:10
  * @version: V1.0 <描述当前版本功能>
  */
-suspend fun <T> RxCache.getDeferred(key: String,type: Type)= asyncInBackground {
+fun <T> RxCache.getDeferred(key: String,type: Type)= asyncInBackground {
     get<T>(key,type).data
 }

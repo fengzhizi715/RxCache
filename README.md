@@ -9,17 +9,17 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存�
 
 # 功能特点：
 
-* 拥有二级缓存：Memory、Persistence
+* 支持二级缓存：Memory、Persistence
 * 各个缓存可以拥有有效时间，超过时间缓存会过期
 * Memory 默认支持 FIFO、LRU、LFU 算法的实现
 * Memory 额外支持 Guava Cache、Caffeine、MapDB 的实现
-* Memory 支持显示缓存使用的统计数据。
 * Memory 支持堆外内存(off-heap)
 * Persistence 默认使用 Gson 实现对象的序列化和反序列化
 * Persistence 额外支持使用 FastJSON、Moshi、Kryo、Hessian、FST、Protobuf 实现对象的序列化和反序列化
 * Persistence 的 AbstractConverter 拥有加密功能，默认使用 AES 128、DES 算法进行加密
+* 支持显示缓存的信息，包括 Memory 缓存使用的统计数据，Persistence 使用的类型和 Converter 的类型
 * 支持 Kotlin, 特别是使用 kotlin extension 模块，可以规避范型擦除
-* 使用 Builder 模式生成 Type
+* 使用 Builder 模式生成复杂对象的 Type
 * 线程安全
 * 支持 RxJava 2、RxJava 3
 * 支持 Retrofit 风格使用缓存

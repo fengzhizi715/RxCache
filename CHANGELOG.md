@@ -1,6 +1,12 @@
 RxCache
 ===
 
+Version 1.8.1
+---
+2020-07-17
+* 增加 rxcache-extension-coroutines 模块
+* 增加 rxcache-extension-result 模块
+
 Version 1.8.0
 ---
 2020-07-16

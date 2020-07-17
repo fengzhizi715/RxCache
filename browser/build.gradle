@@ -21,7 +21,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-    implementation project(":extension")
+    implementation project(":extension:extension")
     implementation project(":converter:fastjson")
     implementation project(":converter:moshi")
     implementation project(":converter:fst")

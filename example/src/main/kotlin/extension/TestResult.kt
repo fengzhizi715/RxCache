@@ -1,6 +1,7 @@
 package extension
 
 import cn.netdiscovery.result.get
+import cn.netdiscovery.result.map
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.ext.saveFunc
 import com.safframework.rxcache.result.getResult
@@ -41,4 +42,11 @@ fun main() {
     rxCache.getResult<String>("test2").get()?.takeIf { it is String }?.let {
         println(it)
     }
+
+    val result = rxCache.getResult<String>("test2").map {
+        it + ", hello kotlin"
+    }.get()
+
+    println(result)
+
 }

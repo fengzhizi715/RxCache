@@ -3,7 +3,7 @@ plugins {
     id 'kotlin'
 }
 
-group 'com.cv4j.rxcache'
+group 'com.safframework.rxcache'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -24,7 +24,7 @@ dependencies {
     implementation project(":proxy")
     implementation project(":extension:extension")
     implementation project(":extension:result")
-
+    implementation project(":extension:coroutines")
 
     implementation project(":memory:guava-cache")
     implementation project(":memory:caffeine")
@@ -47,6 +47,9 @@ dependencies {
     implementation "org.springframework:spring-context:${libs.spring}"
     implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"
     implementation 'cn.netdiscovery.result:result:1.0.0'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.kotlinx_coroutines_core}"
+    implementation 'com.safframework.kotlin.coroutines:coroutines-utils:1.1.0'
 }
 
 compileKotlin {

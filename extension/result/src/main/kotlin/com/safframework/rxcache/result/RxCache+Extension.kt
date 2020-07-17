@@ -8,7 +8,7 @@ import com.safframework.rxcache.reflect.TypeToken
 /**
  *
  * @FileName:
- *          com.safframework.rxcache.ext.`RxCache+Extension`
+ *          com.safframework.rxcache.result.`RxCache+Extension`
  * @author: Tony Shen
  * @date: 2020-07-17 11:10
  * @version: V1.0 <描述当前版本功能>

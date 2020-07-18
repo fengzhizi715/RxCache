@@ -8,6 +8,8 @@ ext {
 
             gson                      : "2.8.6",
 
+            jackson                   : "2.11.1",
+
             bytekit                   : "1.2.6",
 
             spring                    : "5.2.3.RELEASE",

@@ -44,3 +44,6 @@ include 'extension:result'
 findProject(':extension:result')?.name = 'result'
 include 'extension:coroutines'
 findProject(':extension:coroutines')?.name = 'coroutines'
+include 'converter:jackson'
+findProject(':converter:jackson')?.name = 'jackson'
+

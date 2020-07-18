@@ -11,7 +11,7 @@ import java.lang.reflect.Type
  *          com.safframework.rxcache.coroutines.`RxCache+Extension`
  * @author: Tony Shen
  * @date: 2020-07-17 14:10
- * @version: V1.0 <描述当前版本功能>
+ * @version: V1.8
  */
 fun <T> RxCache.getDeferred(key: String,type: Type)= asyncInBackground {
     get<T>(key,type).data

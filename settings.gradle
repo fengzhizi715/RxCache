@@ -28,7 +28,6 @@ findProject(':memory:offheap')?.name = 'off-heap'
 include 'memory:mapdb'
 findProject(':memory:mapdb')?.name = 'memory-mapdb'
 
-
 include 'persistence'
 include 'persistence:okio'
 findProject(':persistence:okio')?.name = 'okio'
@@ -44,6 +43,3 @@ include 'extension:result'
 findProject(':extension:result')?.name = 'result'
 include 'extension:coroutines'
 findProject(':extension:coroutines')?.name = 'coroutines'
-include 'converter:jackson'
-findProject(':converter:jackson')?.name = 'jackson'
-

@@ -41,6 +41,8 @@ RxCache 1.6.0 以及之后的版本使用 RxJava 3.x
 rxcache-core|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|
 rxcache-proxy|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-proxy/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-proxy/_latestVersion)|
 rxcache-extension|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension/_latestVersion)|
+rxcache-extension-coroutines|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension-coroutines/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension-coroutines/_latestVersion)|
+rxcache-extension-result|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension-result/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension-result/_latestVersion)|
 rxcache-memory-guava-cache|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-guava-cache/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-guava-cache/_latestVersion)|
 rxcache-memory-caffeine|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-caffeine/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-caffeine/_latestVersion)|
 rxcache-memory-off-heap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-off-heap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-off-heap/_latestVersion)|

@@ -14,10 +14,24 @@ rxcache-proxy
 implementation 'com.safframework.rxcache:rxcache-proxy:<latest-version>'
 ```
 
+## extension:
+
 rxcache-extension
 
 ```groovy
 implementation 'com.safframework.rxcache:rxcache-extension:<latest-version>'
+```
+
+rxcache-extension-coroutines
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-extension-coroutines:<latest-version>'
+```
+
+rxcache-extension-result
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-extension-result:<latest-version>'
 ```
 
 ## memory:

@@ -14,6 +14,7 @@ def libs = rootProject.ext.libraries // 库
 repositories {
     jcenter()
     mavenCentral()
+    maven { url "https://kotlin.bintray.com/kotlinx" }
 }
 
 dependencies {
@@ -37,6 +38,8 @@ dependencies {
     implementation "io.ktor:ktor-gson:${libs.ktor}"
 
     implementation "io.reactivex.rxjava3:rxjava:$libs.rxjava"
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-cli:0.2.1'
 }
 
 compileKotlin {
@@ -49,6 +52,6 @@ compileTestKotlin {
 shadowJar {
     baseName = 'browser'
     manifest {
-        attributes["Main-Class"] = "com.safframework.rxcache.disk.browser.ApplicationKt"
+        attributes["Main-Class"] = "com.safframework.rxcache.disk.browser.MainKt"
     }
 }

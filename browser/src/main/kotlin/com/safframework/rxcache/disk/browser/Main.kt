@@ -22,13 +22,15 @@ import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
+import kotlinx.cli.ArgParser
+import kotlinx.cli.ArgType
 import java.io.File
 import java.text.DateFormat
 
 /**
  *
  * @FileName:
- *          .Application
+ *          com.safframework.rxcache.disk.browser.Main
  * @author: Tony Shen
  * @date: 2020-06-30 14:24
  * @version: V1.0 <描述当前版本功能>
@@ -82,6 +84,11 @@ fun Application.module() {
     }
 }
 
-fun main() {
-    embeddedServer(Netty, 8080, watchPaths = listOf("ApplicationKt"), module = Application::module).start()
+fun main(args: Array<String>) {
+
+    val parser = ArgParser("rxcache-browser")
+    val port            by parser.option(ArgType.Int, shortName = "p", description = "Port number of the local web service")
+    parser.parse(args)
+
+    embeddedServer(Netty, port?:8080, watchPaths = listOf("MainKt"), module = Application::module).start()
 }

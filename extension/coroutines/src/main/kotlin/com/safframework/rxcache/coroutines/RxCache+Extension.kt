@@ -1,6 +1,7 @@
 package com.safframework.rxcache.coroutines
 
 import com.safframework.kotlin.coroutines.asyncInBackground
+import com.safframework.kotlin.coroutines.extension.emitFlow
 import com.safframework.rxcache.RxCache
 import kotlinx.coroutines.flow.flowOf
 import java.lang.reflect.Type
@@ -17,4 +18,6 @@ fun <T> RxCache.getDeferred(key: String,type: Type)= asyncInBackground {
     get<T>(key,type).data
 }
 
-fun <T> RxCache.getFlow(key: String,type: Type) = flowOf(get<T>(key,type).data)
+fun <T> RxCache.getFlow(key: String,type: Type) = emitFlow {
+    get<T>(key,type).data
+}

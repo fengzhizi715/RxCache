@@ -28,7 +28,6 @@ import java.util.function.Supplier;
 public final class RxCache {
 
     private final CacheRepository cacheRepository;
-
     private static RxCache mRxCache;
 
     public static RxCache getRxCache() {

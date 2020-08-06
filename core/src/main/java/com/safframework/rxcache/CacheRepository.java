@@ -31,26 +31,20 @@ class CacheRepository {
     private final Lock writeLock = lock.writeLock();
 
     CacheRepository(Memory memory, Persistence persistence) {
-
         this.memory = memory;
         this.persistence = persistence;
     }
 
     protected <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
-
         readLock.lock();
 
         try {
             Record<T> record = null;
 
             if (Preconditions.isNotBlanks(key, type)) {
-
                 switch (cacheStrategy) {
-
                     case MEMORY: {
-
                         if (memory!=null) {
-
                             record = memory.getIfPresent(key);
                         }
 
@@ -58,9 +52,7 @@ class CacheRepository {
                     }
 
                     case PERSISTENCE: {
-
                         if (persistence!=null) {
-
                             record = persistence.retrieve(key, type);
                         }
 
@@ -68,14 +60,11 @@ class CacheRepository {
                     }
 
                     case ALL: {
-
                         if (memory != null) {
-
                             record = memory.getIfPresent(key);
                         }
 
                         if (record == null && persistence != null) {
-
                             record = persistence.retrieve(key, type);
 
                             if (memory!=null && record!=null && !record.isExpired()) { // 如果 memory 不为空，record 不为空，并且没有过期
@@ -85,24 +74,20 @@ class CacheRepository {
 
                                 try {
                                     if (record.isNeverExpire()) { // record永不过期的话，直接保存不需要计算ttl
-
                                         memory.put(record.getKey(),record.getData());
                                     } else {
-
                                         long ttl = record.getExpireTime()- (System.currentTimeMillis() - record.getCreateTime());
                                         memory.put(record.getKey(),record.getData(), ttl);
                                     }
 
                                     readLock.lock();    // 写锁在没有释放之前，获得读锁 (锁降级)
                                 } finally {
-
                                     writeLock.unlock(); // 释放写锁
                                 }
                             }
                         }
                         break;
                     }
-
                     default:
                         break;
                 }
@@ -115,7 +100,6 @@ class CacheRepository {
     }
 
     protected String getStringData(String key) {
-
         readLock.lock();
 
         try {
@@ -126,7 +110,6 @@ class CacheRepository {
     }
 
     protected String parseStringData(Converter converter, String data, Type type) {
-
         readLock.lock();
 
         try {
@@ -137,7 +120,6 @@ class CacheRepository {
     }
 
     protected <T> void save(String key, T value) {
-
         save(key,value, Constant.NEVER_EXPIRE);
     }
 
@@ -149,12 +131,10 @@ class CacheRepository {
      * @param <T>
      */
     protected <T> void save(String key, T value, long expireTime) {
-
         save(key,value,expireTime,TimeUnit.MILLISECONDS);
     }
 
     protected <T> void save(String key, T value, long expireTime, TimeUnit timeUnit) {
-
         writeLock.lock();
 
         try {
@@ -192,17 +172,14 @@ class CacheRepository {
      * @param <T>
      */
     protected <T> void saveMemory(String key, T value) {
-
         saveMemory(key,value, Constant.NEVER_EXPIRE);
     }
 
     protected <T> void saveMemory(String key, T value, long expireTime) {
-
         saveMemory(key,value,expireTime,TimeUnit.MILLISECONDS);
     }
 
     protected <T> void saveMemory(String key, T value, long expireTime, TimeUnit timeUnit) {
-
         writeLock.lock();
 
         try {
@@ -226,17 +203,14 @@ class CacheRepository {
     }
 
     protected <T> void update(String key, T value) {
-
         update(key,value, Constant.NEVER_EXPIRE);
     }
 
     protected <T> void update(String key, T value, long expireTime) {
-
         update(key,value, expireTime, TimeUnit.MILLISECONDS);
     }
 
     protected <T> void update(String key, T value, long expireTime, TimeUnit timeUnit) {
-
         writeLock.lock();
 
         try {
@@ -258,17 +232,14 @@ class CacheRepository {
     }
 
     protected <T> void saveOrUpdate(String key, T value) {
-
         saveOrUpdate(key,value, Constant.NEVER_EXPIRE);
     }
 
     protected <T> void saveOrUpdate(String key, T value, long expireTime) {
-
         saveOrUpdate(key,value, expireTime, TimeUnit.MILLISECONDS);
     }
 
     protected <T> void saveOrUpdate(String key, T value, long expireTime, TimeUnit timeUnit) {
-
         writeLock.lock();
 
         try {
@@ -283,12 +254,10 @@ class CacheRepository {
     }
 
     protected <T> void expire(String key, Type type, long expireTime) {
-
         expire(key,type,expireTime,TimeUnit.MILLISECONDS);
     }
 
     protected <T> void expire(String key, Type type, long expireTime, TimeUnit timeUnit) {
-
         writeLock.lock();
 
         try {
@@ -315,7 +284,6 @@ class CacheRepository {
     }
 
     protected boolean containsKey(String key) {
-
         readLock.lock();
 
         try {
@@ -326,7 +294,6 @@ class CacheRepository {
     }
 
     protected Set<String> getAllKeys() {
-
         readLock.lock();
 
         try {
@@ -347,7 +314,6 @@ class CacheRepository {
     }
 
     protected void remove(String key) {
-
         writeLock.lock();
 
         try {
@@ -367,7 +333,6 @@ class CacheRepository {
     }
 
     protected void remove(String... keys) {
-
         writeLock.lock();
 
         try {
@@ -390,7 +355,6 @@ class CacheRepository {
     }
 
     protected long ttl(String key, Type type) {
-
         readLock.lock();
 
         try {
@@ -416,7 +380,6 @@ class CacheRepository {
     }
 
     protected void clear() {
-
         writeLock.lock();
 
         try {
@@ -433,7 +396,6 @@ class CacheRepository {
     }
 
     protected String info() {
-
         readLock.lock();
 
         try {

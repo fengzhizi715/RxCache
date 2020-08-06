@@ -33,7 +33,6 @@ public final class RxCache {
 
     public static RxCache getRxCache() {
         if (mRxCache == null) {
-
             mRxCache = new RxCache.Builder().build();
         }
 
@@ -45,9 +44,7 @@ public final class RxCache {
      * @param builder
      */
     public static void config(Builder builder) {
-
         if (mRxCache == null) {
-
             RxCache.mRxCache = builder.build();
         }
     }
@@ -58,15 +55,12 @@ public final class RxCache {
      * @param builder
      */
     public static void config(Supplier<Builder> builder) {
-
         if (mRxCache == null) {
-
             RxCache.mRxCache = builder.get().build();
         }
     }
 
     private RxCache(Builder builder) {
-
         cacheRepository = new CacheRepository(builder.memory, builder.persistence);
     }
 
@@ -99,7 +93,6 @@ public final class RxCache {
 
     public <T> SingleTransformer<T, Record<T>> transformSingle(final String key, final Type type, final SingleStrategy strategy) {
         return new SingleTransformer<T, Record<T>>() {
-
             @Override
             public SingleSource<Record<T>> apply(Single<T> upstream) {
                 return strategy.execute(RxCache.this, key, upstream, type);
@@ -109,7 +102,6 @@ public final class RxCache {
 
     public <T> CompletableTransformer transformCompletable(final String key, final Type type, final CompletableStrategy strategy) {
         return new CompletableTransformer() {
-
             @Override
             public CompletableSource apply(Completable upstream) {
                 return strategy.execute(RxCache.this, key, upstream, type);
@@ -119,7 +111,6 @@ public final class RxCache {
 
     public <T> MaybeTransformer<T, Record<T>> transformMaybe(final String key, final Type type, final MaybeStrategy strategy) {
         return new MaybeTransformer<T, Record<T>>() {
-
             @Override
             public MaybeSource<Record<T>> apply(Maybe<T> upstream) {
                 return strategy.execute(RxCache.this, key, upstream, type);
@@ -128,7 +119,6 @@ public final class RxCache {
     }
 
     public <T> Observable<Record<T>> load2Observable(final String key, final Type type) {
-
         Record<T> record = get(key, type);
 
         return record != null ? Observable.create(new ObservableOnSubscribe<Record<T>>() {
@@ -141,12 +131,10 @@ public final class RxCache {
     }
 
     public <T> Flowable<Record<T>> load2Flowable(final String key, final Type type) {
-
         return load2Flowable(key,type,BackpressureStrategy.MISSING);
     }
 
     public <T> Flowable<Record<T>> load2Flowable(final String key, final Type type, BackpressureStrategy backpressureStrategy) {
-
         Record<T> record = get(key, type);
 
         return record != null ? Flowable.create(new FlowableOnSubscribe<Record<T>>() {
@@ -159,7 +147,6 @@ public final class RxCache {
     }
 
     public <T> Single<Record<T>> load2Single(final String key, final Type type) {
-
         Record<T> record = get(key, type);
 
         return record != null ? Single.create(new SingleOnSubscribe<Record<T>>() {
@@ -171,7 +158,6 @@ public final class RxCache {
     }
 
     public <T> Maybe<Record<T>> load2Maybe(final String key, final Type type) {
-
         Record<T> record = get(key, type);
 
         return record != null ? Maybe.create(new MaybeOnSubscribe<Record<T>>() {
@@ -191,7 +177,6 @@ public final class RxCache {
      * @return
      */
     public <T> Record<T> get(String key, Type type) {
-
         return cacheRepository.get(key,type,CacheStrategy.ALL);
     }
 
@@ -204,7 +189,6 @@ public final class RxCache {
      * @return
      */
     public <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
-
         return cacheRepository.get(key,type,cacheStrategy);
     }
 
@@ -214,7 +198,6 @@ public final class RxCache {
      * @return
      */
     public String getStringData(String key) {
-
         return cacheRepository.getStringData(key);
     }
 
@@ -226,7 +209,6 @@ public final class RxCache {
      * @return
      */
     public String parseStringData(Converter converter, String data, Type type) {
-
         return cacheRepository.parseStringData(converter, data, type);
     }
 
@@ -237,7 +219,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void save(String key, T value) {
-
         cacheRepository.save(key, value);
     }
 
@@ -249,7 +230,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void save(String key, T value, long expireTime) {
-
         cacheRepository.save(key, value, expireTime);
     }
 
@@ -262,7 +242,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void save(String key, T value, long expireTime, TimeUnit timeUnit) {
-
         cacheRepository.save(key, value, expireTime,timeUnit);
     }
 
@@ -273,7 +252,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void saveMemory(String key, T value) {
-
         cacheRepository.saveMemory(key, value);
     }
 
@@ -285,7 +263,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void saveMemory(String key, T value, long expireTime) {
-
         cacheRepository.saveMemory(key, value, expireTime);
     }
 
@@ -298,7 +275,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void saveMemory(String key, T value, long expireTime, TimeUnit timeUnit) {
-
         cacheRepository.saveMemory(key, value, expireTime,timeUnit);
     }
 
@@ -309,7 +285,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void update(String key, T value) {
-
         cacheRepository.update(key, value);
     }
 
@@ -321,7 +296,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void update(String key, T value, long expireTime) {
-
         cacheRepository.update(key, value, expireTime);
     }
 
@@ -334,7 +308,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void update(String key, T value, long expireTime, TimeUnit timeUnit) {
-
         cacheRepository.update(key, value, expireTime, timeUnit);
     }
 
@@ -345,7 +318,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void saveOrUpdate(String key, T value) {
-
         cacheRepository.saveOrUpdate(key, value);
     }
 
@@ -357,7 +329,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void saveOrUpdate(String key, T value, long expireTime) {
-
         cacheRepository.saveOrUpdate(key, value, expireTime);
     }
 
@@ -370,7 +341,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void saveOrUpdate(String key, T value, long expireTime, TimeUnit timeUnit) {
-
         cacheRepository.saveOrUpdate(key, value, expireTime, timeUnit);
     }
 
@@ -382,7 +352,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void expire(String key, Type type, long expireTime) {
-
         cacheRepository.expire(key, type, expireTime);
     }
 
@@ -395,7 +364,6 @@ public final class RxCache {
      * @param <T>
      */
     public <T> void expire(String key, Type type, long expireTime, TimeUnit timeUnit) {
-
         cacheRepository.expire(key, type, expireTime, timeUnit);
     }
 
@@ -405,7 +373,6 @@ public final class RxCache {
      * @return
      */
     public boolean containsKey(String key) {
-
         return cacheRepository.containsKey(key);
     }
 
@@ -414,7 +381,6 @@ public final class RxCache {
      * @return
      */
     public Set<String> getAllKeys() {
-
         return cacheRepository.getAllKeys();
     }
 
@@ -424,7 +390,6 @@ public final class RxCache {
      * @param key
      */
     public void remove(String key) {
-
         cacheRepository.remove(key);
     }
 
@@ -433,7 +398,6 @@ public final class RxCache {
      * @param keys
      */
     public void remove(String... keys) {
-
         cacheRepository.remove(keys);
     }
 
@@ -448,7 +412,6 @@ public final class RxCache {
      * @return
      */
     public long ttl(String key, Type type) {
-
         return cacheRepository.ttl(key,type);
     }
 
@@ -464,7 +427,6 @@ public final class RxCache {
      * @return
      */
     public boolean test() {
-
         return cacheRepository!=null;
     }
 
@@ -472,7 +434,6 @@ public final class RxCache {
      * 显示缓存中的信息
      */
     public void info() {
-
         info(System.out);
     }
 
@@ -481,7 +442,6 @@ public final class RxCache {
      * @param out
      */
     public void info(PrintStream out) {
-
         out.println(cacheRepository.info());
     }
 
@@ -490,12 +450,10 @@ public final class RxCache {
      * @return
      */
     public String getInfo() {
-
         return cacheRepository.info();
     }
 
     public static final class Builder {
-
         private Memory memory;
         private Persistence persistence;
 
@@ -511,7 +469,6 @@ public final class RxCache {
 
         public RxCache build() {
             if (memory == null && persistence == null) { // 如果 memory 和 persistence 都为空
-
                 memory = new FIFOMemoryImpl();           // memory 使用 FIFOMemoryImpl 作为默认实现，从而至少保证 RxCache 可用
             }
 

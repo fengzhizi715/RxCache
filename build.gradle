@@ -24,7 +24,7 @@ ext {
 
             protostuff                : "1.7.2",
 
-            ktor                      : "1.3.2",
+            ktor                      : "1.4.0",
 
             bytekit                   : "1.2.6",
 
@@ -47,8 +47,8 @@ dependencies {
 }
 
 buildscript {
-    ext.kotlin_version = '1.3.72'
-    ext.rxcache_version = '1.8.1'
+    ext.kotlin_version = '1.4.0'
+    ext.rxcache_version = '1.8.2'
 
     repositories {
         jcenter()

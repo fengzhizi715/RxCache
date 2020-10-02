@@ -71,10 +71,6 @@ repositories {
 
 ![](images/RxCache.png)
 
-# TODO List:
-
-* 增加 jmh 作为基准测试
-
 
 # 感谢
 

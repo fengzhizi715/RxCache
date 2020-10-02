@@ -28,6 +28,8 @@ ext {
 
             bytekit                   : "1.2.6",
 
+            result                    : "1.0.1",
+
             coroutines_utils          : "1.1.1"
     ]
 }

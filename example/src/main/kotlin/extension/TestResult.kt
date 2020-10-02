@@ -44,7 +44,7 @@ fun main() {
     }
 
     val result = rxCache.getResult<String>("test2").map {
-        it + ", hello kotlin"
+         "$it, hello kotlin"
     }.get()
 
     println(result)

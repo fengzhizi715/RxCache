@@ -46,7 +46,7 @@ dependencies {
     implementation "org.springframework:spring-core:${libs.spring}"
     implementation "org.springframework:spring-context:${libs.spring}"
     implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"
-    implementation 'cn.netdiscovery.result:result:1.0.0'
+    implementation "cn.netdiscovery.result:result:${libs.result}"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.kotlinx_coroutines_core}"
     implementation "com.safframework.kotlin.coroutines:coroutines-utils:${libs.coroutines_utils}"

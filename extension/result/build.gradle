@@ -7,6 +7,8 @@ plugins {
 group 'com.safframework.rxcache'
 version '1.0-SNAPSHOT'
 
+def libs = rootProject.ext.libraries // 库
+
 repositories {
     jcenter()
     mavenCentral()
@@ -17,7 +19,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-    implementation 'cn.netdiscovery.result:result:1.0.0'
+    implementation "cn.netdiscovery.result:result:${libs.result}"
 }
 
 compileKotlin {

@@ -16,7 +16,7 @@ ext {
 
             caffeine                  : "2.8.4",
 
-            okio                      : "2.6.0",
+            okio                      : "2.8.0",
 
             mapdb                     : "3.0.8",
 
@@ -47,7 +47,7 @@ dependencies {
 }
 
 buildscript {
-    ext.kotlin_version = '1.4.0'
+    ext.kotlin_version = '1.4.10'
     ext.rxcache_version = '1.8.2'
 
     repositories {

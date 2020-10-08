@@ -20,7 +20,7 @@ dependencies {
 
     implementation project(":core")
 
-    implementation "org.mapdb:mapdb:$libs.mapdb"
+    implementation "org.mapdb:mapdb:${libs.mapdb}"
 }
 
 publish{

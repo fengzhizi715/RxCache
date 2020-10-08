@@ -21,7 +21,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-    compileOnly "io.reactivex.rxjava3:rxjava:$libs.rxjava"
+    compileOnly "io.reactivex.rxjava3:rxjava:${libs.rxjava}"
 }
 
 compileKotlin {

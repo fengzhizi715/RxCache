@@ -167,10 +167,8 @@ public class DiskImpl implements Disk {
             outputStream = new FileOutputStream(file, false);
             converter.writer(outputStream,new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime,converter.converterName()));
         } catch (Exception e) {
-
             throw new RxCacheException(e);
         } finally {
-
             IOUtils.closeQuietly(outputStream);
         }
     }

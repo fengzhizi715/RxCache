@@ -21,9 +21,9 @@ public class TestDiskMap {
 
         File cacheDirectory = new File("aaa/db");
 
-        DiskMapImpl okioImpl = new DiskMapImpl(cacheDirectory);
+        DiskMapImpl diskMap = new DiskMapImpl(cacheDirectory);
 
-        RxCache.config(new RxCache.Builder().persistence(okioImpl));
+        RxCache.config(new RxCache.Builder().persistence(diskMap));
 
         RxCache rxCache = RxCache.getRxCache();
 

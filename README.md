@@ -59,11 +59,24 @@ rxcache-persistence-diskmap|[ ![Download](https://api.bintray.com/packages/fengz
 
 对于 Java 工程，如果使用 gradle 构建，由于默认没有使用 jcenter()，需要在相应 module 的 build.gradle 中配置
 
+## Gradle
+
 ```groovy
 repositories {
-    mavenCentral()
     jcenter()
 }
+```
+
+## Maven
+
+```xml
+<repositories>
+    <repository>
+        <id>central</id>
+        <name>bintray</name>
+        <url>https://jcenter.bintray.com</url>
+    </repository>
+</repositories>
 ```
 
 # [下载](https://github.com/fengzhizi715/RxCache/blob/master/Download.md)

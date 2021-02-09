@@ -2,6 +2,7 @@ package com.safframework.rxcache;
 
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.key.KeyEviction;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
 import com.safframework.rxcache.persistence.Persistence;
@@ -60,7 +61,7 @@ public final class RxCache {
     }
 
     private RxCache(Builder builder) {
-        cacheRepository = new CacheRepository(builder.memory, builder.persistence);
+        cacheRepository = new CacheRepository(builder.memory, builder.persistence, builder.keyEviction);
     }
 
     public <T> ObservableTransformer<T, Record<T>> transformObservable(final String key, final Type type, final ObservableStrategy strategy) {
@@ -455,6 +456,7 @@ public final class RxCache {
     public static final class Builder {
         private Memory memory;
         private Persistence persistence;
+        private KeyEviction keyEviction;
 
         public Builder memory(Memory memory) {
             this.memory = memory;
@@ -466,9 +468,18 @@ public final class RxCache {
             return this;
         }
 
+        public Builder keyEviction(KeyEviction keyEviction) {
+            this.keyEviction = keyEviction;
+            return this;
+        }
+
         public RxCache build() {
             if (memory == null && persistence == null) { // 如果 memory 和 persistence 都为空
                 memory = new FIFOMemoryImpl();           // memory 使用 FIFOMemoryImpl 作为默认实现，从而至少保证 RxCache 可用
+            }
+
+            if (keyEviction == null) {
+                keyEviction = KeyEviction.SYNC;
             }
 
             return new RxCache(this);

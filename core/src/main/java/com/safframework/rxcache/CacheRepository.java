@@ -5,6 +5,7 @@ import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.info.CacheInfo;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.key.KeyEviction;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
 import com.safframework.rxcache.persistence.converter.Converter;
@@ -13,6 +14,7 @@ import com.safframework.rxcache.utils.GsonUtils;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -25,14 +27,19 @@ class CacheRepository {
 
     private Memory memory;
     private Persistence persistence;
+    private ConcurrentHashMap evictionPool;
 
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     private final Lock readLock = lock.readLock();
     private final Lock writeLock = lock.writeLock();
 
-    CacheRepository(Memory memory, Persistence persistence) {
+    CacheRepository(Memory memory, Persistence persistence, KeyEviction keyEviction) {
         this.memory = memory;
         this.persistence = persistence;
+
+        if (keyEviction.equals(KeyEviction.ASYNC)) {
+            evictionPool = new ConcurrentHashMap();
+        }
     }
 
     protected <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {

@@ -9,6 +9,7 @@ import com.safframework.rxcache.key.KeyEviction;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
 import com.safframework.rxcache.persistence.converter.Converter;
+import com.safframework.rxcache.reflect.TypeUtils;
 import com.safframework.rxcache.utils.GsonUtils;
 
 import java.lang.reflect.Type;
@@ -37,9 +38,13 @@ class CacheRepository {
         this.memory = memory;
         this.persistence = persistence;
 
-        if (keyEviction.equals(KeyEviction.ASYNC)) {
-            evictionPool = new ConcurrentHashMap();
+        if (keyEviction == KeyEviction.ASYNC) {
+            evictionPool = new ConcurrentHashMap<String,Type>();
         }
+    }
+
+    protected ConcurrentHashMap getEvictionPool() {
+        return evictionPool;
     }
 
     protected <T> Record<T> get(String key, Type type, CacheStrategy cacheStrategy) {
@@ -157,6 +162,10 @@ class CacheRepository {
                     if (persistence != null) {
                         persistence.save(key, value, newExpireTime);
                     }
+
+                    if (evictionPool !=null) {
+                        evictionPool.put(key, TypeUtils.getRawType(value.getClass()));
+                    }
                 } else {
                     if (memory != null) {
                         memory.put(key, value);
@@ -197,6 +206,10 @@ class CacheRepository {
 
                     if (memory != null) {
                         memory.put(key, value, newExpireTime);
+                    }
+
+                    if (evictionPool !=null) {
+                        evictionPool.put(key, TypeUtils.getRawType(value.getClass()));
                     }
                 } else {
                     if (memory != null) {

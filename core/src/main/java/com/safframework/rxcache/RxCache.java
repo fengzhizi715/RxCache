@@ -14,12 +14,16 @@ import com.safframework.rxcache.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.transformstrategy.SingleStrategy;
 
 import io.reactivex.rxjava3.core.*;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.reactivestreams.Publisher;
 
 import java.io.PrintStream;
 import java.lang.reflect.Type;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 /**
@@ -30,6 +34,7 @@ public final class RxCache {
 
     private final CacheRepository cacheRepository;
     private static RxCache mRxCache;
+    private Disposable disposable;
 
     public static RxCache getRxCache() {
         if (mRxCache == null) {
@@ -62,6 +67,26 @@ public final class RxCache {
 
     private RxCache(Builder builder) {
         cacheRepository = new CacheRepository(builder.memory, builder.persistence, builder.keyEviction);
+
+        if (builder.keyEviction == KeyEviction.ASYNC) {
+            disposable = Observable.interval(10, 7200, TimeUnit.SECONDS) // 每隔2小时，清理过期的缓存
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.newThread())
+                    .subscribe(new Consumer<Long>() {
+                        @Override
+                        public void accept(Long aLong) throws Throwable {
+                            cacheRepository.getEvictionPool().forEach(new BiConsumer<String,Type>() {
+                                @Override
+                                public void accept(String s, Type type) {
+                                    long ttl = cacheRepository.ttl(s,type);
+                                    if (ttl<=0) {
+                                        cacheRepository.remove(s);
+                                    }
+                                }
+                            });
+                        }
+                    });
+        }
     }
 
     public <T> ObservableTransformer<T, Record<T>> transformObservable(final String key, final Type type, final ObservableStrategy strategy) {
@@ -451,6 +476,12 @@ public final class RxCache {
      */
     public String getInfo() {
         return cacheRepository.info();
+    }
+
+    public void dispose() {
+        if (disposable!=null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 
     public static final class Builder {

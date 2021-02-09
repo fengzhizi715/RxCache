@@ -75,15 +75,20 @@ public final class RxCache {
                     .subscribe(new Consumer<Long>() {
                         @Override
                         public void accept(Long aLong) throws Throwable {
-                            cacheRepository.getEvictionPool().forEach(new BiConsumer<String,Type>() {
+                            cacheRepository.getEvictionPool().forEach(new BiConsumer<String, Type>() {
                                 @Override
                                 public void accept(String s, Type type) {
-                                    long ttl = cacheRepository.ttl(s,type);
-                                    if (ttl<=0) {
+                                    long ttl = cacheRepository.ttl(s, type);
+                                    if (ttl <= 0) {
                                         cacheRepository.remove(s);
                                     }
                                 }
                             });
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Throwable {
+                            System.out.println(throwable.getMessage());
                         }
                     });
         }
@@ -478,10 +483,15 @@ public final class RxCache {
         return cacheRepository.info();
     }
 
+    /**
+     * RxCache 不再使用时，需要释放资源，并清空缓存
+     */
     public void dispose() {
         if (disposable!=null && !disposable.isDisposed()) {
             disposable.dispose();
         }
+
+        clear();
     }
 
     public static final class Builder {

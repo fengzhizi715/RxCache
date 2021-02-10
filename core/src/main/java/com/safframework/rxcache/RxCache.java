@@ -3,6 +3,7 @@ package com.safframework.rxcache;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.key.KeyEviction;
+import com.safframework.rxcache.key.KeyThreadFactory;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
 import com.safframework.rxcache.persistence.Persistence;
@@ -21,7 +22,9 @@ import org.reactivestreams.Publisher;
 
 import java.io.PrintStream;
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.Set;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -70,11 +73,11 @@ public final class RxCache {
 
         if (builder.keyEviction == KeyEviction.ASYNC) {
             disposable = Observable.interval(10, 7200, TimeUnit.SECONDS) // 每隔2小时，清理过期的缓存
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.newThread())
+                    .observeOn(Schedulers.from(Executors.newSingleThreadExecutor(new KeyThreadFactory())))
                     .subscribe(new Consumer<Long>() {
                         @Override
                         public void accept(Long aLong) throws Throwable {
+
                             cacheRepository.getEvictionPool().forEach(new BiConsumer<String, Type>() {
                                 @Override
                                 public void accept(String s, Type type) {

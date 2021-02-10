@@ -28,7 +28,6 @@ public class KeyThreadFactory implements ThreadFactory {
         Thread t = new Thread(group, r,
                 namePrefix + threadNumber.getAndIncrement(),
                 0);//真正创建线程的地方，设置了线程的线程组及线程名
-        t.setDaemon(true);
         t.setPriority(Thread.MIN_PRIORITY);
         return t;
     }

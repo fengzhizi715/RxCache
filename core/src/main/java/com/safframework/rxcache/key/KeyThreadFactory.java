@@ -20,8 +20,7 @@ public class KeyThreadFactory implements ThreadFactory {
         SecurityManager s = System.getSecurityManager();
         group = (s != null) ? s.getThreadGroup() :
                 Thread.currentThread().getThreadGroup();//取得线程组
-        namePrefix = "pool-" + poolNumber.getAndIncrement() +
-                "-thread-";
+        namePrefix = "pool-" + poolNumber.getAndIncrement() + "-thread-";
     }
 
     public Thread newThread(Runnable r) {

@@ -82,7 +82,7 @@ public final class RxCache {
                                 @Override
                                 public void accept(String s, Type type) {
                                     long ttl = cacheRepository.ttl(s, type);
-                                    if (ttl <= 0) {
+                                    if (ttl == 0) {
                                         cacheRepository.remove(s);
                                     }
                                 }
@@ -523,7 +523,7 @@ public final class RxCache {
             }
 
             if (keyEviction == null) {
-                keyEviction = KeyEviction.SYNC;
+                keyEviction = KeyEviction.SYNC; // 默认情况，使用同步删除淘汰 key 的方式
             }
 
             return new RxCache(this);

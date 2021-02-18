@@ -1,26 +1,23 @@
 package com.safframework.rxcache;
 
+import com.safframework.rxcache.adapter.Adapter;
+import com.safframework.rxcache.adapter.RxJava3Adapter;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.key.KeyEviction;
-import com.safframework.rxcache.key.KeyThreadFactory;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
 import com.safframework.rxcache.persistence.Persistence;
 import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.transformstrategy.*;
 import io.reactivex.rxjava3.core.*;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.reactivestreams.Publisher;
 
 import java.io.PrintStream;
 import java.lang.reflect.Type;
 import java.util.Set;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 /**
@@ -31,7 +28,7 @@ public final class RxCache {
 
     private final CacheRepository cacheRepository;
     private static RxCache mRxCache;
-    private Disposable disposable;
+    private Adapter adapter;
 
     public static RxCache getRxCache() {
         if (mRxCache == null) {
@@ -65,29 +62,8 @@ public final class RxCache {
     private RxCache(Builder builder) {
         cacheRepository = new CacheRepository(builder.memory, builder.persistence, builder.keyEviction);
 
-        if (builder.keyEviction == KeyEviction.ASYNC) {
-            disposable = Observable.interval(10, 7200, TimeUnit.SECONDS) // 每隔2小时，清理过期的缓存
-                    .observeOn(Schedulers.from(Executors.newSingleThreadExecutor(new KeyThreadFactory())))
-                    .subscribe(new Consumer<Long>() {
-                        @Override
-                        public void accept(Long aLong) throws Throwable {
-
-                            cacheRepository.getEvictionPool().forEach(new BiConsumer<String, Type>() {
-                                @Override
-                                public void accept(String s, Type type) {
-                                    long ttl = cacheRepository.ttl(s, type);
-                                    if (ttl == 0) {
-                                        cacheRepository.remove(s);
-                                    }
-                                }
-                            });
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Throwable {
-                            System.out.println(throwable.getMessage());
-                        }
-                    });
+        if (builder.keyEviction == KeyEviction.ASYNC && adapter!=null) {
+            adapter.interval(RxCache.getRxCache());
         }
     }
 
@@ -480,12 +456,16 @@ public final class RxCache {
         return cacheRepository.info();
     }
 
+    public ConcurrentHashMap getEvictionPool() {
+        return cacheRepository.getEvictionPool();
+    }
+
     /**
      * RxCache 不再使用时，需要释放资源，并清空缓存
      */
     public void dispose() {
-        if (disposable!=null && !disposable.isDisposed()) {
-            disposable.dispose();
+        if (adapter!=null) {
+            adapter.dispose();
         }
 
         clear();
@@ -495,6 +475,7 @@ public final class RxCache {
         private Memory memory;
         private Persistence persistence;
         private KeyEviction keyEviction;
+        private Adapter adapter;
 
         public Builder memory(Memory memory) {
             this.memory = memory;
@@ -511,6 +492,11 @@ public final class RxCache {
             return this;
         }
 
+        public Builder adapter(Adapter adapter) {
+            this.adapter = adapter;
+            return this;
+        }
+
         public RxCache build() {
             if (memory == null && persistence == null) { // 如果 memory 和 persistence 都为空
                 memory = new FIFOMemoryImpl();           // memory 使用 FIFOMemoryImpl 作为默认实现，从而至少保证 RxCache 可用
@@ -518,6 +504,10 @@ public final class RxCache {
 
             if (keyEviction == null) {
                 keyEviction = KeyEviction.SYNC; // 默认情况，使用同步删除淘汰 key 的方式
+            }
+
+            if (adapter == null) {
+                adapter = new RxJava3Adapter();
             }
 
             return new RxCache(this);

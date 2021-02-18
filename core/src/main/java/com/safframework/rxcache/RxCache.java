@@ -61,9 +61,10 @@ public final class RxCache {
 
     private RxCache(Builder builder) {
         cacheRepository = new CacheRepository(builder.memory, builder.persistence, builder.keyEviction);
+        adapter = builder.adapter;
 
         if (builder.keyEviction == KeyEviction.ASYNC && adapter!=null) {
-            adapter.interval(RxCache.getRxCache());
+            adapter.interval(this);
         }
     }
 

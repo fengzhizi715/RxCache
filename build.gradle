@@ -49,8 +49,8 @@ dependencies {
 }
 
 buildscript {
-    ext.kotlin_version = '1.4.10'
-    ext.rxcache_version = '1.8.3'
+    ext.kotlin_version = '1.4.30'
+    ext.rxcache_version = '1.8.4'
 
     repositories {
         jcenter()

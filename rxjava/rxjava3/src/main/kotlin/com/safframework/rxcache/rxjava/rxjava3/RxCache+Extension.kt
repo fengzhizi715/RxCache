@@ -5,6 +5,7 @@ import com.safframework.rxcache.domain.Record
 import com.safframework.rxcache.reflect.TypeToken
 import com.safframework.rxcache.rxjava3.transformstrategy.*
 import io.reactivex.rxjava3.core.*
+import java.lang.reflect.Type
 
 /**
  *
@@ -14,6 +15,72 @@ import io.reactivex.rxjava3.core.*
  * @date: 2021-02-19 12:18
  * @version: V1.0 <描述当前版本功能>
  */
+
+fun <T> RxCache.transformObservable(
+    key: String,
+    type: Type,
+    strategy: ObservableStrategy
+): ObservableTransformer<T, Record<T>> {
+    return ObservableTransformer<T, Record<T>> { upstream -> strategy.execute(this, key, upstream, type) }
+}
+
+fun <T> RxCache.transformFlowable(key: String, type: Type, strategy: FlowableStrategy): FlowableTransformer<T, Record<T>> {
+    return FlowableTransformer { upstream -> strategy.execute(this, key, upstream, type) }
+}
+
+fun <T> RxCache.transformFlowable(
+    key: String,
+    type: Type,
+    strategy: FlowableStrategy,
+    backpressureStrategy: BackpressureStrategy
+): FlowableTransformer<T, Record<T>> {
+    return FlowableTransformer { upstream -> strategy.execute(this, key, upstream, type, backpressureStrategy) }
+}
+
+fun <T> RxCache.transformSingle(key: String, type: Type, strategy: SingleStrategy): SingleTransformer<T, Record<T>> {
+    return SingleTransformer { upstream -> strategy.execute(this, key, upstream, type) }
+}
+
+fun <T> RxCache.transformCompletable(key: String, type: Type, strategy: CompletableStrategy): CompletableTransformer {
+    return CompletableTransformer { upstream -> strategy.execute(this, key, upstream, type) }
+}
+
+fun <T> RxCache.transformMaybe(key: String, type: Type, strategy: MaybeStrategy): MaybeTransformer<T, Record<T>> {
+    return MaybeTransformer { upstream -> strategy.execute(this, key, upstream, type) }
+}
+
+fun <T> RxCache.load2Observable(key: String?, type: Type): Observable<Record<T>> {
+    val record: Record<T> = get(key, type)
+    return if (record != null) Observable.create { emitter ->
+        emitter.onNext(record)
+        emitter.onComplete()
+    } else Observable.empty()
+}
+
+fun <T> RxCache.load2Flowable(key: String, type: Type): Flowable<Record<T>> {
+    return load2Flowable(key, type, BackpressureStrategy.MISSING)
+}
+
+fun <T> RxCache.load2Flowable(key: String?, type: Type, backpressureStrategy: BackpressureStrategy): Flowable<Record<T>> {
+    val record: Record<T> = get(key, type)
+    return if (record != null) Flowable.create({ emitter ->
+        emitter.onNext(record)
+        emitter.onComplete()
+    }, backpressureStrategy) else Flowable.empty()
+}
+
+fun <T> RxCache.load2Single(key: String, type: Type): Single<Record<T>> {
+    val record: Record<T> = get(key, type)
+    return if (record != null) Single.create { emitter -> emitter.onSuccess(record) } else Single.never()
+}
+
+fun <T> RxCache.load2Maybe(key: String, type: Type): Maybe<Record<T>> {
+    val record: Record<T> = get(key, type)
+    return if (record != null) Maybe.create { emitter ->
+        emitter.onSuccess(record)
+        emitter.onComplete()
+    } else Maybe.empty()
+}
 
 inline fun <reified T> RxCache.transformObservable(key: String, strategy: ObservableStrategy): ObservableTransformer<T, Record<T>> = transformObservable<T>(key, object : TypeToken<T>() {}.type, strategy)
 

@@ -1,6 +1,7 @@
-package com.safframework.rxcache.adapter;
+package com.safframework.rxcache.rxjava3;
 
 import com.safframework.rxcache.RxCache;
+import com.safframework.rxcache.adapter.Adapter;
 import com.safframework.rxcache.key.KeyThreadFactory;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -13,12 +14,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 
 /**
- * @FileName: com.safframework.rxcache.adapter.RxJava3Adapter
+ * @FileName: com.safframework.rxcache.rxjava3.RxJava3Adapter
  * @author: Tony Shen
  * @date: 2021-02-19 01:42
  * @version: V1.0 <描述当前版本功能>
  */
-public class RxJava3Adapter implements Adapter{
+public class RxJava3Adapter implements Adapter {
 
     private Disposable disposable;
 

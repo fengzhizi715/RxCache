@@ -1,11 +1,11 @@
-package com.safframework.rxcache.transformstrategy.impl;
+package com.safframework.rxcache.rxjava3.transformstrategy.impl;
 
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
-import com.safframework.rxcache.transformstrategy.FlowableStrategy;
-import com.safframework.rxcache.transformstrategy.MaybeStrategy;
-import com.safframework.rxcache.transformstrategy.ObservableStrategy;
+import com.safframework.rxcache.rxjava3.transformstrategy.FlowableStrategy;
+import com.safframework.rxcache.rxjava3.transformstrategy.MaybeStrategy;
+import com.safframework.rxcache.rxjava3.transformstrategy.ObservableStrategy;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
@@ -13,20 +13,17 @@ import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Function;
-import io.reactivex.rxjava3.functions.Predicate;
 import org.reactivestreams.Publisher;
 
 import java.lang.reflect.Type;
-import java.util.Arrays;
 
 /**
- * 先获取缓存，再获取网络请求
- * Created by tony on 2019-01-25.
+ * 缓存优先的策略，缓存取不到时取接口的数据。
+ * Created by tony on 2018/9/30.
  */
-public class CacheAndRemoteStrategy implements ObservableStrategy,
+public class CacheFirstStrategy implements ObservableStrategy,
         FlowableStrategy,
         MaybeStrategy {
-
 
     @Override
     public <T> Publisher<Record<T>> execute(RxCache rxCache, String key, Flowable<T> source, Type type) {
@@ -44,13 +41,7 @@ public class CacheAndRemoteStrategy implements ObservableStrategy,
                     }
                 });
 
-        return Flowable.concatDelayError(Arrays.asList(cache, remote))
-                .filter(new Predicate<Record<T>>() {
-                    @Override
-                    public boolean test(@NonNull Record<T> record) throws Exception {
-                        return record.getData() != null;
-                    }
-                });
+        return cache.switchIfEmpty(remote);
     }
 
     @Override
@@ -69,13 +60,7 @@ public class CacheAndRemoteStrategy implements ObservableStrategy,
                     }
                 });
 
-        return Flowable.concatDelayError(Arrays.asList(cache, remote))
-                .filter(new Predicate<Record<T>>() {
-                    @Override
-                    public boolean test(@NonNull Record<T> record) throws Exception {
-                        return record.getData() != null;
-                    }
-                });
+        return cache.switchIfEmpty(remote);
     }
 
     @Override
@@ -94,14 +79,7 @@ public class CacheAndRemoteStrategy implements ObservableStrategy,
                     }
                 });
 
-        return Maybe.concatDelayError(Arrays.asList(cache,remote))
-                .filter(new Predicate<Record<T>>() {
-                    @Override
-                    public boolean test(@NonNull Record<T> record) throws Exception {
-                        return record.getData() != null;
-                    }
-                })
-                .firstElement();
+        return cache.switchIfEmpty(remote);
     }
 
     @Override
@@ -120,12 +98,6 @@ public class CacheAndRemoteStrategy implements ObservableStrategy,
                     }
                 });
 
-        return Observable.concatDelayError(Arrays.asList(cache, remote))
-                .filter(new Predicate<Record<T>>() {
-                    @Override
-                    public boolean test(@NonNull Record<T> record) throws Exception {
-                        return record.getData() != null;
-                    }
-                });
+        return cache.switchIfEmpty(remote);
     }
 }

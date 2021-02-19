@@ -1,4 +1,4 @@
-package com.safframework.rxcache.transformstrategy;
+package com.safframework.rxcache.rxjava3.transformstrategy;
 
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;

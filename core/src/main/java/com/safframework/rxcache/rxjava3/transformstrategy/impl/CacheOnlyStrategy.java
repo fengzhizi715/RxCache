@@ -1,9 +1,9 @@
-package com.safframework.rxcache.transformstrategy.impl;
+package com.safframework.rxcache.rxjava3.transformstrategy.impl;
 
 import com.safframework.rxcache.RxCache;
-import com.safframework.rxcache.transformstrategy.FlowableStrategy;
-import com.safframework.rxcache.transformstrategy.MaybeStrategy;
-import com.safframework.rxcache.transformstrategy.ObservableStrategy;
+import com.safframework.rxcache.rxjava3.transformstrategy.FlowableStrategy;
+import com.safframework.rxcache.rxjava3.transformstrategy.MaybeStrategy;
+import com.safframework.rxcache.rxjava3.transformstrategy.ObservableStrategy;
 import com.safframework.rxcache.domain.Record;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;

@@ -1,7 +1,6 @@
 package com.safframework.rxcache;
 
 import com.safframework.rxcache.adapter.Adapter;
-import com.safframework.rxcache.adapter.RxJava3Adapter;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.key.KeyEviction;
@@ -9,7 +8,7 @@ import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
 import com.safframework.rxcache.persistence.Persistence;
 import com.safframework.rxcache.persistence.converter.Converter;
-import com.safframework.rxcache.transformstrategy.*;
+import com.safframework.rxcache.rxjava3.transformstrategy.*;
 import io.reactivex.rxjava3.core.*;
 import org.reactivestreams.Publisher;
 
@@ -505,10 +504,6 @@ public final class RxCache {
 
             if (keyEviction == null) {
                 keyEviction = KeyEviction.SYNC; // 默认情况，使用同步删除淘汰 key 的方式
-            }
-
-            if (adapter == null) {
-                adapter = new RxJava3Adapter();
             }
 
             return new RxCache(this);

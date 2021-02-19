@@ -24,23 +24,24 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存�
 * 支持 [Result](https://github.com/fengzhizi715/Result)
 * 使用 Builder 模式可以生成复杂对象的 Type
 * 线程安全
-* 支持 RxJava 3
+* 支持 RxJava 3、RxJava 2
 * 支持 Retrofit 风格使用缓存
 
 ## 更详细的功能请查看[wiki](https://github.com/fengzhizi715/RxCache/wiki)
 
 ## Tips
 
-RxCache 1.5.1 以及之前的版本使用 RxJava 2.x
+在 RxCache 2.0 之前，RxCache 1.5.1 以及之前的版本使用 RxJava 2.x，RxCache 1.6.0 以及之后的版本使用 RxJava 3.x。
 
-RxCache 1.6.0 以及之后的版本使用 RxJava 3.x
+RxCache 2.0 之后，既支持 RxJava 3.x 也支持 RxJava 2.x。
 
 # 最新版本
 
 模块|最新版本
 ---|:-------------:
 rxcache-core|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|
-rxcache-proxy|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-proxy/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-proxy/_latestVersion)|
+rxcache-rxjava3|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-rxjava3/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-rxjava3/_latestVersion)|
+rxcache-rxjava2|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-rxjava2/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-rxjava2/_latestVersion)|
 rxcache-extension|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension/_latestVersion)|
 rxcache-extension-coroutines|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension-coroutines/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension-coroutines/_latestVersion)|
 rxcache-extension-result|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension-result/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension-result/_latestVersion)|

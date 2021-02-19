@@ -50,7 +50,7 @@ fun <T> RxCache.transformMaybe(key: String, type: Type, strategy: MaybeStrategy)
 }
 
 fun <T> RxCache.load2Observable(key: String, type: Type): Observable<Record<T>> {
-    val record: Record<T> = get(key, type)
+    val record: Record<T>? = get(key, type)
     return if (record != null) Observable.create { emitter ->
         emitter.onNext(record)
         emitter.onComplete()
@@ -59,7 +59,7 @@ fun <T> RxCache.load2Observable(key: String, type: Type): Observable<Record<T>> 
 
 @JvmOverloads
 fun <T> RxCache.load2Flowable(key: String, type: Type, backpressureStrategy: BackpressureStrategy = BackpressureStrategy.MISSING): Flowable<Record<T>> {
-    val record: Record<T> = get(key, type)
+    val record: Record<T>? = get(key, type)
     return if (record != null) Flowable.create({ emitter ->
         emitter.onNext(record)
         emitter.onComplete()
@@ -67,12 +67,12 @@ fun <T> RxCache.load2Flowable(key: String, type: Type, backpressureStrategy: Bac
 }
 
 fun <T> RxCache.load2Single(key: String, type: Type): Single<Record<T>> {
-    val record: Record<T> = get(key, type)
+    val record: Record<T>? = get(key, type)
     return if (record != null) Single.create { emitter -> emitter.onSuccess(record) } else Single.never()
 }
 
 fun <T> RxCache.load2Maybe(key: String, type: Type): Maybe<Record<T>> {
-    val record: Record<T> = get(key, type)
+    val record: Record<T>? = get(key, type)
     return if (record != null) Maybe.create { emitter ->
         emitter.onSuccess(record)
         emitter.onComplete()

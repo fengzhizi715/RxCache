@@ -12,6 +12,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+import static com.safframework.rxcache.rxjava.rxjava3.RxCache_ExtensionKt.*;
+
 /**
  * Created by tony on 2018/10/30.
  */
@@ -71,19 +73,19 @@ public class CacheProxy implements InvocationHandler {
 
                     if (Observable.class.isAssignableFrom(returnClazz)) {
 
-                        return rxCache.load2Observable(cacheKey.value(),cacheClazz);
+                        return load2Observable(rxCache, cacheKey.value(), cacheClazz);
                     } else if (Flowable.class.isAssignableFrom(returnClazz)) {
 
-                        return rxCache.load2Flowable(cacheKey.value(),cacheClazz);
+                        return load2Flowable(rxCache, cacheKey.value(), cacheClazz);
                     } else if (Single.class.isAssignableFrom(returnClazz)) {
 
-                        return rxCache.load2Single(cacheKey.value(),cacheClazz);
+                        return load2Single(rxCache, cacheKey.value(), cacheClazz);
                     } else if (Maybe.class.isAssignableFrom(returnClazz)) {
 
-                        return rxCache.load2Maybe(cacheKey.value(),cacheClazz);
+                        return load2Maybe(rxCache, cacheKey.value(), cacheClazz);
                     } else if (Record.class.isAssignableFrom(returnClazz)) {
 
-                        return rxCache.get(cacheKey.value(),cacheClazz);
+                        return rxCache.get(cacheKey.value(), cacheClazz);
                     }
                 }
 

@@ -1,7 +1,6 @@
 rootProject.name = 'rxcache'
 include 'core'
 include 'example'
-include 'proxy'
 include 'browser'
 
 include 'converter'

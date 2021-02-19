@@ -22,7 +22,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     implementation project(":core")
-    implementation project(":proxy")
     implementation project(":extension:extension")
     implementation project(":extension:result")
     implementation project(":extension:coroutines")
@@ -42,6 +41,8 @@ dependencies {
     implementation project(":persistence:okio")
     implementation project(":persistence:mapdb")
     implementation project(":persistence:diskmap")
+
+    implementation project(":rxjava:rxjava3")
 
     implementation "io.reactivex.rxjava3:rxjava:${libs.rxjava3}"
     implementation "org.springframework:spring-core:${libs.spring}"

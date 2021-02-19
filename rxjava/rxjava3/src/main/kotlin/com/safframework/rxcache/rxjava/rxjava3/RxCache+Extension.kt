@@ -3,7 +3,7 @@ package com.safframework.rxcache.rxjava.rxjava3
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.domain.Record
 import com.safframework.rxcache.reflect.TypeToken
-import com.safframework.rxcache.rxjava3.transformstrategy.*
+import com.safframework.rxcache.rxjava.rxjava3.transformstrategy.*
 import io.reactivex.rxjava3.core.*
 import java.lang.reflect.Type
 
@@ -49,7 +49,7 @@ fun <T> RxCache.transformMaybe(key: String, type: Type, strategy: MaybeStrategy)
     return MaybeTransformer { upstream -> strategy.execute(this, key, upstream, type) }
 }
 
-fun <T> RxCache.load2Observable(key: String?, type: Type): Observable<Record<T>> {
+fun <T> RxCache.load2Observable(key: String, type: Type): Observable<Record<T>> {
     val record: Record<T> = get(key, type)
     return if (record != null) Observable.create { emitter ->
         emitter.onNext(record)
@@ -57,11 +57,8 @@ fun <T> RxCache.load2Observable(key: String?, type: Type): Observable<Record<T>>
     } else Observable.empty()
 }
 
-fun <T> RxCache.load2Flowable(key: String, type: Type): Flowable<Record<T>> {
-    return load2Flowable(key, type, BackpressureStrategy.MISSING)
-}
-
-fun <T> RxCache.load2Flowable(key: String?, type: Type, backpressureStrategy: BackpressureStrategy): Flowable<Record<T>> {
+@JvmOverloads
+fun <T> RxCache.load2Flowable(key: String, type: Type, backpressureStrategy: BackpressureStrategy = BackpressureStrategy.MISSING): Flowable<Record<T>> {
     val record: Record<T> = get(key, type)
     return if (record != null) Flowable.create({ emitter ->
         emitter.onNext(record)

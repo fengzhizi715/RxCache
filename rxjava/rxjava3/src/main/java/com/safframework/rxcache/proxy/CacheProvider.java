@@ -11,7 +11,7 @@ public final class CacheProvider {
 
     private RxCache rxCache;
 
-    private CacheProvider(CacheProvider.Builder builder) {
+    private CacheProvider(Builder builder) {
 
         this.rxCache = builder.rxCache;
     }
@@ -33,7 +33,7 @@ public final class CacheProvider {
 
         private RxCache rxCache;
 
-        public CacheProvider.Builder rxCache(RxCache rxCache) {
+        public Builder rxCache(RxCache rxCache) {
 
             this.rxCache = rxCache;
             return this;

@@ -43,7 +43,7 @@ dependencies {
     implementation project(":persistence:mapdb")
     implementation project(":persistence:diskmap")
 
-    implementation "io.reactivex.rxjava3:rxjava:${libs.rxjava}"
+    implementation "io.reactivex.rxjava3:rxjava:${libs.rxjava3}"
     implementation "org.springframework:spring-core:${libs.spring}"
     implementation "org.springframework:spring-context:${libs.spring}"
     implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"

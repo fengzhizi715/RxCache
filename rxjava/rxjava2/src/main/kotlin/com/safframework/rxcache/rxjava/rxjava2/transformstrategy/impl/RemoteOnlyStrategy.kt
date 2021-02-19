@@ -1,4 +1,4 @@
-package com.safframework.rxcache.rxjava.rxjava2.impl
+package com.safframework.rxcache.rxjava.rxjava2.transformstrategy.impl
 
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.domain.Record
@@ -16,7 +16,7 @@ import java.lang.reflect.Type
 /**
  *
  * @FileName:
- *          com.safframework.rxcache.rxjava.rxjava3.transformstrategy.impl.RemoteOnlyStrategy
+ *          com.safframework.rxcache.rxjava.rxjava2.transformstrategy.impl.RemoteOnlyStrategy
  * @author: Tony Shen
  * @date: 2021-02-19 14:05
  * @version: V1.0 只获取接口的数据，并且将获取到数据保持到缓存中。

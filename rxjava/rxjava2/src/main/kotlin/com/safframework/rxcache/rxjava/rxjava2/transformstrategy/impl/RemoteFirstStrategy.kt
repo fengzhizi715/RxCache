@@ -1,4 +1,4 @@
-package com.safframework.rxcache.rxjava.rxjava2.impl
+package com.safframework.rxcache.rxjava.rxjava2.transformstrategy.impl
 
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.domain.Record
@@ -19,13 +19,12 @@ import java.lang.reflect.Type
 /**
  *
  * @FileName:
- *          com.safframework.rxcache.rxjava.rxjava3.transformstrategy.impl.CacheFirstStrategy
+ *          com.safframework.rxcache.rxjava.rxjava2.transformstrategy.impl.RemoteFirstStrategy
  * @author: Tony Shen
- * @date: 2021-02-19 13:15
- * @version: V1.0 缓存优先的策略，缓存取不到时取接口的数据。
+ * @date: 2021-02-19 14:02
+ * @version: V1.0 接口的数据优先，接口取不到数据时获取缓存的数据。
  */
-class CacheFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
-
+class RemoteFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
     override fun <T> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
         val cache: Flowable<Record<T>> = rxCache.load2Flowable(key, type)
         val remote: Flowable<Record<T>> = source
@@ -33,7 +32,7 @@ class CacheFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
                 rxCache.save(key, t)
                 Record(Source.CLOUD, key, t)
             }
-        return cache.switchIfEmpty(remote)
+        return remote.switchIfEmpty(cache)
     }
 
     override fun <T> execute(
@@ -49,7 +48,7 @@ class CacheFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
                 rxCache.save(key, t)
                 Record(Source.CLOUD, key, t)
             }
-        return cache.switchIfEmpty(remote)
+        return remote.switchIfEmpty(cache)
     }
 
     override fun <T> execute(rxCache: RxCache, key: String, source: Maybe<T>, type: Type): Maybe<Record<T>> {
@@ -59,21 +58,16 @@ class CacheFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
                 rxCache.save(key, t)
                 Record(Source.CLOUD, key, t)
             }
-        return cache.switchIfEmpty(remote)
+        return remote.switchIfEmpty(cache)
     }
 
-    override fun <T> execute(
-        rxCache: RxCache,
-        key: String,
-        source: Observable<T>,
-        type: Type
-    ): Observable<Record<T>> {
+    override fun <T> execute(rxCache: RxCache, key: String, source: Observable<T>, type: Type): Observable<Record<T>> {
         val cache: Observable<Record<T>> = rxCache.load2Observable(key, type)
         val remote: Observable<Record<T>> = source
             .map{ t ->
                 rxCache.save(key, t)
                 Record(Source.CLOUD, key, t)
             }
-        return cache.switchIfEmpty(remote)
+        return remote.switchIfEmpty(cache)
     }
 }

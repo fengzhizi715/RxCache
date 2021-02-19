@@ -1,4 +1,4 @@
-package com.safframework.rxcache.rxjava.rxjava2.impl
+package com.safframework.rxcache.rxjava.rxjava2.transformstrategy.impl
 
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.domain.Record
@@ -15,17 +15,16 @@ import io.reactivex.Maybe
 import io.reactivex.Observable
 import org.reactivestreams.Publisher
 import java.lang.reflect.Type
-import java.util.*
 
 /**
  *
  * @FileName:
- *          com.safframework.rxcache.rxjava.rxjava3.transformstrategy.impl.CacheAndRemoteStrategy
+ *          com.safframework.rxcache.rxjava.rxjava2.transformstrategy.impl.CacheFirstStrategy
  * @author: Tony Shen
- * @date: 2021-02-19 13:06
- * @version: V1.0 先获取缓存，再获取网络请求
+ * @date: 2021-02-19 13:15
+ * @version: V1.0 缓存优先的策略，缓存取不到时取接口的数据。
  */
-class CacheAndRemoteStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
+class CacheFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
 
     override fun <T> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
         val cache: Flowable<Record<T>> = rxCache.load2Flowable(key, type)
@@ -34,8 +33,7 @@ class CacheAndRemoteStrategy : ObservableStrategy, FlowableStrategy, MaybeStrate
                 rxCache.save(key, t)
                 Record(Source.CLOUD, key, t)
             }
-        return Flowable.concatDelayError(Arrays.asList(cache, remote))
-            .filter{ record -> record.data != null }
+        return cache.switchIfEmpty(remote)
     }
 
     override fun <T> execute(
@@ -51,8 +49,7 @@ class CacheAndRemoteStrategy : ObservableStrategy, FlowableStrategy, MaybeStrate
                 rxCache.save(key, t)
                 Record(Source.CLOUD, key, t)
             }
-        return Flowable.concatDelayError(Arrays.asList(cache, remote))
-            .filter{ record -> record.data != null }
+        return cache.switchIfEmpty(remote)
     }
 
     override fun <T> execute(rxCache: RxCache, key: String, source: Maybe<T>, type: Type): Maybe<Record<T>> {
@@ -62,19 +59,21 @@ class CacheAndRemoteStrategy : ObservableStrategy, FlowableStrategy, MaybeStrate
                 rxCache.save(key, t)
                 Record(Source.CLOUD, key, t)
             }
-        return Maybe.concatDelayError(Arrays.asList(cache, remote))
-            .filter{ record -> record.data != null }
-            .firstElement()
+        return cache.switchIfEmpty(remote)
     }
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Observable<T>, type: Type): Observable<Record<T>> {
+    override fun <T> execute(
+        rxCache: RxCache,
+        key: String,
+        source: Observable<T>,
+        type: Type
+    ): Observable<Record<T>> {
         val cache: Observable<Record<T>> = rxCache.load2Observable(key, type)
         val remote: Observable<Record<T>> = source
             .map{ t ->
                 rxCache.save(key, t)
                 Record(Source.CLOUD, key, t)
             }
-        return Observable.concatDelayError(Arrays.asList(cache, remote))
-            .filter{ record -> record.data != null }
+        return cache.switchIfEmpty(remote)
     }
 }

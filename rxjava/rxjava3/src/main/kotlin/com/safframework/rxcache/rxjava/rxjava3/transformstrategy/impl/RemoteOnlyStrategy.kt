@@ -40,7 +40,7 @@ class RemoteOnlyStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
         key: String,
         source: Flowable<T>,
         type: Type,
-        backpressureStrategy: BackpressureStrategy?
+        backpressureStrategy: BackpressureStrategy
     ): Publisher<Record<T>> {
         return source
             .map{ t ->

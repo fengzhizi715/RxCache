@@ -31,15 +31,17 @@ public class RxJava3Adapter implements Adapter {
                     @Override
                     public void accept(Long aLong) throws Throwable {
 
-                        rxCache.getEvictionPool().forEach(new BiConsumer<String, Type>() {
-                            @Override
-                            public void accept(String s, Type type) {
-                                long ttl = rxCache.ttl(s, type);
-                                if (ttl == 0) {
-                                    rxCache.remove(s);
+                        if (rxCache.getEvictionPool()!=null) {
+                            rxCache.getEvictionPool().forEach(new BiConsumer<String, Type>() {
+                                @Override
+                                public void accept(String s, Type type) {
+                                    long ttl = rxCache.ttl(s, type);
+                                    if (ttl == 0) {
+                                        rxCache.remove(s);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 }, new Consumer<Throwable>() {
                     @Override

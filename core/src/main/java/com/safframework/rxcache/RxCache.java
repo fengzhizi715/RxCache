@@ -38,7 +38,7 @@ public final class RxCache {
      * 配置 RxCache，配置一次即可，以后无需再配置。只有配置完了 RxCache，才可以使用。
      * @param builder
      */
-    public static void config(Builder builder) {
+    public synchronized static void config(Builder builder) {
         if (mRxCache == null) {
             RxCache.mRxCache = builder.build();
         }
@@ -49,7 +49,7 @@ public final class RxCache {
      * 方便使用 Kotlin 时，可以使用 dsl 来配置 RxCache
      * @param builder
      */
-    public static void config(Supplier<Builder> builder) {
+    public synchronized static void config(Supplier<Builder> builder) {
         if (mRxCache == null) {
             RxCache.mRxCache = builder.get().build();
         }
@@ -348,6 +348,10 @@ public final class RxCache {
         return cacheRepository.info();
     }
 
+    /**
+     *
+     * @return
+     */
     public ConcurrentHashMap getEvictionPool() {
         return cacheRepository.getEvictionPool();
     }

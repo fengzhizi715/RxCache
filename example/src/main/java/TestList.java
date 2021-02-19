@@ -8,6 +8,8 @@ import io.reactivex.rxjava3.functions.Consumer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.safframework.rxcache.rxjava.rxjava3.RxCache_ExtensionKt.load2Observable;
+
 /**
  * Created by tony on 2019-02-03.
  */
@@ -32,7 +34,7 @@ public class TestList {
         list.add(u2);
         rxCache.save("test",list);
 
-        Observable<Record<List<User>>> observable = rxCache.load2Observable("test", User.class);
+        Observable<Record<List<User>>> observable = load2Observable(rxCache, "test", User.class);
 
         observable.subscribe(new Consumer<Record<List<User>>>() {
 

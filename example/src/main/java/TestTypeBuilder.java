@@ -12,6 +12,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.safframework.rxcache.rxjava.rxjava3.RxCache_ExtensionKt.load2Observable;
+
 /**
  * Created by tony on 2019-02-03.
  */
@@ -49,7 +51,7 @@ public class TestTypeBuilder {
                 .addTypeParam(User.class)
                 .build();
 
-        Observable<Record<List<User>>> observable = rxCache.load2Observable("test", type);
+        Observable<Record<List<User>>> observable = load2Observable(rxCache, "test", type);
 
         observable.subscribe(new Consumer<Record<List<User>>>() {
 
@@ -84,7 +86,7 @@ public class TestTypeBuilder {
                 .addTypeParam(String.class)
                 .build();
 
-        Observable<Record<List<String>>> observable0 = rxCache.load2Observable("list0", type0);
+        Observable<Record<List<String>>> observable0 = load2Observable(rxCache, "list0", type0);
 
         observable0.subscribe(new Consumer<Record<List<String>>>() {
 

@@ -7,6 +7,8 @@ import domain.User;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 
+import static com.safframework.rxcache.rxjava.rxjava3.RxCache_ExtensionKt.load2Observable;
+
 /**
  * Created by tony on 2018/9/29.
  */
@@ -23,7 +25,7 @@ public class TestGuavaCache {
         u.password = "123456";
         rxCache.save("test",u);
 
-        Observable<Record<User>> observable = rxCache.load2Observable("test", User.class);
+        Observable<Record<User>> observable = load2Observable(rxCache, "test", User.class);
 
         observable.subscribe(new Consumer<Record<User>>() {
             @Override

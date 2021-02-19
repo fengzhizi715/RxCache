@@ -9,6 +9,8 @@ import io.reactivex.rxjava3.functions.Consumer;
 
 import java.io.File;
 
+import static com.safframework.rxcache.rxjava.rxjava3.RxCache_ExtensionKt.load2Observable;
+
 /**
  * @FileName: persistence.TestDiskMap
  * @author: Tony Shen
@@ -32,7 +34,7 @@ public class TestDiskMap {
         u.password = "123456";
         rxCache.save("test",u);
 
-        Observable<Record<User>> observable = rxCache.load2Observable("test", User.class);
+        Observable<Record<User>> observable = load2Observable(rxCache,"test", User.class);
 
         observable.subscribe(new Consumer<Record<User>>() {
 

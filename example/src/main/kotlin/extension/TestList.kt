@@ -2,7 +2,7 @@ package extension
 
 import com.safframework.bytekit.utils.Preconditions
 import com.safframework.rxcache.RxCache
-import com.safframework.rxcache.ext.load2Observable
+import com.safframework.rxcache.rxjava.rxjava3.load2Observable
 import domain.User
 import java.util.*
 

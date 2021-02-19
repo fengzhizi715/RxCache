@@ -5,6 +5,8 @@ import domain.User;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
 
+import static com.safframework.rxcache.rxjava.rxjava3.RxCache_ExtensionKt.load2Observable;
+
 /**
  * @FileName: PACKAGE_NAME.TestSaveMemoryOnly
  * @author: Tony Shen
@@ -24,7 +26,7 @@ public class TestSaveMemoryOnly {
         u.password = "123456";
         rxCache.saveMemory("test",u);
 
-        Observable<Record<User>> observable = rxCache.load2Observable("test", User.class);
+        Observable<Record<User>> observable = load2Observable(rxCache, "test", User.class);
 
         observable.subscribe(new Consumer<Record<User>>() {
 

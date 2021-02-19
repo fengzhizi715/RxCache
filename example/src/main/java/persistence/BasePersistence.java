@@ -11,6 +11,8 @@ import io.reactivex.rxjava3.functions.Consumer;
 import java.lang.reflect.Type;
 import java.util.*;
 
+import static com.safframework.rxcache.rxjava.rxjava3.RxCache_ExtensionKt.load2Observable;
+
 /**
  * @FileName: persistence.BasePersistence
  * @author: Tony Shen
@@ -26,7 +28,7 @@ public class BasePersistence {
         u.password = "123456";
         rxCache.save("test",u);
 
-        Observable<Record<User>> observable = rxCache.load2Observable("test", User.class);
+        Observable<Record<User>> observable = load2Observable(rxCache, "test", User.class);
 
         observable.subscribe(new Consumer<Record<User>>() {
 
@@ -60,7 +62,7 @@ public class BasePersistence {
                 .addTypeParam(User.class)
                 .build();
 
-        Observable<Record<Map<String,User>>> observable = rxCache.load2Observable("map", type);
+        Observable<Record<Map<String,User>>> observable = load2Observable(rxCache,"map", type);
 
         observable.subscribe(new Consumer<Record<Map<String,User>>>() {
 
@@ -104,7 +106,7 @@ public class BasePersistence {
                 .addTypeParam(User.class)
                 .build();
 
-        Observable<Record<List<User>>> observable = rxCache.load2Observable("list", type);
+        Observable<Record<List<User>>> observable = load2Observable(rxCache,"list", type);
 
         observable.subscribe(new Consumer<Record<List<User>>>() {
 
@@ -143,7 +145,7 @@ public class BasePersistence {
                 .addTypeParam(User.class)
                 .build();
 
-        Observable<Record<Set<User>>> observable = rxCache.load2Observable("set", type);
+        Observable<Record<Set<User>>> observable = load2Observable(rxCache, "set", type);
 
         observable.subscribe(new Consumer<Record<Set<User>>>() {
 

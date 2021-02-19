@@ -3,8 +3,8 @@ package extension
 import com.safframework.bytekit.utils.Preconditions
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.converter.FastJSONConverter
-import com.safframework.rxcache.ext.load2Observable
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl
+import com.safframework.rxcache.rxjava.rxjava3.load2Observable
 import domain.User
 import java.io.File
 import java.util.*

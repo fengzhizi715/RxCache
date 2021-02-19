@@ -14,6 +14,8 @@ import java.io.File;
 import java.lang.reflect.Type;
 import java.util.*;
 
+import static com.safframework.rxcache.rxjava.rxjava3.RxCache_ExtensionKt.load2Observable;
+
 /**
  * Created by tony on 2018/11/6.
  */
@@ -47,7 +49,7 @@ public class TestDiskImplWithMoshi {
         u.password = "123456";
         rxCache.save("test", u);
 
-        Observable<Record<User>> observable = rxCache.load2Observable("test", User.class);
+        Observable<Record<User>> observable = load2Observable(rxCache, "test", User.class);
 
         observable.subscribe(new Consumer<Record<User>>() {
 
@@ -82,7 +84,7 @@ public class TestDiskImplWithMoshi {
                 .addTypeParam(User.class)
                 .build();
 
-        Observable<Record<Map<String, User>>> observable = rxCache.load2Observable("map", type);
+        Observable<Record<Map<String, User>>> observable = load2Observable(rxCache,"map", type);
 
         observable.subscribe(new Consumer<Record<Map<String, User>>>() {
 
@@ -126,7 +128,7 @@ public class TestDiskImplWithMoshi {
                 .addTypeParam(User.class)
                 .build();
 
-        Observable<Record<List<User>>> observable = rxCache.load2Observable("list", type);
+        Observable<Record<List<User>>> observable = load2Observable(rxCache,"list", type);
 
         observable.subscribe(new Consumer<Record<List<User>>>() {
 
@@ -165,7 +167,7 @@ public class TestDiskImplWithMoshi {
                 .addTypeParam(User.class)
                 .build();
 
-        Observable<Record<Set<User>>> observable = rxCache.load2Observable("set", type);
+        Observable<Record<Set<User>>> observable = load2Observable(rxCache,"set", type);
 
         observable.subscribe(new Consumer<Record<Set<User>>>() {
 

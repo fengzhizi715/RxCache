@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 2.0.0
+---
+2021-02-19
+* RxCache 不再依赖 RxJava 3.x，可以支持 RxJava 2.x 也可以支持 RxJava 3.x
+
 Version 1.8.4
 ---
 2021-02-13

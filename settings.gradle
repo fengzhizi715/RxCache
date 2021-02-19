@@ -43,3 +43,7 @@ include 'extension:result'
 findProject(':extension:result')?.name = 'result'
 include 'extension:coroutines'
 findProject(':extension:coroutines')?.name = 'coroutines'
+
+include 'rxjava'
+include 'rxjava:rxjava3'
+findProject(':rxjava:rxjava3')?.name = 'rxjava3'

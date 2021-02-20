@@ -8,10 +8,18 @@ rxcache-core
 implementation 'com.safframework.rxcache:rxcache-core:<latest-version>'
 ```
 
-rxcache-proxy
+## rxjava:
+
+rxcache-rxjava3
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-proxy:<latest-version>'
+implementation 'com.safframework.rxcache:rxcache-rxjava3:<latest-version>'
+```
+
+rxcache-rxjava2
+
+```groovy
+implementation 'com.safframework.rxcache:rxcache-rxjava2:<latest-version>'
 ```
 
 ## extension:

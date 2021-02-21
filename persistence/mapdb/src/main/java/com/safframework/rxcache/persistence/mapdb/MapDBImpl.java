@@ -56,7 +56,7 @@ public class MapDBImpl implements Persistence {
 
         T result = null;
 
-        if (expireTime<0) { // 缓存的数据从不过期
+        if (expireTime == Constant.NEVER_EXPIRE) { // 缓存的数据从不过期
 
             String json = holder.getData();
 

@@ -18,7 +18,6 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
 
     private Map<String,Object> cache;
     private List<String> keys;
-    private CacheStatistics cacheStatistics;
 
     public FIFOMemoryImpl() {
 

@@ -26,13 +26,13 @@ public class LFUCache<K, V> {
     /* current size of Cache */
     private int size;
 
-    public LFUCache(int capacity) {
+    public LFUCache(int capacity,CacheStatistics cacheStatistics) {
         this.capacity = capacity;
-        size = 0;
-        kvStore = new HashMap<K, LFUCacheEntry<K, V>>();
-        freqList = new NodeList();
-        frequencyMap = new HashMap<Integer, FrequencyNode>();
-        cacheStatistics = new CacheStatistics(capacity);
+        this.size = 0;
+        this.kvStore = new HashMap<K, LFUCacheEntry<K, V>>();
+        this.freqList = new NodeList();
+        this.frequencyMap = new HashMap<Integer, FrequencyNode>();
+        this.cacheStatistics = cacheStatistics;
     }
 
     public boolean containsKey(K key) {

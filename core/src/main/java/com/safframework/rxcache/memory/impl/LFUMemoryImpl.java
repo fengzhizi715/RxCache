@@ -23,7 +23,7 @@ public class LFUMemoryImpl extends AbstractMemoryImpl {
     public LFUMemoryImpl(long maxSize) {
 
         super(maxSize);
-        cache = new LFUCache<String, Object>((int) maxSize);
+        cache = new LFUCache<String, Object>((int) maxSize,new CacheStatistics((int)maxSize));
     }
 
     @Override

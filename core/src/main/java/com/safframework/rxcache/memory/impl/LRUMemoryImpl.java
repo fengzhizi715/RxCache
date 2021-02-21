@@ -23,7 +23,7 @@ public class LRUMemoryImpl extends AbstractMemoryImpl {
     public LRUMemoryImpl(long maxSize) {
 
         super(maxSize);
-        cache = new LRUCache<String,Object>((int)maxSize);
+        cache = new LRUCache<String,Object>((int)maxSize,new CacheStatistics((int)maxSize));
     }
 
     @Override

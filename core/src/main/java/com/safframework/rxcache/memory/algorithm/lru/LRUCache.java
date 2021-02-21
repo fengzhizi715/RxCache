@@ -21,17 +21,12 @@ public class LRUCache<K,V> {
     private CacheStatistics cacheStatistics;
     private int size = 0;
 
-    public LRUCache() {
-
-        this(Constant.DEFAULT_CACHE_SIZE);
-    }
-
-    public LRUCache(int size) {
+    public LRUCache(int size,CacheStatistics cacheStatistics) {
 
         this.size = size;
         this.cache = new ConcurrentHashMap<K,V>(size);
         this.queue = new ConcurrentLinkedQueue<K>();
-        this.cacheStatistics = new CacheStatistics(size);
+        this.cacheStatistics = cacheStatistics;
     }
 
     public boolean containsKey(K key) {

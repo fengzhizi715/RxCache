@@ -40,7 +40,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
 
         if(expireTimeMap.get(key)!=null) {
 
-            if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
+            if (expireTimeMap.get(key) == Constant.NEVER_EXPIRE) { // 缓存的数据从不过期
 
                 result = (T) cache.get(key);
             } else {
@@ -75,7 +75,7 @@ public class FIFOMemoryImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
-        if (keySet().size()<maxSize) { // 缓存还有空间
+        if (keySet().size() < maxSize) { // 缓存还有空间
 
             saveValue(key,value,expireTime);
             cacheStatistics.incrementPutCount();

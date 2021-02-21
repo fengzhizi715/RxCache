@@ -27,6 +27,7 @@ public class CaffeineImpl extends AbstractMemoryImpl {
                 .recordStats()
                 .maximumSize(maxSize)
                 .build();
+        this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
 
     public CaffeineImpl(long maxSize, CacheConfig cacheConfig) {
@@ -50,6 +51,7 @@ public class CaffeineImpl extends AbstractMemoryImpl {
         }
 
         cache = caffeine.build();
+        this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
 
     @Override
@@ -124,10 +126,11 @@ public class CaffeineImpl extends AbstractMemoryImpl {
 
         CacheStats cacheStats = cache.stats();
 
-        long evictionCount = cacheStats.evictionCount();
-        long hitCount = cacheStats.hitCount();
-        long missCount = cacheStats.missCount();
+        cacheStatistics.setPutCount(putCount.get());
+        cacheStatistics.setEvictionCount((int)cacheStats.evictionCount());
+        cacheStatistics.setHitCount((int)cacheStats.hitCount());
+        cacheStatistics.setMissCount((int)cacheStats.missCount());
 
-        return new CacheStatistics((int)maxSize,putCount.get(),(int)evictionCount,(int)hitCount,(int)missCount);
+        return cacheStatistics;
     }
 }

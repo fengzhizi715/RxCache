@@ -27,13 +27,37 @@ public class CacheStatistics {
 
     public int getSize() { return this.size; }
 
-    public int getPutCount() { return this.putCount; }
+    public int getPutCount() {
+        return putCount;
+    }
 
-    public int getEvictionCount() { return this.evictionCount; }
+    public void setPutCount(int putCount) {
+        this.putCount = putCount;
+    }
 
-    public int getHitCount() { return this.hitCount; }
+    public int getEvictionCount() {
+        return evictionCount;
+    }
 
-    public int getMissCount() { return this.missCount; }
+    public void setEvictionCount(int evictionCount) {
+        this.evictionCount = evictionCount;
+    }
+
+    public int getHitCount() {
+        return hitCount;
+    }
+
+    public void setHitCount(int hitCount) {
+        this.hitCount = hitCount;
+    }
+
+    public int getMissCount() {
+        return missCount;
+    }
+
+    public void setMissCount(int missCount) {
+        this.missCount = missCount;
+    }
 
     public void incrementPutCount() { this.putCount++; }
 

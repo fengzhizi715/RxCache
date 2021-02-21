@@ -34,6 +34,7 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
                         return key;
                     }
                 });
+        this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
 
     public GuavaCacheImpl(long maxSize, CacheConfig cacheConfig) {
@@ -63,6 +64,7 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
                         return key;
                     }
                 });
+        this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
 
     @Override
@@ -137,10 +139,11 @@ public class GuavaCacheImpl extends AbstractMemoryImpl {
 
         CacheStats cacheStats = cache.stats();
 
-        long evictionCount = cacheStats.evictionCount();
-        long hitCount = cacheStats.hitCount();
-        long missCount = cacheStats.missCount();
+        cacheStatistics.setPutCount(putCount.get());
+        cacheStatistics.setEvictionCount((int)cacheStats.evictionCount());
+        cacheStatistics.setHitCount((int)cacheStats.hitCount());
+        cacheStatistics.setMissCount((int)cacheStats.missCount());
 
-        return new CacheStatistics((int)maxSize,putCount.get(),(int)evictionCount,(int)hitCount,(int)missCount);
+        return cacheStatistics;
     }
 }

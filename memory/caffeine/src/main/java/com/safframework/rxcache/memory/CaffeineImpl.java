@@ -59,7 +59,7 @@ public class CaffeineImpl extends AbstractMemoryImpl {
 
         if (expireTimeMap.get(key)!=null) {
 
-            if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
+            if (expireTimeMap.get(key) == Constant.NEVER_EXPIRE) { // 缓存的数据从不过期
 
                 result = (T) cache.getIfPresent(key);
             } else {

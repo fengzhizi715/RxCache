@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 2.0.1
+---
+2021-02-22
+* 优化代码逻辑以及 Memory 中生成 CacheStatistics 的方式
+
 Version 2.0.0
 ---
 2021-02-19

@@ -4,6 +4,8 @@ ext {
     libraries = [
             kotlinx_coroutines_core   : "1.5.2",
 
+            joor_java                 : "0.9.14",
+
             rxjava3                   : "3.1.1",
 
             rxjava2                   : "2.2.21",

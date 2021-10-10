@@ -19,10 +19,9 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    compileOnly "io.reactivex.rxjava3:rxjava:${libs.rxjava3}"
     implementation "com.google.code.gson:gson:${libs.gson}"
     implementation "com.github.fengzhizi715.bytekit:core:${libs.bytekit}"
-    compile "org.jooq:joor-java-8:0.9.13"
+    implementation "org.jooq:joor-java-8:${libs.joor_java}"
 }
 
 publish{

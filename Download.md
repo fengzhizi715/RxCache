@@ -5,7 +5,7 @@
 rxcache-core
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-core:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:core:<latest-version>'
 ```
 
 ## rxjava:
@@ -47,13 +47,13 @@ implementation 'com.github.fengzhizi715.RxCache:result:<latest-version>'
 rxcache-memory-guava-cache
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-memory-guava-cache:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:guava-cache:<latest-version>'
 ```
 
 rxcache-memory-caffeine
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-memory-caffeine:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:caffeine:<latest-version>'
 ```
 
 rxcache-memory-off-heap
@@ -86,7 +86,7 @@ implementation 'com.safframework.rxcache:rxcache-converter-moshi:<latest-version
 rxcache-converter-kryo
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-kryo:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:kryo:<latest-version>'
 ```
 
 rxcache-converter-hessian
@@ -124,5 +124,5 @@ implementation 'com.safframework.rxcache:rxcache-persistence-mapdb:<latest-versi
 rxcache-persistence-diskmap
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-persistence-diskmap:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:diskmap:<latest-version>'
 ```

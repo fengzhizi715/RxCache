@@ -10,6 +10,8 @@ ext {
 
             gson                      : "2.8.6",
 
+            fastjson                  : "1.2.76",
+
             jackson                   : "2.11.1",
 
             spring                    : "5.2.3.RELEASE",

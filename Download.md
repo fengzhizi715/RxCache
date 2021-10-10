@@ -33,13 +33,13 @@ implementation 'com.safframework.rxcache:rxcache-extension:<latest-version>'
 rxcache-extension-coroutines
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-extension-coroutines:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:coroutines:<latest-version>'
 ```
 
 rxcache-extension-result
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-extension-result:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:result:<latest-version>'
 ```
 
 ## memory:
@@ -74,7 +74,7 @@ implementation 'com.safframework.rxcache:rxcache-memory-mapdb:<latest-version>'
 rxcache-converter-fastjson
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-fastjson:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:fastjson:<latest-version>'
 ```
 
 rxcache-converter-moshi

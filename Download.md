@@ -13,13 +13,13 @@ implementation 'com.github.fengzhizi715.RxCache:core:<latest-version>'
 rxcache-rxjava3
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-rxjava3:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:rxjava3:<latest-version>'
 ```
 
 rxcache-rxjava2
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-rxjava2:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:rxjava2:<latest-version>'
 ```
 
 ## extension:
@@ -27,7 +27,7 @@ implementation 'com.safframework.rxcache:rxcache-rxjava2:<latest-version>'
 rxcache-extension
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-extension:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:extension:<latest-version>'
 ```
 
 rxcache-extension-coroutines
@@ -92,13 +92,13 @@ implementation 'com.github.fengzhizi715.RxCache:kryo:<latest-version>'
 rxcache-converter-hessian
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-hessian:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:hessian:<latest-version>'
 ```
 
 rxcache-converter-fst
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-fst:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:fst:<latest-version>'
 ```
 
 rxcache-converter-protobuf
@@ -118,7 +118,7 @@ implementation 'com.safframework.rxcache:rxcache-persistence-okio:<latest-versio
 rxcache-persistence-mapdb
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-persistence-mapdb:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:mapdb:<latest-version>'
 ```
 
 rxcache-persistence-diskmap

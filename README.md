@@ -39,25 +39,25 @@ RxCache 2.0 之后，既支持 RxJava 3.x 也支持 RxJava 2.x。
 
 模块|最新版本
 ---|:-------------:
-rxcache-core|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-core/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-core/_latestVersion)|
-rxcache-rxjava3|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-rxjava3/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-rxjava3/_latestVersion)|
-rxcache-rxjava2|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-rxjava2/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-rxjava2/_latestVersion)|
-rxcache-extension|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension/_latestVersion)|
-rxcache-extension-coroutines|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension-coroutines/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension-coroutines/_latestVersion)|
-rxcache-extension-result|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-extension-result/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-extension-result/_latestVersion)|
-rxcache-memory-guava-cache|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-guava-cache/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-guava-cache/_latestVersion)|
-rxcache-memory-caffeine|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-caffeine/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-caffeine/_latestVersion)|
-rxcache-memory-off-heap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-off-heap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-off-heap/_latestVersion)|
-rxcache-memory-mapdb|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-memory-mapdb/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-memory-mapdb/_latestVersion)|
-rxcache-converter-fastjson|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-fastjson/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-fastjson/_latestVersion)|
-rxcache-converter-moshi|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-moshi/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-moshi/_latestVersion)|
-rxcache-converter-kryo|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-kryo/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-kryo/_latestVersion)|
-rxcache-converter-hessian|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-hessian/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-hessian/_latestVersion)|
-rxcache-converter-fst|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-fst/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-fst/_latestVersion)|
-rxcache-converter-protobuf|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-converter-protobuf/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-converter-protobuf/_latestVersion)|
-rxcache-persistence-okio|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-okio/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-okio/_latestVersion)|
-rxcache-persistence-mapdb|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-mapdb/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-mapdb/_latestVersion)|
-rxcache-persistence-diskmap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-diskmap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-diskmap/_latestVersion)|
+rxcache-core|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-rxjava3|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-rxjava2|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-extension|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-extension-coroutines|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-extension-result|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-memory-guava-cache|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-memory-caffeine|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-memory-off-heap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-memory-mapdb|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-converter-fastjson|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-converter-moshi|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-converter-kryo|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-converter-hessian|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-converter-fst|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-converter-protobuf|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-persistence-okio|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-persistence-mapdb|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-persistence-diskmap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 
 将它添加到项目的 root build.gradle 中：
 

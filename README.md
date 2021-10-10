@@ -59,26 +59,15 @@ rxcache-persistence-okio|[ ![Download](https://api.bintray.com/packages/fengzhiz
 rxcache-persistence-mapdb|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-mapdb/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-mapdb/_latestVersion)|
 rxcache-persistence-diskmap|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache-persistence-diskmap/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache-persistence-diskmap/_latestVersion)|
 
-对于 Java 工程，如果使用 gradle 构建，由于默认没有使用 jcenter()，需要在相应 module 的 build.gradle 中配置
-
-## Gradle
+将它添加到项目的 root build.gradle 中：
 
 ```groovy
-repositories {
-    jcenter()
-}
-```
-
-## Maven
-
-```xml
-<repositories>
-    <repository>
-        <id>central</id>
-        <name>bintray</name>
-        <url>https://jcenter.bintray.com</url>
-    </repository>
-</repositories>
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
 
 # [下载](https://github.com/fengzhizi715/RxCache/blob/master/Download.md)

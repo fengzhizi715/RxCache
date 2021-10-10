@@ -18,7 +18,7 @@ ext {
 
             caffeine                  : "2.8.4",
 
-            okio                      : "2.8.0",
+            okio                      : "2.10.0",
 
             mapdb                     : "3.0.8",
 

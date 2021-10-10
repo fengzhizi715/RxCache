@@ -1,10 +1,8 @@
 plugins {
     id 'java'
-    id 'com.novoda.bintray-release'
 }
 
-group 'com.safframework.rxcache'
-version '1.0-SNAPSHOT'
+group = 'com.github.fengzhizi715'
 
 sourceCompatibility = 1.8
 
@@ -21,13 +19,4 @@ dependencies {
 
     implementation project(":core")
     implementation "com.squareup.moshi:moshi:${libs.moshi}"
-}
-
-publish{
-    userOrg = 'fengzhizi715'
-    groupId = 'com.safframework.rxcache'
-    artifactId = 'rxcache-converter-moshi'
-    publishVersion = "$rxcache_version"
-    desc = 'A local reactive cache for Java and Android.'
-    website = 'https://github.com/fengzhizi715/RxCache'
 }

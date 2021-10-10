@@ -1,10 +1,8 @@
 plugins {
     id 'java'
-    id 'com.novoda.bintray-release'
 }
 
-group 'com.safframework.rxcache'
-version '1.0-SNAPSHOT'
+group = 'com.github.fengzhizi715'
 
 sourceCompatibility = 1.8
 
@@ -22,13 +20,4 @@ dependencies {
     implementation project(":core")
 
     implementation "org.mapdb:mapdb:${libs.mapdb}"
-}
-
-publish{
-    userOrg = 'fengzhizi715'
-    groupId = 'com.safframework.rxcache'
-    artifactId = 'rxcache-persistence-mapdb'
-    publishVersion = "$rxcache_version"
-    desc = 'A local reactive cache for Java and Android.'
-    website = 'https://github.com/fengzhizi715/RxCache'
 }

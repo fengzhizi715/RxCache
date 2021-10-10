@@ -1,10 +1,8 @@
 plugins {
     id 'java'
-    id 'com.novoda.bintray-release'
 }
 
-group 'com.safframework.rxcache'
-version '1.0-SNAPSHOT'
+group = 'com.github.fengzhizi715'
 
 sourceCompatibility = 1.8
 
@@ -18,13 +16,4 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-}
-
-publish{
-    userOrg = 'fengzhizi715'
-    groupId = 'com.safframework.rxcache'
-    artifactId = 'rxcache-persistence-diskmap'
-    publishVersion = "$rxcache_version"
-    desc = 'A local reactive cache for Java and Android.'
-    website = 'https://github.com/fengzhizi715/RxCache'
 }

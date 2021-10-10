@@ -1,11 +1,9 @@
 plugins {
     id 'java'
     id 'kotlin'
-    id 'com.novoda.bintray-release'
 }
 
-group 'com.safframework.rxcache'
-version '1.0-SNAPSHOT'
+group = 'com.github.fengzhizi715'
 
 sourceCompatibility = 1.8
 
@@ -30,13 +28,4 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
-}
-
-publish{
-    userOrg = 'fengzhizi715'
-    groupId = 'com.safframework.rxcache'
-    artifactId = 'rxcache-rxjava2'
-    publishVersion = "$rxcache_version"
-    desc = 'A local reactive cache for Java and Android.'
-    website = 'https://github.com/fengzhizi715/RxCache'
 }

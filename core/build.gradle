@@ -1,10 +1,8 @@
 plugins {
     id 'java'
-    id 'com.novoda.bintray-release'
 }
 
-group 'com.safframework.rxcache'
-version '1.0-SNAPSHOT'
+group = 'com.github.fengzhizi715'
 
 sourceCompatibility = 1.8
 
@@ -22,13 +20,4 @@ dependencies {
     implementation "com.google.code.gson:gson:${libs.gson}"
     implementation "com.github.fengzhizi715.bytekit:core:${libs.bytekit}"
     implementation "org.jooq:joor-java-8:${libs.joor_java}"
-}
-
-publish{
-    userOrg = 'fengzhizi715'
-    groupId = 'com.safframework.rxcache'
-    artifactId = 'rxcache-core'
-    publishVersion = "$rxcache_version"
-    desc = 'A local reactive cache for Java and Android.'
-    website = 'https://github.com/fengzhizi715/RxCache'
 }

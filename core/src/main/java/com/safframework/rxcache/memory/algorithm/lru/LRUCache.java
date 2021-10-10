@@ -1,6 +1,5 @@
 package com.safframework.rxcache.memory.algorithm.lru;
 
-import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.exception.RxCacheException;
 

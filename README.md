@@ -88,8 +88,9 @@ rxcache-persistence-diskmap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)]
 * [snailflying](https://github.com/snailflying)
 
 ## TODO List:
-* 优化 diskmap
 
+* 优化 diskmap
+* 部分第三方库的升级
 
 联系方式
 ===

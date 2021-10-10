@@ -51,8 +51,7 @@ dependencies {
     implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.kotlinx_coroutines_core}"
-    implementation "com.safframework.kotlin.coroutines:coroutines-utils:${libs.coroutines_utils}"
-
+    implementation "com.github.fengzhizi715.Kotlin-Coroutines-Utils:common:${libs.coroutines_utils}"
     implementation "com.github.fengzhizi715:Result:${libs.result}"
 
     implementation 'org.openjdk.jmh:jmh-core:1.25.2'

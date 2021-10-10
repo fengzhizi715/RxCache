@@ -30,7 +30,7 @@ ext {
 
             bytekit                   : "1.2.6",
 
-            result                    : "1.0.1",
+            result                    : "v1.0.3",
 
             coroutines_utils          : "1.1.2"
     ]
@@ -44,6 +44,7 @@ sourceCompatibility = 1.8
 repositories {
     jcenter()
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -57,6 +58,7 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'

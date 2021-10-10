@@ -4,14 +4,14 @@ plugins {
     id 'com.novoda.bintray-release'
 }
 
-group 'com.safframework.rxcache'
-version '1.0-SNAPSHOT'
+group = 'com.github.fengzhizi715'
 
 def libs = rootProject.ext.libraries // 库
 
 repositories {
     jcenter()
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -19,7 +19,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation project(":core")
-    implementation "cn.netdiscovery.result:result:${libs.result}"
+    implementation "com.github.fengzhizi715:Result:${libs.result}"
 }
 
 compileKotlin {

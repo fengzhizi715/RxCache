@@ -1,5 +1,7 @@
 # RxCache
 
+A local reactive cache for Java and Android. Now, it supports heap memory、off-heap memory and disk cache.
+
 RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存、堆外内存、磁盘缓存。
 
 [![@Tony沈哲 on weibo](https://img.shields.io/badge/weibo-%40Tony%E6%B2%88%E5%93%B2-blue.svg)](http://www.weibo.com/fengzhizi715)
@@ -31,9 +33,9 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache 。目前支持内存�
 
 ## Tips
 
-在 RxCache 2.0 之前，RxCache 1.5.1 以及之前的版本使用 RxJava 2.x，RxCache 1.6.0 以及之后的版本使用 RxJava 3.x。
-
-RxCache 2.0 之后，既支持 RxJava 3.x 也支持 RxJava 2.x。
+>在 RxCache 2.0 之前，RxCache 1.5.1 以及之前的版本使用 RxJava 2.x，RxCache 1.6.0 以及之后的版本使用 RxJava 3.x。
+>
+>RxCache 2.0 之后，既支持 RxJava 3.x 也支持 RxJava 2.x。
 
 # 最新版本
 

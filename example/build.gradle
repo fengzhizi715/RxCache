@@ -48,7 +48,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:${libs.rxjava3}"
     implementation "org.springframework:spring-core:${libs.spring}"
     implementation "org.springframework:spring-context:${libs.spring}"
-    implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"
+    implementation "com.github.fengzhizi715.bytekit:core:${libs.bytekit}"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.kotlinx_coroutines_core}"
     implementation "com.github.fengzhizi715.Kotlin-Coroutines-Utils:common:${libs.coroutines_utils}"

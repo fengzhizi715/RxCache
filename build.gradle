@@ -30,7 +30,7 @@ ext {
 
             ktor                      : "1.4.0",
 
-            bytekit                   : "1.2.6",
+            bytekit                   : "v1.3.0",
 
             result                    : "v1.0.3",
 

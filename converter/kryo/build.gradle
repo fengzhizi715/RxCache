@@ -13,6 +13,7 @@ def libs = rootProject.ext.libraries // 库
 repositories {
     jcenter()
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -21,7 +22,7 @@ dependencies {
     implementation project(":core")
 
     implementation 'com.esotericsoftware:kryo:4.0.2'
-    implementation "com.safframework.bytekit:bytekit-core:${libs.bytekit}"
+    implementation "com.github.fengzhizi715.bytekit:core:${libs.bytekit}"
 }
 
 publish{

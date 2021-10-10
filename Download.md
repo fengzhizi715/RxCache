@@ -59,13 +59,13 @@ implementation 'com.github.fengzhizi715.RxCache:caffeine:<latest-version>'
 rxcache-memory-off-heap
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-memory-off-heap:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:off-heap:<latest-version>'
 ```
 
 rxcache-memory-mapdb
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-memory-mapdb:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:memory-mapdb:<latest-version>'
 ```
 
 
@@ -80,7 +80,7 @@ implementation 'com.github.fengzhizi715.RxCache:fastjson:<latest-version>'
 rxcache-converter-moshi
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-moshi:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:moshi:<latest-version>'
 ```
 
 rxcache-converter-kryo
@@ -104,7 +104,7 @@ implementation 'com.github.fengzhizi715.RxCache:fst:<latest-version>'
 rxcache-converter-protobuf
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-converter-protobuf:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:protobuf:<latest-version>'
 ```
 
 ## persistence：
@@ -112,7 +112,7 @@ implementation 'com.safframework.rxcache:rxcache-converter-protobuf:<latest-vers
 rxcache-persistence-okio
 
 ```groovy
-implementation 'com.safframework.rxcache:rxcache-persistence-okio:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache:okio:<latest-version>'
 ```
 
 rxcache-persistence-mapdb

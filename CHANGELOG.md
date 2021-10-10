@@ -1,7 +1,7 @@
 RxCache
 ===
 
-Version 2.1.0
+Version 2.1.1
 ---
 2021-10-10
 * Kotlin 升级到 1.5.31

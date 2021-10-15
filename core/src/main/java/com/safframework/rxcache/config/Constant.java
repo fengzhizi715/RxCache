@@ -12,6 +12,5 @@ public class Constant {
 
     public static final long HAS_EXPIRED = 0;
 
-
     public static final int DEFAULT_CACHE_SIZE = 512; // 默认的缓存个数
 }

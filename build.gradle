@@ -57,7 +57,6 @@ dependencies {
 
 buildscript {
     ext.kotlin_version = '1.5.31'
-    ext.rxcache_version = '2.0.1'
 
     repositories {
         jcenter()
@@ -69,9 +68,3 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
-tasks.getByPath(":core:javadoc").enabled = false
-tasks.getByPath(":converter:protobuf:javadoc").enabled = false
-tasks.getByPath(":persistence:diskmap:javadoc").enabled = false
-tasks.getByPath(":rxjava:rxjava2:javadoc").enabled = false
-tasks.getByPath(":rxjava:rxjava3:javadoc").enabled = false

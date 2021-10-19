@@ -93,6 +93,7 @@ rxcache-persistence-diskmap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)]
 
 * 优化 diskmap
 * 部分第三方库的升级
+* 支持 ohc 堆外缓存框架
 
 联系方式
 ===

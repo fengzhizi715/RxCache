@@ -4,10 +4,9 @@ import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
-import org.caffinitas.ohc.OHCache;
-import org.caffinitas.ohc.OHCacheBuilder;
-import org.caffinitas.ohc.OHCacheStats;
+import org.caffinitas.ohc.*;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -29,6 +28,7 @@ public class OHCImpl extends AbstractMemoryImpl {
                 .keySerializer(new StringSerializer())
                 .valueSerializer(new StringSerializer())
                 .capacity(maxSize)
+                .eviction(Eviction.LRU)
                 .build();
         this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
@@ -46,14 +46,17 @@ public class OHCImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value, long expireTime) {
         ohCache.put(key,value,expireTime);
-        timestampMap.put(key,System.currentTimeMillis());
-        expireTimeMap.put(key,expireTime);
         putCount.incrementAndGet();
     }
 
     @Override
     public Set<String> keySet() {
-        return null;
+
+        Set<String> keys = new HashSet<>();
+        for (CloseableIterator<String> it = ohCache.keyIterator(); it.hasNext(); ) {
+            keys.add(it.next());
+        }
+        return keys;
     }
 
     @Override

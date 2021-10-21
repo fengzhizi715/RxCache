@@ -18,7 +18,6 @@ public class DirectBufferMemoryImpl extends AbstractMemoryImpl {
 
     private ConcurrentStringObjectDirectHashMap cache;
     private List<String> keys;
-    private CacheStatistics cacheStatistics;
 
     public DirectBufferMemoryImpl(long maxSize) {
 

@@ -19,7 +19,6 @@ public class MapDBImpl extends AbstractMemoryImpl {
 
     private DB db;
     private HTreeMap<String, Object> map;
-    private CacheStatistics cacheStatistics;
 
     public MapDBImpl(long maxSize) {
         super(maxSize);

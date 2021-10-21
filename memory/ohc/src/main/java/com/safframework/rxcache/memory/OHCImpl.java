@@ -3,6 +3,7 @@ package com.safframework.rxcache.memory;
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 import org.caffinitas.ohc.*;
 
@@ -35,7 +36,13 @@ public class OHCImpl extends AbstractMemoryImpl {
 
     @Override
     public <T> Record<T> getIfPresent(String key) {
-        return null;
+        T result = null;
+        result = (T)ohCache.get(key);
+        if (result == null) {
+            timestampMap.remove(key);
+            expireTimeMap.remove(key);
+        }
+        return result != null ? new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key)) : null;
     }
 
     @Override
@@ -46,6 +53,8 @@ public class OHCImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value, long expireTime) {
         ohCache.put(key,value,expireTime);
+        timestampMap.put(key,System.currentTimeMillis());
+        expireTimeMap.put(key,expireTime);
         putCount.incrementAndGet();
     }
 
@@ -67,11 +76,15 @@ public class OHCImpl extends AbstractMemoryImpl {
     @Override
     public void evict(String key) {
         ohCache.remove(key);
+        timestampMap.remove(key);
+        expireTimeMap.remove(key);
     }
 
     @Override
     public void evictAll() {
         ohCache.clear();
+        timestampMap.clear();
+        expireTimeMap.clear();
     }
 
     @Override

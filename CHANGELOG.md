@@ -1,6 +1,11 @@
 RxCache
 ===
 
+Version 2.1.2
+---
+2021-10-21
+* caffeine 升级
+
 Version 2.1.1
 ---
 2021-10-10

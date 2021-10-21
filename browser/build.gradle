@@ -38,7 +38,7 @@ dependencies {
     implementation "io.ktor:ktor-freemarker:${libs.ktor}"
     implementation "io.ktor:ktor-gson:${libs.ktor}"
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-cli:0.2.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-cli:${libs.kotlinx_cli}"
 }
 
 compileKotlin {

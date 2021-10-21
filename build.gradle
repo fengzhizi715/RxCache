@@ -2,6 +2,8 @@ apply plugin: 'java'
 
 ext {
     libraries = [
+            kotlinx_cli               : "0.3.2",
+
             kotlinx_coroutines_core   : "1.5.2",
 
             joor_java                 : "0.9.14",
@@ -30,7 +32,7 @@ ext {
 
             protostuff                : "1.7.4",
 
-            ktor                      : "1.4.0",
+            ktor                      : "1.6.4",
 
             bytekit                   : "v1.3.0",
 

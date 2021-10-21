@@ -5,6 +5,8 @@ plugins {
 
 group = 'com.github.fengzhizi715'
 
+def libs = rootProject.ext.libraries // 库
+
 repositories {
     jcenter()
     mavenCentral()
@@ -17,6 +19,7 @@ dependencies {
 
     implementation project(":core")
     implementation "org.caffinitas.ohc:ohc-core:0.7.1"
+    implementation "com.github.fengzhizi715.bytekit:core:${libs.bytekit}"
 }
 
 compileKotlin {

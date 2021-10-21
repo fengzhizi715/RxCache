@@ -3,7 +3,7 @@ package com.safframework.rxcache.memory;
 import org.caffinitas.ohc.CacheSerializer;
 
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @FileName: com.safframework.rxcache.memory.StringSerializer
@@ -13,11 +13,9 @@ import java.nio.charset.Charset;
  */
 public class StringSerializer implements CacheSerializer<String> {
 
-    private static Charset UTF_8 = Charset.forName("UTF-8");
-
     @Override
     public void serialize(String s, ByteBuffer byteBuffer) {
-        byte[] bytes = s.getBytes(UTF_8);
+        byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
         byteBuffer.put((byte) ((bytes.length >>> 8) & 0xFF));
         byteBuffer.put((byte) ((bytes.length >>> 0) & 0xFF));
         byteBuffer.put(bytes);
@@ -28,7 +26,7 @@ public class StringSerializer implements CacheSerializer<String> {
         int length = (((byteBuffer.get() & 0xff) << 8) + ((byteBuffer.get() & 0xff) << 0));
         byte[] bytes = new byte[length];
         byteBuffer.get(bytes);
-        return new String(bytes, UTF_8);
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 
     @Override

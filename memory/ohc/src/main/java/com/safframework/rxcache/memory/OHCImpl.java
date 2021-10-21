@@ -27,7 +27,7 @@ public class OHCImpl extends AbstractMemoryImpl {
         super(maxSize);
         this.ohCache = OHCacheBuilder.<String, String>newBuilder()
                 .keySerializer(new StringSerializer())
-                .valueSerializer(new StringSerializer())
+                .valueSerializer(new ObjectSerializer())
                 .eviction(Eviction.LRU)
                 .build();
         this.cacheStatistics = new CacheStatistics((int)maxSize);

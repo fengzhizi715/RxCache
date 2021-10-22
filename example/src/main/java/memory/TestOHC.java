@@ -57,7 +57,5 @@ public class TestOHC {
                 }
             });
         }
-
-        System.out.println(rxCache.getAllKeys());
     }
 }

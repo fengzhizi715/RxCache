@@ -28,6 +28,7 @@ public class OHCImpl extends AbstractMemoryImpl {
         this.ohCache = OHCacheBuilder.<String, String>newBuilder()
                 .keySerializer(new StringSerializer())
                 .valueSerializer(new ObjectSerializer())
+                .timeouts(true)
                 .eviction(Eviction.LRU)
                 .build();
         this.cacheStatistics = new CacheStatistics((int)maxSize);
@@ -51,7 +52,12 @@ public class OHCImpl extends AbstractMemoryImpl {
 
     @Override
     public <T> void put(String key, T value, long expireTime) {
-        ohCache.put(key,value,expireTime);
+        if (expireTime>0) {
+            ohCache.put(key,value,System.currentTimeMillis() + expireTime);
+        } else {
+            ohCache.put(key,value);
+        }
+
         timestampMap.put(key,System.currentTimeMillis());
         expireTimeMap.put(key,expireTime);
         putCount.incrementAndGet();

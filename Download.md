@@ -68,6 +68,11 @@ rxcache-memory-mapdb
 implementation 'com.github.fengzhizi715.RxCache:memory-mapdb:<latest-version>'
 ```
 
+rxcache-memory-ohc
+
+```groovy
+implementation 'com.github.fengzhizi715.RxCache:ohc:<latest-version>'
+```
 
 ## converter:
 

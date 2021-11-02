@@ -1,8 +1,12 @@
 package com.safframework.rxcache.memory;
 
+import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
+import net.openhft.chronicle.map.ChronicleMap;
+import net.openhft.chronicle.map.ChronicleMapBuilder;
 
 import java.util.Set;
 
@@ -14,49 +18,106 @@ import java.util.Set;
  */
 public class ChronicleMapImpl extends AbstractMemoryImpl {
 
-    public ChronicleMapImpl(long maxSize) {
+    private ChronicleMap<CharSequence, Object> cache;
 
+    public ChronicleMapImpl(long maxSize) {
         super(maxSize);
+
+        cache = ChronicleMapBuilder
+                .of(CharSequence.class, Object.class)
+                .name("rxcache-cm")
+                .entries(maxSize)
+                .averageKey("test")
+                .averageValue("test")
+                .create();
+
         this.cacheStatistics = new CacheStatistics((int)maxSize);
     }
 
     @Override
     public <T> Record<T> getIfPresent(String key) {
-        return null;
+
+        T result = null;
+
+        if (expireTimeMap.get(key)!=null) {
+
+            if (expireTimeMap.get(key) == Constant.NEVER_EXPIRE) { // 缓存的数据从不过期
+
+                result = (T) cache.get(key);
+            } else {
+
+                if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                    result = (T) cache.get(key);
+                } else {                     // 缓存的数据已经过期
+
+                    evict(key);
+                }
+            }
+        }
+
+        if (result!=null) {
+
+            cacheStatistics.incrementHitCount();
+            return new Record<>(Source.MEMORY,key, result, timestampMap.get(key),expireTimeMap.get(key));
+        } else {
+
+            cacheStatistics.incrementMissCount();
+            return null;
+        }
     }
 
     @Override
     public <T> void put(String key, T value) {
-
+        put(key,value, Constant.NEVER_EXPIRE);
     }
 
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
+        cache.put(key,value);
+        timestampMap.put(key,System.currentTimeMillis());
+        expireTimeMap.put(key,expireTime);
+
+        cacheStatistics.incrementPutCount();
     }
 
     @Override
     public Set<String> keySet() {
+
+//        return cache.keySet();
         return null;
     }
 
     @Override
     public boolean containsKey(String key) {
-        return false;
+
+        return cache.containsKey(key);
     }
 
     @Override
     public void evict(String key) {
 
+        cache.remove(key);
+        timestampMap.remove(key);
+        expireTimeMap.remove(key);
+        cacheStatistics.incrementEvictionCount();
     }
 
     @Override
     public void evictAll() {
-
+        cache.clear();
+        timestampMap.clear();
+        expireTimeMap.clear();
+        cacheStatistics.incrementEvictionCount(keySet().size());
     }
 
     @Override
     public CacheStatistics getCacheStatistics() {
-        return null;
+        return cacheStatistics;
+    }
+
+    public void close() {
+        cache.close();
     }
 }

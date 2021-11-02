@@ -32,6 +32,7 @@ dependencies {
     implementation project(":memory:off-heap")
     implementation project(":memory:memory-mapdb")
     implementation project(":memory:ohc")
+    implementation project(":memory:chronicle-map")
 
     implementation project(":converter:fastjson")
     implementation project(":converter:moshi")
@@ -54,6 +55,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.kotlinx_coroutines_core}"
     implementation "com.github.fengzhizi715.Kotlin-Coroutines-Utils:common:${libs.coroutines_utils}"
     implementation "com.github.fengzhizi715:Result:${libs.result}"
+    implementation "net.openhft:chronicle-map:${libs.chronicle_map}"
 
     implementation 'org.openjdk.jmh:jmh-core:1.25.2'
     annotationProcessor 'org.openjdk.jmh:jmh-generator-annprocess:1.25.2'

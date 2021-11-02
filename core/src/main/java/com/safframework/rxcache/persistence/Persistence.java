@@ -3,7 +3,6 @@ package com.safframework.rxcache.persistence;
 import com.safframework.rxcache.domain.Record;
 
 import java.lang.reflect.Type;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,7 +18,6 @@ public interface Persistence {
 
     <T> void save(String key, T value, long expireTime);
 
-//    List<String> allKeys();
     Set<String> keySet();
 
     boolean containsKey(String key);

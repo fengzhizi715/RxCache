@@ -18,13 +18,13 @@ import java.util.Set;
  */
 public class ChronicleMapImpl extends AbstractMemoryImpl {
 
-    private ChronicleMap<CharSequence, Object> cache;
+    private ChronicleMap<String, Object> cache;
 
     public ChronicleMapImpl(long maxSize) {
         super(maxSize);
 
         cache = ChronicleMapBuilder
-                .of(CharSequence.class, Object.class)
+                .of(String.class, Object.class)
                 .name("rxcache-cm")
                 .entries(maxSize)
                 .averageKey("test")
@@ -85,8 +85,7 @@ public class ChronicleMapImpl extends AbstractMemoryImpl {
     @Override
     public Set<String> keySet() {
 
-//        return cache.keySet();
-        return null;
+        return cache.keySet();
     }
 
     @Override

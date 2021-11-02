@@ -30,7 +30,7 @@ public class CacheInfo {
         if (builder.persistence!=null) {
 
             persistence = new PersistenceInfo();
-            persistence.keys = builder.persistence.allKeys();
+            persistence.keys = builder.persistence.keySet();
             persistence.persistenceImpl = TypeUtils.getClassSimpleName(builder.persistence);
             Converter converter = on(builder.persistence).field("converter").get();
             persistence.converterName = converter.converterName();

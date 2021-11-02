@@ -15,6 +15,7 @@ import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -118,9 +119,9 @@ public class MapDBImpl implements Persistence {
     }
 
     @Override
-    public List<String> allKeys() {
+    public Set<String> keySet() {
 
-        return new ArrayList(map.keySet());
+        return map.keySet();
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @FileName: com.safframework.rxcache.persistence.diskmap.DiskMapImpl
@@ -125,9 +126,9 @@ public class DiskMapImpl implements Disk {
     }
 
     @Override
-    public List<String> allKeys() {
+    public Set<String> keySet() {
 
-        return new ArrayList(map.keySet());
+        return map.keySet();
     }
 
     @Override

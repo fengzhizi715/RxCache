@@ -1,13 +1,13 @@
 package com.safframework.rxcache.domain.info;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by tony on 2019-02-07.
  */
 public class PersistenceInfo {
 
-    public List<String> keys;
+    public Set<String> keys;
 
     public String persistenceImpl;
 

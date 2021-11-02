@@ -324,7 +324,7 @@ class CacheRepository {
             }
 
             if (persistence != null) {
-                result.addAll(persistence.allKeys());
+                result.addAll(persistence.keySet());
             }
 
             return result;

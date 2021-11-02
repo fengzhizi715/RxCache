@@ -17,7 +17,9 @@ import okio.Okio;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by tony on 2019-02-27.
@@ -187,8 +189,8 @@ public class OkioImpl implements Disk {
     }
 
     @Override
-    public List<String> allKeys() {
-        List<String> result = new ArrayList<>();
+    public Set<String> keySet() {
+        Set<String> result = new HashSet<>();
 
         File[] files = cacheDirectory.listFiles();
         if (files == null) return result;

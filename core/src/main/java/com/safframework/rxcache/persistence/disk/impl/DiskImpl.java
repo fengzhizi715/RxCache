@@ -16,7 +16,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by tony on 2018/9/29.
@@ -174,9 +176,9 @@ public class DiskImpl implements Disk {
     }
 
     @Override
-    public List<String> allKeys() {
+    public Set<String> keySet() {
 
-        List<String> result = new ArrayList<>();
+        Set<String> result = new HashSet<String>();
 
         File[] files = cacheDirectory.listFiles();
         if (files == null) return result;

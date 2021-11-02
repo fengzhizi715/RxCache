@@ -48,7 +48,5 @@ public class TestOkio {
                 System.out.println(user.password);
             }
         });
-
-
     }
 }

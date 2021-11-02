@@ -28,6 +28,8 @@ include 'memory:mapdb'
 findProject(':memory:mapdb')?.name = 'memory-mapdb'
 include 'memory:ohc'
 findProject(':memory:ohc')?.name = 'ohc'
+include 'memory:chronicle-map'
+findProject(':memory:chronicle-map')?.name = 'chronicle-map'
 
 include 'persistence'
 include 'persistence:okio'

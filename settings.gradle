@@ -36,8 +36,6 @@ include 'persistence:mapdb'
 findProject(':persistence:mapdb')?.name = 'mapdb'
 include 'persistence:diskmap'
 findProject(':persistence:diskmap')?.name = 'diskmap'
-include 'persistence:chronicle-map'
-findProject(':persistence:chronicle-map')?.name = 'chronicle-map'
 
 include 'extension'
 include 'extension:extension'

@@ -92,7 +92,6 @@ rxcache-persistence-diskmap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)]
 
 ## TODO List:
 
-* 支持 Chronicle-Map
 * 增加一个模块，实现二级缓存 （local cache + redis）
 * 重构 diskmap 
 

@@ -1,6 +1,12 @@
 RxCache
 ===
 
+Version 2.1.4
+---
+2021-11-3
+* 优化 Persistence 接口
+* 增加 Chronicle-Map 模块
+
 Version 2.1.3
 ---
 2021-10-24

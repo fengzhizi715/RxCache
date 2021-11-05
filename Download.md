@@ -74,6 +74,12 @@ rxcache-memory-ohc
 implementation 'com.github.fengzhizi715.RxCache:ohc:<latest-version>'
 ```
 
+rxcache-memory-chronicle-map
+
+```groovy
+implementation 'com.github.fengzhizi715.RxCache:chronicle-map:<latest-version>'
+```
+
 ## converter:
 
 rxcache-converter-fastjson

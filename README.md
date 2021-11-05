@@ -52,7 +52,7 @@ rxcache-memory-caffeine|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](htt
 rxcache-memory-off-heap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-memory-mapdb|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-memory-ohc|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
-rxcache-chronicle-map|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-memory-chronicle-map|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-converter-fastjson|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-converter-moshi|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-converter-kryo|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|

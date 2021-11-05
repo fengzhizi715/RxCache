@@ -14,7 +14,7 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache，目前支持内存、
 * 支持二级缓存：Memory、Persistence
 * 各个缓存可以拥有有效时间，超过时间缓存会过期
 * Memory 默认支持 FIFO、LRU、LFU 算法的实现
-* Memory 支持 Guava Cache、Caffeine、MapDB、OHC 的实现
+* Memory 支持 Guava Cache、Caffeine、MapDB、OHC、Chronicle-Map 的实现
 * Memory 支持堆外内存(off-heap)
 * Persistence 默认使用 Gson 实现对象的序列化和反序列化
 * Persistence 支持使用 FastJSON、Moshi、Kryo、Hessian、FST、Protobuf 实现对象的序列化和反序列化
@@ -52,6 +52,7 @@ rxcache-memory-caffeine|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](htt
 rxcache-memory-off-heap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-memory-mapdb|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-memory-ohc|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
+rxcache-chronicle-map|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-converter-fastjson|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-converter-moshi|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|
 rxcache-converter-kryo|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)](https://jitpack.io/#fengzhizi715/RxCache)|

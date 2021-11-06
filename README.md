@@ -29,7 +29,7 @@ RxCache 是一款支持 Java 和 Android 的 Local Cache，目前支持内存、
 * 支持 RxJava 3、RxJava 2
 * 支持 Retrofit 风格使用缓存
 
-## 更详细的功能请查看[wiki](https://github.com/fengzhizi715/RxCache/wiki)
+## 更详细的功能请查看 [wiki](https://github.com/fengzhizi715/RxCache/wiki)
 
 ## Tips
 
@@ -94,7 +94,7 @@ rxcache-persistence-diskmap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)]
 ## TODO List:
 
 * 增加一个模块，实现二级缓存 （local cache + redis）
-* 重构 diskmap 
+* 重构 diskmap (是否有必要呢？)
 
 
 联系方式

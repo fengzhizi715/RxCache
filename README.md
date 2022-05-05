@@ -93,7 +93,7 @@ rxcache-persistence-diskmap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)]
 
 ## TODO List:
 
-* 增加一个模块，实现二级缓存 （local cache + redis）
+* 优化 disk 相关的模块
 * 重构 diskmap (是否有必要呢？)
 
 

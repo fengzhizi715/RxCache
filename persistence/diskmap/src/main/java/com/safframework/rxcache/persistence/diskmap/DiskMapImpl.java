@@ -33,9 +33,30 @@ public class DiskMapImpl implements Disk {
         this(cacheDirectory,new GsonConverter());
     }
 
+    public DiskMapImpl(String cachePath) {
+
+        this(cachePath,new GsonConverter());
+    }
+
     public DiskMapImpl(File cacheDirectory, Converter converter) {
 
         this.cacheDirectory = cacheDirectory;
+        this.converter = converter;
+        try {
+            map = new DiskMap(cacheDirectory, String.class, CacheHolder.class, converter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public DiskMapImpl(String cachePath, Converter converter) {
+
+        File dir = new File(cachePath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        this.cacheDirectory = dir;
         this.converter = converter;
         try {
             map = new DiskMap(cacheDirectory, String.class, CacheHolder.class, converter);

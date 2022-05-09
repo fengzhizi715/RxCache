@@ -32,12 +32,30 @@ public class MapDBImpl implements Persistence {
         this(dbFile,new GsonConverter());
     }
 
+    public MapDBImpl(String dbFilePath) {
+
+        this(dbFilePath,new GsonConverter());
+    }
+
     public MapDBImpl(File dbFile, Converter converter) {
 
         this.converter = converter;
 
         db = DBMaker
                 .fileDB(dbFile)
+                .fileMmapEnableIfSupported()
+                .make();
+
+        map = db.hashMap("rxcache", Serializer.STRING,Serializer.JAVA)
+                .createOrOpen();
+    }
+
+    public MapDBImpl(String dbFilePath, Converter converter) {
+
+        this.converter = converter;
+
+        db = DBMaker
+                .fileDB(dbFilePath)
                 .fileMmapEnableIfSupported()
                 .make();
 

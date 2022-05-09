@@ -16,9 +16,7 @@ import okio.Okio;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,9 +32,25 @@ public class OkioImpl implements Disk {
         this(cacheDirectory,new GsonConverter());
     }
 
+    public OkioImpl(String cachePath) {
+
+        this(cachePath,new GsonConverter());
+    }
+
     public OkioImpl(File cacheDirectory, Converter converter) {
 
         this.cacheDirectory = cacheDirectory;
+        this.converter = converter;
+    }
+
+    public OkioImpl(String cachePath, Converter converter) {
+
+        File dir = new File(cachePath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        this.cacheDirectory = dir;
         this.converter = converter;
     }
 

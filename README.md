@@ -94,7 +94,6 @@ rxcache-persistence-diskmap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)]
 ## TODO List:
 
 * 支持 Java 11 以上
-* 重构 diskmap (是否有必要呢？)
 
 
 联系方式

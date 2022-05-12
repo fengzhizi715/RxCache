@@ -8,7 +8,7 @@ ext {
 
             joor_java                 : "0.9.14",
 
-            rxjava3                   : "3.1.1",
+            rxjava3                   : "3.1.4",
 
             rxjava2                   : "2.2.21",
 
@@ -60,7 +60,7 @@ dependencies {
 }
 
 buildscript {
-    ext.kotlin_version = '1.5.31'
+    ext.kotlin_version = '1.6.21'
 
     repositories {
         jcenter()

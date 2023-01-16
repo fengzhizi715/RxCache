@@ -313,6 +313,15 @@ class CacheRepository {
         }
     }
 
+    protected boolean checkKey(String key) {
+        try {
+            return getStringData(key)!=null;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     protected Set<String> getAllKeys() {
         readLock.lock();
 

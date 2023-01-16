@@ -271,6 +271,10 @@ public final class RxCache {
         return cacheRepository.containsKey(key);
     }
 
+    public boolean checkKey(String key) {
+        return cacheRepository.checkKey(key);
+    }
+
     /**
      * 获取缓存中所有的key
      * @return

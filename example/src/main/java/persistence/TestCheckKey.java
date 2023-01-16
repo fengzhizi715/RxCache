@@ -29,5 +29,9 @@ public class TestCheckKey {
         RxCache rxCache = RxCache.getRxCache();
         Boolean result  = rxCache.checkKey("test");
         System.out.println(result);
+
+        if (!result) {
+            rxCache.remove("test");
+        }
     }
 }

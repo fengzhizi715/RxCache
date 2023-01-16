@@ -271,6 +271,11 @@ public final class RxCache {
         return cacheRepository.containsKey(key);
     }
 
+    /**
+     * 校验 RxCache 是否可以获取这个 key
+     * @param key
+     * @return
+     */
     public boolean checkKey(String key) {
         return cacheRepository.checkKey(key);
     }

@@ -4,7 +4,7 @@ ext {
     libraries = [
             kotlinx_cli               : "0.3.2",
 
-            kotlinx_coroutines_core   : "1.6.1",
+            kotlinx_coroutines_core   : "1.6.4",
 
             joor_java                 : "0.9.14",
 
@@ -60,7 +60,7 @@ dependencies {
 }
 
 buildscript {
-    ext.kotlin_version = '1.6.21'
+    ext.kotlin_version = '1.7.21'
 
     repositories {
         jcenter()

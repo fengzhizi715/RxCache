@@ -4,6 +4,7 @@ import com.safframework.rxcache.adapter.Adapter;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.key.KeyEviction;
+import com.safframework.rxcache.log.Logger;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
 import com.safframework.rxcache.persistence.Persistence;
@@ -56,7 +57,7 @@ public final class RxCache {
     }
 
     private RxCache(Builder builder) {
-        cacheRepository = new CacheRepository(builder.memory, builder.persistence, builder.keyEviction);
+        cacheRepository = new CacheRepository(builder.memory, builder.persistence, builder.keyEviction, builder.mLogger);
         adapter = builder.adapter;
 
         if (builder.keyEviction == KeyEviction.ASYNC && adapter!=null) {
@@ -379,6 +380,7 @@ public final class RxCache {
     public static final class Builder {
         private Memory memory;
         private Persistence persistence;
+        private Logger mLogger;
         private KeyEviction keyEviction;
         private Adapter adapter;
 
@@ -389,6 +391,11 @@ public final class RxCache {
 
         public Builder persistence(Persistence persistence) {
             this.persistence = persistence;
+            return this;
+        }
+
+        public Builder log(Logger logger) {
+            this.mLogger = logger;
             return this;
         }
 

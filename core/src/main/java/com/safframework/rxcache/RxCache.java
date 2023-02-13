@@ -5,6 +5,7 @@ import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.key.KeyEviction;
 import com.safframework.rxcache.log.Logger;
+import com.safframework.rxcache.log.LoggerProxy;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.memory.impl.FIFOMemoryImpl;
 import com.safframework.rxcache.persistence.Persistence;
@@ -57,8 +58,10 @@ public final class RxCache {
     }
 
     private RxCache(Builder builder) {
-        cacheRepository = new CacheRepository(builder.memory, builder.persistence, builder.keyEviction, builder.mLogger);
+        cacheRepository = new CacheRepository(builder.memory, builder.persistence, builder.keyEviction);
         adapter = builder.adapter;
+
+        LoggerProxy.INSTANCE.initLogger(builder.log);
 
         if (builder.keyEviction == KeyEviction.ASYNC && adapter!=null) {
             adapter.interval(this);
@@ -380,7 +383,7 @@ public final class RxCache {
     public static final class Builder {
         private Memory memory;
         private Persistence persistence;
-        private Logger mLogger;
+        private Logger log;
         private KeyEviction keyEviction;
         private Adapter adapter;
 
@@ -395,7 +398,7 @@ public final class RxCache {
         }
 
         public Builder log(Logger logger) {
-            this.mLogger = logger;
+            this.log = logger;
             return this;
         }
 
@@ -416,6 +419,37 @@ public final class RxCache {
 
             if (keyEviction == null) {
                 keyEviction = KeyEviction.SYNC; // 默认情况，使用同步删除淘汰 key 的方式
+            }
+
+            if (log == null) { // 默认情况，设置 Logger
+                log = new Logger() {
+                    @Override
+                    public void i(String msg, String tag) {
+                        System.out.println(tag + " " + msg);
+                    }
+
+                    @Override
+                    public void v(String msg, String tag) {
+                        System.out.println(tag + " " + msg);
+                    }
+
+                    @Override
+                    public void d(String msg, String tag) {
+                        System.out.println(tag + " " + msg);
+                    }
+
+                    @Override
+                    public void w(String msg, String tag, Throwable tr) {
+                        tr.printStackTrace();
+                        System.out.println(tag + " " + msg);
+                    }
+
+                    @Override
+                    public void e(String msg, String tag, Throwable tr) {
+                        tr.printStackTrace();
+                        System.err.println(tag + " " + msg);
+                    }
+                };
             }
 
             return new RxCache(this);

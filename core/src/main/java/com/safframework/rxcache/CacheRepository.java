@@ -7,6 +7,7 @@ import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.key.KeyEviction;
 import com.safframework.rxcache.log.Logger;
+import com.safframework.rxcache.log.LoggerProxy;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
 import com.safframework.rxcache.persistence.converter.Converter;
@@ -30,16 +31,14 @@ class CacheRepository {
     private Memory memory;
     private Persistence persistence;
     private ConcurrentHashMap evictionPool;
-    private Logger mLogger;
 
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     private final Lock readLock = lock.readLock();
     private final Lock writeLock = lock.writeLock();
 
-    CacheRepository(Memory memory, Persistence persistence, KeyEviction keyEviction, Logger logger) {
+    CacheRepository(Memory memory, Persistence persistence, KeyEviction keyEviction) {
         this.memory = memory;
         this.persistence = persistence;
-        this.mLogger = logger;
 
         if (keyEviction == KeyEviction.ASYNC) {
             evictionPool = new ConcurrentHashMap<String,Type>();
@@ -320,8 +319,8 @@ class CacheRepository {
         try {
             return getStringData(key)!=null;
         } catch (Exception e){
-            if (mLogger!=null) {
-                mLogger.e("checkKey is failed...", "rxcache", e.getCause());
+            if (LoggerProxy.INSTANCE.getLogger()!=null) {
+                LoggerProxy.INSTANCE.getLogger().e("checkKey is failed...", "rxcache", e.getCause());
             }
             return false;
         }

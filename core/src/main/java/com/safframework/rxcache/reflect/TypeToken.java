@@ -1,6 +1,7 @@
 package com.safframework.rxcache.reflect;
 
 import com.safframework.rxcache.exception.RxCacheException;
+import com.safframework.rxcache.log.LoggerProxy;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -16,6 +17,7 @@ public abstract class TypeToken<T> {
 
         Type superclass = getClass().getGenericSuperclass();
         if (superclass instanceof Class) {
+            LoggerProxy.INSTANCE.getLogger().i("No generics found!", "rxcache");
             throw new RxCacheException("No generics found!");
         }
         ParameterizedType type = (ParameterizedType) superclass;

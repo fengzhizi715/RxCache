@@ -2,6 +2,7 @@ package com.safframework.rxcache.converter;
 
 import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.exception.RxCacheException;
+import com.safframework.rxcache.log.LoggerProxy;
 import io.protostuff.*;
 import io.protostuff.runtime.DefaultIdStrategy;
 import io.protostuff.runtime.Delegate;
@@ -111,6 +112,7 @@ public class ProtostuffUtils {
     public static <T> byte[] serialize(T obj) {
 
         if (obj == null) {
+            LoggerProxy.INSTANCE.getLogger().i("序列号对象不能为空","rxcache");
             throw new RxCacheException("序列号对象不能为空");
         }
 
@@ -126,6 +128,7 @@ public class ProtostuffUtils {
             }
             return ProtostuffIOUtil.toByteArray(serializeObject, schema, buffer);
         } catch (Exception e) {
+            LoggerProxy.INSTANCE.getLogger().e("serialize is failed...","rxcache", e);
             throw new IllegalStateException(e.getMessage(), e);
         } finally {
             buffer.clear();
@@ -143,6 +146,7 @@ public class ProtostuffUtils {
     public static <T> T deserialize(byte[] data, Class<T> clazz) {
 
         if (data == null) {
+            LoggerProxy.INSTANCE.getLogger().i("反序列号对象不能为空","rxcache");
             throw new RxCacheException("反序列号对象不能为空");
         }
 
@@ -158,6 +162,7 @@ public class ProtostuffUtils {
                 return wrapper.getData();
             }
         } catch (Exception e) {
+            LoggerProxy.INSTANCE.getLogger().e("deserialize is failed...","rxcache", e);
             throw new IllegalStateException(e.getMessage(), e);
         }
     }

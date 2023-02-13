@@ -1,6 +1,7 @@
 package com.safframework.rxcache.reflect.impl;
 
 import com.safframework.rxcache.exception.RxCacheException;
+import com.safframework.rxcache.log.LoggerProxy;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -27,12 +28,15 @@ public class ParameterizedTypeImpl implements ParameterizedType {
     private void checkArgs() {
 
         if (raw == null) {
+            LoggerProxy.INSTANCE.getLogger().i("raw class can't be null", "rxcache");
             throw new RxCacheException("raw class can't be null");
         }
 
         TypeVariable[] typeParameters = raw.getTypeParameters();
         if (args.length != 0 && typeParameters.length != args.length) {
-            throw new RxCacheException(raw.getName() + " expect " + typeParameters.length + " arg(s), got " + args.length);
+            String errorMsg = raw.getName() + " expect " + typeParameters.length + " arg(s), got " + args.length;
+            LoggerProxy.INSTANCE.getLogger().i(errorMsg, "rxcache");
+            throw new RxCacheException(errorMsg);
         }
     }
 

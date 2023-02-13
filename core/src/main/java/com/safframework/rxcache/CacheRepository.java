@@ -319,9 +319,7 @@ class CacheRepository {
         try {
             return getStringData(key)!=null;
         } catch (Exception e){
-            if (LoggerProxy.INSTANCE.getLogger()!=null) {
-                LoggerProxy.INSTANCE.getLogger().e("checkKey is failed...", "rxcache", e.getCause());
-            }
+            LoggerProxy.INSTANCE.getLogger().e("checkKey() is failed...", "rxcache", e);
             return false;
         }
     }

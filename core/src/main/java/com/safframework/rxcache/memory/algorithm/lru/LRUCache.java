@@ -2,6 +2,7 @@ package com.safframework.rxcache.memory.algorithm.lru;
 
 import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.exception.RxCacheException;
+import com.safframework.rxcache.log.LoggerProxy;
 
 import java.util.AbstractQueue;
 import java.util.Iterator;
@@ -55,7 +56,10 @@ public class LRUCache<K,V> {
 
     public void put(K key, V value) {
 
-        if(key == null || value == null) throw new RxCacheException("key is null or value is null");
+        if(key == null || value == null) {
+            LoggerProxy.INSTANCE.getLogger().i("key is null or value is null","rxcache");
+            throw new RxCacheException("key is null or value is null");
+        }
 
         if(cache.containsKey(key)) {
             queue.remove(key);

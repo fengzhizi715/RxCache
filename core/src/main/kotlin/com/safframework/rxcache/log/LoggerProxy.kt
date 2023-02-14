@@ -16,7 +16,7 @@ interface Logger {
     fun e(msg: String, tag: String? = "rxcache", tr: Throwable?)
 }
 
-internal object LoggerProxy {
+object LoggerProxy {
 
     private lateinit var mLogger: Logger
 

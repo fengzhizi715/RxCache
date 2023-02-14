@@ -6,7 +6,6 @@ import com.safframework.rxcache.coroutines.getDeferred
 import com.safframework.rxcache.coroutines.getFlow
 import com.safframework.rxcache.ext.saveFunc
 import domain.User
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking

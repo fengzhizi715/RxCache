@@ -40,7 +40,7 @@ ext {
 
             result                    : "v1.0.4",
 
-            coroutines_utils          : "v1.1.5"
+            coroutines_utils          : "v1.1.6"
     ]
 }
 

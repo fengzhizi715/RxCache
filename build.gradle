@@ -34,7 +34,7 @@ ext {
 
             ktor                      : "1.6.4",
 
-            chronicle_map             : "3.23ea1",
+            chronicle_map             : "3.24ea2",
 
             bytekit                   : "v1.3.0",
 

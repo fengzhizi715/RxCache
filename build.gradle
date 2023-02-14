@@ -24,23 +24,23 @@ ext {
 
             caffeine                  : "2.9.2",
 
-            okio                      : "2.10.0",
+            okio                      : "3.3.0",
 
             mapdb                     : "3.0.8",
 
-            moshi                     : "1.12.0",
+            moshi                     : "1.14.0",
 
             protostuff                : "1.7.4",
 
             ktor                      : "1.6.4",
 
-            chronicle_map             : "3.23ea1",
+            chronicle_map             : "3.24ea2",
 
             bytekit                   : "v1.3.0",
 
             result                    : "v1.0.4",
 
-            coroutines_utils          : "v1.1.5"
+            coroutines_utils          : "v1.1.6"
     ]
 }
 

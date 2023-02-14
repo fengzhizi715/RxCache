@@ -7,6 +7,7 @@ import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.exception.RxCacheException;
+import com.safframework.rxcache.log.LoggerProxy;
 import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.persistence.converter.GsonConverter;
 import com.safframework.rxcache.persistence.disk.Disk;
@@ -116,7 +117,7 @@ public class OkioImpl implements Disk {
 
             return result != null ? new Record<>(Source.PERSISTENCE, safetyKey, result, timestamp, expireTime) : null;
         } catch (Exception ignore) {
-
+            LoggerProxy.INSTANCE.getLogger().e("retrieve() is failed...", "rxcache", ignore);
             throw new RxCacheException(ignore);
         } finally {
 
@@ -166,7 +167,7 @@ public class OkioImpl implements Disk {
 
             return json;
         } catch (Exception ignore) {
-
+            LoggerProxy.INSTANCE.getLogger().e("getStringData() is failed...", "rxcache", ignore);
             throw new RxCacheException(ignore);
         } finally {
 

@@ -6,6 +6,8 @@ import com.safframework.rxcache.domain.info.CacheInfo;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.key.KeyEviction;
+import com.safframework.rxcache.log.Logger;
+import com.safframework.rxcache.log.LoggerProxy;
 import com.safframework.rxcache.memory.Memory;
 import com.safframework.rxcache.persistence.Persistence;
 import com.safframework.rxcache.persistence.converter.Converter;
@@ -317,7 +319,7 @@ class CacheRepository {
         try {
             return getStringData(key)!=null;
         } catch (Exception e){
-            e.printStackTrace();
+            LoggerProxy.INSTANCE.getLogger().e("checkKey() is failed...", "rxcache", e);
             return false;
         }
     }

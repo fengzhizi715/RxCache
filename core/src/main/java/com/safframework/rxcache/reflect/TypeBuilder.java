@@ -1,6 +1,7 @@
 package com.safframework.rxcache.reflect;
 
 import com.safframework.rxcache.exception.RxCacheException;
+import com.safframework.rxcache.log.LoggerProxy;
 import com.safframework.rxcache.reflect.impl.ParameterizedTypeImpl;
 import com.safframework.rxcache.reflect.impl.WildcardTypeImpl;
 
@@ -38,6 +39,7 @@ public class TypeBuilder {
     public TypeBuilder endSubType() {
 
         if (parent == null) {
+            LoggerProxy.INSTANCE.getLogger().i("expect beginSubType() before endSubType()", "rxcache");
             throw new RxCacheException("expect beginSubType() before endSubType()");
         }
 
@@ -53,6 +55,7 @@ public class TypeBuilder {
     public TypeBuilder addTypeParamExtends(Class... classes) {
 
         if (classes == null) {
+            LoggerProxy.INSTANCE.getLogger().i("addTypeParamExtends() expect not null Class", "rxcache");
             throw new RxCacheException("addTypeParamExtends() expect not null Class");
         }
 
@@ -64,6 +67,7 @@ public class TypeBuilder {
     public TypeBuilder addTypeParamSuper(Class... classes) {
 
         if (classes == null) {
+            LoggerProxy.INSTANCE.getLogger().i("addTypeParamSuper() expect not null Class", "rxcache");
             throw new RxCacheException("addTypeParamSuper() expect not null Class");
         }
 
@@ -75,6 +79,7 @@ public class TypeBuilder {
     public TypeBuilder addTypeParam(Type type) {
 
         if (type == null) {
+            LoggerProxy.INSTANCE.getLogger().i("addTypeParam expect not null Type", "rxcache");
             throw new RxCacheException("addTypeParam expect not null Type");
         }
 
@@ -86,6 +91,7 @@ public class TypeBuilder {
     public Type build() {
 
         if (parent != null) {
+            LoggerProxy.INSTANCE.getLogger().i("expect endSubType() before build()", "rxcache");
             throw new RxCacheException("expect endSubType() before build()");
         }
 

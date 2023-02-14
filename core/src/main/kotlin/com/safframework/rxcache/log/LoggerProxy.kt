@@ -8,7 +8,7 @@ package com.safframework.rxcache.log
  * @date: 2023/2/13 8:00 PM
  * @version: V1.0 <描述当前版本功能>
  */
-object LoggerProxy {
+internal object LoggerProxy {
 
     private lateinit var mLogger: Logger
 

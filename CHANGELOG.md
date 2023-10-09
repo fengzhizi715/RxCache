@@ -1,6 +1,12 @@
 RxCache
 ===
 
+Version 2.1.9
+---
+2023-10-19
+* 完善 RxCache 的 checkKey() 函数
+* 升级 Kotlin 版本到 1.8
+
 Version 2.1.8
 ---
 2023-2-14

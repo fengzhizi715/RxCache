@@ -316,7 +316,7 @@ class CacheRepository {
         }
     }
 
-    protected boolean checkKey(String key) {
+    protected boolean checkKey(String key) throws RxCacheException {
         try {
             return getStringData(key)!=null;
         } catch (Exception e){

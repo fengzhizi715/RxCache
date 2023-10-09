@@ -1,6 +1,7 @@
 package persistence;
 
 import com.safframework.rxcache.RxCache;
+import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.persistence.disk.impl.DiskImpl;
 
 import java.io.File;
@@ -27,11 +28,15 @@ public class TestCheckKey {
         RxCache.config(new RxCache.Builder().persistence(diskImpl));
 
         RxCache rxCache = RxCache.getRxCache();
-        Boolean result  = rxCache.checkKey("test");
-        System.out.println(result);
+        try {
+            Boolean result = rxCache.checkKey("test");
+            System.out.println(result);
 
-        if (!result) {
-            rxCache.remove("test");
+            if (!result) {
+                rxCache.remove("test");
+            }
+        } catch (RxCacheException e) {
+
         }
     }
 }

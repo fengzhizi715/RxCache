@@ -279,6 +279,7 @@ public final class RxCache {
     /**
      * 校验 RxCache 是否可以获取这个 key
      * @param key
+     * @throws RxCacheException
      * @return
      */
     public boolean checkKey(String key) throws RxCacheException {

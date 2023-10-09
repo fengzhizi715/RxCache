@@ -23,11 +23,11 @@ import java.lang.reflect.Type
  */
 class NoCacheStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
         return source.map{ t -> Record(Source.CLOUD, key, t) }
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Flowable<T>,
@@ -41,7 +41,7 @@ class NoCacheStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
         return source.map{ t -> Record(Source.CLOUD, key, t) }
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Observable<T>,

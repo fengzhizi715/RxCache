@@ -27,7 +27,7 @@ import java.util.*
  */
 class CacheAndRemoteStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
         val cache: Flowable<Record<T>> = rxCache.load2Flowable(key, type)
         val remote: Flowable<Record<T>> = source
             .map{ t ->
@@ -38,7 +38,7 @@ class CacheAndRemoteStrategy : ObservableStrategy, FlowableStrategy, MaybeStrate
             .filter{ record -> record.data != null }
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Flowable<T>,
@@ -67,7 +67,7 @@ class CacheAndRemoteStrategy : ObservableStrategy, FlowableStrategy, MaybeStrate
             .firstElement()
     }
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Observable<T>, type: Type): Observable<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Observable<T>, type: Type): Observable<Record<T>> {
         val cache: Observable<Record<T>> = rxCache.load2Observable(key, type)
         val remote: Observable<Record<T>> = source
             .map{ t ->

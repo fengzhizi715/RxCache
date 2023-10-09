@@ -25,11 +25,11 @@ import java.lang.reflect.Type
  */
 class CacheOnlyStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
         return rxCache.load2Flowable(key, type)
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Flowable<T>,
@@ -43,7 +43,7 @@ class CacheOnlyStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
         return rxCache.load2Maybe(key, type)
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Observable<T>,

@@ -16,7 +16,7 @@ import java.lang.reflect.Type
  * @version: V1.0 <描述当前版本功能>
  */
 
-fun <T> RxCache.transformObservable(
+fun <T:Any> RxCache.transformObservable(
     key: String,
     type: Type,
     strategy: ObservableStrategy
@@ -24,11 +24,11 @@ fun <T> RxCache.transformObservable(
     return ObservableTransformer<T, Record<T>> { upstream -> strategy.execute(this, key, upstream, type) }
 }
 
-fun <T> RxCache.transformFlowable(key: String, type: Type, strategy: FlowableStrategy): FlowableTransformer<T, Record<T>> {
+fun <T:Any> RxCache.transformFlowable(key: String, type: Type, strategy: FlowableStrategy): FlowableTransformer<T, Record<T>> {
     return FlowableTransformer { upstream -> strategy.execute(this, key, upstream, type) }
 }
 
-fun <T> RxCache.transformFlowable(
+fun <T:Any> RxCache.transformFlowable(
     key: String,
     type: Type,
     strategy: FlowableStrategy,
@@ -37,7 +37,7 @@ fun <T> RxCache.transformFlowable(
     return FlowableTransformer { upstream -> strategy.execute(this, key, upstream, type, backpressureStrategy) }
 }
 
-fun <T> RxCache.transformSingle(key: String, type: Type, strategy: SingleStrategy): SingleTransformer<T, Record<T>> {
+fun <T:Any> RxCache.transformSingle(key: String, type: Type, strategy: SingleStrategy): SingleTransformer<T, Record<T>> {
     return SingleTransformer { upstream -> strategy.execute(this, key, upstream, type) }
 }
 
@@ -45,7 +45,7 @@ fun <T> RxCache.transformCompletable(key: String, type: Type, strategy: Completa
     return CompletableTransformer { upstream -> strategy.execute(this, key, upstream, type) }
 }
 
-fun <T> RxCache.transformMaybe(key: String, type: Type, strategy: MaybeStrategy): MaybeTransformer<T, Record<T>> {
+fun <T:Any> RxCache.transformMaybe(key: String, type: Type, strategy: MaybeStrategy): MaybeTransformer<T, Record<T>> {
     return MaybeTransformer { upstream -> strategy.execute(this, key, upstream, type) }
 }
 
@@ -81,17 +81,17 @@ fun <T> RxCache.load2Maybe(key: String, type: Type): Maybe<Record<T>> {
     } else Maybe.empty()
 }
 
-inline fun <reified T> RxCache.transformObservable(key: String, strategy: ObservableStrategy): ObservableTransformer<T, Record<T>> = transformObservable<T>(key, object : TypeToken<T>() {}.type, strategy)
+inline fun <reified T:Any> RxCache.transformObservable(key: String, strategy: ObservableStrategy): ObservableTransformer<T, Record<T>> = transformObservable<T>(key, object : TypeToken<T>() {}.type, strategy)
 
-inline fun <reified T> RxCache.transformFlowable(key: String, strategy: FlowableStrategy): FlowableTransformer<T, Record<T>> = transformFlowable<T>(key, object : TypeToken<T>() {}.type, strategy)
+inline fun <reified T:Any> RxCache.transformFlowable(key: String, strategy: FlowableStrategy): FlowableTransformer<T, Record<T>> = transformFlowable<T>(key, object : TypeToken<T>() {}.type, strategy)
 
-inline fun <reified T> RxCache.transformFlowable(key: String, strategy: FlowableStrategy, backpressureStrategy: BackpressureStrategy): FlowableTransformer<T, Record<T>> = transformFlowable<T>(key, object : TypeToken<T>() {}.type, strategy, backpressureStrategy)
+inline fun <reified T:Any> RxCache.transformFlowable(key: String, strategy: FlowableStrategy, backpressureStrategy: BackpressureStrategy): FlowableTransformer<T, Record<T>> = transformFlowable<T>(key, object : TypeToken<T>() {}.type, strategy, backpressureStrategy)
 
-inline fun <reified T> RxCache.transformSingle(key: String, strategy: SingleStrategy): SingleTransformer<T, Record<T>> = transformSingle<T>(key, object : TypeToken<T>() {}.type, strategy)
+inline fun <reified T:Any> RxCache.transformSingle(key: String, strategy: SingleStrategy): SingleTransformer<T, Record<T>> = transformSingle<T>(key, object : TypeToken<T>() {}.type, strategy)
 
 inline fun <reified T> RxCache.transformCompletable(key: String, strategy: CompletableStrategy): CompletableTransformer = transformCompletable<T>(key, object : TypeToken<T>() {}.type, strategy)
 
-inline fun <reified T> RxCache.transformMaybe(key: String, strategy: MaybeStrategy): MaybeTransformer<T, Record<T>> = transformMaybe<T>(key, object : TypeToken<T>() {}.type, strategy)
+inline fun <reified T:Any> RxCache.transformMaybe(key: String, strategy: MaybeStrategy): MaybeTransformer<T, Record<T>> = transformMaybe<T>(key, object : TypeToken<T>() {}.type, strategy)
 
 
 inline fun <reified T> RxCache.load2Observable(key: String): Observable<Record<T>> = load2Observable<T>(key, object : TypeToken<T>() {}.type)

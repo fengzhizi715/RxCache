@@ -26,7 +26,7 @@ import java.lang.reflect.Type
  */
 class CacheFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
         val cache: Flowable<Record<T>> = rxCache.load2Flowable(key, type)
         val remote: Flowable<Record<T>> = source
             .map{ t ->
@@ -36,7 +36,7 @@ class CacheFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
         return cache.switchIfEmpty(remote)
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Flowable<T>,
@@ -62,7 +62,7 @@ class CacheFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
         return cache.switchIfEmpty(remote)
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Observable<T>,

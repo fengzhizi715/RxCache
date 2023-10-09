@@ -27,7 +27,7 @@ import java.lang.reflect.Type
 class CacheFirstTimeoutStrategy(private val timestamp: Long) : ObservableStrategy, FlowableStrategy,
     MaybeStrategy {
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
 
         val cache: Flowable<Record<T>> = rxCache.load2Flowable<T>(key, type)
             .filter{ record -> System.currentTimeMillis() - record.createTime <= timestamp }
@@ -40,7 +40,7 @@ class CacheFirstTimeoutStrategy(private val timestamp: Long) : ObservableStrateg
         return cache.switchIfEmpty(remote)
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Flowable<T>,
@@ -68,7 +68,7 @@ class CacheFirstTimeoutStrategy(private val timestamp: Long) : ObservableStrateg
         return cache.switchIfEmpty(remote)
     }
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Observable<T>, type: Type): Observable<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Observable<T>, type: Type): Observable<Record<T>> {
         val cache: Observable<Record<T>> = rxCache.load2Observable<T>(key, type)
             .filter{ record -> System.currentTimeMillis() - record.createTime <= timestamp }
         val remote: Observable<Record<T>> = source

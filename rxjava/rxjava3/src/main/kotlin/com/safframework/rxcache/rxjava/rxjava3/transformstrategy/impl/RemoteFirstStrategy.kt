@@ -25,7 +25,7 @@ import java.lang.reflect.Type
  * @version: V1.0 接口的数据优先，接口取不到数据时获取缓存的数据。
  */
 class RemoteFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
-    override fun <T> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Flowable<T>, type: Type): Publisher<Record<T>> {
         val cache: Flowable<Record<T>> = rxCache.load2Flowable(key, type)
         val remote: Flowable<Record<T>> = source
             .map{ t ->
@@ -35,7 +35,7 @@ class RemoteFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy 
         return remote.switchIfEmpty(cache)
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Flowable<T>,
@@ -61,7 +61,7 @@ class RemoteFirstStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy 
         return remote.switchIfEmpty(cache)
     }
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Observable<T>, type: Type): Observable<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Observable<T>, type: Type): Observable<Record<T>> {
         val cache: Observable<Record<T>> = rxCache.load2Observable(key, type)
         val remote: Observable<Record<T>> = source
             .map{ t ->

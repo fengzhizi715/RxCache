@@ -22,7 +22,7 @@ import java.lang.reflect.Type
  * @version: V1.0 只获取接口的数据，并且将获取到数据保持到缓存中。
  */
 class RemoteOnlyStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Flowable<T>,
@@ -35,7 +35,7 @@ class RemoteOnlyStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
             }
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Flowable<T>,
@@ -62,7 +62,7 @@ class RemoteOnlyStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
             }
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Observable<T>,

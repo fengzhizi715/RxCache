@@ -3,6 +3,7 @@ package com.safframework.rxcache;
 import com.safframework.rxcache.adapter.Adapter;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.key.KeyEviction;
 import com.safframework.rxcache.log.Logger;
 import com.safframework.rxcache.log.LoggerProxy;
@@ -280,7 +281,7 @@ public final class RxCache {
      * @param key
      * @return
      */
-    public boolean checkKey(String key) {
+    public boolean checkKey(String key) throws RxCacheException {
         return cacheRepository.checkKey(key);
     }
 

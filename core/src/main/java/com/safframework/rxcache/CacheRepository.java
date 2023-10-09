@@ -5,6 +5,7 @@ import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.info.CacheInfo;
 import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.key.KeyEviction;
 import com.safframework.rxcache.log.Logger;
 import com.safframework.rxcache.log.LoggerProxy;
@@ -319,8 +320,9 @@ class CacheRepository {
         try {
             return getStringData(key)!=null;
         } catch (Exception e){
-            LoggerProxy.INSTANCE.getLogger().e("checkKey() is failed...", "rxcache", e);
-            return false;
+            String errorMsg = "key:"+key+", checkKey() is failed...";
+            LoggerProxy.INSTANCE.getLogger().e(errorMsg, "rxcache", e);
+            throw new RxCacheException(errorMsg);
         }
     }
 

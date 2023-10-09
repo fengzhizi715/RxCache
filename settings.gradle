@@ -1,4 +1,4 @@
-rootProject.name = 'rxcache'
+rootProject.name = 'RxCache'
 include 'core'
 include 'example'
 include 'browser'

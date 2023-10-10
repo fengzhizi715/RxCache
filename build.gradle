@@ -4,7 +4,7 @@ ext {
     libraries = [
             kotlinx_cli               : "0.3.2",
 
-            kotlinx_coroutines_core   : "1.6.4",
+            kotlinx_coroutines_core   : "1.7.3",
 
             joor_java                 : "0.9.14",
 
@@ -40,7 +40,7 @@ ext {
 
             result                    : "v1.0.4",
 
-            coroutines_utils          : "v1.1.6"
+            coroutines_utils          : "v1.1.7"
     ]
 }
 

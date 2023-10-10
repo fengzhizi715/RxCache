@@ -93,6 +93,7 @@ rxcache-persistence-diskmap|[![](https://jitpack.io/v/fengzhizi715/RxCache.svg)]
 
 ## TODO List:
 
+* 完善日志的使用
 * 支持 Java 11 以上
 
 

@@ -93,7 +93,8 @@ public final class RxCache {
     }
 
     /**
-     * 从 RxCache 中获取一条记录(并不是 Record 这个真实缓存内容的包装类，而是 Record 对应的 data)，该记录返回是一个 json 对象或者是一个 Base64 加密过的字符串
+     * 从 RxCache 中获取一条记录(并不是 Record 这个真实缓存内容的包装类，而是 Record 对应的 data)，只支持 persistence 对象
+     * 该记录返回是一个 json 对象或者是一个 Base64 加密过的字符串
      * @param key
      * @return
      */
@@ -277,7 +278,8 @@ public final class RxCache {
     }
 
     /**
-     * 校验 RxCache 是否可以获取这个 key
+     * 校验 RxCache 是否可以从 persistence 中获取这个 key
+     * 获取失败会抛出 RxCacheException
      * @param key
      * @throws RxCacheException
      * @return

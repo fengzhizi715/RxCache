@@ -2,6 +2,7 @@ package com.safframework.rxcache.domain;
 
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.utils.GsonUtils;
+import com.safframework.rxcache.utils.SystemClock;
 
 /**
  * 封装缓存的数据，使用 Immutable 对象，保证线程安全
@@ -17,12 +18,12 @@ public final class Record<T> {
 
     public Record(Source from,String key,T value) {
 
-        this(from,key,value,System.currentTimeMillis());
+        this(from, key, value, SystemClock.now());
     }
 
     public Record(Source from,String key,T value,long createTime) {
 
-        this(from,key,value,createTime, Constant.NEVER_EXPIRE);
+        this(from, key, value, createTime, Constant.NEVER_EXPIRE);
     }
 
     public Record(Source from,String key,T value,long createTime,long expireTime) {
@@ -65,7 +66,7 @@ public final class Record<T> {
             return false;
         }
 
-        return createTime + expireTime < System.currentTimeMillis();
+        return createTime + expireTime < SystemClock.now();
     }
 
     /**
@@ -93,7 +94,7 @@ public final class Record<T> {
             return Constant.HAS_EXPIRED;
         }
 
-        return getExpireTime()- (System.currentTimeMillis() - getCreateTime());
+        return getExpireTime()- (SystemClock.now() - getCreateTime());
     }
 
     public String toString() {

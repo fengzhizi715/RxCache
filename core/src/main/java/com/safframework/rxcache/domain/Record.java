@@ -89,12 +89,12 @@ public final class Record<T> {
             return Constant.NEVER_EXPIRE;
         }
 
-        if (isExpired()) {
+        if (createTime + expireTime < SystemClock.now()) {
 
             return Constant.HAS_EXPIRED;
         }
 
-        return getExpireTime()- (SystemClock.now() - getCreateTime());
+        return getExpireTime() - (SystemClock.now() - getCreateTime());
     }
 
     public String toString() {

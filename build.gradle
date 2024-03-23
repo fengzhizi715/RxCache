@@ -20,9 +20,9 @@ ext {
 
             spring                    : "5.2.3.RELEASE",
 
-            guava                     : "30.1-jre",
+            guava                     : "33.1.0-jre",
 
-            caffeine                  : "2.9.2",
+            caffeine                  : "2.9.3",
 
             okio                      : "3.3.0",
 

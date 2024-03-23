@@ -55,7 +55,7 @@ class CacheAndRemoteStrategy : ObservableStrategy, FlowableStrategy, MaybeStrate
             .filter{ record -> record.data != null }
     }
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Maybe<T>, type: Type): Maybe<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Maybe<T>, type: Type): Maybe<Record<T>> {
         val cache: Maybe<Record<T>> = rxCache.load2Maybe(key, type)
         val remote: Maybe<Record<T>> = source
             .map{ t ->

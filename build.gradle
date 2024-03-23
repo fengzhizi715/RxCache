@@ -8,11 +8,11 @@ ext {
 
             joor_java                 : "0.9.14",
 
-            rxjava3                   : "3.1.4",
+            rxjava3                   : "3.1.8",
 
             rxjava2                   : "2.2.21",
 
-            gson                      : "2.8.6",
+            gson                      : "2.10.1",
 
             fastjson                  : "1.2.76",
 

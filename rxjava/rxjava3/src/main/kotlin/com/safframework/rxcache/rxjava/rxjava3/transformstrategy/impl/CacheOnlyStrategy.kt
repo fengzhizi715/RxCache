@@ -39,7 +39,7 @@ class CacheOnlyStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
         return rxCache.load2Flowable(key, type, backpressureStrategy)
     }
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Maybe<T>, type: Type): Maybe<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Maybe<T>, type: Type): Maybe<Record<T>> {
         return rxCache.load2Maybe(key, type)
     }
 

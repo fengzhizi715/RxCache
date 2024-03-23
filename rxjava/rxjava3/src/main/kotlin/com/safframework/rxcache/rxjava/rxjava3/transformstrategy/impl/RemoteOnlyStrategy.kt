@@ -49,7 +49,7 @@ class RemoteOnlyStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
             }
     }
 
-    override fun <T> execute(
+    override fun <T:Any> execute(
         rxCache: RxCache,
         key: String,
         source: Maybe<T>,

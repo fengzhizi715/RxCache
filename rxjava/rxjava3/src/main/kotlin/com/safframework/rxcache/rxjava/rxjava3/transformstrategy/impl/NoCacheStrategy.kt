@@ -37,7 +37,7 @@ class NoCacheStrategy : ObservableStrategy, FlowableStrategy, MaybeStrategy {
         return source.map{ t -> Record(Source.CLOUD, key, t) }
     }
 
-    override fun <T> execute(rxCache: RxCache, key: String, source: Maybe<T>, type: Type): Maybe<Record<T>> {
+    override fun <T:Any> execute(rxCache: RxCache, key: String, source: Maybe<T>, type: Type): Maybe<Record<T>> {
         return source.map{ t -> Record(Source.CLOUD, key, t) }
     }
 

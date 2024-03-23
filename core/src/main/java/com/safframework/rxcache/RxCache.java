@@ -366,7 +366,7 @@ public final class RxCache {
     }
 
     /**
-     *
+     * 异步淘汰的 key 和 对象存放的 Map
      * @return
      */
     public ConcurrentHashMap getEvictionPool() {

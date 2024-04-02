@@ -3,7 +3,6 @@ package com.safframework.rxcache.coroutines
 import com.safframework.kotlin.coroutines.asyncInBackground
 import com.safframework.kotlin.coroutines.extension.emitFlow
 import com.safframework.rxcache.RxCache
-import kotlinx.coroutines.flow.flowOf
 import java.lang.reflect.Type
 
 /**

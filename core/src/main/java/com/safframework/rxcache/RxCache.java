@@ -5,6 +5,7 @@ import com.safframework.rxcache.domain.CacheStrategy;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.exception.RxCacheException;
 import com.safframework.rxcache.key.KeyEviction;
+import com.safframework.rxcache.log.DefaultLogger;
 import com.safframework.rxcache.log.Logger;
 import com.safframework.rxcache.log.LoggerProxy;
 import com.safframework.rxcache.memory.Memory;
@@ -426,34 +427,7 @@ public final class RxCache {
             }
 
             if (log == null) { // 默认情况，设置 Logger
-                log = new Logger() {
-                    @Override
-                    public void i(String msg, String tag) {
-                        System.out.println(tag + " " + msg);
-                    }
-
-                    @Override
-                    public void v(String msg, String tag) {
-                        System.out.println(tag + " " + msg);
-                    }
-
-                    @Override
-                    public void d(String msg, String tag) {
-                        System.out.println(tag + " " + msg);
-                    }
-
-                    @Override
-                    public void w(String msg, String tag, Throwable tr) {
-                        tr.printStackTrace();
-                        System.out.println(tag + " " + msg);
-                    }
-
-                    @Override
-                    public void e(String msg, String tag, Throwable tr) {
-                        tr.printStackTrace();
-                        System.err.println(tag + " " + msg);
-                    }
-                };
+                log = DefaultLogger.INSTANCE;
             }
 
             return new RxCache(this);

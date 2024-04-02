@@ -1,5 +1,7 @@
 package com.safframework.rxcache.log
 
+import com.safframework.rxcache.utils.GsonUtils
+
 /**
  *
  * @FileName:
@@ -16,6 +18,30 @@ interface Logger {
     fun e(msg: String, tag: String? = "rxcache", tr: Throwable?)
 }
 
+object DefaultLogger: Logger {
+    override fun i(msg: String, tag: String?) {
+        println("$tag $msg")
+    }
+
+    override fun v(msg: String, tag: String?) {
+        println("$tag $msg")
+    }
+
+    override fun d(msg: String, tag: String?) {
+        println("$tag $msg")
+    }
+
+    override fun w(msg: String, tag: String?, tr: Throwable?) {
+        tr?.printStackTrace()
+        println("$tag $msg")
+    }
+
+    override fun e(msg: String, tag: String?, tr: Throwable?) {
+        tr?.printStackTrace()
+        System.err.println("$tag $msg")
+    }
+}
+
 object LoggerProxy {
 
     private lateinit var mLogger: Logger
@@ -27,6 +53,8 @@ object LoggerProxy {
     fun getLogger() = mLogger
 }
 
-fun String.logI() = LoggerProxy.getLogger().i(this,"rxcache")
+fun String.logI(tag:String = "rxcache") = LoggerProxy.getLogger().i(this, tag)
 
-fun Throwable.logE(msg: String) = LoggerProxy.getLogger().e(msg, "rxcache", this)
+fun Any.logI(tag:String = "rxcache") = LoggerProxy.getLogger().i(GsonUtils.toJson(this), tag)
+
+fun Throwable.logE(msg: String,tag:String = "rxcache") = LoggerProxy.getLogger().e(msg, tag, this)

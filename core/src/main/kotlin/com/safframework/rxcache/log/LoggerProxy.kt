@@ -50,7 +50,13 @@ object LoggerProxy {
         mLogger = logger
     }
 
-    fun getLogger() = mLogger
+    fun getLogger(): Logger {
+        return if (this::mLogger.isInitialized) {
+            mLogger
+        } else {
+            DefaultLogger
+        }
+    }
 }
 
 fun String.logI(tag:String = "rxcache") = LoggerProxy.getLogger().i(this, tag)

@@ -53,7 +53,6 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.kotlinx_coroutines_core}"
     implementation "com.github.fengzhizi715.Kotlin-Coroutines-Utils:common:${libs.coroutines_utils}"
-    implementation "com.github.fengzhizi715:Result:${libs.result}"
     implementation "net.openhft:chronicle-map:${libs.chronicle_map}"
 
     implementation 'org.openjdk.jmh:jmh-core:1.25.2'

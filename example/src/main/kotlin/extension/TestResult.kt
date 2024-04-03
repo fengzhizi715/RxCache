@@ -26,8 +26,7 @@ fun main() {
         u
     }
 
-    rxCache.getResult<User>("test1").getOrNull()?.takeIf { it is User }?.let {
-        it as User
+    rxCache.getResult<User>("test1").getOrNull()?.let {
 
         print(it.name)
         println(it.password)
@@ -37,7 +36,7 @@ fun main() {
         "hello world"
     }
 
-    rxCache.getResult<String>("test2").getOrNull()?.takeIf { it is String }?.let {
+    rxCache.getResult<String>("test2").getOrNull()?.let {
         println(it)
     }
 

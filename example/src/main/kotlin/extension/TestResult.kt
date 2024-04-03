@@ -1,10 +1,8 @@
 package extension
 
-import cn.netdiscovery.result.get
-import cn.netdiscovery.result.map
 import com.safframework.rxcache.RxCache
+import com.safframework.rxcache.ext.getResult
 import com.safframework.rxcache.ext.saveFunc
-import com.safframework.rxcache.result.getResult
 import domain.User
 
 /**
@@ -28,7 +26,7 @@ fun main() {
         u
     }
 
-    rxCache.getResult<User>("test1").get()?.takeIf { it is User }?.let {
+    rxCache.getResult<User>("test1").getOrNull()?.takeIf { it is User }?.let {
         it as User
 
         print(it.name)
@@ -39,13 +37,13 @@ fun main() {
         "hello world"
     }
 
-    rxCache.getResult<String>("test2").get()?.takeIf { it is String }?.let {
+    rxCache.getResult<String>("test2").getOrNull()?.takeIf { it is String }?.let {
         println(it)
     }
 
     val result = rxCache.getResult<String>("test2").map {
          "$it, hello kotlin"
-    }.get()
+    }.getOrNull()
 
     println(result)
 

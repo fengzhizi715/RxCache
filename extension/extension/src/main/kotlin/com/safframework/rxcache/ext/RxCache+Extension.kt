@@ -80,3 +80,14 @@ fun RxCache.Builder.memory(init:RxCache.Builder.()->Memory) = this.apply {
 fun RxCache.Builder.persistence(init:RxCache.Builder.()-> Persistence) = this.apply {
     this.persistence(init())
 }
+
+fun <T> resultFrom(block: () -> T): Result<T> =
+    try {
+        Result.Companion.success(block())
+    } catch (x: Exception) {
+        Result.Companion.failure(x)
+    }
+
+inline fun <reified T> RxCache.getResult(key: String): Result<T> = resultFrom {
+    get<T>(key, object : TypeToken<T>() {}.type).data
+}

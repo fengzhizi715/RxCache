@@ -24,7 +24,6 @@ dependencies {
 
     implementation project(":core")
     implementation project(":extension:extension")
-    implementation project(":extension:result")
     implementation project(":extension:coroutines")
 
     implementation project(":memory:guava-cache")

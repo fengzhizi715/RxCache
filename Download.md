@@ -36,12 +36,6 @@ rxcache-extension-coroutines
 implementation 'com.github.fengzhizi715.RxCache:coroutines:<latest-version>'
 ```
 
-rxcache-extension-result
-
-```groovy
-implementation 'com.github.fengzhizi715.RxCache:result:<latest-version>'
-```
-
 ## memory:
 
 rxcache-memory-guava-cache

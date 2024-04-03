@@ -36,8 +36,6 @@ ext {
 
             bytekit                   : "v1.3.0",
 
-            result                    : "v1.0.4",
-
             coroutines_utils          : "v1.1.7"
     ]
 }

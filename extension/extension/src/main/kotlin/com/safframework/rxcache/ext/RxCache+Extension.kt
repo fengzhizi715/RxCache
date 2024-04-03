@@ -83,9 +83,9 @@ fun RxCache.Builder.persistence(init:RxCache.Builder.()-> Persistence) = this.ap
 
 fun <T> resultFrom(block: () -> T): Result<T> =
     try {
-        Result.Companion.success(block())
+        Result.success(block())
     } catch (x: Exception) {
-        Result.Companion.failure(x)
+        Result.failure(x)
     }
 
 inline fun <reified T> RxCache.getResult(key: String): Result<T> = resultFrom {

@@ -1,6 +1,14 @@
 RxCache
 ===
 
+Version 2.2.0
+---
+2024-4-9
+* 第三方库的升级
+* 升级 Kotlin 版本到 1.9
+* 完善日志的使用
+* 使用 Kotlin 的 Result 替换原先的 Result
+
 Version 2.1.10
 ---
 2023-10-10

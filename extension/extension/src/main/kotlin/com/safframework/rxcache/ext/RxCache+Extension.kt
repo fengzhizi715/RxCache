@@ -81,13 +81,13 @@ fun RxCache.Builder.persistence(init:RxCache.Builder.()-> Persistence) = this.ap
     this.persistence(init())
 }
 
+inline fun <reified T> RxCache.getResult(key: String): Result<T> = resultFrom {
+    get<T>(key, object : TypeToken<T>() {}.type).data
+}
+
 fun <T> resultFrom(block: () -> T): Result<T> =
     try {
         Result.success(block())
     } catch (x: Exception) {
         Result.failure(x)
     }
-
-inline fun <reified T> RxCache.getResult(key: String): Result<T> = resultFrom {
-    get<T>(key, object : TypeToken<T>() {}.type).data
-}

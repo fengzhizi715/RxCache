@@ -59,9 +59,9 @@ buildscript {
     ext.kotlin_version = '1.9.21'
 
     repositories {
-        jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
